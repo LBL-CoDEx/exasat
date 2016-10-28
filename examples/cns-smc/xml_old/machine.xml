@@ -1,0 +1,14 @@
+<machine>
+  <prop key="Gflop/s/thread" val="10" />
+  <prop key="GB/s/thread" val="1" />
+  <prop key="Int Regs/thread" val="16" />
+  <prop key="FP Regs/thread" val="16" />
+  <prop key="Threads" val="16" />
+  <prop key="$/thread group (kB)" val="1024" />
+  <prop key="Word Size" val="8" />
+  <prop key="Cache Line Size" val="64" />
+  <prop key="Division Cost" val="39" />
+  <prop key="Special Cost" val="125" />
+  <prop key="NIC BW (GB/s)" val="100" />
+  <prop key="NIC Latency (us)" val="0.4" />
+</machine>

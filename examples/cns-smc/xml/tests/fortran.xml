@@ -1,0 +1,9 @@
+<program>
+<function name="main" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="a" component="" datatype="int" accesstype="readonly">
+<access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<local name="a"/>
+</function>
+</program>

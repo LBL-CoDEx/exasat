@@ -1,0 +1,31 @@
+<!--
+comm= communication
+ 
+interface= the name of the function interface to boxlib used (performs
+actual MPI calls)
+
+numofcomponents= can be either an integer or "all" if the number of
+components is a parameter to be specified later.  In the CNS code, there
+are 5 components of U and Unew (the component is specified as the fourth
+dimension of the array), and we typically exchange all five components.
+
+commtype= type of the communication. Currently there is "ghost" for a
+halo exchange, and "parallel_reduce" for a reduction.
+
+ghost= shows the size and the direction of the ghost zone halo that
+needs to be exchanged. The order is (-x,+x),(-y,+y),(-z,+z)
+
+functioncall= call to the functions that perform some computation
+-->
+
+<program>
+<function name="advance">
+  
+   <comm linenum="11" interface="multifab_fill_boundary">
+    <array name="Unew" numofcomponents="5" commtype="ghost" ghost="(-4,4),(-4,4),(-4,4)"/>
+  </comm>
+  <!--large amount of computation-->
+  <functioncall linenum="22" name="updateU"/>
+  
+  </function>
+</program>

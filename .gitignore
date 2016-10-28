@@ -1,0 +1,13 @@
+\#*\#
+*.dot
+*.o
+*~
+*.aux
+*.log
+.DS_Store
+*.bbl
+*.blg
+.*.swp
+*.mod
+*.rmod
+

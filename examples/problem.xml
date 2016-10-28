@@ -1,0 +1,14 @@
+<machine>
+<prop key="X Problem Size" val="128" />
+<prop key="Y Problem Size" val="128" />
+<prop key="Z Problem Size" val="128" />
+<prop key="X Block Size" val="16" />
+<prop key="Y Block Size" val="16" />
+<prop key="Z Block Size" val="128" />
+<prop key="Num Ghosts (NG)" val="4" />
+<prop key="CPU/DRAM Overlap" val="1" />
+<prop key="PWFlag" val="0" />
+<prop key="Num Species" val="9" />
+<prop key="Streaming Writes" val="0" />
+<prop key="NTA Hints" val="0" />
+</machine>

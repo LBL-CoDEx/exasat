@@ -1,0 +1,88 @@
+\subsubsection{Parameters}
+
+The parameters at the top allow the user to explore different settings:
+
+Changing the blocking factor may decrease execution time if it enables
+greater reuse of cached data.  On the other hand, increasing the
+blocking factor by too great an amount could hurt performance, as there
+is increased memory bandwidth consumed when pulling in the ghost cells
+for more blocks.
+
+Changing the cache available per core may affect what type of reuse
+occurs in each loop of the program.  The spreadsheet compares the
+available machine cache size with the working set sizes required for
+reuse between pencil iterations and plane iterations.
+
+The cost of reads (R), read-writes (RW), and writes (W) affect the
+bandwidth consumed by each of the memory operations.  For example, in
+a cache-bypass setting, the write bandwidth could be half that of the
+read-write bandwidth, whereas if no cache-bypass is used, it could be
+equal to the read-write bandwidth.
+
+The last two parameters allows two optimizations to be made to how the
+cache is managed.  If Streaming Writes is TRUE, it is assumed that data
+from read-write and write-only arrays are streamed into registers and
+do not pollute the cache.  If the additional optimization of using NTA
+cache hints is used, it is assumed that streaming reads (reads with no
+reuse) will not pollute the cache either.  These optimizations affect
+the computed working set sizes required for different types of reuse
+(reuse between plane sweeps and reuse between pencil sweeps).
+
+\subsubsection{Loop Analysis Table}
+
+This table lists the following properties for each loop in the code:
+
+\begin{itemize}
+
+\item Function name and line number of the loop
+
+\item Number of sweeps (e.g. if it is run for each component in an array)
+
+\item Total and block iteration space
+
+\item Number of floating point operations per iteration (adds, multiplies,
+and specials)
+
+\item Number of arrays for read-write (RW) and write-only (W) access
+
+\item Number of planes and pencils required in the working set to enable
+reuse between sweeps
+
+\item Four pairs of columns, each pair listing 1) the working set in MB
+      to enable reuse between plane sweeps and 2) the working set in MB
+      to enable reuse between pencil sweeps.  The first pair is for a
+      naive memory access pattern.  The second pair lists working sets
+      required if streaming writes are utilized.  The third pair lists
+      the optimal working set where only data that is reused resides
+      in cache.  The fourth pair lists the actual working sets based on
+      the user's selections in the parameter table section.  If NTA Hints
+      is TRUE, then the fourth pair of columns points to the third pair
+      (reuse only).  If NTA Hints is FALSE, but Streaming Writes is TRUE,
+      then the fourth pair points to the second pair (streaming writes).
+      If both are FALSE, then the fourth pair points to the first pair
+      (naive).
+
+\item Four columns showing the memory bandwidth consumed under different
+      scenarios.  The first column shows the amount of data transferred
+      if there is reuse between plane sweeps of the cache block.
+      This corresponds to the compulsory traffic for the cache block.
+      The second column shows amount transferred if there is reuse between
+      pencil sweeps, but not plane sweeps.  The third column shows the
+      amount transferred if there is is no reuse between pencil sweeps.
+      The fourth column shows the actual amount transferred given the
+      size of the cache specified in the parameters table at the top of
+      the spreadsheet and the working set sizes required for different
+      types of reuse given in the ``Working set (actual)'' columns of
+      this table.
+
+\item Gflops performed per iteration and the arithmetic intensity of
+      the computation given the Gflops performaned and the Gbytes
+      transferred
+
+\item The estimated execution times if the program is CPU limited (CPU),
+      or memory bandwidth limited (DRAM).  The final estimate (CPU and
+      DRAM) is the maximum between these two values.
+
+\end{itemize}
+
+

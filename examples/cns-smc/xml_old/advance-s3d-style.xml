@@ -1,0 +1,760 @@
+<program>
+<function name="advance">
+<vars>
+</vars>
+</function>
+<function name="ctoprim">
+<vars>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="u"/>
+<nonlocal name="q"/>
+<nonlocal name="dx"/>
+</vars>
+<loop linenum="51" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1) ,hi(1)),(lo(2), hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>4</add>
+<multiply>12</multiply>
+<special>0</special>
+</flops>
+<vars>
+<scalar name="eint"/>
+<scalar name="rhoinv"/>
+<array name="u" component="1" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="2" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="3" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="4" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="5" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="1" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="5" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="6" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="2" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="3" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="4" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+<loop linenum="74" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2),hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>3</add>
+<multiply>5</multiply>
+<special>1</special>
+</flops>
+<vars>
+<scalar name="c"/>
+<scalar name="courx"/>
+<scalar name="coury"/>
+<scalar name="courz"/>
+<scalar name="courmx"/>
+<scalar name="courmy"/>
+<scalar name="courmz"/>
+<array name="q" component="1" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="2" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="3" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="4" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="5" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+</function>
+<function name="rhs">
+<vars>
+<local name="ux"/>
+<local name="vx"/>
+<local name="wx"/>
+<local name="tx"/>
+<local name="uy"/>
+<local name="vy"/>
+<local name="wy"/>
+<local name="ty"/>
+<local name="uz"/>
+<local name="vz"/>
+<local name="wz"/>
+<local name="tz"/>
+<nonlocal name="q"/>
+<nonlocal name="u"/>
+<nonlocal name="Fx"/>
+<nonlocal name="Fy"/>
+<nonlocal name="Fz"/>
+<nonlocal name="RHS"/>
+
+</vars>
+<loop linenum="1" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1)-ng,hi(1)+ng),(lo(2),hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>28</add>
+<multiply>20</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="q" component="2" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="q" component="3" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="q" component="4" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="q" component="6" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="ux" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vx"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wx" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="tx"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+<loop linenum="2" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2)-ng,hi(2)+ng),(lo(3),hi(3))</range>
+<flops>
+<add>28</add>
+<multiply>20</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="q" component="2" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="q" component="3" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="q" component="4" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="q" component="6" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="uy" component="" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vy" component=""  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wy" component="" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="ty" componenet=""  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+<loop linenum="3" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2),hi(2)),(lo(3)-ng,hi(3)+ng)</range>
+<flops>
+<add>28</add>
+<multiply>20</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="q" component="2" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="q" component="3" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="q" component="4" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="q" component="6" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="uz" component="" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vz" component="" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wz" component="" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="tz" component=""  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+<loop linenum="4" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2),hi(2)),(lo(3) ,hi(3))</range>
+<flops>
+<add>12</add>
+<multiply>15</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="ux" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="uy" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="uz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vx" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wx" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="tx" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="u" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="q" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+
+<array name="Fx" component="1"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fx" component="2"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fx" component="3"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fx" component="4"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fx" component="5"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+ 
+
+
+</vars>
+</loop>
+
+
+<loop linenum="5" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1) - ng,hi(1) + ng),(lo(2),hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>35</add>
+<multiply>25</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="Fx" component="1" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="Fx" component="2" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="Fx" component="3" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="Fx" component="4" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+<array name="Fx" component="5" accesstype="readonly" ghost="(-4,4),(0,0),(0,0)">
+<access value="(-1,0,0)"/>
+<access value="(-2,0,0)"/>
+<access value="(-3,0,0)"/>
+<access value="(-4,0,0)"/>
+<access value="(1,0,0)"/>
+<access value="(2,0,0)"/>
+<access value="(3,0,0)"/>
+<access value="(4,0,0)"/>
+</array>
+
+<array name="RHS" component="1"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="2"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="3"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="4"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="5"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+
+</vars>
+</loop>
+
+
+
+<loop linenum="6" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1) ,hi(1)),(lo(2),hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>12</add>
+<multiply>15</multiply>
+<special>0</special>
+</flops>
+<vars>
+
+<array name="vx" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vy" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="vz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="uy" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wy" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="ty" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="u" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="q" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+
+<array name="Fy" component="1"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fy" component="2"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fy" component="3"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fy" component="4"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fy" component="5"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+ 
+</vars>
+</loop>
+<loop linenum="7" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2)-ng,hi(2)+ng),(lo(3),hi(3))</range>
+<flops>
+<add>40</add>
+<multiply>25</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="Fy" component="1" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array> 
+<array name="Fy" component="2" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array> 
+<array name="Fy" component="3" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="Fy" component="4" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+<array name="Fy" component="5" accesstype="readonly" ghost="(0,0),(-4,4),(0,0)">
+<access value="(0,-1,0)"/>
+<access value="(0,-2,0)"/>
+<access value="(0,-3,0)"/>
+<access value="(0,-4,0)"/>
+<access value="(0,1,0)"/>
+<access value="(0,2,0)"/>
+<access value="(0,3,0)"/>
+<access value="(0,4,0)"/>
+</array>
+
+<array name="RHS" component="1" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="2" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="3" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="4" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="5" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+
+
+<loop linenum="8" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1) ,hi(1)),(lo(2),hi(2)),(lo(3),hi(3))</range>
+<flops>
+<add>12</add>
+<multiply>15</multiply>
+<special>0</special>
+</flops>
+<vars>
+
+<array name="wx" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wy" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="uz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="wz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="tz" component=""  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="u" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="u" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+<array name="q" component="2"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="3"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="4"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="q" component="5"  accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fz" component="1"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fz" component="2"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fz" component="3"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fz" component="4"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="Fz" component="5"  accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+</vars>
+</loop>
+
+<loop linenum="9" stride="(1,1,1)" componentsweep="false">
+<range>(lo(1),hi(1)),(lo(2),hi(2)),(lo(3)-ng,hi(3)+ng)</range>
+<flops>
+<add>40</add>
+<multiply>25</multiply>
+<special>0</special>
+</flops>
+<vars>
+<array name="Fz" component="1" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array> 
+<array name="Fz" component="2" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array> 
+<array name="Fz" component="3" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="Fz" component="4" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="Fz" component="5" accesstype="readonly" ghost="(0,0),(0,0),(-4,4)">
+<access value="(0,0,-1)"/>
+<access value="(0,0,-2)"/>
+<access value="(0,0,-3)"/>
+<access value="(0,0,-4)"/>
+<access value="(0,0,1)"/>
+<access value="(0,0,2)"/>
+<access value="(0,0,3)"/>
+<access value="(0,0,4)"/>
+</array>
+<array name="RHS" component="1" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="2" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="3" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="4" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+<array name="RHS" component="5" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access value="(0,0,0)"/>
+</array>
+
+
+</vars>
+</loop>
+
+
+
+</function>
+</program>

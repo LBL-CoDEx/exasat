@@ -1,0 +1,2 @@
+[WARN] Caught frontend exception
+[WARN] Caught frontend exception

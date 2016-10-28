@@ -1,0 +1,68 @@
+<program>
+<function name="laplacian4" adds="0" multiplies="0" divides="0" specials="0">
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="11" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="12" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="13" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="24" multiplies="2" divides="1" specials="0">
+<scalar name="fac" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="26" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="26" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="26" writes="0"/>
+<array name="A0" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(2,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(3,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(4,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,2,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,3,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,4,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,2)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,3)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,4)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-2)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-3)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-4)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-2,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-3,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-4,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-2,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-3,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-4,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="Anext" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="A0"/>
+<nonlocal name="Anext"/>
+</function>
+</program>

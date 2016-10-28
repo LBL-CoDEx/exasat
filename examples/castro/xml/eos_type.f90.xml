@@ -1,0 +1,99 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="composition_derivatives" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="167" loopvar="n" lowerbound="1" upperbound="nspec" stride="1" adds="7" multiplies="9" divides="5" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rho" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="p" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dpdr" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dedr" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="abar" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="zbar" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="dpdA" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dpdZ" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dedA" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dedZ" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="13" writes="1"/>
+<array name="aion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="6" writes="0"/>
+</array>
+<array name="zion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="2" writes="0"/>
+</array>
+<array name="dedX" struct="::eos_type_module::eos_t" component="" datatype="double" accesstype="writeread">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="1"/>
+</array>
+<array name="dpdX" struct="::eos_type_module::eos_t" component="" datatype="double" accesstype="writeread">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="1"/>
+</array>
+<array name="dhdX" struct="::eos_type_module::eos_t" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
+</array>
+</loop>
+<nonlocal name="aion"/>
+<nonlocal name="zion"/>
+<nonlocal name="dedX"/>
+<nonlocal name="dpdX"/>
+<nonlocal name="dhdX"/>
+</function>
+<function name="composition" adds="0" multiplies="1" divides="2" specials="0">
+<scalar name="mu_e" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="abar" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="zbar" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="assume_neutral" datatype="bool" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ysum" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="yzsum" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ysumi" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="126" loopvar="n" lowerbound="1" upperbound="nspec" stride="1" adds="2" multiplies="1" divides="1" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ymass" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ysum" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="yzsum" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<array name="aion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="zion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="xn" struct="::eos_type_module::eos_t" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+</loop>
+<if linenum="136" conditional="assume_neutral" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="mu" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="abar" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="136" adds="0" multiplies="0" divides="1" specials="0">
+<scalar name="mu" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ysumi" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="142" loopvar="n" lowerbound="1" upperbound="nspec" stride="1" adds="2" multiplies="1" divides="1" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ymass" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ysumi" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<array name="aion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="zion" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="xn" struct="::eos_type_module::eos_t" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+</loop>
+</else>
+<nonlocal name="aion"/>
+<nonlocal name="zion"/>
+<nonlocal name="xn"/>
+</function>
+<function name="network_init" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="network_species_index" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+</program>

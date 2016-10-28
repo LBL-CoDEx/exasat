@@ -1,0 +1,37 @@
+<program>
+<function name="waxpby" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="53" conditional="alpha == 1.0;" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="57" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="w" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+</loop>
+</if>
+<if linenum="59" conditional="beta == 1.0;" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="63" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="w" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+</loop>
+</if>
+<else iflinenum="59" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="69" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="n" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="w" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+</loop>
+</else>
+</function>
+</program>

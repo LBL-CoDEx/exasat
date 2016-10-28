@@ -1,0 +1,2 @@
+in /src/CG.cpp, the function call CopyVector is inlined. ExaSAT failed to
+parse the assert call in the source. Not sure why. 

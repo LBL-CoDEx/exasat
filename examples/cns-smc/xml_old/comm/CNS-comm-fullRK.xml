@@ -1,0 +1,46 @@
+<!--
+comm= communication
+ 
+interface= the interface to boxlib which performs actual MPI calls
+
+numofcomponents= Can be either all or an integer. We typically exchange all the componenets of an array in CNS. There are 5 components (4th dimension of the array)
+this should be a parameter that user can set later on if the value is set to all. 
+
+commtype=type of the communication. Currently there is "ghost" and "parallel_reduce".
+
+ghost= shows the size and the direction of the ghosts that needs to be exchanged. The order is (-x,+x),(-y,+y),(-z,+z) 
+
+functioncall=call to the functions that perform some computation
+-->
+
+<program>
+  <function name="advance">
+    <comm linenum="67" interface="multifab_fill_boundary">
+      <array name="U" numofcomponents=5 commtype="ghost" ghost="(-4,4),(-4,4),(-4,4)"/>
+    </comm>
+    <!--very little amount of computation--> 
+    <functioncall linenum="90" name="ctoprim"/>
+    <comm linenum="93" interface="parallel_reduce">
+      <scalar name="courno" commtype="reduce"/>
+    </comm>
+    <!--large amount of computation-->
+    <functioncall linenum="112" name="diffterm"/>
+    <functioncall linenum="128" name="hypterm"/>
+    <comm linenum="160" interface="multifab_fill_boundary">
+      <array name="Unew" numofcomponents=5 commtype="ghost" ghost="(-4,4),(-4,4),(-4,4)"/>
+    </comm>
+    <!--large amount of computation-->
+    <functioncall linenum="173" name="ctoprim"/>
+    <functioncall linenum="187" name="diffterm"/>
+    <functioncall linenum="202" name="hypterm"/>
+
+    <comm linenum="234" interface="multifab_fill_boundary">
+      <array name="Unew" numofcomponents=5 commtype="ghost" ghost="(-4,4),(-4,4),(-4,4)"/>
+    </comm>
+    <!--large amount of computation-->
+    <functioncall linenum="247" name="ctoprim"/>
+    <functioncall linenum="261" name="diffterm"/>
+    <functioncall linenum="276" name="hypterm"/>
+
+  </function>
+</program>

@@ -1,0 +1,46 @@
+<program>
+<function name="ComputeDotProduct_ref" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="x" datatype="const ::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const ::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="result" datatype="double &" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="time_allreduce" datatype="double &" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t0" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="global_result" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<if linenum="54" conditional="yv == xv;" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="58" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="xv" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="2" writes="0"/>
+</array>
+</loop>
+</if>
+<else iflinenum="54" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="63" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="xv" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="1" writes="0"/>
+</array>
+<array name="yv" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="1" writes="0"/>
+</array>
+</loop>
+</else>
+<funccall linenum="68" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="70" name="" origname="MPI_Allreduce" module="unknown" flops="unknown">
+<arg paramname="" argname="(&local_result)"/>
+<arg paramname="" argname="(&global_result)"/>
+<arg paramname="" argname="1"/>
+<arg paramname="" argname="((MPI_Datatype )0x4c00080b)"/>
+<arg paramname="" argname="((MPI_Op )0x58000003)"/>
+<arg paramname="" argname="((MPI_Comm )0x44000000)"/>
+</funccall>
+<funccall linenum="73" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<local name="xv"/>
+<local name="yv"/>
+</function>
+</program>

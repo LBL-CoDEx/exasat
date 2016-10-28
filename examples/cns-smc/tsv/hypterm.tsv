@@ -1,0 +1,175 @@
+Parameters:	
+X Problem Size	128	
+Y Problem Size	128	
+Z Problem Size	128	
+X Block Size	16	
+Y Block Size	16	
+Z Block Size	128	
+Num Ghosts (NG)	4	
+Num Species	9	
+GB/s/thread	1	
+Gflop/s/thread	10	
+Int Regs/thread	16	
+FP Regs/thread	16	
+Threads	1024	
+$/thread group (kB)	1024	
+Word Size	8	
+Cache Line Size	64	
+R cost	8	
+RW cost	16	
+W cost	16	
+Division Cost	39	
+Special Cost	125	
+Streaming Writes	False	
+NTA Hints	False	
+NIC BW (GB/s)	100	
+NIC Latency (us)	0.4	
+CPU/DRAM Overlap	1	
+PWFlag	False	
+	
+COMM ANALYSIS	
+			Iteration Space	
+function	line	array	X	Y	Z	Total Off-Node (MB)	Num Messages	BW Cost (s)	Latency Cost (s)	Total Cost (s)	
+Totals						=sum(G33:G32)	=sum(H33:H32)	=sum(I33:I32)	=sum(J33:J32)	=sum(K33:K32)		
+	
+LOOP ANALYSIS	
+			Iteration Space			Block Iteration Space					Flops/cell/sweep				Registers		RW/W Arrays		RW/W Working Set			Working set (naive)			Working set (streaming writes)			Working set (reuse only)			Working set (actual)			Memory Traffic (GBytes)						Computation (Gflops)			Estimated execution times (s)	
+function	line	sweeps	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	add	mul	div	special	GP Regs	FP Regs	RW Arrays	W Arrays	RW/W WS Planes	RW/W WS Pencils	RW/W WS Cells	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	Reuse between blocks	Reuse between planes	Reuse between pencils	Reuse within pencils	No reuse within pencils	Actual	Gflops performed	Weighted Gflops	B/F ratio	time (CPU)	time (DRAM)	time (CPU and DRAM)		
+advance	43	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G38/($B$17/$B$16),1)*($B$17/$B$16)	=$D38/$G38*$E38/$H38*$F38/$I38	=(15)	=(15)	=(0)	=(0)	=(12)	=(3)	=(5)	=(0)	=(5)	=(5)	=(5)	=$Z$70+$B$16*$T38*$J38*$H38/2^10	=$AA$70+$B$16*$U38*$J38/2^10	=$AB$70+$B$16*$V38/2^10	=$Z$70	=$AA$70	=$AB$70	=$AC$70	=$AD$70	=$AE$70	=IF($AJ38=$AK38,$AG38,IF($B$24, $AC38, IF($B$23, $Z38, $W38)))	=IF($AK38=$AL38,$AH38,IF($B$24, $AD38, IF($B$23, $AA38, $X38)))	=IF($B$24, $AE38, IF($B$23, $AB38, $Y38))	=$C38*($S38*$B$18+$U38*$B$19+$T38*$B$20)*$K38*$J38*$H38*$I38/2^30	=$C38*($AF$70+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AG$70+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AH$70+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AI$70+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=IF($AF38<$B$15,MIN($AJ38:$AM38),IF($AG38<$B$15,MIN($AK38:$AM38),IF($AH38<$B$15,MIN($AL38:$AM38),$AM38)))	=$C38*($L38+$M38+$N38+$O38)*$D38*$E38*$F38/1e9	=$C38*($L38+$M38+$B$21*$N38+$B$22*$O38)*$D38*$E38*$F38/1e9	=($AN38*2^30)/($AP38*10^9)	=$AP38/($B$11*$B$14)	=$AN38/($B$10*$B$14)	=max($AR38:$AS38)	
+hypterm	81	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G39/($B$17/$B$16),1)*($B$17/$B$16)	=$D39/$G39*$E39/$H39*$F39/$I39	=(163)	=(195)	=(0)	=(0)	=(15)	=(20)	=(0)	=(5)	=(10)	=(10)	=(5)	=$Z$84+$B$16*$T39*$J39*$H39/2^10	=$AA$84+$B$16*$U39*$J39/2^10	=$AB$84+$B$16*$V39/2^10	=$Z$84	=$AA$84	=$AB$84	=$AC$84	=$AD$84	=$AE$84	=IF($AJ39=$AK39,$AG39,IF($B$24, $AC39, IF($B$23, $Z39, $W39)))	=IF($AK39=$AL39,$AH39,IF($B$24, $AD39, IF($B$23, $AA39, $X39)))	=IF($B$24, $AE39, IF($B$23, $AB39, $Y39))	=$C39*($S39*$B$18+$U39*$B$19+$T39*$B$20)*$K39*$J39*$H39*$I39/2^30	=$C39*($AF$84+($R39*$B$19+$S39*$B$20)*$K39*$J39*$H39*$I39/2^30)	=$C39*($AG$84+($R39*$B$19+$S39*$B$20)*$K39*$J39*$H39*$I39/2^30)	=$C39*($AH$84+($R39*$B$19+$S39*$B$20)*$K39*$J39*$H39*$I39/2^30)	=$C39*($AI$84+($R39*$B$19+$S39*$B$20)*$K39*$J39*$H39*$I39/2^30)	=IF($AF39<$B$15,MIN($AJ39:$AM39),IF($AG39<$B$15,MIN($AK39:$AM39),IF($AH39<$B$15,MIN($AL39:$AM39),$AM39)))	=$C39*($L39+$M39+$N39+$O39)*$D39*$E39*$F39/1e9	=$C39*($L39+$M39+$B$21*$N39+$B$22*$O39)*$D39*$E39*$F39/1e9	=($AN39*2^30)/($AP39*10^9)	=$AP39/($B$11*$B$14)	=$AN39/($B$10*$B$14)	=max($AR39:$AS39)	
+Total/Max																															=max(AF38:AF39)	=max(AG38:AG39)	=max(AH38:AH39)	=sum(AI38:AI39)	=sum(AJ38:AJ39)	=sum(AK38:AK39)	=sum(AL38:AL39)	=sum(AM38:AM39)	=sum(AN38:AN39)	=sum(AO38:AO39)	=sum(AP38:AP39)	=($AN40*2^30)/($AP40*10^9)	=sum(AR38:AR39)	=sum(AS38:AS39)	=sum(AT38:AT39)	
+	
+WOODWARD LOOP ANALYSIS	
+			Iteration Space			Block Iteration Space					Flops/cell/sweep				Registers		Num Blocks				Working Set	Bandwidth				Computation (Gflops)			Estimated execution times (s)	
+function	line	sweeps	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	add	mul	div	special	GP Regs	FP Regs	Resident	R	W	RW	kB	R (GB)	W (GB)	RW (GB)	Total (GB)	Gflops performed	Weighted Gflops	B/F ratio	time (CPU)	time (DRAM)	time (CPU and DRAM)		
+advance	43	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5+($D45-$B$2)	=$B$6+($E45-$B$3)	=$B$7+($F45-$B$4)	=ceiling($G45/($B$17/$B$16),1)*($B$17/$B$16)	=$B$2/$B$5*$B$3/$B$6*$B$4/$B$7	=(15)	=(15)	=(0)	=(0)	=(12)	=(3)	=(20)	=(15)	=(0)	=(5)	=$B$16*((20*$B$5*$B$6*$B$7))/2^10	=IF($V45<$B$15, $B$18*$K45*((15*$B$5*$B$6*$B$7))/2^30, "N/A")	=IF($V45<$B$15, $B$20*$K45*((0))/2^30, "N/A")	=IF($V45<$B$15, $B$19*$K45*((5*$B$5*$B$6*$B$7))/2^30, "N/A")	=$W45+$X45+$Y45	=$C45*($L45+$M45+$N45+$O45)*$G45*$H45*$I45*$K45/1e9	=$C45*($L45+$M45+$B$21*$N45+$B$22*$O45)*$G45*$H45*$I45*$K45/1e9	=($Z45*2^30)/($AB45*10^9)	=$AB45/($B$11*$B$14)	=$Z45/($B$10*$B$14)	=max($AD45:$AE45)	
+hypterm	81	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5+($D46-$B$2)	=$B$6+($E46-$B$3)	=$B$7+($F46-$B$4)	=ceiling($G46/($B$17/$B$16),1)*($B$17/$B$16)	=$B$2/$B$5*$B$3/$B$6*$B$4/$B$7	=(163)	=(195)	=(0)	=(0)	=(15)	=(20)	=(13)	=(8)	=(5)	=(0)	=$B$16*((-5*$B$5*$B$6*$B$7 + 6*$B$5*$B$6*($B$7 + 8) + 6*$B$5*$B$7*($B$6 + 8) + 6*$B$6*$B$7*($B$5 + 8)))/2^10	=IF($V46<$B$15, $B$18*$K46*((-10*$B$5*$B$6*$B$7 + 6*$B$5*$B$6*($B$7 + 8) + 6*$B$5*$B$7*($B$6 + 8) + 6*$B$6*$B$7*($B$5 + 8)))/2^30, "N/A")	=IF($V46<$B$15, $B$20*$K46*((5*$B$5*$B$6*$B$7))/2^30, "N/A")	=IF($V46<$B$15, $B$19*$K46*((0))/2^30, "N/A")	=$W46+$X46+$Y46	=$C46*($L46+$M46+$N46+$O46)*$G46*$H46*$I46*$K46/1e9	=$C46*($L46+$M46+$B$21*$N46+$B$22*$O46)*$G46*$H46*$I46*$K46/1e9	=($Z46*2^30)/($AB46*10^9)	=$AB46/($B$11*$B$14)	=$Z46/($B$10*$B$14)	=max($AD46:$AE46)	
+Total/Max																					=max(V45:V46)	=sum(W45:W46)	=sum(X45:X46)	=sum(Y45:Y46)	=sum(Z45:Z46)	=sum(AA45:AA46)	=sum(AB45:AB46)	=($Z47*2^30)/($AB47*10^9)	=sum(AD45:AD46)	=sum(AE45:AE46)	=sum(AF45:AF46)	
+	
+DETAILED READ-ONLY ARRAY INFO	
+	
+Function:	advance	
+Loop line num:	43	
+			Iteration Space			Block Iteration Space					Block Access Space				Bandwidth				Working Set			Reuse WS			WS (all reads)			WS (reuse only)			GBytes transferred/sweep	
+		Name	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	X	Y	Z	X (cache line)	Copies	Planes	Pencils	Cells	Planes	Pencils	Cells	Planes	Pencils	Cells	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	Reuse between planes	Reuse between pencils	Reuse within pencils	No reuse within pencils		
+		U.iene	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G55/($B$17/$B$16),1)*($B$17/$B$16)	=$D55/$G55*$E55/$H55*$F55/$I55	=$G55+0	=$H55+0	=$I55+0	=ceiling($L55/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T55*$O55*$M55/2^10	=$B$16*$U55*$O55/2^10	=$B$16*$V55/2^10	=$B$16*$W55*$O55*$M55/2^10	=$B$16*$X55*$O55/2^10	=$B$16*$Y55/2^10	=$K55*$P55*$B$18*$O55*$M55*$N55/2^30	=$K55*$Q55*$B$18*$O55*$M55*$I55/2^30	=$K55*$R55*$B$18*$O55*$H55*$I55/2^30	=$K55*$S55*$B$18*$G55*$H55*$I55/2^30	
+		U.imx	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G56/($B$17/$B$16),1)*($B$17/$B$16)	=$D56/$G56*$E56/$H56*$F56/$I56	=$G56+0	=$H56+0	=$I56+0	=ceiling($L56/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T56*$O56*$M56/2^10	=$B$16*$U56*$O56/2^10	=$B$16*$V56/2^10	=$B$16*$W56*$O56*$M56/2^10	=$B$16*$X56*$O56/2^10	=$B$16*$Y56/2^10	=$K56*$P56*$B$18*$O56*$M56*$N56/2^30	=$K56*$Q56*$B$18*$O56*$M56*$I56/2^30	=$K56*$R56*$B$18*$O56*$H56*$I56/2^30	=$K56*$S56*$B$18*$G56*$H56*$I56/2^30	
+		U.imy	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G57/($B$17/$B$16),1)*($B$17/$B$16)	=$D57/$G57*$E57/$H57*$F57/$I57	=$G57+0	=$H57+0	=$I57+0	=ceiling($L57/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T57*$O57*$M57/2^10	=$B$16*$U57*$O57/2^10	=$B$16*$V57/2^10	=$B$16*$W57*$O57*$M57/2^10	=$B$16*$X57*$O57/2^10	=$B$16*$Y57/2^10	=$K57*$P57*$B$18*$O57*$M57*$N57/2^30	=$K57*$Q57*$B$18*$O57*$M57*$I57/2^30	=$K57*$R57*$B$18*$O57*$H57*$I57/2^30	=$K57*$S57*$B$18*$G57*$H57*$I57/2^30	
+		U.imz	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G58/($B$17/$B$16),1)*($B$17/$B$16)	=$D58/$G58*$E58/$H58*$F58/$I58	=$G58+0	=$H58+0	=$I58+0	=ceiling($L58/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T58*$O58*$M58/2^10	=$B$16*$U58*$O58/2^10	=$B$16*$V58/2^10	=$B$16*$W58*$O58*$M58/2^10	=$B$16*$X58*$O58/2^10	=$B$16*$Y58/2^10	=$K58*$P58*$B$18*$O58*$M58*$N58/2^30	=$K58*$Q58*$B$18*$O58*$M58*$I58/2^30	=$K58*$R58*$B$18*$O58*$H58*$I58/2^30	=$K58*$S58*$B$18*$G58*$H58*$I58/2^30	
+		U.irho	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G59/($B$17/$B$16),1)*($B$17/$B$16)	=$D59/$G59*$E59/$H59*$F59/$I59	=$G59+0	=$H59+0	=$I59+0	=ceiling($L59/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T59*$O59*$M59/2^10	=$B$16*$U59*$O59/2^10	=$B$16*$V59/2^10	=$B$16*$W59*$O59*$M59/2^10	=$B$16*$X59*$O59/2^10	=$B$16*$Y59/2^10	=$K59*$P59*$B$18*$O59*$M59*$N59/2^30	=$K59*$Q59*$B$18*$O59*$M59*$I59/2^30	=$K59*$R59*$B$18*$O59*$H59*$I59/2^30	=$K59*$S59*$B$18*$G59*$H59*$I59/2^30	
+		difflux.iene	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G60/($B$17/$B$16),1)*($B$17/$B$16)	=$D60/$G60*$E60/$H60*$F60/$I60	=$G60+0	=$H60+0	=$I60+0	=ceiling($L60/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T60*$O60*$M60/2^10	=$B$16*$U60*$O60/2^10	=$B$16*$V60/2^10	=$B$16*$W60*$O60*$M60/2^10	=$B$16*$X60*$O60/2^10	=$B$16*$Y60/2^10	=$K60*$P60*$B$18*$O60*$M60*$N60/2^30	=$K60*$Q60*$B$18*$O60*$M60*$I60/2^30	=$K60*$R60*$B$18*$O60*$H60*$I60/2^30	=$K60*$S60*$B$18*$G60*$H60*$I60/2^30	
+		difflux.imx	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G61/($B$17/$B$16),1)*($B$17/$B$16)	=$D61/$G61*$E61/$H61*$F61/$I61	=$G61+0	=$H61+0	=$I61+0	=ceiling($L61/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T61*$O61*$M61/2^10	=$B$16*$U61*$O61/2^10	=$B$16*$V61/2^10	=$B$16*$W61*$O61*$M61/2^10	=$B$16*$X61*$O61/2^10	=$B$16*$Y61/2^10	=$K61*$P61*$B$18*$O61*$M61*$N61/2^30	=$K61*$Q61*$B$18*$O61*$M61*$I61/2^30	=$K61*$R61*$B$18*$O61*$H61*$I61/2^30	=$K61*$S61*$B$18*$G61*$H61*$I61/2^30	
+		difflux.imy	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G62/($B$17/$B$16),1)*($B$17/$B$16)	=$D62/$G62*$E62/$H62*$F62/$I62	=$G62+0	=$H62+0	=$I62+0	=ceiling($L62/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T62*$O62*$M62/2^10	=$B$16*$U62*$O62/2^10	=$B$16*$V62/2^10	=$B$16*$W62*$O62*$M62/2^10	=$B$16*$X62*$O62/2^10	=$B$16*$Y62/2^10	=$K62*$P62*$B$18*$O62*$M62*$N62/2^30	=$K62*$Q62*$B$18*$O62*$M62*$I62/2^30	=$K62*$R62*$B$18*$O62*$H62*$I62/2^30	=$K62*$S62*$B$18*$G62*$H62*$I62/2^30	
+		difflux.imz	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G63/($B$17/$B$16),1)*($B$17/$B$16)	=$D63/$G63*$E63/$H63*$F63/$I63	=$G63+0	=$H63+0	=$I63+0	=ceiling($L63/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T63*$O63*$M63/2^10	=$B$16*$U63*$O63/2^10	=$B$16*$V63/2^10	=$B$16*$W63*$O63*$M63/2^10	=$B$16*$X63*$O63/2^10	=$B$16*$Y63/2^10	=$K63*$P63*$B$18*$O63*$M63*$N63/2^30	=$K63*$Q63*$B$18*$O63*$M63*$I63/2^30	=$K63*$R63*$B$18*$O63*$H63*$I63/2^30	=$K63*$S63*$B$18*$G63*$H63*$I63/2^30	
+		difflux.irho	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G64/($B$17/$B$16),1)*($B$17/$B$16)	=$D64/$G64*$E64/$H64*$F64/$I64	=$G64+0	=$H64+0	=$I64+0	=ceiling($L64/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T64*$O64*$M64/2^10	=$B$16*$U64*$O64/2^10	=$B$16*$V64/2^10	=$B$16*$W64*$O64*$M64/2^10	=$B$16*$X64*$O64/2^10	=$B$16*$Y64/2^10	=$K64*$P64*$B$18*$O64*$M64*$N64/2^30	=$K64*$Q64*$B$18*$O64*$M64*$I64/2^30	=$K64*$R64*$B$18*$O64*$H64*$I64/2^30	=$K64*$S64*$B$18*$G64*$H64*$I64/2^30	
+		flux.iene	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G65/($B$17/$B$16),1)*($B$17/$B$16)	=$D65/$G65*$E65/$H65*$F65/$I65	=$G65+0	=$H65+0	=$I65+0	=ceiling($L65/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T65*$O65*$M65/2^10	=$B$16*$U65*$O65/2^10	=$B$16*$V65/2^10	=$B$16*$W65*$O65*$M65/2^10	=$B$16*$X65*$O65/2^10	=$B$16*$Y65/2^10	=$K65*$P65*$B$18*$O65*$M65*$N65/2^30	=$K65*$Q65*$B$18*$O65*$M65*$I65/2^30	=$K65*$R65*$B$18*$O65*$H65*$I65/2^30	=$K65*$S65*$B$18*$G65*$H65*$I65/2^30	
+		flux.imx	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G66/($B$17/$B$16),1)*($B$17/$B$16)	=$D66/$G66*$E66/$H66*$F66/$I66	=$G66+0	=$H66+0	=$I66+0	=ceiling($L66/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T66*$O66*$M66/2^10	=$B$16*$U66*$O66/2^10	=$B$16*$V66/2^10	=$B$16*$W66*$O66*$M66/2^10	=$B$16*$X66*$O66/2^10	=$B$16*$Y66/2^10	=$K66*$P66*$B$18*$O66*$M66*$N66/2^30	=$K66*$Q66*$B$18*$O66*$M66*$I66/2^30	=$K66*$R66*$B$18*$O66*$H66*$I66/2^30	=$K66*$S66*$B$18*$G66*$H66*$I66/2^30	
+		flux.imy	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G67/($B$17/$B$16),1)*($B$17/$B$16)	=$D67/$G67*$E67/$H67*$F67/$I67	=$G67+0	=$H67+0	=$I67+0	=ceiling($L67/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T67*$O67*$M67/2^10	=$B$16*$U67*$O67/2^10	=$B$16*$V67/2^10	=$B$16*$W67*$O67*$M67/2^10	=$B$16*$X67*$O67/2^10	=$B$16*$Y67/2^10	=$K67*$P67*$B$18*$O67*$M67*$N67/2^30	=$K67*$Q67*$B$18*$O67*$M67*$I67/2^30	=$K67*$R67*$B$18*$O67*$H67*$I67/2^30	=$K67*$S67*$B$18*$G67*$H67*$I67/2^30	
+		flux.imz	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G68/($B$17/$B$16),1)*($B$17/$B$16)	=$D68/$G68*$E68/$H68*$F68/$I68	=$G68+0	=$H68+0	=$I68+0	=ceiling($L68/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T68*$O68*$M68/2^10	=$B$16*$U68*$O68/2^10	=$B$16*$V68/2^10	=$B$16*$W68*$O68*$M68/2^10	=$B$16*$X68*$O68/2^10	=$B$16*$Y68/2^10	=$K68*$P68*$B$18*$O68*$M68*$N68/2^30	=$K68*$Q68*$B$18*$O68*$M68*$I68/2^30	=$K68*$R68*$B$18*$O68*$H68*$I68/2^30	=$K68*$S68*$B$18*$G68*$H68*$I68/2^30	
+		flux.irho	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G69/($B$17/$B$16),1)*($B$17/$B$16)	=$D69/$G69*$E69/$H69*$F69/$I69	=$G69+0	=$H69+0	=$I69+0	=ceiling($L69/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T69*$O69*$M69/2^10	=$B$16*$U69*$O69/2^10	=$B$16*$V69/2^10	=$B$16*$W69*$O69*$M69/2^10	=$B$16*$X69*$O69/2^10	=$B$16*$Y69/2^10	=$K69*$P69*$B$18*$O69*$M69*$N69/2^30	=$K69*$Q69*$B$18*$O69*$M69*$I69/2^30	=$K69*$R69*$B$18*$O69*$H69*$I69/2^30	=$K69*$S69*$B$18*$G69*$H69*$I69/2^30	
+		Total													=sum(P55:P69)	=sum(Q55:Q69)	=sum(R55:R69)	=sum(S55:S69)	=sum(T55:T69)	=sum(U55:U69)	=sum(V55:V69)	=sum(W55:W69)	=sum(X55:X69)	=sum(Y55:Y69)	=sum(Z55:Z69)	=sum(AA55:AA69)	=sum(AB55:AB69)	=sum(AC55:AC69)	=sum(AD55:AD69)	=sum(AE55:AE69)	=sum(AF55:AF69)	=sum(AG55:AG69)	=sum(AH55:AH69)	=sum(AI55:AI69)	
+	
+Function:	hypterm	
+Loop line num:	81	
+			Iteration Space			Block Iteration Space					Block Access Space				Bandwidth				Working Set			Reuse WS			WS (all reads)			WS (reuse only)			GBytes transferred/sweep	
+		Name	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	X	Y	Z	X (cache line)	Copies	Planes	Pencils	Cells	Planes	Pencils	Cells	Planes	Pencils	Cells	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	Reuse between planes	Reuse between pencils	Reuse within pencils	No reuse within pencils		
+		cons.iene	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G76/($B$17/$B$16),1)*($B$17/$B$16)	=$D76/$G76*$E76/$H76*$F76/$I76	=$G76+8	=$H76+8	=$I76+8	=ceiling($L76/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(9)	=(17)	=(24)	=(10)	=(26)	=(24)	=(10)	=(10)	=(24)	=$B$16*$T76*($J76*$M76+$O76*$H76-$J76*$H76)/2^10	=$B$16*$U76*$O76/2^10	=$B$16*$V76/2^10	=$B$16*$W76*($J76*$M76+$O76*$H76-$J76*$H76)/2^10	=$B$16*$X76*$O76/2^10	=$B$16*$Y76/2^10	=$K76*$P76*$B$18*($O76*$H76*$I76+$J76*$M76*$I76+$J76*$H76*$N76-2*$J76*$H76*$I76)/2^30	=$K76*$Q76*$B$18*($O76*$H76+$J76*$M76-$J76*$H76)*$I76/2^30	=$K76*$R76*$B$18*$O76*$H76*$I76/2^30	=$K76*$S76*$B$18*$G76*$H76*$I76/2^30	
+		cons.imx	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G77/($B$17/$B$16),1)*($B$17/$B$16)	=$D77/$G77*$E77/$H77*$F77/$I77	=$G77+8	=$H77+8	=$I77+8	=ceiling($L77/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(9)	=(17)	=(24)	=(10)	=(26)	=(24)	=(10)	=(10)	=(24)	=$B$16*$T77*($J77*$M77+$O77*$H77-$J77*$H77)/2^10	=$B$16*$U77*$O77/2^10	=$B$16*$V77/2^10	=$B$16*$W77*($J77*$M77+$O77*$H77-$J77*$H77)/2^10	=$B$16*$X77*$O77/2^10	=$B$16*$Y77/2^10	=$K77*$P77*$B$18*($O77*$H77*$I77+$J77*$M77*$I77+$J77*$H77*$N77-2*$J77*$H77*$I77)/2^30	=$K77*$Q77*$B$18*($O77*$H77+$J77*$M77-$J77*$H77)*$I77/2^30	=$K77*$R77*$B$18*$O77*$H77*$I77/2^30	=$K77*$S77*$B$18*$G77*$H77*$I77/2^30	
+		cons.imy	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G78/($B$17/$B$16),1)*($B$17/$B$16)	=$D78/$G78*$E78/$H78*$F78/$I78	=$G78+8	=$H78+8	=$I78+8	=ceiling($L78/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(9)	=(17)	=(24)	=(10)	=(26)	=(24)	=(10)	=(10)	=(24)	=$B$16*$T78*($J78*$M78+$O78*$H78-$J78*$H78)/2^10	=$B$16*$U78*$O78/2^10	=$B$16*$V78/2^10	=$B$16*$W78*($J78*$M78+$O78*$H78-$J78*$H78)/2^10	=$B$16*$X78*$O78/2^10	=$B$16*$Y78/2^10	=$K78*$P78*$B$18*($O78*$H78*$I78+$J78*$M78*$I78+$J78*$H78*$N78-2*$J78*$H78*$I78)/2^30	=$K78*$Q78*$B$18*($O78*$H78+$J78*$M78-$J78*$H78)*$I78/2^30	=$K78*$R78*$B$18*$O78*$H78*$I78/2^30	=$K78*$S78*$B$18*$G78*$H78*$I78/2^30	
+		cons.imz	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G79/($B$17/$B$16),1)*($B$17/$B$16)	=$D79/$G79*$E79/$H79*$F79/$I79	=$G79+8	=$H79+8	=$I79+8	=ceiling($L79/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(9)	=(17)	=(24)	=(10)	=(26)	=(24)	=(10)	=(10)	=(24)	=$B$16*$T79*($J79*$M79+$O79*$H79-$J79*$H79)/2^10	=$B$16*$U79*$O79/2^10	=$B$16*$V79/2^10	=$B$16*$W79*($J79*$M79+$O79*$H79-$J79*$H79)/2^10	=$B$16*$X79*$O79/2^10	=$B$16*$Y79/2^10	=$K79*$P79*$B$18*($O79*$H79*$I79+$J79*$M79*$I79+$J79*$H79*$N79-2*$J79*$H79*$I79)/2^30	=$K79*$Q79*$B$18*($O79*$H79+$J79*$M79-$J79*$H79)*$I79/2^30	=$K79*$R79*$B$18*$O79*$H79*$I79/2^30	=$K79*$S79*$B$18*$G79*$H79*$I79/2^30	
+		q.qpres	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G80/($B$17/$B$16),1)*($B$17/$B$16)	=$D80/$G80*$E80/$H80*$F80/$I80	=$G80+8	=$H80+8	=$I80+8	=ceiling($L80/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(9)	=(17)	=(24)	=(10)	=(26)	=(24)	=(10)	=(10)	=(24)	=$B$16*$T80*($J80*$M80+$O80*$H80-$J80*$H80)/2^10	=$B$16*$U80*$O80/2^10	=$B$16*$V80/2^10	=$B$16*$W80*($J80*$M80+$O80*$H80-$J80*$H80)/2^10	=$B$16*$X80*$O80/2^10	=$B$16*$Y80/2^10	=$K80*$P80*$B$18*($O80*$H80*$I80+$J80*$M80*$I80+$J80*$H80*$N80-2*$J80*$H80*$I80)/2^30	=$K80*$Q80*$B$18*($O80*$H80+$J80*$M80-$J80*$H80)*$I80/2^30	=$K80*$R80*$B$18*$O80*$H80*$I80/2^30	=$K80*$S80*$B$18*$G80*$H80*$I80/2^30	
+		q.qu	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G81/($B$17/$B$16),1)*($B$17/$B$16)	=$D81/$G81*$E81/$H81*$F81/$I81	=$G81+8	=$H81+0	=$I81+0	=ceiling($L81/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(8)	=(2)	=(2)	=(8)	=(0)	=(0)	=(8)	=$B$16*$T81*($J81*$M81+$O81*$H81-$J81*$H81)/2^10	=$B$16*$U81*$O81/2^10	=$B$16*$V81/2^10	=$B$16*$W81*($J81*$M81+$O81*$H81-$J81*$H81)/2^10	=$B$16*$X81*$O81/2^10	=$B$16*$Y81/2^10	=$K81*$P81*$B$18*($O81*$H81*$I81+$J81*$M81*$I81+$J81*$H81*$N81-2*$J81*$H81*$I81)/2^30	=$K81*$Q81*$B$18*($O81*$H81+$J81*$M81-$J81*$H81)*$I81/2^30	=$K81*$R81*$B$18*$O81*$H81*$I81/2^30	=$K81*$S81*$B$18*$G81*$H81*$I81/2^30	
+		q.qv	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G82/($B$17/$B$16),1)*($B$17/$B$16)	=$D82/$G82*$E82/$H82*$F82/$I82	=$G82+0	=$H82+8	=$I82+0	=ceiling($L82/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(8)	=(8)	=(2)	=(10)	=(8)	=(2)	=(10)	=(8)	=$B$16*$T82*($J82*$M82+$O82*$H82-$J82*$H82)/2^10	=$B$16*$U82*$O82/2^10	=$B$16*$V82/2^10	=$B$16*$W82*($J82*$M82+$O82*$H82-$J82*$H82)/2^10	=$B$16*$X82*$O82/2^10	=$B$16*$Y82/2^10	=$K82*$P82*$B$18*($O82*$H82*$I82+$J82*$M82*$I82+$J82*$H82*$N82-2*$J82*$H82*$I82)/2^30	=$K82*$Q82*$B$18*($O82*$H82+$J82*$M82-$J82*$H82)*$I82/2^30	=$K82*$R82*$B$18*$O82*$H82*$I82/2^30	=$K82*$S82*$B$18*$G82*$H82*$I82/2^30	
+		q.qw	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G83/($B$17/$B$16),1)*($B$17/$B$16)	=$D83/$G83*$E83/$H83*$F83/$I83	=$G83+0	=$H83+0	=$I83+8	=ceiling($L83/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(8)	=(8)	=(8)	=(10)	=(16)	=(8)	=(10)	=(0)	=(8)	=$B$16*$T83*($J83*$M83+$O83*$H83-$J83*$H83)/2^10	=$B$16*$U83*$O83/2^10	=$B$16*$V83/2^10	=$B$16*$W83*($J83*$M83+$O83*$H83-$J83*$H83)/2^10	=$B$16*$X83*$O83/2^10	=$B$16*$Y83/2^10	=$K83*$P83*$B$18*($O83*$H83*$I83+$J83*$M83*$I83+$J83*$H83*$N83-2*$J83*$H83*$I83)/2^30	=$K83*$Q83*$B$18*($O83*$H83+$J83*$M83-$J83*$H83)*$I83/2^30	=$K83*$R83*$B$18*$O83*$H83*$I83/2^30	=$K83*$S83*$B$18*$G83*$H83*$I83/2^30	
+		Total													=sum(P76:P83)	=sum(Q76:Q83)	=sum(R76:R83)	=sum(S76:S83)	=sum(T76:T83)	=sum(U76:U83)	=sum(V76:V83)	=sum(W76:W83)	=sum(X76:X83)	=sum(Y76:Y83)	=sum(Z76:Z83)	=sum(AA76:AA83)	=sum(AB76:AB83)	=sum(AC76:AC83)	=sum(AD76:AD83)	=sum(AE76:AE83)	=sum(AF76:AF83)	=sum(AG76:AG83)	=sum(AH76:AH83)	=sum(AI76:AI83)	
+	
+ARRAY READ-WRITE TABLES	
+	
+advance	Copies	43	Reads	Writes	Present		
+U.iene	=(1)	R	=$B89*(COUNTIF(C89:C89,"R")+COUNTIF(C89:C89,"RW"))	=$B89*(COUNTIF(C89:C89,"W")+COUNTIF(C89:C89,"RW")+COUNTIF(C89:C89,"WR"))	=$B89*COUNTIF(C89:C89,"P")		
+U.imx	=(1)	R	=$B90*(COUNTIF(C90:C90,"R")+COUNTIF(C90:C90,"RW"))	=$B90*(COUNTIF(C90:C90,"W")+COUNTIF(C90:C90,"RW")+COUNTIF(C90:C90,"WR"))	=$B90*COUNTIF(C90:C90,"P")		
+U.imy	=(1)	R	=$B91*(COUNTIF(C91:C91,"R")+COUNTIF(C91:C91,"RW"))	=$B91*(COUNTIF(C91:C91,"W")+COUNTIF(C91:C91,"RW")+COUNTIF(C91:C91,"WR"))	=$B91*COUNTIF(C91:C91,"P")		
+U.imz	=(1)	R	=$B92*(COUNTIF(C92:C92,"R")+COUNTIF(C92:C92,"RW"))	=$B92*(COUNTIF(C92:C92,"W")+COUNTIF(C92:C92,"RW")+COUNTIF(C92:C92,"WR"))	=$B92*COUNTIF(C92:C92,"P")		
+U.irho	=(1)	R	=$B93*(COUNTIF(C93:C93,"R")+COUNTIF(C93:C93,"RW"))	=$B93*(COUNTIF(C93:C93,"W")+COUNTIF(C93:C93,"RW")+COUNTIF(C93:C93,"WR"))	=$B93*COUNTIF(C93:C93,"P")		
+Unew.iene	=(1)	RW	=$B94*(COUNTIF(C94:C94,"R")+COUNTIF(C94:C94,"RW"))	=$B94*(COUNTIF(C94:C94,"W")+COUNTIF(C94:C94,"RW")+COUNTIF(C94:C94,"WR"))	=$B94*COUNTIF(C94:C94,"P")		
+Unew.imx	=(1)	RW	=$B95*(COUNTIF(C95:C95,"R")+COUNTIF(C95:C95,"RW"))	=$B95*(COUNTIF(C95:C95,"W")+COUNTIF(C95:C95,"RW")+COUNTIF(C95:C95,"WR"))	=$B95*COUNTIF(C95:C95,"P")		
+Unew.imy	=(1)	RW	=$B96*(COUNTIF(C96:C96,"R")+COUNTIF(C96:C96,"RW"))	=$B96*(COUNTIF(C96:C96,"W")+COUNTIF(C96:C96,"RW")+COUNTIF(C96:C96,"WR"))	=$B96*COUNTIF(C96:C96,"P")		
+Unew.imz	=(1)	RW	=$B97*(COUNTIF(C97:C97,"R")+COUNTIF(C97:C97,"RW"))	=$B97*(COUNTIF(C97:C97,"W")+COUNTIF(C97:C97,"RW")+COUNTIF(C97:C97,"WR"))	=$B97*COUNTIF(C97:C97,"P")		
+Unew.irho	=(1)	RW	=$B98*(COUNTIF(C98:C98,"R")+COUNTIF(C98:C98,"RW"))	=$B98*(COUNTIF(C98:C98,"W")+COUNTIF(C98:C98,"RW")+COUNTIF(C98:C98,"WR"))	=$B98*COUNTIF(C98:C98,"P")		
+difflux.iene	=(1)	R	=$B99*(COUNTIF(C99:C99,"R")+COUNTIF(C99:C99,"RW"))	=$B99*(COUNTIF(C99:C99,"W")+COUNTIF(C99:C99,"RW")+COUNTIF(C99:C99,"WR"))	=$B99*COUNTIF(C99:C99,"P")		
+difflux.imx	=(1)	R	=$B100*(COUNTIF(C100:C100,"R")+COUNTIF(C100:C100,"RW"))	=$B100*(COUNTIF(C100:C100,"W")+COUNTIF(C100:C100,"RW")+COUNTIF(C100:C100,"WR"))	=$B100*COUNTIF(C100:C100,"P")		
+difflux.imy	=(1)	R	=$B101*(COUNTIF(C101:C101,"R")+COUNTIF(C101:C101,"RW"))	=$B101*(COUNTIF(C101:C101,"W")+COUNTIF(C101:C101,"RW")+COUNTIF(C101:C101,"WR"))	=$B101*COUNTIF(C101:C101,"P")		
+difflux.imz	=(1)	R	=$B102*(COUNTIF(C102:C102,"R")+COUNTIF(C102:C102,"RW"))	=$B102*(COUNTIF(C102:C102,"W")+COUNTIF(C102:C102,"RW")+COUNTIF(C102:C102,"WR"))	=$B102*COUNTIF(C102:C102,"P")		
+difflux.irho	=(1)	R	=$B103*(COUNTIF(C103:C103,"R")+COUNTIF(C103:C103,"RW"))	=$B103*(COUNTIF(C103:C103,"W")+COUNTIF(C103:C103,"RW")+COUNTIF(C103:C103,"WR"))	=$B103*COUNTIF(C103:C103,"P")		
+flux.iene	=(1)	R	=$B104*(COUNTIF(C104:C104,"R")+COUNTIF(C104:C104,"RW"))	=$B104*(COUNTIF(C104:C104,"W")+COUNTIF(C104:C104,"RW")+COUNTIF(C104:C104,"WR"))	=$B104*COUNTIF(C104:C104,"P")		
+flux.imx	=(1)	R	=$B105*(COUNTIF(C105:C105,"R")+COUNTIF(C105:C105,"RW"))	=$B105*(COUNTIF(C105:C105,"W")+COUNTIF(C105:C105,"RW")+COUNTIF(C105:C105,"WR"))	=$B105*COUNTIF(C105:C105,"P")		
+flux.imy	=(1)	R	=$B106*(COUNTIF(C106:C106,"R")+COUNTIF(C106:C106,"RW"))	=$B106*(COUNTIF(C106:C106,"W")+COUNTIF(C106:C106,"RW")+COUNTIF(C106:C106,"WR"))	=$B106*COUNTIF(C106:C106,"P")		
+flux.imz	=(1)	R	=$B107*(COUNTIF(C107:C107,"R")+COUNTIF(C107:C107,"RW"))	=$B107*(COUNTIF(C107:C107,"W")+COUNTIF(C107:C107,"RW")+COUNTIF(C107:C107,"WR"))	=$B107*COUNTIF(C107:C107,"P")		
+flux.irho	=(1)	R	=$B108*(COUNTIF(C108:C108,"R")+COUNTIF(C108:C108,"RW"))	=$B108*(COUNTIF(C108:C108,"W")+COUNTIF(C108:C108,"RW")+COUNTIF(C108:C108,"WR"))	=$B108*COUNTIF(C108:C108,"P")		
+Footprint		=SUMIF(C89:C108,"<>",B89:B108)		
+	
+hypterm	Copies	81	Reads	Writes	Present		
+cons.iene	=(1)	R	=$B112*(COUNTIF(C112:C112,"R")+COUNTIF(C112:C112,"RW"))	=$B112*(COUNTIF(C112:C112,"W")+COUNTIF(C112:C112,"RW")+COUNTIF(C112:C112,"WR"))	=$B112*COUNTIF(C112:C112,"P")		
+cons.imx	=(1)	R	=$B113*(COUNTIF(C113:C113,"R")+COUNTIF(C113:C113,"RW"))	=$B113*(COUNTIF(C113:C113,"W")+COUNTIF(C113:C113,"RW")+COUNTIF(C113:C113,"WR"))	=$B113*COUNTIF(C113:C113,"P")		
+cons.imy	=(1)	R	=$B114*(COUNTIF(C114:C114,"R")+COUNTIF(C114:C114,"RW"))	=$B114*(COUNTIF(C114:C114,"W")+COUNTIF(C114:C114,"RW")+COUNTIF(C114:C114,"WR"))	=$B114*COUNTIF(C114:C114,"P")		
+cons.imz	=(1)	R	=$B115*(COUNTIF(C115:C115,"R")+COUNTIF(C115:C115,"RW"))	=$B115*(COUNTIF(C115:C115,"W")+COUNTIF(C115:C115,"RW")+COUNTIF(C115:C115,"WR"))	=$B115*COUNTIF(C115:C115,"P")		
+flux.iene	=(1)	W	=$B116*(COUNTIF(C116:C116,"R")+COUNTIF(C116:C116,"RW"))	=$B116*(COUNTIF(C116:C116,"W")+COUNTIF(C116:C116,"RW")+COUNTIF(C116:C116,"WR"))	=$B116*COUNTIF(C116:C116,"P")		
+flux.imx	=(1)	W	=$B117*(COUNTIF(C117:C117,"R")+COUNTIF(C117:C117,"RW"))	=$B117*(COUNTIF(C117:C117,"W")+COUNTIF(C117:C117,"RW")+COUNTIF(C117:C117,"WR"))	=$B117*COUNTIF(C117:C117,"P")		
+flux.imy	=(1)	W	=$B118*(COUNTIF(C118:C118,"R")+COUNTIF(C118:C118,"RW"))	=$B118*(COUNTIF(C118:C118,"W")+COUNTIF(C118:C118,"RW")+COUNTIF(C118:C118,"WR"))	=$B118*COUNTIF(C118:C118,"P")		
+flux.imz	=(1)	W	=$B119*(COUNTIF(C119:C119,"R")+COUNTIF(C119:C119,"RW"))	=$B119*(COUNTIF(C119:C119,"W")+COUNTIF(C119:C119,"RW")+COUNTIF(C119:C119,"WR"))	=$B119*COUNTIF(C119:C119,"P")		
+flux.irho	=(1)	W	=$B120*(COUNTIF(C120:C120,"R")+COUNTIF(C120:C120,"RW"))	=$B120*(COUNTIF(C120:C120,"W")+COUNTIF(C120:C120,"RW")+COUNTIF(C120:C120,"WR"))	=$B120*COUNTIF(C120:C120,"P")		
+q.qpres	=(1)	R	=$B121*(COUNTIF(C121:C121,"R")+COUNTIF(C121:C121,"RW"))	=$B121*(COUNTIF(C121:C121,"W")+COUNTIF(C121:C121,"RW")+COUNTIF(C121:C121,"WR"))	=$B121*COUNTIF(C121:C121,"P")		
+q.qu	=(1)	R	=$B122*(COUNTIF(C122:C122,"R")+COUNTIF(C122:C122,"RW"))	=$B122*(COUNTIF(C122:C122,"W")+COUNTIF(C122:C122,"RW")+COUNTIF(C122:C122,"WR"))	=$B122*COUNTIF(C122:C122,"P")		
+q.qv	=(1)	R	=$B123*(COUNTIF(C123:C123,"R")+COUNTIF(C123:C123,"RW"))	=$B123*(COUNTIF(C123:C123,"W")+COUNTIF(C123:C123,"RW")+COUNTIF(C123:C123,"WR"))	=$B123*COUNTIF(C123:C123,"P")		
+q.qw	=(1)	R	=$B124*(COUNTIF(C124:C124,"R")+COUNTIF(C124:C124,"RW"))	=$B124*(COUNTIF(C124:C124,"W")+COUNTIF(C124:C124,"RW")+COUNTIF(C124:C124,"WR"))	=$B124*COUNTIF(C124:C124,"P")		
+Footprint		=SUMIF(C112:C124,"<>",B112:B124)		
+	
+STATE VARIABLE TABLES	
+	
+advance	copies	43		
+a	=(1)	=(5)		
+b	=(1)	=(5)		
+dt	=(1)	=(5)		
+i	=(1)	=(26)		
+iene	=(1)	=(5)		
+imx	=(1)	=(5)		
+imy	=(1)	=(5)		
+imz	=(1)	=(5)		
+irho	=(1)	=(5)		
+j	=(1)	=(25)		
+k	=(1)	=(25)		
+	
+hypterm	copies	81		
+ALP	=(1)	=(15)		
+BET	=(1)	=(15)		
+DEL	=(1)	=(15)		
+GAM	=(1)	=(15)		
+dxinv(1,)	=(1)	=(5)		
+dxinv(2,)	=(1)	=(5)		
+dxinv(3,)	=(1)	=(5)		
+fluxiene	=(1)	=(4)		
+fluximx	=(1)	=(4)		
+fluximy	=(1)	=(4)		
+fluximz	=(1)	=(4)		
+fluxirho	=(1)	=(4)		
+i	=(1)	=(198)		
+iene	=(1)	=(25)		
+imx	=(1)	=(33)		
+imy	=(1)	=(33)		
+imz	=(1)	=(33)		
+irho	=(1)	=(1)		
+j	=(1)	=(197)		
+k	=(1)	=(197)		
+qpres	=(1)	=(48)		
+qu	=(1)	=(8)		
+qv	=(1)	=(8)		
+qw	=(1)	=(8)		
+unm1	=(1)	=(18)		
+unm2	=(1)	=(18)		
+unm3	=(1)	=(18)		
+unm4	=(1)	=(18)		
+unp1	=(1)	=(18)		
+unp2	=(1)	=(18)		
+unp3	=(1)	=(18)		
+unp4	=(1)	=(18)		
+	

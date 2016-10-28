@@ -1,0 +1,431 @@
+<program name ="main.Linux.PGI.exe" pid="3559">
+  <function name="advance_module_ctoprim_" file="/global/u2/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Tutorials/Exp_CNS_NoSpec/./advance.f90">
+    <loop num="1" line="318" entries="9" iters="360" ops="6480" reads="1080" writes="0" bytereads="4320" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="12010100" />
+    <loop num="1.1" line="319" entries="360" iters="14400" ops="259200" reads="43200" writes="0" bytereads="172800" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="1.1.1" line="321" entries="14400" iters="576000" ops="97920000" reads="8064000" writes="3456000" bytereads="64512000" bytewrites="27648000" uniquereads="0" uniquewrites="0" adds="1152000" subs="576000" muls="6336000" divs="576000" cachehits="0" />
+    <loop num="2" line="341" entries="3" iters="96" ops="1344" reads="288" writes="0" bytereads="1152" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1318172" />
+    <loop num="2.1" line="342" entries="96" iters="3072" ops="46080" reads="9216" writes="0" bytereads="36864" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2.1.1" line="344" entries="3072" iters="98304" ops="9437184" reads="1179648" writes="0" bytereads="11796480" bytewrites="0" uniquereads="298080" uniquewrites="0" adds="294912" subs="0" muls="98304" divs="393216" cachehits="0" />
+  </function>
+  <function name="advance_module_hypterm_" file="/global/u2/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Tutorials/Exp_CNS_NoSpec/./advance.f90">
+    <loop num="1" line="379" entries="9" iters="27" ops="243" reads="54" writes="27" bytereads="432" bytewrites="216" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="27" cachehits="90" />
+    <loop num="2" line="384" entries="9" iters="288" ops="4320" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="31763601" />
+    <loop num="2.1" line="385" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2.1.1" line="387" entries="9216" iters="294912" ops="170459136" reads="27721728" writes="1474560" bytereads="221773824" bytewrites="11796480" uniquereads="0" uniquewrites="0" adds="6782976" subs="9732096" muls="19169280" divs="0" cachehits="0" />
+    <loop num="3" line="441" entries="9" iters="288" ops="4032" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="32029929" />
+    <loop num="3.1" line="442" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3.1.1" line="444" entries="9216" iters="294912" ops="284000256" reads="27721728" writes="1474560" bytereads="221773824" bytewrites="11796480" uniquereads="0" uniquewrites="0" adds="6782976" subs="9732096" muls="19169280" divs="0" cachehits="0" />
+    <loop num="4" line="498" entries="9" iters="288" ops="4032" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="32024500" />
+    <loop num="4.1" line="499" entries="288" iters="9216" ops="138240" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4.1.1" line="501" entries="9216" iters="294912" ops="276037632" reads="27721728" writes="1474560" bytereads="221773824" bytewrites="11796480" uniquereads="0" uniquewrites="0" adds="6782976" subs="9732096" muls="19169280" divs="0" cachehits="0" />
+  </function>
+  <function name="advance_module_diffterm_" file="/global/u2/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Tutorials/Exp_CNS_NoSpec/./advance.f90">
+    <loop num="1" line="591" entries="9" iters="288" ops="3456" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="608247" />
+    <loop num="1.1" line="591" entries="288" iters="9216" ops="110592" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="1.1.1" line="591" entries="9216" iters="294912" ops="5603328" reads="0" writes="589824" bytereads="0" bytewrites="4718592" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="594" entries="9" iters="27" ops="243" reads="54" writes="27" bytereads="432" bytewrites="216" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="27" cachehits="83" />
+    <loop num="3" line="600" entries="9" iters="360" ops="6480" reads="1080" writes="0" bytereads="4320" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="20068043" />
+    <loop num="3.1" line="601" entries="360" iters="14400" ops="216000" reads="43200" writes="0" bytereads="172800" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3.1.1" line="603" entries="14400" iters="460800" ops="77414400" reads="17971200" writes="1382400" bytereads="143769600" bytewrites="11059200" uniquereads="0" uniquewrites="650038" adds="4147200" subs="5529600" muls="6912000" divs="0" cachehits="0" />
+    <loop num="4" line="627" entries="9" iters="360" ops="5040" reads="1080" writes="0" bytereads="4320" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="20079360" />
+    <loop num="4.1" line="628" entries="360" iters="11520" ops="207360" reads="34560" writes="0" bytereads="138240" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4.1.1" line="630" entries="11520" iters="460800" ops="131328000" reads="17971200" writes="1382400" bytereads="143769600" bytewrites="11059200" uniquereads="0" uniquewrites="419816" adds="4147200" subs="5529600" muls="6912000" divs="0" cachehits="0" />
+    <loop num="5" line="654" entries="9" iters="288" ops="5184" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="20080197" />
+    <loop num="5.1" line="655" entries="288" iters="11520" ops="207360" reads="34560" writes="0" bytereads="138240" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="5.1.1" line="657" entries="11520" iters="460800" ops="124416000" reads="17971200" writes="1382400" bytereads="143769600" bytewrites="11059200" uniquereads="0" uniquewrites="453972" adds="4147200" subs="5529600" muls="6912000" divs="0" cachehits="0" />
+    <loop num="6" line="682" entries="9" iters="288" ops="4320" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="22939488" />
+    <loop num="6.1" line="683" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1" line="685" entries="9216" iters="294912" ops="99680256" reads="21823488" writes="294912" bytereads="174587904" bytewrites="2359296" uniquereads="18492" uniquewrites="0" adds="10027008" subs="2359296" muls="10027008" divs="0" cachehits="0" />
+    <loop num="7" line="721" entries="9" iters="288" ops="4320" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="22939488" />
+    <loop num="7.1" line="722" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1" line="724" entries="9216" iters="294912" ops="128581632" reads="21823488" writes="294912" bytereads="174587904" bytewrites="2359296" uniquereads="7416" uniquewrites="0" adds="10027008" subs="2359296" muls="10027008" divs="0" cachehits="0" />
+    <loop num="8" line="760" entries="9" iters="288" ops="4320" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="22939488" />
+    <loop num="8.1" line="761" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1" line="763" entries="9216" iters="294912" ops="122683392" reads="21823488" writes="294912" bytereads="174587904" bytewrites="2359296" uniquereads="26952" uniquewrites="0" adds="10027008" subs="2359296" muls="10027008" divs="0" cachehits="0" />
+    <loop num="9" line="800" entries="9" iters="288" ops="4320" reads="864" writes="0" bytereads="3456" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="21825801" />
+    <loop num="9.1" line="801" entries="288" iters="9216" ops="129024" reads="27648" writes="0" bytereads="110592" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="9.1.1" line="803" entries="9216" iters="294912" ops="164560896" reads="20348928" writes="294912" bytereads="162791424" bytewrites="2359296" uniquereads="477150" uniquewrites="0" adds="12681216" subs="884736" muls="9732096" divs="0" cachehits="0" />
+  </function>
+  <function name="box_module_box_nobox_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="224" entries="15" iters="45" ops="315" reads="0" writes="90" bytereads="0" bytewrites="360" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="88" />
+    <loop num="2" line="225" entries="15" iters="45" ops="315" reads="0" writes="90" bytereads="0" bytewrites="360" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="90" />
+  </function>
+  <function name="box_module_box_build_2_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="263" entries="1" iters="3" ops="33" reads="3" writes="3" bytereads="12" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="2" line="264" entries="1" iters="3" ops="33" reads="3" writes="3" bytereads="12" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+  </function>
+  <function name="box_module_box_coarsen_i_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="331" entries="33" iters="99" ops="1287" reads="0" writes="99" bytereads="0" bytewrites="396" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="99" />
+    <loop num="2" line="332" entries="33" iters="99" ops="1287" reads="0" writes="99" bytereads="0" bytewrites="396" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="99" />
+  </function>
+  <function name="box_module_box_nodalize_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="393" entries="16" iters="48" ops="480" reads="96" writes="0" bytereads="384" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="96" />
+  </function>
+  <function name="box_module_box_grow_n_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="504" entries="15" iters="45" ops="495" reads="90" writes="45" bytereads="360" bytewrites="180" uniquereads="9" uniquewrites="9" adds="0" subs="0" muls="0" divs="0" cachehits="166" />
+    <loop num="2" line="505" entries="15" iters="45" ops="495" reads="90" writes="45" bytereads="360" bytewrites="180" uniquereads="9" uniquewrites="9" adds="0" subs="0" muls="0" divs="0" cachehits="174" />
+  </function>
+  <function name="box_module_box_less_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="515" entries="16" iters="26" ops="414" reads="116" writes="0" bytereads="464" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="box_module_box_intersects_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="603" entries="8" iters="24" ops="366" reads="102" writes="0" bytereads="408" bytewrites="0" uniquereads="6" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="115" />
+  </function>
+  <function name="box_module_box_contains_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="614" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="614" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="614" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="614" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="5" line="619" entries="470" iters="1410" ops="14106" reads="2820" writes="0" bytereads="11280" bytewrites="0" uniquereads="12" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="17566" />
+    <loop num="6" line="619" entries="470" iters="1410" ops="14100" reads="2820" writes="0" bytereads="11280" bytewrites="0" uniquereads="12" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2820" />
+    <loop num="7" line="619" entries="470" iters="1410" ops="14100" reads="2820" writes="0" bytereads="11280" bytewrites="0" uniquereads="12" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2820" />
+    <loop num="8" line="619" entries="470" iters="1410" ops="14112" reads="2820" writes="0" bytereads="11280" bytewrites="0" uniquereads="12" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2820" />
+  </function>
+  <function name="box_module_box_contains_iv_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="643" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="643" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="645" entries="1" iters="3" ops="36" reads="6" writes="0" bytereads="24" bytewrites="0" uniquereads="6" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="9" />
+    <loop num="4" line="645" entries="1" iters="3" ops="36" reads="6" writes="0" bytereads="24" bytewrites="0" uniquereads="6" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+  </function>
+  <function name="box_module_box_shift_v_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="668" entries="26" iters="78" ops="1014" reads="156" writes="78" bytereads="624" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1262" />
+    <loop num="2" line="669" entries="26" iters="78" ops="1014" reads="156" writes="78" bytereads="624" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="234" />
+  </function>
+  <function name="box_module_box_extent_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="706" entries="2" iters="6" ops="66" reads="12" writes="6" bytereads="48" bytewrites="24" uniquereads="12" uniquewrites="6" adds="0" subs="0" muls="0" divs="0" cachehits="16" />
+  </function>
+  <function name="box_module_box_lwb_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="719" entries="75" iters="225" ops="1575" reads="0" writes="450" bytereads="0" bytewrites="1800" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="513" />
+    <loop num="2" line="720" entries="75" iters="225" ops="2025" reads="225" writes="225" bytereads="900" bytewrites="900" uniquereads="12" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="449" />
+  </function>
+  <function name="box_module_box_upb_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="743" entries="74" iters="222" ops="1554" reads="0" writes="444" bytereads="0" bytewrites="1776" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="444" />
+    <loop num="2" line="744" entries="74" iters="222" ops="1998" reads="222" writes="222" bytereads="888" bytewrites="888" uniquereads="9" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="444" />
+  </function>
+  <function name="box_module_box_volume_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="810" entries="53" iters="159" ops="3021" reads="318" writes="0" bytereads="1272" bytewrites="0" uniquereads="30" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="369" />
+  </function>
+  <function name="box_module_box_bbox_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="834" entries="2" iters="6" ops="72" reads="12" writes="6" bytereads="48" bytewrites="24" uniquereads="12" uniquewrites="6" adds="0" subs="0" muls="0" divs="0" cachehits="25" />
+    <loop num="2" line="835" entries="2" iters="6" ops="72" reads="12" writes="6" bytereads="48" bytewrites="24" uniquereads="12" uniquewrites="6" adds="0" subs="0" muls="0" divs="0" cachehits="18" />
+  </function>
+  <function name="box_module_box_periodic_shift_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/box_f.f90">
+    <loop num="1" line="1009" entries="1" iters="27" ops="594" reads="108" writes="108" bytereads="756" bytewrites="756" uniquereads="0" uniquewrites="108" adds="0" subs="0" muls="0" divs="0" cachehits="221" />
+    <loop num="2" line="1032" entries="1" iters="3" ops="42" reads="6" writes="0" bytereads="24" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="3" line="1042" entries="1" iters="3" ops="36" reads="6" writes="0" bytereads="24" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="4" line="1044" entries="1" iters="3" ops="24" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="8" />
+    <loop num="5" line="1047" entries="1" iters="3" ops="36" reads="15" writes="6" bytereads="60" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="21" />
+    <loop num="6" line="1050" entries="1" iters="3" ops="24" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="7" line="1051" entries="1" iters="3" ops="24" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="8" line="1052" entries="1" iters="3" ops="24" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="9" line="1053" entries="1" iters="3" ops="24" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="10" line="1054" entries="1" iters="3" ops="27" reads="0" writes="3" bytereads="0" bytewrites="12" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="3" />
+    <loop num="11" line="1057" entries="1" iters="3" ops="174" reads="41" writes="25" bytereads="164" bytewrites="148" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1770" />
+    <loop num="11.1" line="1061" entries="3" iters="9" ops="516" reads="123" writes="75" bytereads="492" bytewrites="444" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11.1.1" line="1065" entries="9" iters="27" ops="2891" reads="728" writes="458" bytereads="3224" bytewrites="2888" uniquereads="0" uniquewrites="104" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11.1.1.1" line="1075" entries="26" iters="78" ops="702" reads="0" writes="78" bytereads="0" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11.1.1.2" line="1076" entries="26" iters="78" ops="1326" reads="156" writes="78" bytereads="624" bytewrites="312" uniquereads="0" uniquewrites="78" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="boxarray_module_boxarray_build_copy_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="226" entries="2" iters="2" ops="44" reads="16" writes="8" bytereads="96" bytewrites="56" uniquereads="8" uniquewrites="8" adds="0" subs="0" muls="0" divs="0" cachehits="20" />
+    <loop num="2" line="227" entries="2" iters="2" ops="66" reads="18" writes="8" bytereads="104" bytewrites="56" uniquereads="18" uniquewrites="8" adds="0" subs="0" muls="0" divs="0" cachehits="26" />
+    <loop num="3" line="227" entries="2" iters="2" ops="58" reads="16" writes="8" bytereads="96" bytewrites="56" uniquereads="16" uniquewrites="8" adds="0" subs="0" muls="0" divs="0" cachehits="26" />
+  </function>
+  <function name="boxarray_module_boxarray_build_v_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="250" entries="1" iters="32" ops="704" reads="256" writes="128" bytereads="1536" bytewrites="896" uniquereads="0" uniquewrites="128" adds="0" subs="0" muls="0" divs="0" cachehits="385" />
+    <loop num="2" line="251" entries="1" iters="32" ops="1024" reads="256" writes="128" bytereads="1536" bytewrites="896" uniquereads="128" uniquewrites="128" adds="0" subs="0" muls="0" divs="0" cachehits="398" />
+  </function>
+  <function name="boxarray_module_boxarray_build_bx_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="267" entries="2" iters="2" ops="44" reads="16" writes="8" bytereads="96" bytewrites="56" uniquereads="8" uniquewrites="8" adds="0" subs="0" muls="0" divs="0" cachehits="18" />
+  </function>
+  <function name="boxarray_module_boxarray_build_l_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="288" entries="2" iters="7" ops="154" reads="56" writes="28" bytereads="336" bytewrites="196" uniquereads="4" uniquewrites="28" adds="0" subs="0" muls="0" divs="0" cachehits="90" />
+    <loop num="2" line="291" entries="2" iters="9" ops="247" reads="28" writes="28" bytereads="140" bytewrites="196" uniquereads="4" uniquewrites="28" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="boxarray_module_boxarray_verify_dim_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="345" entries="7" iters="43" ops="731" reads="258" writes="0" bytereads="1204" bytewrites="0" uniquereads="51" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="320" />
+  </function>
+  <function name="boxarray_module_boxarray_grow_n_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="404" entries="1" iters="1" ops="36" reads="8" writes="4" bytereads="40" bytewrites="28" uniquereads="0" uniquewrites="4" adds="0" subs="0" muls="0" divs="0" cachehits="8" />
+  </function>
+  <function name="boxarray_module_boxarray_bbox_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="593" entries="2" iters="2" ops="54" reads="8" writes="8" bytereads="40" bytewrites="56" uniquereads="8" uniquewrites="8" adds="0" subs="0" muls="0" divs="0" cachehits="8" />
+  </function>
+  <function name="boxarray_module_boxarray_diff_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="640" entries="1" iters="1" ops="28" reads="4" writes="3" bytereads="20" bytewrites="24" uniquereads="4" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+  </function>
+  <function name="boxarray_module_boxarray_maxsize_i_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="653" entries="1" iters="3" ops="27" reads="3" writes="3" bytereads="12" bytewrites="12" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+  </function>
+  <function name="boxarray_module_boxarray_maxsize_l_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/boxarray_f.f90">
+    <loop num="1" line="678" entries="1" iters="1" ops="17" reads="4" writes="0" bytereads="20" bytewrites="0" uniquereads="4" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+    <loop num="2" line="681" entries="1" iters="2" ops="35" reads="1" writes="0" bytereads="4" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2.1" line="684" entries="1" iters="3" ops="36" reads="6" writes="0" bytereads="24" bytewrites="0" uniquereads="6" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2.1.1" line="688" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2.1.2" line="698" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="fab_module_least_used_cpus_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/fab.f90">
+    <loop num="1" line="494" entries="1" iters="1" ops="26" reads="6" writes="1" bytereads="28" bytewrites="4" uniquereads="6" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+    <loop num="2" line="499" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="fab_module_fab_build_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/fab.f90">
+    <loop num="1" line="805" entries="13" iters="39" ops="234" reads="0" writes="78" bytereads="0" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="130" />
+    <loop num="2" line="806" entries="13" iters="39" ops="234" reads="0" writes="78" bytereads="0" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="78" />
+    <loop num="3" line="812" entries="13" iters="39" ops="312" reads="39" writes="39" bytereads="156" bytewrites="156" uniquereads="3" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="78" />
+    <loop num="4" line="813" entries="13" iters="39" ops="312" reads="39" writes="39" bytereads="156" bytewrites="156" uniquereads="3" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="78" />
+  </function>
+  <function name="init_data_module_init_data_3d_" file="/global/u2/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Tutorials/Exp_CNS_NoSpec/./init_data.f90">
+    <loop num="1" line="57" entries="1" iters="3" ops="33" reads="9" writes="3" bytereads="72" bytewrites="24" uniquereads="6" uniquewrites="3" adds="0" subs="3" muls="3" divs="0" cachehits="10" />
+    <loop num="2" line="62" entries="1" iters="32" ops="608" reads="160" writes="0" bytereads="896" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="32" divs="32" cachehits="658943" />
+    <loop num="2.1" line="64" entries="32" iters="1024" ops="20480" reads="5120" writes="0" bytereads="28672" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="1024" divs="1024" cachehits="0" />
+    <loop num="2.1.1" line="66" entries="1024" iters="32768" ops="6651904" reads="458752" writes="163840" bytereads="3670016" bytewrites="1310720" uniquereads="0" uniquewrites="163840" adds="425984" subs="0" muls="917504" divs="32768" cachehits="0" />
+  </function>
+  <function name="knapsack_module_knapsack_i_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/knapsack.f90">
+    <loop num="1" line="73" entries="1" iters="1" ops="37" reads="12" writes="12" bytereads="96" bytewrites="96" uniquereads="12" uniquewrites="12" adds="0" subs="0" muls="0" divs="0" cachehits="22" />
+    <loop num="2" line="79" entries="1" iters="1" ops="24" reads="4" writes="3" bytereads="16" bytewrites="12" uniquereads="0" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="3" line="82" entries="1" iters="1" ops="13" reads="1" writes="1" bytereads="4" bytewrites="8" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="4" line="83" entries="1" iters="1" ops="11" reads="1" writes="0" bytereads="8" bytewrites="0" uniquereads="1" uniquewrites="0" adds="1" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="5" line="89" entries="1" iters="1" ops="20" reads="1" writes="1" bytereads="8" bytewrites="8" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+    <loop num="6" line="91" entries="1" iters="1" ops="14" reads="2" writes="0" bytereads="8" bytewrites="0" uniquereads="2" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7" line="96" entries="1" iters="1" ops="14" reads="4" writes="1" bytereads="28" bytewrites="8" uniquereads="4" uniquewrites="1" adds="0" subs="0" muls="1" divs="1" cachehits="0" />
+    <loop num="7.1" line="105" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1" line="109" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1.1" line="110" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8" line="138" entries="1" iters="1" ops="26" reads="4" writes="4" bytereads="16" bytewrites="16" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="19" />
+    <loop num="8.1" line="139" entries="1" iters="1" ops="18" reads="3" writes="3" bytereads="12" bytewrites="12" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="9" line="143" entries="1" iters="1" ops="11" reads="2" writes="2" bytereads="8" bytewrites="8" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="10" line="148" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11" line="149" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="12" line="152" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="13" line="153" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="14" line="158" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="15" line="161" entries="1" iters="1" ops="13" reads="1" writes="0" bytereads="8" bytewrites="0" uniquereads="1" uniquewrites="0" adds="1" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="16" line="164" entries="1" iters="1" ops="16" reads="3" writes="2" bytereads="12" bytewrites="8" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+  </function>
+  <function name="knapsack_module_knapsack_i_weights" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/knapsack.f90">
+    <loop num="1" line="193" entries="3" iters="3" ops="21" reads="0" writes="6" bytereads="0" bytewrites="48" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+    <loop num="2" line="195" entries="3" iters="3" ops="33" reads="0" writes="3" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="3" />
+  </function>
+  <function name="knapsack_module_knapsack_i_weight" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/knapsack.f90">
+    <loop num="1" line="205" entries="5" iters="5" ops="140" reads="40" writes="0" bytereads="240" bytewrites="0" uniquereads="3" uniquewrites="0" adds="5" subs="0" muls="0" divs="0" cachehits="36" />
+  </function>
+  <function name="knapsack_module_knapsack_i_sort_procs" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/knapsack.f90">
+    <loop num="1" line="226" entries="1" iters="1" ops="20" reads="5" writes="1" bytereads="24" bytewrites="4" uniquereads="5" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+    <loop num="2" line="226" entries="1" iters="1" ops="15" reads="3" writes="1" bytereads="16" bytewrites="4" uniquereads="3" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+  </function>
+  <function name="knapsack_module_knapsack_i_reheap_procs" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/knapsack.f90">
+    <loop num="1" line="239" entries="1" iters="1" ops="2" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="252" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_layout_rep_build_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="459" entries="1" iters="3" ops="69" reads="15" writes="3" bytereads="72" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="17" />
+    <loop num="2" line="470" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="472" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_layout_rep_destroy_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="522" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="530" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="538" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="548" entries="1" iters="2" ops="24" reads="1" writes="0" bytereads="8" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="5" line="558" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6" line="568" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7" line="579" entries="1" iters="1" ops="23" reads="5" writes="0" bytereads="28" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="25" />
+    <loop num="7.1" line="580" entries="1" iters="1" ops="22" reads="5" writes="0" bytereads="28" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1" line="581" entries="1" iters="1" ops="52" reads="15" writes="4" bytereads="80" bytewrites="24" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8" line="592" entries="1" iters="1" ops="1" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_layout_build_ba_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="624" entries="1" iters="3" ops="21" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="2" line="624" entries="1" iters="3" ops="33" reads="3" writes="3" bytereads="12" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+  </function>
+  <function name="layout_module_layout_knapsack_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="887" entries="1" iters="1" ops="17" reads="0" writes="1" bytereads="0" bytewrites="4" uniquereads="0" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="2" line="906" entries="1" iters="1" ops="22" reads="2" writes="1" bytereads="8" bytewrites="4" uniquereads="2" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="3" />
+  </function>
+  <function name="layout_module_boxassoc_check_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="975" entries="8" iters="24" ops="600" reads="168" writes="0" bytereads="768" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="138" />
+  </function>
+  <function name="layout_module_layout_boxassoc_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="1004" entries="9" iters="9" ops="705" reads="2368" writes="2368" bytereads="18944" bytewrites="18944" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_boxarray_bndry_periodic_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="1088" entries="1" iters="27" ops="486" reads="108" writes="108" bytereads="756" bytewrites="756" uniquereads="0" uniquewrites="108" adds="0" subs="0" muls="0" divs="0" cachehits="215" />
+    <loop num="2" line="1112" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="1132" entries="1" iters="3" ops="27" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="329" />
+    <loop num="3.1" line="1132" entries="3" iters="162" ops="2106" reads="0" writes="324" bytereads="0" bytewrites="1296" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="1137" entries="1" iters="32" ops="640" reads="128" writes="128" bytereads="896" bytewrites="896" uniquereads="0" uniquewrites="128" adds="0" subs="0" muls="0" divs="0" cachehits="259" />
+    <loop num="5" line="1139" entries="1" iters="6" ops="150" reads="0" writes="24" bytereads="0" bytewrites="168" uniquereads="0" uniquewrites="24" adds="0" subs="0" muls="0" divs="0" cachehits="25" />
+    <loop num="6" line="1141" entries="1" iters="26" ops="754" reads="104" writes="104" bytereads="728" bytewrites="728" uniquereads="104" uniquewrites="104" adds="0" subs="0" muls="0" divs="0" cachehits="220" />
+    <loop num="7" line="1142" entries="1" iters="3" ops="39" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="162" />
+    <loop num="7.1" line="1142" entries="3" iters="78" ops="1872" reads="78" writes="78" bytereads="312" bytewrites="312" uniquereads="78" uniquewrites="78" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_boxassoc_build_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="1188" entries="1" iters="3" ops="36" reads="3" writes="0" bytereads="12" bytewrites="0" uniquereads="3" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="3" />
+    <loop num="2" line="1194" entries="1" iters="50" ops="1500" reads="600" writes="400" bytereads="4200" bytewrites="3200" uniquereads="0" uniquewrites="400" adds="0" subs="0" muls="0" divs="0" cachehits="1046" />
+    <loop num="3" line="1195" entries="1" iters="50" ops="1800" reads="750" writes="550" bytereads="5400" bytewrites="4400" uniquereads="0" uniquewrites="550" adds="0" subs="0" muls="0" divs="0" cachehits="1347" />
+    <loop num="4" line="1196" entries="1" iters="50" ops="1800" reads="750" writes="550" bytereads="5400" bytewrites="4400" uniquereads="0" uniquewrites="550" adds="0" subs="0" muls="0" divs="0" cachehits="1349" />
+    <loop num="5" line="1208" entries="1" iters="3" ops="69" reads="15" writes="3" bytereads="72" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="18" />
+    <loop num="6" line="1210" entries="1" iters="2" ops="26" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="6.1" line="1210" entries="2" iters="2" ops="26" reads="0" writes="4" bytereads="0" bytewrites="16" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7" line="1210" entries="1" iters="2" ops="24" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="7.1" line="1210" entries="2" iters="2" ops="26" reads="0" writes="4" bytereads="0" bytewrites="16" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8" line="1215" entries="1" iters="1" ops="82" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="8" />
+    <loop num="8.1" line="1217" entries="1" iters="32" ops="1088" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1" line="1223" entries="26" iters="26" ops="4498" reads="676" writes="364" bytereads="3744" bytewrites="2392" uniquereads="0" uniquewrites="260" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.1" line="1228" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.2" line="1229" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.3" line="1229" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.4" line="1237" entries="26" iters="78" ops="1404" reads="78" writes="78" bytereads="312" bytewrites="312" uniquereads="78" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.5" line="1241" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.6" line="1242" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.7" line="1242" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.8" line="1252" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.9" line="1257" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.10" line="1258" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.11" line="1258" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.12" line="1268" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.13" line="1270" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.14" line="1271" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1.15" line="1272" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="9" line="1289" entries="1" iters="26" ops="754" reads="208" writes="208" bytereads="1664" bytewrites="1664" uniquereads="0" uniquewrites="208" adds="0" subs="0" muls="0" divs="0" cachehits="455" />
+    <loop num="10" line="1290" entries="1" iters="26" ops="884" reads="312" writes="208" bytereads="2184" bytewrites="1664" uniquereads="208" uniquewrites="208" adds="0" subs="0" muls="0" divs="0" cachehits="540" />
+    <loop num="11" line="1290" entries="1" iters="26" ops="884" reads="208" writes="208" bytereads="1664" bytewrites="1664" uniquereads="208" uniquewrites="208" adds="0" subs="0" muls="0" divs="0" cachehits="442" />
+    <loop num="12" line="1294" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="13" line="1295" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="14" line="1295" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="15" line="1299" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="16" line="1300" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="17" line="1300" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="18" line="1307" entries="1" iters="1" ops="32" reads="0" writes="2" bytereads="0" bytewrites="8" uniquereads="0" uniquewrites="2" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+    <loop num="18.1" line="1307" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="18.2" line="1308" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="19" line="1314" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="20" line="1323" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="21" line="1331" entries="1" iters="1" ops="12" reads="2" writes="0" bytereads="8" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+    <loop num="22" line="1332" entries="1" iters="1" ops="12" reads="2" writes="0" bytereads="8" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+    <loop num="23" line="1335" entries="1" iters="1" ops="12" reads="1" writes="0" bytereads="4" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="24" line="1336" entries="1" iters="1" ops="12" reads="1" writes="0" bytereads="4" bytewrites="0" uniquereads="1" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="25" line="1337" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="26" line="1338" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="27" line="1341" entries="1" iters="1" ops="20" reads="4" writes="0" bytereads="16" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+  </function>
+  <function name="layout_module_init_box_hash_bin_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="2496" entries="1" iters="3" ops="18" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="5" />
+    <loop num="2" line="2496" entries="1" iters="3" ops="18" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="3" line="2498" entries="1" iters="1" ops="63" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="9" />
+    <loop num="3.1" line="2498" entries="1" iters="3" ops="48" reads="6" writes="3" bytereads="24" bytewrites="12" uniquereads="6" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="2503" entries="1" iters="3" ops="28" reads="4" writes="0" bytereads="16" bytewrites="0" uniquereads="2" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="5" line="2508" entries="1" iters="3" ops="24" reads="3" writes="6" bytereads="24" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="8" />
+    <loop num="6" line="2508" entries="1" iters="3" ops="48" reads="6" writes="3" bytereads="36" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="9" />
+    <loop num="7" line="2509" entries="1" iters="3" ops="24" reads="3" writes="6" bytereads="24" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="9" />
+    <loop num="8" line="2509" entries="1" iters="3" ops="48" reads="6" writes="3" bytereads="36" bytewrites="12" uniquereads="3" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="9" />
+    <loop num="9" line="2510" entries="1" iters="3" ops="48" reads="3" writes="3" bytereads="24" bytewrites="12" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="6" />
+    <loop num="10" line="2511" entries="1" iters="1" ops="13" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="28" />
+    <loop num="10.1" line="2511" entries="1" iters="1" ops="13" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="10.1.1" line="2511" entries="1" iters="1" ops="45" reads="18" writes="11" bytereads="124" bytewrites="88" uniquereads="18" uniquewrites="11" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11" line="2514" entries="1" iters="1" ops="15" reads="4" writes="0" bytereads="20" bytewrites="0" uniquereads="2" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="17" />
+    <loop num="11.1" line="2515" entries="1" iters="1" ops="15" reads="4" writes="0" bytereads="20" bytewrites="0" uniquereads="2" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11.1.1" line="2516" entries="1" iters="1" ops="135" reads="5" writes="4" bytereads="20" bytewrites="16" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="12" line="2521" entries="1" iters="1" ops="290" reads="18" writes="6" bytereads="80" bytewrites="36" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="24" />
+    <loop num="12.1" line="2521" entries="1" iters="3" ops="18" reads="0" writes="6" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="12.2" line="2521" entries="1" iters="3" ops="51" reads="0" writes="3" bytereads="0" bytewrites="12" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="12.3" line="2527" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="12.4" line="2527" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="layout_module_layout_get_box_intersector_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/layout.f90">
+    <loop num="1" line="2552" entries="32" iters="1600" ops="36800" reads="12800" writes="6400" bytereads="83200" bytewrites="51200" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="23012" />
+    <loop num="2" line="2558" entries="32" iters="96" ops="576" reads="0" writes="192" bytereads="0" bytewrites="768" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="192" />
+    <loop num="3" line="2558" entries="32" iters="96" ops="1344" reads="96" writes="96" bytereads="384" bytewrites="384" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="192" />
+    <loop num="4" line="2559" entries="32" iters="96" ops="576" reads="0" writes="192" bytereads="0" bytewrites="768" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="256" />
+    <loop num="5" line="2559" entries="32" iters="96" ops="1344" reads="96" writes="96" bytereads="384" bytewrites="384" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="224" />
+    <loop num="6" line="2564" entries="31" iters="31" ops="651" reads="250" writes="0" bytereads="1124" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="1431" />
+    <loop num="6.1" line="2565" entries="30" iters="30" ops="630" reads="240" writes="0" bytereads="1080" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1" line="2566" entries="29" iters="29" ops="812" reads="29" writes="0" bytereads="116" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1.1" line="2567" entries="29" iters="29" ops="3201" reads="584" writes="246" bytereads="3076" bytewrites="1644" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1.1.1" line="2572" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1.1.2" line="2573" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6.1.1.1.3" line="2573" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7" line="2587" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1" line="2588" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1" line="2589" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1.1" line="2594" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1.2" line="2595" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7.1.1.3" line="2595" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8" line="2609" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1" line="2610" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.1" line="2615" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.2" line="2616" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8.1.3" line="2616" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="9" line="2627" entries="26" iters="26" ops="546" reads="104" writes="104" bytereads="832" bytewrites="832" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="260" />
+    <loop num="10" line="2628" entries="26" iters="26" ops="702" reads="208" writes="104" bytereads="1352" bytewrites="832" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="338" />
+    <loop num="11" line="2628" entries="26" iters="26" ops="676" reads="104" writes="104" bytereads="832" bytewrites="832" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="234" />
+  </function>
+  <function name="list_box_module_list_build_v_box_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/list_box.f90">
+    <loop num="1" line="191" entries="1" iters="1" ops="15" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="list_box_module_list_erase_range_box_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/list_box.f90">
+    <loop num="1" line="456" entries="3" iters="11" ops="107" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="460" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="list_box_module_boxlist_box_diff_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/list_box.f90">
+    <loop num="1" line="550" entries="1" iters="3" ops="324" reads="66" writes="24" bytereads="336" bytewrites="168" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="30" />
+  </function>
+  <function name="list_box_module_boxlist_boxlist_diff_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/list_box.f90">
+    <loop num="1" line="586" entries="1" iters="2" ops="25" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="1.1" line="588" entries="1" iters="8" ops="208" reads="0" writes="3" bytereads="0" bytewrites="24" uniquereads="0" uniquewrites="3" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="multifab_module_multifab_build_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/multifab_f.f90">
+    <loop num="1" line="596" entries="13" iters="39" ops="585" reads="156" writes="78" bytereads="780" bytewrites="312" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="229" />
+    <loop num="2" line="596" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="597" entries="13" iters="13" ops="624" reads="1716" writes="1664" bytereads="13572" bytewrites="13312" uniquereads="4" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="3557" />
+    <loop num="4" line="599" entries="13" iters="13" ops="754" reads="52" writes="0" bytereads="260" bytewrites="0" uniquereads="4" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="multifab_module_multifab_destroy_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/multifab_f.f90">
+    <loop num="1" line="792" entries="13" iters="13" ops="208" reads="52" writes="0" bytereads="260" bytewrites="0" uniquereads="4" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="multifab_module_multifab_volume_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/multifab_f.f90">
+    <loop num="1" line="854" entries="26" iters="26" ops="364" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="multifab_module_cpy_d_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/multifab_f.f90">
+    <loop num="1" line="1577" entries="234" iters="1170" ops="15210" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="2873727" />
+    <loop num="1.1" line="1578" entries="1170" iters="14760" ops="206640" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="1.1.1" line="1579" entries="14760" iters="169920" ops="2208960" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="1.1.1.1" line="1580" entries="169920" iters="1405440" ops="47784960" reads="1405440" writes="1405440" bytereads="11243520" bytewrites="11243520" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="multifab_module_mf_fb_fancy_double_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/multifab_f.f90">
+    <loop num="1" line="1933" entries="9" iters="234" ops="32526" reads="7956" writes="1872" bytereads="43056" bytewrites="13104" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="2" line="1950" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="3" line="1956" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="1956" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="5" line="1956" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="6" line="1956" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="7" line="1958" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="8" line="1963" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="9" line="1971" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="10" line="1975" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11" line="1982" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="11.1" line="1982" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="parallel_parallel_allgather_iv_" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/parallel_stubs.f90">
+    <loop num="1" line="1358" entries="1" iters="1" ops="9" reads="1" writes="1" bytereads="4" bytewrites="4" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+  </function>
+  <function name="sort_box_module_heapsort_box_he_sort_no_cmp" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/sort_box.f90">
+    <loop num="1" line="70" entries="1" iters="3" ops="33" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="87" />
+    <loop num="2" line="73" entries="1" iters="5" ops="145" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="114" />
+  </function>
+  <function name="sort_box_module_heapsort_box_peck_no_cmp" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/sort_box.f90">
+    <loop num="1" line="117" entries="8" iters="15" ops="496" reads="52" writes="28" bytereads="292" bytewrites="196" uniquereads="16" uniquewrites="4" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="sort_d_module_heapsort_indirect_d_he_sort_cmp" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/sort_d.f90">
+    <loop num="1" line="214" entries="2" iters="2" ops="22" reads="0" writes="2" bytereads="0" bytewrites="8" uniquereads="0" uniquewrites="2" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="2" line="214" entries="2" iters="2" ops="34" reads="2" writes="2" bytereads="8" bytewrites="8" uniquereads="2" uniquewrites="2" adds="0" subs="0" muls="0" divs="0" cachehits="4" />
+    <loop num="3" line="216" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="219" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+  <function name="sort_i_module_heapsort_indirect_i_he_sort_no_cmp" file="/global/homes/w/wsmead/ExaCT_Proxy_Apps_20120322/BoxLib/Src/F_BaseLib/sort_i.f90">
+    <loop num="1" line="163" entries="1" iters="1" ops="11" reads="0" writes="1" bytereads="0" bytewrites="4" uniquereads="0" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="1" />
+    <loop num="2" line="163" entries="1" iters="1" ops="17" reads="1" writes="1" bytereads="4" bytewrites="4" uniquereads="1" uniquewrites="1" adds="0" subs="0" muls="0" divs="0" cachehits="2" />
+    <loop num="3" line="165" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+    <loop num="4" line="168" entries="0" iters="0" ops="0" reads="0" writes="0" bytereads="0" bytewrites="0" uniquereads="0" uniquewrites="0" adds="0" subs="0" muls="0" divs="0" cachehits="0" />
+  </function>
+</program>

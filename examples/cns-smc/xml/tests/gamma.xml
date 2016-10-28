@@ -1,0 +1,123 @@
+<program>
+<function name="calc_gamma" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="n_spec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="15" loopvar="i_1_6559" lowerbound="0" upperbound="nz - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_1_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="15" loopvar="i_2_6559" lowerbound="0" upperbound="ny - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_2_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="15" loopvar="i_3_6559" lowerbound="0" upperbound="nx - 2" stride="1" adds="1" multiplies="0" divides="1" specials="0">
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_1_6559" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="i_2_6559" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="i_3_6559" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<array name="cpmix" component="" datatype="float" accesstype="readonly">
+<access offset="(2,2,2)" dependentloopvar="(i_3_6559,i_2_6559,i_1_6559)" reads="2" writes="0"/>
+</array>
+<array name="gamma" component="" datatype="float" accesstype="readwrite">
+<access offset="(2,2,2)" dependentloopvar="(i_3_6559,i_2_6559,i_1_6559)" reads="1" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<loop linenum="18" loopvar="i_4_6559" lowerbound="0" upperbound="nz - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_4_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="18" loopvar="i_5_6559" lowerbound="0" upperbound="ny - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_5_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="18" loopvar="i_6_6559" lowerbound="0" upperbound="nx - 2" stride="1" adds="0" multiplies="3" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_4_6559" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="i_5_6559" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="i_6_6559" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<array name="rho" component="" datatype="float" accesstype="readonly">
+<access offset="(2,2,2)" dependentloopvar="(i_6_6559,i_5_6559,i_4_6559)" reads="1" writes="0"/>
+</array>
+<array name="Ru" component="" datatype="float" accesstype="readonly">
+<access offset="(2,2,2)" dependentloopvar="(i_6_6559,i_5_6559,i_4_6559)" reads="1" writes="0"/>
+</array>
+<array name="temp" component="" datatype="float" accesstype="readonly">
+<access offset="(2,2,2)" dependentloopvar="(i_6_6559,i_5_6559,i_4_6559)" reads="1" writes="0"/>
+</array>
+<array name="avmolwt" component="" datatype="float" accesstype="readonly">
+<access offset="(k,k,k)" dependentloopvar="(i_6_6559,i_5_6559,i_4_6559)" reads="1" writes="0"/>
+</array>
+<array name="pressure" component="" datatype="float" accesstype="writeonly">
+<access offset="(2,2,2)" dependentloopvar="(i_6_6559,i_5_6559,i_4_6559)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<loop linenum="21" loopvar="i_7_6559" lowerbound="0" upperbound="nz - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_7_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="21" loopvar="i_8_6559" lowerbound="0" upperbound="ny - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_8_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="21" loopvar="i_9_6559" lowerbound="0" upperbound="nx - k" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_7_6559" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_8_6559" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_9_6559" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="yspecies" component="m" datatype="float" accesstype="readonly">
+<access offset="(k,k,k,m)" dependentloopvar="(i_9_6559,i_8_6559,i_7_6559,)" reads="1" writes="0"/>
+</array>
+<array name="molwt_c" component="" datatype="float" accesstype="readonly">
+<access offset="(m)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="avmolwt" component="" datatype="float" accesstype="writeonly">
+<access offset="(k,k,k)" dependentloopvar="(i_9_6559,i_8_6559,i_7_6559)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<loop linenum="23" loopvar="m" lowerbound="1" upperbound="n_spec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="n_spec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="24" loopvar="i_10_6559" lowerbound="0" upperbound="nz - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_10_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="24" loopvar="i_11_6559" lowerbound="0" upperbound="ny - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_11_6559" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="24" loopvar="i_12_6559" lowerbound="0" upperbound="nx - k" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="10" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_10_6559" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="i_11_6559" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="i_12_6559" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<array name="yspecies" component="m" datatype="float" accesstype="readonly">
+<access offset="(k,k,k,0)" dependentloopvar="(i_12_6559,i_11_6559,i_10_6559,m)" reads="1" writes="0"/>
+</array>
+<array name="molwt_c" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(m)" reads="1" writes="0"/>
+</array>
+<array name="avmolwt" component="" datatype="float" accesstype="readwrite">
+<access offset="(k,k,k)" dependentloopvar="(i_12_6559,i_11_6559,i_10_6559)" reads="1" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+</loop>
+<nonlocal name="gamma"/>
+<nonlocal name="cpmix"/>
+<nonlocal name="pressure"/>
+<nonlocal name="rho"/>
+<nonlocal name="Ru"/>
+<nonlocal name="temp"/>
+<nonlocal name="avmolwt"/>
+<nonlocal name="yspecies"/>
+<nonlocal name="molwt_c"/>
+</function>
+</program>

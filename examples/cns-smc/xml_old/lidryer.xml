@@ -1,0 +1,239 @@
+<program>
+<function name="chemterm_3d">
+<local name="Yt"/>
+<local name="wdot"/>
+<local name="molecular_weight"/>
+<local name="k_f_save"/>
+<local name="Kc_save"/>
+<local name="imw"/>
+<local name="sc"/>
+<local name="g_RT"/>
+<local name="tsc"/>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="Q"/>
+<nonlocal name="Uprime"/>
+<loop linenum="62" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(2)" isRelative="false" datatype="int" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(2)" isRelative="false" datatype="int" reads="1" writes="0"/>
+</array>
+<loop linenum="63" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="int" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="int" reads="1" writes="0"/>
+</array>
+<loop linenum="64" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="195" multiplies="253" divides="39" specials="51">
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qdot" datatype="double" isConstant="false" accesstype="writeread" reads="78" writes="21"/>
+<scalar name="mixture" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
+<scalar name="Kc" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="k_f" datatype="double" isConstant="false" accesstype="writeread" reads="46" writes="23"/>
+<scalar name="k_r" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="q_f" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="q_r" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="phi_f" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="phi_r" datatype="double" isConstant="false" accesstype="writeread" reads="21" writes="21"/>
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="6"/>
+<scalar name="redP" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="2"/>
+<scalar name="logPred" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="2"/>
+<scalar name="F" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="4"/>
+<scalar name="F_troe" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="logFcent" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="2"/>
+<scalar name="troe" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="2"/>
+<scalar name="troe_c" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="2"/>
+<scalar name="troe_n" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="invT" datatype="double" isConstant="false" accesstype="writeread" reads="17" writes="1"/>
+<scalar name="refC" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
+<scalar name="T" datatype="double" isConstant="false" accesstype="writeread" reads="19" writes="1"/>
+<scalar name="qrho" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qtemp" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rho" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="T_save" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="e" datatype="float" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="Q" component="qrho" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0,0,0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="Q" component="qtemp" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0,0,0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="wdot" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="5" writes="5"/>
+<access index="(2)" isRelative="false" datatype="double" reads="8" writes="8"/>
+<access index="(3)" isRelative="false" datatype="double" reads="7" writes="7"/>
+<access index="(4)" isRelative="false" datatype="double" reads="12" writes="12"/>
+<access index="(5)" isRelative="false" datatype="double" reads="8" writes="8"/>
+<access index="(6)" isRelative="false" datatype="double" reads="17" writes="17"/>
+<access index="(7)" isRelative="false" datatype="double" reads="13" writes="13"/>
+<access index="(8)" isRelative="false" datatype="double" reads="8" writes="8"/>
+</array>
+<array name="k_f_save" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(10)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(11)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(12)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(13)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(14)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(15)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(16)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(17)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(18)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(19)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(2)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(20)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(21)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(3)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(4)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(5)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(6)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(7)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(8)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(9)" isRelative="false" datatype="double" reads="1" writes="1"/>
+</array>
+<array name="Kc_save" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(10)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(11)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(12)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(13)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(14)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(15)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(16)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(17)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(18)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(19)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(2)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(20)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(21)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(3)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(4)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(5)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(6)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(7)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(8)" isRelative="false" datatype="double" reads="1" writes="1"/>
+<access index="(9)" isRelative="false" datatype="double" reads="1" writes="1"/>
+</array>
+<array name="sc" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="11" writes="0"/>
+<access index="(2)" isRelative="false" datatype="double" reads="9" writes="0"/>
+<access index="(3)" isRelative="false" datatype="double" reads="13" writes="0"/>
+<access index="(4)" isRelative="false" datatype="double" reads="12" writes="0"/>
+<access index="(5)" isRelative="false" datatype="double" reads="8" writes="0"/>
+<access index="(6)" isRelative="false" datatype="double" reads="17" writes="0"/>
+<access index="(7)" isRelative="false" datatype="double" reads="13" writes="0"/>
+<access index="(8)" isRelative="false" datatype="double" reads="8" writes="0"/>
+</array>
+<array name="g_RT" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="5" writes="0"/>
+<access index="(2)" isRelative="false" datatype="double" reads="8" writes="0"/>
+<access index="(3)" isRelative="false" datatype="double" reads="7" writes="0"/>
+<access index="(4)" isRelative="false" datatype="double" reads="12" writes="0"/>
+<access index="(5)" isRelative="false" datatype="double" reads="8" writes="0"/>
+<access index="(6)" isRelative="false" datatype="double" reads="17" writes="0"/>
+<access index="(7)" isRelative="false" datatype="double" reads="13" writes="0"/>
+<access index="(8)" isRelative="false" datatype="double" reads="8" writes="0"/>
+</array>
+<array name="tsc" component="" datatype="double" accesstype="writeread" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="11" writes="1"/>
+<access index="(2)" isRelative="false" datatype="double" reads="0" writes="1"/>
+<access index="(3)" isRelative="false" datatype="double" reads="0" writes="1"/>
+<access index="(4)" isRelative="false" datatype="double" reads="0" writes="1"/>
+<access index="(5)" isRelative="false" datatype="double" reads="0" writes="1"/>
+</array>
+<loop linenum="66" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qy1" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="Q" component="qyn" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0,0,0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="Yt" component="" datatype="double" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="76" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="3" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="rho" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="Yt" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="imw" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="sc" component="" datatype="double" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="93" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="mixture" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<array name="sc" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="100" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="6" multiplies="6" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="invT" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="tsc" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(1)" isRelative="false" datatype="double" reads="1" writes="0"/>
+<access index="(2)" isRelative="false" datatype="double" reads="1" writes="0"/>
+<access index="(3)" isRelative="false" datatype="double" reads="1" writes="0"/>
+<access index="(4)" isRelative="false" datatype="double" reads="1" writes="0"/>
+<access index="(5)" isRelative="false" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="g_RT" component="" datatype="double" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="114" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="wdot" component="" datatype="double" accesstype="writeonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="486" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<array name="wdot" component="" datatype="double" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="1"/>
+</array>
+</loop>
+<loop linenum="492" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="iry1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="wdot" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="molecular_weight" component="" datatype="double" accesstype="readonly" ghost="(0,0),(0,0),(0,0)">
+<access index="(0)" isRelative="true" datatype="double" reads="1" writes="0"/>
+</array>
+<array name="Uprime" component="qyn" datatype="double" accesstype="readwrite" ghost="(0,0),(0,0),(0,0)">
+<access index="(0,0,0)" isRelative="true" datatype="double" reads="1" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+</loop>
+</function>
+</program>

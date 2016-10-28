@@ -1,0 +1,25 @@
+<program>
+<function name="ComputeSPMV_ref" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="A" datatype="const ::SparseMatrix&" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="x" datatype="::Vector&" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="y" datatype="::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<funccall linenum="53" name="" origname="ExchangeHalo" module="unknown" flops="unknown">
+<arg paramname="A" argname="A"/>
+<arg paramname="x" argname="x"/>
+</funccall>
+<loop linenum="61" loopvar="i" lowerbound="0" upperbound="nrow - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="A" datatype="const ::SparseMatrix&" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="yv" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nrow" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="sum" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="67" loopvar="j" lowerbound="0" upperbound="cur_nnz - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="xv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="sum" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_vals" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_inds" datatype="const ::local_int_t*const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_nnz" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+</loop>
+</loop>
+</function>
+</program>

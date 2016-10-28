@@ -1,0 +1,606 @@
+<program>
+<function name="chemterm_3d" adds="0" multiplies="0" divides="0" specials="0">
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="74" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="75" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="76" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="577" multiplies="826" divides="142" specials="49">
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qdot" datatype="double" isConstant="false" accesstype="writeread" reads="319" writes="84"/>
+<scalar name="mixture" datatype="double" isConstant="false" accesstype="writeread" reads="14" writes="1"/>
+<scalar name="Kc" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="k_f" datatype="double" isConstant="false" accesstype="writeread" reads="184" writes="92"/>
+<scalar name="k_r" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="q_f" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="q_r" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="phi_f" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="phi_r" datatype="double" isConstant="false" accesstype="writeread" reads="84" writes="84"/>
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="writeread" reads="14" writes="14"/>
+<scalar name="redP" datatype="double" isConstant="false" accesstype="writeread" reads="24" writes="8"/>
+<scalar name="logPred" datatype="double" isConstant="false" accesstype="writeread" reads="16" writes="8"/>
+<scalar name="F" datatype="double" isConstant="false" accesstype="writeread" reads="16" writes="16"/>
+<scalar name="F_troe" datatype="double" isConstant="false" accesstype="writeread" reads="8" writes="8"/>
+<scalar name="logFcent" datatype="double" isConstant="false" accesstype="writeread" reads="24" writes="8"/>
+<scalar name="troe" datatype="double" isConstant="false" accesstype="writeread" reads="16" writes="8"/>
+<scalar name="troe_c" datatype="double" isConstant="false" accesstype="writeread" reads="16" writes="8"/>
+<scalar name="troe_n" datatype="double" isConstant="false" accesstype="writeread" reads="8" writes="8"/>
+<scalar name="invT" datatype="double" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<scalar name="refC" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="T" datatype="double" isConstant="false" accesstype="writeread" reads="38" writes="1"/>
+<scalar name="qrho" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qtemp" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rho" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="T_save" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="Q" component="qrho" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qrho)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+</array>
+<array name="Q" component="qtemp" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qtemp)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+</array>
+<array name="wdot" component="" datatype="double" accesstype="writeread">
+<access offset="(1)" dependentloopvar="()" reads="15" writes="15"/>
+<access offset="(10)" dependentloopvar="()" reads="26" writes="26"/>
+<access offset="(11)" dependentloopvar="()" reads="10" writes="10"/>
+<access offset="(12)" dependentloopvar="()" reads="17" writes="17"/>
+<access offset="(13)" dependentloopvar="()" reads="10" writes="10"/>
+<access offset="(14)" dependentloopvar="()" reads="18" writes="18"/>
+<access offset="(15)" dependentloopvar="()" reads="16" writes="16"/>
+<access offset="(16)" dependentloopvar="()" reads="5" writes="5"/>
+<access offset="(17)" dependentloopvar="()" reads="5" writes="5"/>
+<access offset="(18)" dependentloopvar="()" reads="9" writes="9"/>
+<access offset="(19)" dependentloopvar="()" reads="6" writes="6"/>
+<access offset="(2)" dependentloopvar="()" reads="42" writes="42"/>
+<access offset="(20)" dependentloopvar="()" reads="4" writes="4"/>
+<access offset="(21)" dependentloopvar="()" reads="4" writes="4"/>
+<access offset="(3)" dependentloopvar="()" reads="18" writes="18"/>
+<access offset="(4)" dependentloopvar="()" reads="21" writes="21"/>
+<access offset="(5)" dependentloopvar="()" reads="29" writes="29"/>
+<access offset="(6)" dependentloopvar="()" reads="19" writes="19"/>
+<access offset="(7)" dependentloopvar="()" reads="17" writes="17"/>
+<access offset="(8)" dependentloopvar="()" reads="14" writes="14"/>
+<access offset="(9)" dependentloopvar="()" reads="14" writes="14"/>
+</array>
+<array name="k_f_save" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(10)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(11)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(12)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(13)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(14)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(15)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(16)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(17)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(18)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(19)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(20)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(21)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(22)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(23)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(24)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(25)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(26)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(27)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(28)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(29)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(30)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(31)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(32)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(33)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(34)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(35)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(36)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(37)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(38)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(39)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(40)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(41)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(42)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(43)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(44)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(45)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(46)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(47)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(48)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(49)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(50)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(51)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(52)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(53)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(54)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(55)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(56)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(57)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(58)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(59)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(6)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(60)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(61)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(62)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(63)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(64)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(65)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(66)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(67)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(68)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(69)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(7)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(70)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(71)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(72)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(73)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(74)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(75)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(76)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(77)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(78)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(79)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(8)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(80)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(81)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(82)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(83)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(84)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(9)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="Kc_save" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(10)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(11)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(12)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(13)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(14)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(15)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(16)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(17)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(18)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(19)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(20)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(21)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(22)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(23)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(24)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(25)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(26)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(27)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(28)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(29)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(30)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(31)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(32)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(33)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(34)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(35)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(36)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(37)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(38)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(39)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(40)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(41)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(42)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(43)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(44)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(45)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(46)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(47)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(48)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(49)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(50)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(51)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(52)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(53)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(54)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(55)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(56)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(57)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(58)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(59)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(6)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(60)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(61)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(62)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(63)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(64)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(65)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(66)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(67)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(68)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(69)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(7)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(70)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(71)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(72)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(73)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(74)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(75)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(76)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(77)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(78)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(79)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(8)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(80)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(81)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(82)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(83)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(84)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(9)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="sc" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="29" writes="0"/>
+<access offset="(10)" dependentloopvar="()" reads="30" writes="0"/>
+<access offset="(11)" dependentloopvar="()" reads="23" writes="0"/>
+<access offset="(12)" dependentloopvar="()" reads="29" writes="0"/>
+<access offset="(13)" dependentloopvar="()" reads="23" writes="0"/>
+<access offset="(14)" dependentloopvar="()" reads="18" writes="0"/>
+<access offset="(15)" dependentloopvar="()" reads="16" writes="0"/>
+<access offset="(16)" dependentloopvar="()" reads="5" writes="0"/>
+<access offset="(17)" dependentloopvar="()" reads="5" writes="0"/>
+<access offset="(18)" dependentloopvar="()" reads="9" writes="0"/>
+<access offset="(19)" dependentloopvar="()" reads="20" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="46" writes="0"/>
+<access offset="(20)" dependentloopvar="()" reads="5" writes="0"/>
+<access offset="(21)" dependentloopvar="()" reads="16" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="18" writes="0"/>
+<access offset="(4)" dependentloopvar="()" reads="24" writes="0"/>
+<access offset="(5)" dependentloopvar="()" reads="31" writes="0"/>
+<access offset="(6)" dependentloopvar="()" reads="33" writes="0"/>
+<access offset="(7)" dependentloopvar="()" reads="17" writes="0"/>
+<access offset="(8)" dependentloopvar="()" reads="14" writes="0"/>
+<access offset="(9)" dependentloopvar="()" reads="14" writes="0"/>
+</array>
+<array name="tsc" component="" datatype="double" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="8" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(4)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(5)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<loop linenum="78" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qy1" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="Q" component="qyn" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+</array>
+<array name="Yt" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="87" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="3" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="rho" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="Yt" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="imw" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="sc" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="103" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="mixture" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<array name="sc" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="108" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="6" multiplies="6" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="invT" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="tsc" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="g_RT" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
+</array>
+</loop>
+<loop linenum="121" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="wdot" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
+</array>
+</loop>
+<if linenum="125" conditional="T .NE. T_save" adds="264" multiplies="182" divides="20" specials="143">
+<scalar name="invT" datatype="double" isConstant="false" accesstype="readonly" reads="47" writes="0"/>
+<scalar name="refC" datatype="double" isConstant="false" accesstype="readonly" reads="23" writes="0"/>
+<scalar name="T" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="T_save" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="g_RT" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="15" writes="0"/>
+<access offset="(10)" dependentloopvar="()" reads="26" writes="0"/>
+<access offset="(11)" dependentloopvar="()" reads="10" writes="0"/>
+<access offset="(12)" dependentloopvar="()" reads="17" writes="0"/>
+<access offset="(13)" dependentloopvar="()" reads="10" writes="0"/>
+<access offset="(14)" dependentloopvar="()" reads="18" writes="0"/>
+<access offset="(15)" dependentloopvar="()" reads="16" writes="0"/>
+<access offset="(16)" dependentloopvar="()" reads="5" writes="0"/>
+<access offset="(17)" dependentloopvar="()" reads="5" writes="0"/>
+<access offset="(18)" dependentloopvar="()" reads="9" writes="0"/>
+<access offset="(19)" dependentloopvar="()" reads="6" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="42" writes="0"/>
+<access offset="(20)" dependentloopvar="()" reads="4" writes="0"/>
+<access offset="(21)" dependentloopvar="()" reads="4" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="18" writes="0"/>
+<access offset="(4)" dependentloopvar="()" reads="21" writes="0"/>
+<access offset="(5)" dependentloopvar="()" reads="29" writes="0"/>
+<access offset="(6)" dependentloopvar="()" reads="19" writes="0"/>
+<access offset="(7)" dependentloopvar="()" reads="17" writes="0"/>
+<access offset="(8)" dependentloopvar="()" reads="14" writes="0"/>
+<access offset="(9)" dependentloopvar="()" reads="14" writes="0"/>
+</array>
+<array name="tsc" component="" datatype="double" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="41" writes="0"/>
+</array>
+<array name="k_f_save" component="" datatype="double" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(10)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(11)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(12)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(13)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(14)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(15)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(16)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(17)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(18)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(19)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(20)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(21)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(22)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(23)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(24)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(25)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(26)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(27)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(28)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(29)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(30)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(31)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(32)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(33)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(34)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(35)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(36)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(37)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(38)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(39)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(4)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(40)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(41)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(42)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(43)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(44)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(45)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(46)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(47)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(48)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(49)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(5)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(50)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(51)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(52)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(53)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(54)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(55)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(56)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(57)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(58)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(59)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(6)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(60)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(61)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(62)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(63)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(64)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(65)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(66)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(67)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(68)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(69)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(7)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(70)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(71)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(72)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(73)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(74)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(75)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(76)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(77)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(78)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(79)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(8)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(80)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(81)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(82)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(83)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(84)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(9)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<array name="Kc_save" component="" datatype="double" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(10)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(11)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(12)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(13)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(14)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(15)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(16)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(17)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(18)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(19)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(20)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(21)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(22)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(23)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(24)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(25)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(26)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(27)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(28)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(29)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(30)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(31)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(32)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(33)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(34)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(35)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(36)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(37)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(38)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(39)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(4)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(40)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(41)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(42)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(43)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(44)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(45)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(46)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(47)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(48)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(49)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(5)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(50)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(51)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(52)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(53)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(54)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(55)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(56)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(57)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(58)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(59)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(6)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(60)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(61)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(62)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(63)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(64)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(65)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(66)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(67)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(68)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(69)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(7)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(70)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(71)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(72)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(73)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(74)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(75)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(76)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(77)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(78)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(79)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(8)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(80)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(81)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(82)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(83)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(84)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(9)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+</if>
+<funccall linenum="717" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="741" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="779" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="817" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="869" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="893" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="931" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="1415" name="" origname="pow" module="unknown" flops="unknown">
+</funccall>
+<loop linenum="1554" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<array name="wdot" component="" datatype="double" accesstype="readwrite">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="1"/>
+</array>
+</loop>
+<loop linenum="1558" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="nspecies" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="iry1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<array name="wdot" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="molecular_weight" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="Uprime" component="qyn" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+</loop>
+<local name="Yt"/>
+<local name="wdot"/>
+<local name="molecular_weight"/>
+<local name="k_f_save"/>
+<local name="Kc_save"/>
+<local name="imw"/>
+<local name="sc"/>
+<local name="g_RT"/>
+<local name="tsc"/>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="Q"/>
+<nonlocal name="Uprime"/>
+</function>
+</program>

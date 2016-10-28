@@ -1,0 +1,380 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="uflaten" adds="1" multiplies="0" divides="1" specials="0">
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="nmax" datatype="int" isConstant="false" accesstype="writeread" reads="9" writes="1"/>
+<scalar name="zcut1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zcut2" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="7" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="8" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="9" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="7" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="8" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="9" writes="0"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+</array>
+<array name="chi" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
+</array>
+<loop linenum="50" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="51" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<loop linenum="52" loopvar="i" lowerbound="lo(1) - 1" upperbound="hi(1) + 1" stride="1" adds="4" multiplies="1" divides="2" specials="0">
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="9" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="denom" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="zeta" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="tmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="shktst" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zcut1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dzcut" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(2,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-1,0,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(-2,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="u" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="writeonly">
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="0" writes="1"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="writeread">
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="2" writes="1"/>
+</array>
+<if linenum="58" conditional="u(i - 1,j,k) - u(i + 1,j,k) &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="58" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<if linenum="64" conditional="(abs(dp(idx,j,k)) / tmp) &gt; shktst" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(idx,0,0)" dependentloopvar="(,j,k)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="64" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(idx,0,0)" dependentloopvar="(,j,k)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="70" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="readonly">
+<access offset="(idx,0,0)" dependentloopvar="(,j,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="1" writes="0"/>
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="1" writes="0"/>
+</array>
+<array name="chi" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="1" writes="0"/>
+<access offset="(1,0,0)" dependentloopvar="(,j,k)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="0" writes="1"/>
+</array>
+<if linenum="72" conditional="dp(idx,j,k) &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="72" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</loop>
+</loop>
+</loop>
+<loop linenum="91" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="92" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<loop linenum="93" loopvar="j" lowerbound="lo(2) - 1" upperbound="hi(2) + 1" stride="1" adds="4" multiplies="1" divides="2" specials="0">
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="9" writes="1"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="denom" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="zeta" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="tmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="shktst" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zcut1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dzcut" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,2,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-1,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,-2,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="v" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="0" writes="1"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="writeread">
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="2" writes="1"/>
+</array>
+<if linenum="99" conditional="v(i,j - 1,k) - v(i,j + 1,k) &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="99" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<if linenum="105" conditional="(abs(dp(i,idx,k)) / tmp) &gt; shktst" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,idx,0)" dependentloopvar="(i,,k)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="105" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,idx,0)" dependentloopvar="(i,,k)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="111" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ftmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="readonly">
+<access offset="(0,idx,0)" dependentloopvar="(i,,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="1" writes="0"/>
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="1" writes="0"/>
+</array>
+<array name="chi" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="1" writes="0"/>
+<access offset="(0,1,0)" dependentloopvar="(i,,k)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="1"/>
+</array>
+<if linenum="113" conditional="dp(i,idx,k) &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="113" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</loop>
+</loop>
+</loop>
+<loop linenum="133" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="134" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="2" writes="0"/>
+</array>
+<loop linenum="135" loopvar="k" lowerbound="lo(3) - 1" upperbound="hi(3) + 1" stride="1" adds="4" multiplies="1" divides="2" specials="0">
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeread" reads="9" writes="1"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="denom" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="zeta" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="tmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="shktst" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zcut1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dzcut" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,0,2)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-1)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,0,-2)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="w" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="2" writes="1"/>
+</array>
+<if linenum="141" conditional="w(i,j,k - 1) - w(i,j,k + 1) &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="141" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<if linenum="147" conditional="(abs(dp(i,j,idx)) / tmp) &gt; shktst" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tst" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,idx)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="147" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="chi" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,idx)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="153" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="idx" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ftmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="dp" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,idx)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="chi" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="1"/>
+</array>
+<if linenum="155" conditional="dp(i,j,idx) &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="155" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ishft" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</loop>
+</loop>
+</loop>
+<local name="dp"/>
+<local name="z"/>
+<local name="chi"/>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="p"/>
+<nonlocal name="u"/>
+<nonlocal name="v"/>
+<nonlocal name="w"/>
+<nonlocal name="flatn"/>
+</function>
+</program>

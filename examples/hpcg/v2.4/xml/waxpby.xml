@@ -1,0 +1,37 @@
+<program>
+<function name="ComputeWAXPBY_ref" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const ::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const ::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="w" datatype="::Vector&" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="51" conditional="alpha == 1.0;" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="55" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="xv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="yv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="wv" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+</loop>
+</if>
+<if linenum="56" conditional="beta == 1.0;" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="60" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="xv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="yv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="wv" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+</loop>
+</if>
+<else iflinenum="56" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="65" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="n" datatype="const ::local_int_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="xv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="yv" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="wv" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+</loop>
+</else>
+</function>
+</program>

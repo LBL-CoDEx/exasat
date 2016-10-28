@@ -1,0 +1,1 @@
+~/Exasat_org/exasat/src/genCodeDescript -I./ -I/usr/lib/gcc/x86_64-redhat-linux/4.4.4/include/ -I/opt/intel/impi/4.1.0.030/intel64/include -DUSE_MPI  -DSTENCIL_FUSE_BC -DSTENCIL_FUSE_DINV  -DGSRB_STRIDE2 -DUSE_GSRB -DUSE_HELMHOLTZ hpgmg.c mg.c operators.7pt.c >out.txt

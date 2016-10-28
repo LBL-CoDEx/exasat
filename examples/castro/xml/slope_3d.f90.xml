@@ -1,0 +1,672 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="pslope" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="iorder" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<funccall linenum="217" name="" origname="MIN" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="218" name="" origname="MAX" module="unknown" flops="unknown">
+</funccall>
+<if linenum="225" conditional="iorder .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="227" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="228" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="dpx" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="dpy" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="dpz" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</if>
+<else iflinenum="225" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="238" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="241" loopvar="i" lowerbound="ilo1 - 2" upperbound="ihi1 + 2" stride="1" adds="9" multiplies="9" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="dx" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="19" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="19" writes="0"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="2" writes="0"/>
+<access offset="(-1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="rho" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="2" writes="0"/>
+<access offset="(-1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="grav" component="1" datatype="double" accesstype="readonly">
+<access offset="(1,0,k3d,1)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d,1)" dependentloopvar="(i,j,,)" reads="2" writes="0"/>
+<access offset="(-1,0,k3d,1)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<funccall linenum="253" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="254" conditional="dlft * drgt &gt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="254" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="263" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="3" multiplies="6" divides="0" specials="0">
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="dx" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="11" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
+<scalar name="dp1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="rho" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="grav" component="1" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d,1)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+<access offset="(-1,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dpx" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="2"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</loop>
+</loop>
+<loop linenum="273" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="276" loopvar="j" lowerbound="ilo2 - 2" upperbound="ihi2 + 2" stride="1" adds="9" multiplies="9" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
+<scalar name="dy" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="19" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="19" writes="1"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="2" writes="0"/>
+<access offset="(0,-1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="rho" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="2" writes="0"/>
+<access offset="(0,-1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="grav" component="2" datatype="double" accesstype="readonly">
+<access offset="(0,1,k3d,2)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d,2)" dependentloopvar="(i,j,,)" reads="2" writes="0"/>
+<access offset="(0,-1,k3d,2)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<funccall linenum="287" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="288" conditional="dlft * drgt &gt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="288" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="297" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="3" multiplies="6" divides="0" specials="0">
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="dy" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="11" writes="1"/>
+<scalar name="dp1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="rho" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="grav" component="2" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d,2)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+<access offset="(0,-1)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dpy" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="2"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</loop>
+</loop>
+<loop linenum="307" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="308" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="30" multiplies="32" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="dz" datatype="double" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="42" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="42" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeread" reads="36" writes="3"/>
+<scalar name="dp1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dm" datatype="double" isConstant="false" accesstype="writeread" reads="9" writes="6"/>
+<scalar name="dp" datatype="double" isConstant="false" accesstype="writeread" reads="9" writes="6"/>
+<scalar name="dc" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="3"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="dfm" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dfp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ds" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="3"/>
+<array name="p" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="6" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="3" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="3" writes="0"/>
+</array>
+<array name="rho" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="6" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="3" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="3" writes="0"/>
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="grav" component="3" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d+-1,3)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+<access offset="(0,0,k3d+-1,3)" dependentloopvar="(i,j,,)" reads="6" writes="0"/>
+<access offset="(0,0,k3d+-1,3)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+<access offset="(0,0,k3d,3)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="dpz" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="2"/>
+</array>
+<funccall linenum="319" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="320" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dm" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dp" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="320" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<funccall linenum="336" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="337" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dm" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dp" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="337" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<funccall linenum="353" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="354" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dm" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dp" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="354" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</loop>
+</loop>
+</else>
+<local name="dsgn"/>
+<local name="dlim"/>
+<local name="df"/>
+<local name="dcen"/>
+<nonlocal name="p"/>
+<nonlocal name="rho"/>
+<nonlocal name="flatn"/>
+<nonlocal name="dpx"/>
+<nonlocal name="dpy"/>
+<nonlocal name="dpz"/>
+<nonlocal name="grav"/>
+</function>
+<function name="uslope" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="iorder" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<funccall linenum="42" name="" origname="MIN" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="43" name="" origname="MAX" module="unknown" flops="unknown">
+</funccall>
+<if linenum="50" conditional="iorder .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="52" loopvar="n" lowerbound="1" upperbound="nv" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nv" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="53" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="54" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="dqx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+<array name="dqy" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+<array name="dqz" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+</if>
+<else iflinenum="50" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="64" loopvar="n" lowerbound="1" upperbound="nv" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nv" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="68" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="71" loopvar="i" lowerbound="ilo1 - 2" upperbound="ihi1 + 2" stride="1" adds="3" multiplies="5" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="11" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="slop" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="q" component="n" datatype="double" accesstype="readonly">
+<access offset="(1,0,k3d,0)" dependentloopvar="(i,j,,n)" reads="1" writes="0"/>
+<access offset="(0,0,k3d,0)" dependentloopvar="(i,j,,n)" reads="2" writes="0"/>
+<access offset="(-1,0,k3d,0)" dependentloopvar="(i,j,,n)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<funccall linenum="75" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="77" conditional="dlft * drgt &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="slop" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="77" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="86" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="2" multiplies="4" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="7" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dq1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+<access offset="(-1,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dqx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</loop>
+</loop>
+<loop linenum="96" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="98" loopvar="j" lowerbound="ilo2 - 2" upperbound="ihi2 + 2" stride="1" adds="3" multiplies="5" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="11" writes="1"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="dlft" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="drgt" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="slop" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="q" component="n" datatype="double" accesstype="readonly">
+<access offset="(0,1,k3d,0)" dependentloopvar="(i,j,,n)" reads="1" writes="0"/>
+<access offset="(0,0,k3d,0)" dependentloopvar="(i,j,,n)" reads="2" writes="0"/>
+<access offset="(0,-1,k3d,0)" dependentloopvar="(i,j,,n)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="1"/>
+</array>
+<funccall linenum="102" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="104" conditional="dlft * drgt &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="slop" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="104" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="dlim" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</else>
+</loop>
+<loop linenum="113" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="2" multiplies="4" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="7" writes="1"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dq1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="dsgn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="df" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+<access offset="(0,-1)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dcen" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="dqy" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+<array name="dlim" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</loop>
+</loop>
+<loop linenum="122" loopvar="j" lowerbound="ilo2 - 1" upperbound="ihi2 + 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ilo2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="123" loopvar="i" lowerbound="ilo1 - 1" upperbound="ihi1 + 1" stride="1" adds="11" multiplies="18" divides="0" specials="0">
+<scalar name="ilo1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="FOURTH" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="SIXTH" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="14" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="14" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeread" reads="12" writes="3"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="13" writes="0"/>
+<scalar name="dq1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dm" datatype="double" isConstant="false" accesstype="writeread" reads="9" writes="3"/>
+<scalar name="dp" datatype="double" isConstant="false" accesstype="writeread" reads="9" writes="3"/>
+<scalar name="dc" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="3"/>
+<scalar name="ds" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="3"/>
+<scalar name="sl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="3"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="dfm" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dfp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="q" component="n" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d+-1,0)" dependentloopvar="(i,j,,n)" reads="3" writes="0"/>
+<access offset="(0,0,k3d+-1,0)" dependentloopvar="(i,j,,n)" reads="6" writes="0"/>
+<access offset="(0,0,k3d+-1,0)" dependentloopvar="(i,j,,n)" reads="3" writes="0"/>
+</array>
+<array name="flatn" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="dqz" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc,0)" dependentloopvar="(i,j,,n)" reads="0" writes="1"/>
+</array>
+<funccall linenum="130" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="132" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="sl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="132" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<funccall linenum="144" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="146" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="sl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="146" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+<funccall linenum="158" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="160" conditional="dm * dp &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="sl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="160" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</loop>
+</loop>
+</loop>
+</else>
+<local name="dsgn"/>
+<local name="dlim"/>
+<local name="df"/>
+<local name="dcen"/>
+<nonlocal name="q"/>
+<nonlocal name="flatn"/>
+<nonlocal name="dqx"/>
+<nonlocal name="dqy"/>
+<nonlocal name="dqz"/>
+</function>
+</program>

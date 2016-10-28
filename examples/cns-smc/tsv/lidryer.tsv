@@ -1,0 +1,178 @@
+Parameters:	
+X Problem Size	128	
+Y Problem Size	128	
+Z Problem Size	128	
+X Block Size	16	
+Y Block Size	16	
+Z Block Size	128	
+Num Ghosts (NG)	4	
+Num Species	9	
+GB/s/thread	1	
+Gflop/s/thread	10	
+Int Regs/thread	16	
+FP Regs/thread	16	
+Threads	1024	
+$/thread group (kB)	1024	
+Word Size	8	
+Cache Line Size	64	
+R cost	8	
+RW cost	16	
+W cost	16	
+Division Cost	39	
+Special Cost	125	
+Streaming Writes	False	
+NTA Hints	False	
+NIC BW (GB/s)	100	
+NIC Latency (us)	0.4	
+CPU/DRAM Overlap	1	
+PWFlag	False	
+	
+COMM ANALYSIS	
+			Iteration Space	
+function	line	array	X	Y	Z	Total Off-Node (MB)	Num Messages	BW Cost (s)	Latency Cost (s)	Total Cost (s)	
+Totals						=sum(G33:G32)	=sum(H33:H32)	=sum(I33:I32)	=sum(J33:J32)	=sum(K33:K32)		
+	
+LOOP ANALYSIS	
+			Iteration Space			Block Iteration Space					Flops/cell/sweep				Registers		RW/W Arrays		RW/W Working Set			Working set (naive)			Working set (streaming writes)			Working set (reuse only)			Working set (actual)			Memory Traffic (GBytes)						Computation (Gflops)			Estimated execution times (s)	
+function	line	sweeps	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	add	mul	div	special	GP Regs	FP Regs	RW Arrays	W Arrays	RW/W WS Planes	RW/W WS Pencils	RW/W WS Cells	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	Reuse between blocks	Reuse between planes	Reuse between pencils	Reuse within pencils	No reuse within pencils	Actual	Gflops performed	Weighted Gflops	B/F ratio	time (CPU)	time (DRAM)	time (CPU and DRAM)		
+chemterm_3d	62	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G38/($B$17/$B$16),1)*($B$17/$B$16)	=$D38/$G38*$E38/$H38*$F38/$I38	=(8*$B$9 + 195)	=(11*$B$9 + 253)	=(39)	=(51)	=(12)	=(3*$B$9 + 94)	=($B$9)	=(0)	=($B$9)	=($B$9)	=($B$9)	=$Z$56+$B$16*$T38*$J38*$H38/2^10	=$AA$56+$B$16*$U38*$J38/2^10	=$AB$56+$B$16*$V38/2^10	=$Z$56	=$AA$56	=$AB$56	=$AC$56	=$AD$56	=$AE$56	=IF($AJ38=$AK38,$AG38,IF($B$24, $AC38, IF($B$23, $Z38, $W38)))	=IF($AK38=$AL38,$AH38,IF($B$24, $AD38, IF($B$23, $AA38, $X38)))	=IF($B$24, $AE38, IF($B$23, $AB38, $Y38))	=$C38*($S38*$B$18+$U38*$B$19+$T38*$B$20)*$K38*$J38*$H38*$I38/2^30	=$C38*($AF$56+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AG$56+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AH$56+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=$C38*($AI$56+($R38*$B$19+$S38*$B$20)*$K38*$J38*$H38*$I38/2^30)	=IF($AF38<$B$15,MIN($AJ38:$AM38),IF($AG38<$B$15,MIN($AK38:$AM38),IF($AH38<$B$15,MIN($AL38:$AM38),$AM38)))	=$C38*($L38+$M38+$N38+$O38)*$D38*$E38*$F38/1e9	=$C38*($L38+$M38+$B$21*$N38+$B$22*$O38)*$D38*$E38*$F38/1e9	=($AN38*2^30)/($AP38*10^9)	=$AP38/($B$11*$B$14)	=$AN38/($B$10*$B$14)	=max($AR38:$AS38)	
+Total/Max																															=max(AF38:AF38)	=max(AG38:AG38)	=max(AH38:AH38)	=sum(AI38:AI38)	=sum(AJ38:AJ38)	=sum(AK38:AK38)	=sum(AL38:AL38)	=sum(AM38:AM38)	=sum(AN38:AN38)	=sum(AO38:AO38)	=sum(AP38:AP38)	=($AN39*2^30)/($AP39*10^9)	=sum(AR38:AR38)	=sum(AS38:AS38)	=sum(AT38:AT38)	
+	
+WOODWARD LOOP ANALYSIS	
+			Iteration Space			Block Iteration Space					Flops/cell/sweep				Registers		Num Blocks				Working Set	Bandwidth				Computation (Gflops)			Estimated execution times (s)	
+function	line	sweeps	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	add	mul	div	special	GP Regs	FP Regs	Resident	R	W	RW	kB	R (GB)	W (GB)	RW (GB)	Total (GB)	Gflops performed	Weighted Gflops	B/F ratio	time (CPU)	time (DRAM)	time (CPU and DRAM)		
+chemterm_3d	62	=(1)	=($B$2)	=($B$3)	=($B$4)	=$B$5+($D44-$B$2)	=$B$6+($E44-$B$3)	=$B$7+($F44-$B$4)	=ceiling($G44/($B$17/$B$16),1)*($B$17/$B$16)	=$B$2/$B$5*$B$3/$B$6*$B$4/$B$7	=(8*$B$9 + 195)	=(11*$B$9 + 253)	=(39)	=(51)	=(12)	=(3*$B$9 + 94)	=(2*$B$9 + 2)	=($B$9 + 2)	=(0)	=($B$9)	=$B$16*((2*$B$5*$B$6*$B$7*$B$9 + 2*$B$5*$B$6*$B$7))/2^10	=IF($V44<$B$15, $B$18*$K44*(($B$5*$B$6*$B$7*$B$9 + 2*$B$5*$B$6*$B$7))/2^30, "N/A")	=IF($V44<$B$15, $B$20*$K44*((0))/2^30, "N/A")	=IF($V44<$B$15, $B$19*$K44*(($B$5*$B$6*$B$7*$B$9))/2^30, "N/A")	=$W44+$X44+$Y44	=$C44*($L44+$M44+$N44+$O44)*$G44*$H44*$I44*$K44/1e9	=$C44*($L44+$M44+$B$21*$N44+$B$22*$O44)*$G44*$H44*$I44*$K44/1e9	=($Z44*2^30)/($AB44*10^9)	=$AB44/($B$11*$B$14)	=$Z44/($B$10*$B$14)	=max($AD44:$AE44)	
+Total/Max																					=max(V44:V44)	=sum(W44:W44)	=sum(X44:X44)	=sum(Y44:Y44)	=sum(Z44:Z44)	=sum(AA44:AA44)	=sum(AB44:AB44)	=($Z45*2^30)/($AB45*10^9)	=sum(AD44:AD44)	=sum(AE44:AE44)	=sum(AF44:AF44)	
+	
+DETAILED READ-ONLY ARRAY INFO	
+	
+Function:	chemterm_3d	
+Loop line num:	62	
+			Iteration Space			Block Iteration Space					Block Access Space				Bandwidth				Working Set			Reuse WS			WS (all reads)			WS (reuse only)			GBytes transferred/sweep	
+		Name	X	Y	Z	X	Y	Z	X (cache line)	Num Blocks	X	Y	Z	X (cache line)	Copies	Planes	Pencils	Cells	Planes	Pencils	Cells	Planes	Pencils	Cells	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	WS/plane/core (kB)	WS/pencil/core (kB)	WS/cell/core (kB)	Reuse between planes	Reuse between pencils	Reuse within pencils	No reuse within pencils		
+		Q.qrho	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G53/($B$17/$B$16),1)*($B$17/$B$16)	=$D53/$G53*$E53/$H53*$F53/$I53	=$G53+0	=$H53+0	=$I53+0	=ceiling($L53/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T53*$O53*$M53/2^10	=$B$16*$U53*$O53/2^10	=$B$16*$V53/2^10	=$B$16*$W53*$O53*$M53/2^10	=$B$16*$X53*$O53/2^10	=$B$16*$Y53/2^10	=$K53*$P53*$B$18*$O53*$M53*$N53/2^30	=$K53*$Q53*$B$18*$O53*$M53*$I53/2^30	=$K53*$R53*$B$18*$O53*$H53*$I53/2^30	=$K53*$S53*$B$18*$G53*$H53*$I53/2^30	
+		Q.qtemp	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G54/($B$17/$B$16),1)*($B$17/$B$16)	=$D54/$G54*$E54/$H54*$F54/$I54	=$G54+0	=$H54+0	=$I54+0	=ceiling($L54/($B$17/$B$16),1)*($B$17/$B$16)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(1)	=(0)	=(0)	=(1)	=$B$16*$T54*$O54*$M54/2^10	=$B$16*$U54*$O54/2^10	=$B$16*$V54/2^10	=$B$16*$W54*$O54*$M54/2^10	=$B$16*$X54*$O54/2^10	=$B$16*$Y54/2^10	=$K54*$P54*$B$18*$O54*$M54*$N54/2^30	=$K54*$Q54*$B$18*$O54*$M54*$I54/2^30	=$K54*$R54*$B$18*$O54*$H54*$I54/2^30	=$K54*$S54*$B$18*$G54*$H54*$I54/2^30	
+		Q.qyn	=($B$2)	=($B$3)	=($B$4)	=$B$5	=$B$6	=$B$7	=ceiling($G55/($B$17/$B$16),1)*($B$17/$B$16)	=$D55/$G55*$E55/$H55*$F55/$I55	=$G55+0	=$H55+0	=$I55+0	=ceiling($L55/($B$17/$B$16),1)*($B$17/$B$16)	=($B$9)	=($B$9)	=($B$9)	=($B$9)	=($B$9)	=($B$9)	=($B$9)	=(0)	=(0)	=($B$9)	=$B$16*$T55*$O55*$M55/2^10	=$B$16*$U55*$O55/2^10	=$B$16*$V55/2^10	=$B$16*$W55*$O55*$M55/2^10	=$B$16*$X55*$O55/2^10	=$B$16*$Y55/2^10	=$K55*$P55*$B$18*$O55*$M55*$N55/2^30	=$K55*$Q55*$B$18*$O55*$M55*$I55/2^30	=$K55*$R55*$B$18*$O55*$H55*$I55/2^30	=$K55*$S55*$B$18*$G55*$H55*$I55/2^30	
+		Total													=sum(P53:P55)	=sum(Q53:Q55)	=sum(R53:R55)	=sum(S53:S55)	=sum(T53:T55)	=sum(U53:U55)	=sum(V53:V55)	=sum(W53:W55)	=sum(X53:X55)	=sum(Y53:Y55)	=sum(Z53:Z55)	=sum(AA53:AA55)	=sum(AB53:AB55)	=sum(AC53:AC55)	=sum(AD53:AD55)	=sum(AE53:AE55)	=sum(AF53:AF55)	=sum(AG53:AG55)	=sum(AH53:AH55)	=sum(AI53:AI55)	
+	
+ARRAY READ-WRITE TABLES	
+	
+chemterm_3d	Copies	62	Reads	Writes	Present		
+Q.qrho	=(1)	R	=$B61*(COUNTIF(C61:C61,"R")+COUNTIF(C61:C61,"RW"))	=$B61*(COUNTIF(C61:C61,"W")+COUNTIF(C61:C61,"RW")+COUNTIF(C61:C61,"WR"))	=$B61*COUNTIF(C61:C61,"P")		
+Q.qtemp	=(1)	R	=$B62*(COUNTIF(C62:C62,"R")+COUNTIF(C62:C62,"RW"))	=$B62*(COUNTIF(C62:C62,"W")+COUNTIF(C62:C62,"RW")+COUNTIF(C62:C62,"WR"))	=$B62*COUNTIF(C62:C62,"P")		
+Q.qyn	=($B$9)	R	=$B63*(COUNTIF(C63:C63,"R")+COUNTIF(C63:C63,"RW"))	=$B63*(COUNTIF(C63:C63,"W")+COUNTIF(C63:C63,"RW")+COUNTIF(C63:C63,"WR"))	=$B63*COUNTIF(C63:C63,"P")		
+Uprime.qyn	=($B$9)	RW	=$B64*(COUNTIF(C64:C64,"R")+COUNTIF(C64:C64,"RW"))	=$B64*(COUNTIF(C64:C64,"W")+COUNTIF(C64:C64,"RW")+COUNTIF(C64:C64,"WR"))	=$B64*COUNTIF(C64:C64,"P")		
+Footprint		=SUMIF(C61:C64,"<>",B61:B64)		
+	
+STATE VARIABLE TABLES	
+	
+chemterm_3d	copies	62		
+F	=(1)	=(8)		
+F_troe	=(1)	=(4)		
+Kc	=(1)	=(42)		
+Kc_save(1,)	=(1)	=(2)		
+Kc_save(10,)	=(1)	=(2)		
+Kc_save(11,)	=(1)	=(2)		
+Kc_save(12,)	=(1)	=(2)		
+Kc_save(13,)	=(1)	=(2)		
+Kc_save(14,)	=(1)	=(2)		
+Kc_save(15,)	=(1)	=(2)		
+Kc_save(16,)	=(1)	=(2)		
+Kc_save(17,)	=(1)	=(2)		
+Kc_save(18,)	=(1)	=(2)		
+Kc_save(19,)	=(1)	=(2)		
+Kc_save(2,)	=(1)	=(2)		
+Kc_save(20,)	=(1)	=(2)		
+Kc_save(21,)	=(1)	=(2)		
+Kc_save(3,)	=(1)	=(2)		
+Kc_save(4,)	=(1)	=(2)		
+Kc_save(5,)	=(1)	=(2)		
+Kc_save(6,)	=(1)	=(2)		
+Kc_save(7,)	=(1)	=(2)		
+Kc_save(8,)	=(1)	=(2)		
+Kc_save(9,)	=(1)	=(2)		
+T	=(1)	=(20)		
+T_save	=(1)	=(2)		
+Yt	=($B$9)	=(2)		
+alpha	=(1)	=(12)		
+e	=(1)	=(3)		
+g_RT(1,)	=(1)	=(6)		
+g_RT(2,)	=(1)	=(9)		
+g_RT(3,)	=(1)	=(8)		
+g_RT(4,)	=(1)	=(13)		
+g_RT(5,)	=(1)	=(9)		
+g_RT(6,)	=(1)	=(18)		
+g_RT(7,)	=(1)	=(14)		
+g_RT(8,)	=(1)	=(9)		
+i	=(1)	=(3*$B$9 + 3)		
+imw	=($B$9)	=(1)		
+invT	=(1)	=($B$9 + 18)		
+iry1	=(1)	=($B$9)		
+j	=(1)	=(3*$B$9 + 2)		
+k	=(1)	=(3*$B$9 + 2)		
+k_f	=(1)	=(69)		
+k_f_save(1,)	=(1)	=(2)		
+k_f_save(10,)	=(1)	=(2)		
+k_f_save(11,)	=(1)	=(2)		
+k_f_save(12,)	=(1)	=(2)		
+k_f_save(13,)	=(1)	=(2)		
+k_f_save(14,)	=(1)	=(2)		
+k_f_save(15,)	=(1)	=(2)		
+k_f_save(16,)	=(1)	=(2)		
+k_f_save(17,)	=(1)	=(2)		
+k_f_save(18,)	=(1)	=(2)		
+k_f_save(19,)	=(1)	=(2)		
+k_f_save(2,)	=(1)	=(2)		
+k_f_save(20,)	=(1)	=(2)		
+k_f_save(21,)	=(1)	=(2)		
+k_f_save(3,)	=(1)	=(2)		
+k_f_save(4,)	=(1)	=(2)		
+k_f_save(5,)	=(1)	=(2)		
+k_f_save(6,)	=(1)	=(2)		
+k_f_save(7,)	=(1)	=(2)		
+k_f_save(8,)	=(1)	=(2)		
+k_f_save(9,)	=(1)	=(2)		
+k_r	=(1)	=(42)		
+logFcent	=(1)	=(8)		
+logPred	=(1)	=(6)		
+mixture	=(1)	=(2*$B$9 + 7)		
+molecular_weight	=($B$9)	=(1)		
+n	=(1)	=(20*$B$9)		
+nspecies	=(1)	=(7*$B$9)		
+phi_f	=(1)	=(42)		
+phi_r	=(1)	=(42)		
+q_f	=(1)	=(42)		
+q_r	=(1)	=(42)		
+qdot	=(1)	=(99)		
+qrho	=(1)	=(1)		
+qtemp	=(1)	=(1)		
+qy1	=(1)	=($B$9)		
+qyn	=(1)	=(5*$B$9)		
+redP	=(1)	=(8)		
+refC	=(1)	=(7)		
+rho	=(1)	=($B$9 + 1)		
+sc(1,)	=(1)	=(13)		
+sc(2,)	=(1)	=(11)		
+sc(3,)	=(1)	=(15)		
+sc(4,)	=(1)	=(14)		
+sc(5,)	=(1)	=(10)		
+sc(6,)	=(1)	=(19)		
+sc(7,)	=(1)	=(15)		
+sc(8,)	=(1)	=(10)		
+troe	=(1)	=(6)		
+troe_c	=(1)	=(6)		
+troe_n	=(1)	=(4)		
+tsc(1,)	=(1)	=($B$9 + 12)		
+tsc(2,)	=(1)	=($B$9 + 1)		
+tsc(3,)	=(1)	=($B$9 + 1)		
+tsc(4,)	=(1)	=($B$9 + 1)		
+tsc(5,)	=(1)	=($B$9 + 1)		
+wdot(1,)	=(1)	=(14)		
+wdot(2,)	=(1)	=(20)		
+wdot(3,)	=(1)	=(18)		
+wdot(4,)	=(1)	=(28)		
+wdot(5,)	=(1)	=(20)		
+wdot(6,)	=(1)	=(38)		
+wdot(7,)	=(1)	=(30)		
+wdot(8,)	=(1)	=(20)		
+	

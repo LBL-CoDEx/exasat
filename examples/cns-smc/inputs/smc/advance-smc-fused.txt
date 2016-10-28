@@ -1,0 +1,13 @@
+merged Fhyp, Fdif, dpe initialization loops (L1, L5, L14)
+  for each array component, change first update to an assignment
+merged hypterm loops (L2-L4)
+  TODO: merge update statements to further increase locality
+merged diffterm loops
+  fused Q -> dQ/dx loops (L7-L9)
+  fused dQ,mu,vsm -> Fdif(imx, imy, imz, iene) loops (L10-L13)
+  fused big loops (L16-L21)
+    ghost dependency oh Hg: shift bounds and index on dependent loop (i -> i-1) and use if statement to merge
+    duplicate Hg into Hgx, Hgy, Hgz so that we can merge all three big loops together, gated with if statements
+    working set expands by roughly 2x due to larger tile size (ghost cells in X and Y)
+swapped order of hypterm and diffterm and had them update Uprime directly to remove calcU (L23)
+merged reset_density into update_rk3 (L24 & L25)

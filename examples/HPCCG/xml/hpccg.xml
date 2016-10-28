@@ -1,0 +1,195 @@
+<program>
+<function name="HPCCG" adds="5" multiplies="0" divides="0" specials="1">
+<scalar name="local_nrow" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_ncol" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="b" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="double *const" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="max_iter" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="normr" datatype="double &" isConstant="false" accesstype="writeonly" reads="0" writes="2"/>
+<scalar name="t_begin" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t0" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="4"/>
+<scalar name="t1" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="t2" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="t3" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="t4" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="nrow" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="rtrans" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="print_freq" datatype="int" isConstant="false" accesstype="readwrite" reads="2" writes="2"/>
+<array name="times" component="" datatype="double" accesstype="writeonly">
+<access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(4)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<funccall linenum="67" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<if linenum="92" conditional="print_freq &gt; 50;" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<if linenum="93" conditional="print_freq &lt; 1;" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<funccall linenum="96" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="96" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="x"/>
+<arg paramname="beta" argname="0.0"/>
+<arg paramname="y" argname="x"/>
+<arg paramname="w" argname="p"/>
+</funccall>
+<funccall linenum="96" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="100" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="100" name="" origname="HPC_sparsemv" module="unknown" flops="unknown">
+<arg paramname="A" argname="A"/>
+<arg paramname="x" argname="p"/>
+<arg paramname="y" argname="Ap"/>
+</funccall>
+<funccall linenum="100" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="101" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="101" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="b"/>
+<arg paramname="beta" argname="- 1.0"/>
+<arg paramname="y" argname="Ap"/>
+<arg paramname="w" argname="r"/>
+</funccall>
+<funccall linenum="101" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="102" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="102" name="" origname="ddot" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="x" argname="r"/>
+<arg paramname="y" argname="r"/>
+<arg paramname="result" argname="&rtrans"/>
+<arg paramname="time_allreduce" argname="t4"/>
+</funccall>
+<funccall linenum="102" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<loop linenum="107" loopvar="k" lowerbound="1" upperbound="max_iter - 1" stride="1" adds="3" multiplies="0" divides="1" specials="1">
+<scalar name="x" datatype="double *const" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="max_iter" datatype="const int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="tolerance" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="niters" datatype="int &" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="normr" datatype="double &" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="t0" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="3"/>
+<scalar name="t1" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t2" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t3" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t4" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nrow" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="rtrans" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="print_freq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="readwrite" reads="4" writes="1"/>
+<if linenum="109" conditional="k == 1;" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="t0" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="t2" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nrow" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<funccall linenum="111" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="111" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="r"/>
+<arg paramname="beta" argname="0.0"/>
+<arg paramname="y" argname="r"/>
+<arg paramname="w" argname="p"/>
+</funccall>
+<funccall linenum="111" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+</if>
+<else iflinenum="109" adds="2" multiplies="0" divides="1" specials="0">
+<scalar name="t0" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="t1" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t2" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="t4" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nrow" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rtrans" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="oldrtrans" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="beta" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<funccall linenum="116" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="116" name="" origname="ddot" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="x" argname="r"/>
+<arg paramname="y" argname="r"/>
+<arg paramname="result" argname="&rtrans"/>
+<arg paramname="time_allreduce" argname="t4"/>
+</funccall>
+<funccall linenum="116" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="118" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="118" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="r"/>
+<arg paramname="beta" argname="beta"/>
+<arg paramname="y" argname="p"/>
+<arg paramname="w" argname="p"/>
+</funccall>
+<funccall linenum="118" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+</else>
+<if linenum="121" conditional="rank == 0 &&(k % print_freq == 0 || k + 1 == max_iter);" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<funccall linenum="126" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="126" name="" origname="HPC_sparsemv" module="unknown" flops="unknown">
+<arg paramname="A" argname="A"/>
+<arg paramname="x" argname="p"/>
+<arg paramname="y" argname="Ap"/>
+</funccall>
+<funccall linenum="126" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="128" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="128" name="" origname="ddot" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="x" argname="p"/>
+<arg paramname="y" argname="Ap"/>
+<arg paramname="result" argname="&alpha"/>
+<arg paramname="time_allreduce" argname="t4"/>
+</funccall>
+<funccall linenum="128" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="130" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="130" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="x"/>
+<arg paramname="beta" argname="alpha"/>
+<arg paramname="y" argname="p"/>
+<arg paramname="w" argname="x"/>
+</funccall>
+<funccall linenum="131" name="" origname="waxpby" module="unknown" flops="unknown">
+<arg paramname="n" argname="nrow"/>
+<arg paramname="alpha" argname="1.0"/>
+<arg paramname="x" argname="r"/>
+<arg paramname="beta" argname="-alpha"/>
+<arg paramname="y" argname="Ap"/>
+<arg paramname="w" argname="r"/>
+</funccall>
+<funccall linenum="131" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<if linenum="133" conditional="normr &gt; tolerance;" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+</loop>
+<funccall linenum="147" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<local name="r"/>
+<local name="p"/>
+<local name="Ap"/>
+<nonlocal name="A"/>
+<nonlocal name="times"/>
+</function>
+</program>

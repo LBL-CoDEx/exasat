@@ -1,0 +1,60 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="network_init" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="network_initialized" datatype="bool" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ic12" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="io16" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="img24" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<array name="spec_names" component="" datatype="char*" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<array name="short_spec_names" component="" datatype="char*" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<array name="aion" component="" datatype="float" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<array name="zion" component="" datatype="float" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<array name="ebin" component="" datatype="float" accesstype="writeonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="1"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<nonlocal name="spec_names"/>
+<nonlocal name="short_spec_names"/>
+<nonlocal name="aion"/>
+<nonlocal name="zion"/>
+<nonlocal name="ebin"/>
+</function>
+<function name="network_species_index" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="r" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="91" loopvar="n" lowerbound="1" upperbound="nspec" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="name" datatype="char*" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<array name="spec_names" component="" datatype="char*" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<array name="short_spec_names" component="" datatype="char*" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
+</array>
+<if linenum="92" conditional="name .EQ. spec_names(n) .OR. name .EQ. short_spec_names(n)" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="r" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+</loop>
+<nonlocal name="spec_names"/>
+<nonlocal name="short_spec_names"/>
+</function>
+</program>

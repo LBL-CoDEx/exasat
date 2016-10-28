@@ -1,0 +1,23 @@
+<program>
+<function name="HPC_sparsemv" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="local_nrow" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="62" loopvar="i" lowerbound="0" upperbound="nrow - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="y" datatype="double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nrow" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="sum" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="A" component="" datatype="struct ::HPC_Sparse_Matrix_STRUCT" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="3" writes="0"/>
+</array>
+<loop linenum="73" loopvar="j" lowerbound="0" upperbound="cur_nnz - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="sum" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_vals" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_inds" datatype="const int *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cur_nnz" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+</loop>
+</loop>
+<nonlocal name="A"/>
+</function>
+</program>

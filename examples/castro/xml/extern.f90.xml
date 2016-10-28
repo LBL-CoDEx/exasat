@@ -1,0 +1,37 @@
+Note: astNode = 0x386f598 = SgBasicBlock parent = 0x3aa77f0 
+Note: parentNode = 0x386f598 = SgBasicBlock 
+Note: parentNode = 0x3aa77f0 = SgIfStmt 
+Note: parentNode = 0x386f138 = SgBasicBlock 
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="runtime_init" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="eos_assume_neutral" datatype="bool" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="eos_gamma" datatype="float" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="namlen" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="un" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="status" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="maxlen" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="probin" datatype="char*" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="49" conditional="namlen &gt; maxlen" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<loop linenum="54" loopvar="i" lowerbound="1" upperbound="namlen" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="namlen" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="probin" datatype="char*" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="name" component="" datatype="int" accesstype="readwrite">
+<access offset="(0)" dependentloopvar="(i)" reads="0" writes="0"/>
+</array>
+<funccall linenum="55" name="" origname="char" module="unknown" flops="unknown">
+</funccall>
+</loop>
+<if linenum="64" conditional="status &lt; 0" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<else iflinenum="64" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="status" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="68" conditional="status &gt; 0" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+</else>
+<nonlocal name="name"/>
+</function>
+</program>

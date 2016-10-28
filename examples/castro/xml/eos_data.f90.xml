@@ -1,0 +1,12 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="eos_get_small_dens" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="smalld" datatype="float" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_dens_out" datatype="float" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</function>
+<function name="eos_get_small_temp" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="smallt" datatype="float" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_temp_out" datatype="float" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</function>
+</program>

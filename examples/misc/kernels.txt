@@ -1,0 +1,100 @@
+gsrb_3d:
+
+Flops (per every other cell):
+A: 11, M: 8, D: 1, S: 0
+
+Arrays (cell, pencil, plane):
+u: ro(6, 4, 2), wo(1, 0, 0), rw(0, 1, 1))
+bx: (2, 1, 1)
+by: (2, 2, 1)
+bz: (2, 2, 2)
+f:  (1, 1, 1)
+
+Working Set / Traffic:
+Cell: 14
+Pencil: 11
+Plane: 8
+Blocks: 5
+
+applyop_3d:
+
+Flops:
+A: 11, M: 8, D: 1, S: 0
+
+Arrays (cell, pencil, plane):
+u:   (7, 5, 3)
+bx:  (2, 1, 1)
+by:  (2, 2, 1)
+bz:  (2, 2, 2)
+g: wo(1, 1, 1)
+
+Working Set / Traffic:
+Cell: 14
+Pencil: 11
+Plane: 8
+Blocks: 5
+
+residual_3d:
+
+Flops:
+A: 12, M: 8, D: 1, S: 0
+
+Arrays (cell, pencil, plane):
+u:   (7, 5, 3)
+bx:  (2, 1, 1)
+by:  (2, 2, 1)
+bz:  (2, 2, 2)
+f:   (1, 1, 1)
+res: wo(1, 1, 1)
+
+Working Set / Traffic:
+Cell: 15
+Pencil: 12
+Plane: 9
+Blocks: 6
+
+restrict_3d:
+
+Flops:
+A: 7, M: 0, D: 1, S: 0
+
+Arrays (cell, pencil, plane):
+fine(2,2,2): (8, 4, 2)
+crse: wo(1, 1, 1)
+
+Working Set / Traffic:
+Cell: 9
+Pencil: 4F+C
+Plane: 2F+C
+Block: F+C
+
+pc_prolongate_3d:
+
+Flops:
+A: 0, M: 0, D: 0, S: 0
+
+Arrays (cell, pencil, plane):
+crse(.5,.5,.5): (1, 1, 1)
+fine: rw(1, 1, 1)
+
+Working Set / Traffic:
+Cell: F+C
+Pencil: F+C
+Plane: F+C
+Block: F+C
+
+trilinear_prolongate_3d:
+
+Flops:
+A: 8, M: 4, D: 0, S: 0
+
+Arrays (cell, pencil, plane):
+crse(.5,.5,.5): (8, 4, 2)
+fine: rw(1, 1, 1)
+
+Working Set / Traffic:
+Cell: F+8C
+Pencil: F+4C
+Plane: F+2C
+Block: F+C
+

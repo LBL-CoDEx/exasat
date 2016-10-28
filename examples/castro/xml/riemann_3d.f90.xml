@@ -1,0 +1,2519 @@
+<program>
+<function name="bl_assert1" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_assert2" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_assert3" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_assert4" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_assert_v" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error0" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_c" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_ch" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_d" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_i" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_s" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_error1_z" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn0" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_c" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_ch" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_d" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_i" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_s" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="bl_warn1_z" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="cmpflx" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="use_colglaz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ppm_temp_fix" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="smallc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="cavg" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="gamcm" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<array name="gamcp" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(,)" reads="1" writes="0"/>
+</array>
+<if linenum="57" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="58" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="59" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="10" writes="0"/>
+<array name="gamc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(-1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="csml" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(-1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="c" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(-1,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="smallc" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="cavg" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcm" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcp" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</if>
+<else iflinenum="57" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="66" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="67" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="68" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="10" writes="0"/>
+<array name="gamc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,-1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="csml" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,-1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="c" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,-1,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="smallc" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="cavg" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcm" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcp" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</if>
+<else iflinenum="66" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="76" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="77" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k3d" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="10" writes="0"/>
+<array name="gamc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="csml" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="c" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,k3d)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+<access offset="(0,0,k3d+-1)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="smallc" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="cavg" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcm" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcp" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</else>
+</else>
+<if linenum="86" conditional="ppm_temp_fix .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="93" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="94" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="0" multiplies="2" divides="2" specials="0">
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="14" writes="0"/>
+<scalar name="rho" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="2"/>
+<scalar name="T" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="p" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="e" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="gam1" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="eos_input_re" datatype="int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="QRHO" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="QPRES" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="QREINT" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="16" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="16" writes="0"/>
+<array name="qm" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="qp" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="gamcm" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="gamcp" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="0" writes="1"/>
+</array>
+<array name="qm" component="QPRES" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<array name="qm" component="QREINT" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<array name="qp" component="QPRES" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<array name="qp" component="QREINT" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<loop linenum="104" loopvar="i_1_5290" lowerbound="0" upperbound="nspec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_1_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qm" component="QFS + i_1_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFS)" dependentloopvar="(i,j,,i_1_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="105" loopvar="i_2_5290" lowerbound="0" upperbound="naux - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="naux" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_2_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qm" component="QFX + i_2_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFX)" dependentloopvar="(i,j,,i_2_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<funccall linenum="107" name="" origname="eos" module="eos_module" flops="unknown">
+<arg paramname="input" argname="eos_input_re"/>
+<arg paramname="state" argname="eos_state"/>
+<arg paramname="do_eos_diag" argname=".FALSE."/>
+</funccall>
+<loop linenum="118" loopvar="i_3_5290" lowerbound="0" upperbound="nspec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_3_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qp" component="QFS + i_3_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFS)" dependentloopvar="(i,j,,i_3_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="119" loopvar="i_4_5290" lowerbound="0" upperbound="naux - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="naux" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_4_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qp" component="QFX + i_4_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFX)" dependentloopvar="(i,j,,i_4_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<funccall linenum="121" name="" origname="eos" module="eos_module" flops="unknown">
+<arg paramname="input" argname="eos_input_re"/>
+<arg paramname="state" argname="eos_state"/>
+<arg paramname="do_eos_diag" argname=".FALSE."/>
+</funccall>
+</loop>
+</loop>
+</if>
+<if linenum="133" conditional="use_colglaz .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="qpd_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<funccall linenum="134" name="" origname="riemanncg" module="riemann_module" flops="unknown">
+<arg paramname="ql" argname="qm"/>
+<arg paramname="qr" argname="qp"/>
+<arg paramname="qpd_l1" argname="qpd_l1"/>
+<arg paramname="qpd_l2" argname="qpd_l2"/>
+<arg paramname="qpd_l3" argname="qpd_l3"/>
+<arg paramname="qpd_h1" argname="qpd_h1"/>
+<arg paramname="qpd_h2" argname="qpd_h2"/>
+<arg paramname="qpd_h3" argname="qpd_h3"/>
+<arg paramname="gamcl" argname="gamcm"/>
+<arg paramname="gamcr" argname="gamcp"/>
+<arg paramname="cav" argname="cavg"/>
+<arg paramname="smallc" argname="smallc"/>
+<arg paramname="gd_l1" argname="ilo - 1"/>
+<arg paramname="gd_l2" argname="jlo - 1"/>
+<arg paramname="gd_h1" argname="ihi + 1"/>
+<arg paramname="gd_h2" argname="jhi + 1"/>
+<arg paramname="uflx" argname="flx"/>
+<arg paramname="uflx_l1" argname="flx_l1"/>
+<arg paramname="uflx_l2" argname="flx_l2"/>
+<arg paramname="uflx_l3" argname="flx_l3"/>
+<arg paramname="uflx_h1" argname="flx_h1"/>
+<arg paramname="uflx_h2" argname="flx_h2"/>
+<arg paramname="uflx_h3" argname="flx_h3"/>
+<arg paramname="ugdnv" argname="ugdnv"/>
+<arg paramname="pgdnv" argname="pgdnv"/>
+<arg paramname="gegdnv" argname="gegdnv"/>
+<arg paramname="pg_l1" argname="pg_l1"/>
+<arg paramname="pg_l2" argname="pg_l2"/>
+<arg paramname="pg_l3" argname="pg_l3"/>
+<arg paramname="pg_h1" argname="pg_h1"/>
+<arg paramname="pg_h2" argname="pg_h2"/>
+<arg paramname="pg_h3" argname="pg_h3"/>
+<arg paramname="idir" argname="idir"/>
+<arg paramname="ilo" argname="ilo"/>
+<arg paramname="ihi" argname="ihi"/>
+<arg paramname="jlo" argname="jlo"/>
+<arg paramname="jhi" argname="jhi"/>
+<arg paramname="kc" argname="kc"/>
+<arg paramname="kflux" argname="kflux"/>
+<arg paramname="domlo" argname="domlo"/>
+<arg paramname="domhi" argname="domhi"/>
+</funccall>
+</if>
+<else iflinenum="133" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="qpd_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qpd_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="flx_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_l3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h2" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pg_h3" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<funccall linenum="141" name="" origname="riemannus" module="riemann_module" flops="unknown">
+<arg paramname="ql" argname="qm"/>
+<arg paramname="qr" argname="qp"/>
+<arg paramname="qpd_l1" argname="qpd_l1"/>
+<arg paramname="qpd_l2" argname="qpd_l2"/>
+<arg paramname="qpd_l3" argname="qpd_l3"/>
+<arg paramname="qpd_h1" argname="qpd_h1"/>
+<arg paramname="qpd_h2" argname="qpd_h2"/>
+<arg paramname="qpd_h3" argname="qpd_h3"/>
+<arg paramname="gamcl" argname="gamcm"/>
+<arg paramname="gamcr" argname="gamcp"/>
+<arg paramname="cav" argname="cavg"/>
+<arg paramname="smallc" argname="smallc"/>
+<arg paramname="gd_l1" argname="ilo - 1"/>
+<arg paramname="gd_l2" argname="jlo - 1"/>
+<arg paramname="gd_h1" argname="ihi + 1"/>
+<arg paramname="gd_h2" argname="jhi + 1"/>
+<arg paramname="uflx" argname="flx"/>
+<arg paramname="uflx_l1" argname="flx_l1"/>
+<arg paramname="uflx_l2" argname="flx_l2"/>
+<arg paramname="uflx_l3" argname="flx_l3"/>
+<arg paramname="uflx_h1" argname="flx_h1"/>
+<arg paramname="uflx_h2" argname="flx_h2"/>
+<arg paramname="uflx_h3" argname="flx_h3"/>
+<arg paramname="ugdnv" argname="ugdnv"/>
+<arg paramname="pgdnv" argname="pgdnv"/>
+<arg paramname="gegdnv" argname="gegdnv"/>
+<arg paramname="pg_l1" argname="pg_l1"/>
+<arg paramname="pg_l2" argname="pg_l2"/>
+<arg paramname="pg_l3" argname="pg_l3"/>
+<arg paramname="pg_h1" argname="pg_h1"/>
+<arg paramname="pg_h2" argname="pg_h2"/>
+<arg paramname="pg_h3" argname="pg_h3"/>
+<arg paramname="idir" argname="idir"/>
+<arg paramname="ilo" argname="ilo"/>
+<arg paramname="ihi" argname="ihi"/>
+<arg paramname="jlo" argname="jlo"/>
+<arg paramname="jhi" argname="jhi"/>
+<arg paramname="kc" argname="kc"/>
+<arg paramname="kflux" argname="kflux"/>
+<arg paramname="domlo" argname="domlo"/>
+<arg paramname="domhi" argname="domhi"/>
+</funccall>
+</else>
+<local name="smallc"/>
+<local name="cavg"/>
+<local name="gamcm"/>
+<local name="gamcp"/>
+<nonlocal name="qm"/>
+<nonlocal name="qp"/>
+<nonlocal name="flx"/>
+<nonlocal name="ugdnv"/>
+<nonlocal name="pgdnv"/>
+<nonlocal name="gegdnv"/>
+<nonlocal name="gamc"/>
+<nonlocal name="csml"/>
+<nonlocal name="c"/>
+<nonlocal name="domlo"/>
+<nonlocal name="domhi"/>
+</function>
+<function name="composition_derivatives" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="composition" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="eos_get_small_dens" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="eos_get_small_temp" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="eos_init" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="eos" adds="0" multiplies="0" divides="1" specials="0">
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n_A" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<local name="ymass"/>
+</function>
+<function name="network_init" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="network_species_index" adds="0" multiplies="0" divides="0" specials="0">
+</function>
+<function name="riemanncg" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="cg_maxiter" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="cg_tol" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="iter_max" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="tol" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="pstar_hist" component="" datatype="double" accesstype="readonly">
+<access offset="(cg_maxiter)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="252" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="253" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="62" multiplies="49" divides="22" specials="9">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="9" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="20" writes="0"/>
+<scalar name="TWO" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="FOUR3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="FIVE3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QRHO" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="QPRES" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="QREINT" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEDEN" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEINT" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_dens" datatype="double" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="small" datatype="double" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="28" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="28" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="gamgdnv" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="writeread" reads="12" writes="1"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="wl" datatype="double" isConstant="false" accesstype="writeread" reads="7" writes="3"/>
+<scalar name="wr" datatype="double" isConstant="false" accesstype="writeread" reads="7" writes="3"/>
+<scalar name="rhoetot" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="rstar" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="3"/>
+<scalar name="cstar" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="writeread" reads="25" writes="6"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeread" reads="7" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="co" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="sgnm" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="spin" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="spout" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="ushock" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="frac" datatype="double" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
+<scalar name="wsmall" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="csmall" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="gcl" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="gcr" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="clsq" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="clsql" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="clsqr" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="wlsq" datatype="double" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="wosq" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="wrsq" datatype="double" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="wo" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="zm" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="zp" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="denom" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dpditer" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="dpjmp" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="gamc_bar" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="game_bar" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="gamel" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="gamer" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="gameo" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="gamstar" datatype="double" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="gmin" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="gmax" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="gdot" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="iter" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="2"/>
+<scalar name="iter_max" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tol" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="err" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="converged" datatype="bool" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="pstnm1" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="taul" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="taur" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="tauo" datatype="double" isConstant="false" accesstype="readwrite" reads="2" writes="1"/>
+<scalar name="ustarm" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="3"/>
+<scalar name="ustarp" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="3"/>
+<scalar name="ustnm1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ustnp1" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="weakwv" datatype="double" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<array name="ql" component="QPRES" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QREINT" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QPRES" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QREINT" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="gamcl" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="gamcr" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="cav" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="4" writes="0"/>
+</array>
+<array name="smallc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UEINT" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UEINT)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="gegdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UEDEN" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UEDEN)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="4" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="4" writes="2"/>
+</array>
+<array name="pstar_hist" component="" datatype="double" accesstype="writeonly">
+<access offset="(iter)" dependentloopvar="()" reads="0" writes="1"/>
+</array>
+<if linenum="259" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="259" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="263" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="263" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="280" conditional="rel &lt;= ZERO .OR. pl &lt; small_pres" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="rho" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="T" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="p" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="e" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gam1" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="eos_input_rt" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_temp" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="gcl" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="285" loopvar="i_5_5290" lowerbound="0" upperbound="nspec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_5_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="ql" component="QFS + i_5_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFS)" dependentloopvar="(i,j,,i_5_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="286" loopvar="i_6_5290" lowerbound="0" upperbound="naux - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="naux" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_6_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="ql" component="QFX + i_6_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFX)" dependentloopvar="(i,j,,i_6_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<funccall linenum="288" name="" origname="eos" module="eos_module" flops="unknown">
+<arg paramname="input" argname="eos_input_rt"/>
+<arg paramname="state" argname="eos_state"/>
+<arg paramname="do_eos_diag" argname=".FALSE."/>
+</funccall>
+</if>
+<if linenum="299" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="299" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="303" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="303" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="317" conditional="rer &lt;= ZERO .OR. pr &lt; small_pres" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="rho" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="T" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="p" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="e" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gam1" struct="::eos_type_module::eos_t" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="eos_input_rt" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_temp" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="readwrite" reads="1" writes="1"/>
+<scalar name="gcr" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="322" loopvar="i_7_5290" lowerbound="0" upperbound="nspec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nspec" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_7_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qr" component="QFS + i_7_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFS)" dependentloopvar="(i,j,,i_7_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<loop linenum="323" loopvar="i_8_5290" lowerbound="0" upperbound="naux - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="naux" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_8_5290" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="qr" component="QFX + i_8_5290" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QFX)" dependentloopvar="(i,j,,i_8_5290)" reads="1" writes="0"/>
+</array>
+</loop>
+<funccall linenum="325" name="" origname="eos" module="eos_module" flops="unknown">
+<arg paramname="input" argname="eos_input_rt"/>
+<arg paramname="state" argname="eos_state"/>
+<arg paramname="do_eos_diag" argname=".FALSE."/>
+</funccall>
+</if>
+<funccall linenum="372" name="" origname="wsqge" module="riemann_module" flops="unknown">
+<arg paramname="p" argname="pl"/>
+<arg paramname="v" argname="taul"/>
+<arg paramname="gam" argname="gamel"/>
+<arg paramname="gdot" argname="gdot"/>
+<arg paramname="gstar" argname="gamstar"/>
+<arg paramname="pstar" argname="pstar"/>
+<arg paramname="wsq" argname="wlsq"/>
+<arg paramname="csq" argname="clsql"/>
+<arg paramname="gmin" argname="gmin"/>
+<arg paramname="gmax" argname="gmax"/>
+</funccall>
+<funccall linenum="375" name="" origname="wsqge" module="riemann_module" flops="unknown">
+<arg paramname="p" argname="pr"/>
+<arg paramname="v" argname="taur"/>
+<arg paramname="gam" argname="gamer"/>
+<arg paramname="gdot" argname="gdot"/>
+<arg paramname="gstar" argname="gamstar"/>
+<arg paramname="pstar" argname="pstar"/>
+<arg paramname="wsq" argname="wrsq"/>
+<arg paramname="csq" argname="clsqr"/>
+<arg paramname="gmin" argname="gmin"/>
+<arg paramname="gmax" argname="gmax"/>
+</funccall>
+<funccall linenum="400" name="" origname="wsqge" module="riemann_module" flops="unknown">
+<arg paramname="p" argname="pl"/>
+<arg paramname="v" argname="taul"/>
+<arg paramname="gam" argname="gamel"/>
+<arg paramname="gdot" argname="gdot"/>
+<arg paramname="gstar" argname="gamstar"/>
+<arg paramname="pstar" argname="pstar"/>
+<arg paramname="wsq" argname="wlsq"/>
+<arg paramname="csq" argname="clsql"/>
+<arg paramname="gmin" argname="gmin"/>
+<arg paramname="gmax" argname="gmax"/>
+</funccall>
+<funccall linenum="403" name="" origname="wsqge" module="riemann_module" flops="unknown">
+<arg paramname="p" argname="pr"/>
+<arg paramname="v" argname="taur"/>
+<arg paramname="gam" argname="gamer"/>
+<arg paramname="gdot" argname="gdot"/>
+<arg paramname="gstar" argname="gamstar"/>
+<arg paramname="pstar" argname="pstar"/>
+<arg paramname="wsq" argname="wrsq"/>
+<arg paramname="csq" argname="clsqr"/>
+<arg paramname="gmin" argname="gmin"/>
+<arg paramname="gmax" argname="gmax"/>
+</funccall>
+<if linenum="423" conditional="zp - weakwv * cav(i,j) &lt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="wl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zp" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="dpditer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<if linenum="428" conditional="zm - weakwv * cav(i,j) &lt;= ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="wr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="zm" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="dpditer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<if linenum="439" conditional="err &lt; tol * pstar" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="converged" datatype="bool" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<if linenum="447" conditional=".NOT.converged" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gcl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gcr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="449" loopvar="iter" lowerbound="1" upperbound="iter_max" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="iter" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="iter_max" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="pstar_hist" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(iter)" reads="1" writes="0"/>
+</array>
+</loop>
+<funccall linenum="456" name="bl_error" origname="bl_error0" module="bl_error_module" flops="unknown">
+<arg paramname="str" argname=""ERROR: non-convergence in the Riemann solver""/>
+</funccall>
+</if>
+<if linenum="471" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gcl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamel" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gameo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="taul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tauo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="471" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="479" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gcr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gameo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="taur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tauo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<else iflinenum="479" adds="6" multiplies="6" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gcl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gcr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamel" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gameo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="taul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="taur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tauo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</else>
+</else>
+<funccall linenum="506" name="" origname="wsqge" module="riemann_module" flops="unknown">
+<arg paramname="p" argname="po"/>
+<arg paramname="v" argname="tauo"/>
+<arg paramname="gam" argname="gameo"/>
+<arg paramname="gdot" argname="gdot"/>
+<arg paramname="gstar" argname="gamstar"/>
+<arg paramname="pstar" argname="pstar"/>
+<arg paramname="wsq" argname="wosq"/>
+<arg paramname="csq" argname="clsq"/>
+<arg paramname="gmin" argname="gmin"/>
+<arg paramname="gmax" argname="gmax"/>
+</funccall>
+<funccall linenum="509" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="530" conditional="pstar - po &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="spin" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="spout" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ushock" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+</if>
+<if linenum="546" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="546" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="549" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="549" adds="2" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</else>
+</else>
+<if linenum="566" conditional="spout &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gameo" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="572" conditional="spin &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="rstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="584" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="585" conditional="i .EQ. domlo(1) .AND.(physbc_lo(1) .EQ. Symmetry .OR.(physbc_lo(1) .EQ. SlipWall .OR. physbc_lo(1) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="589" conditional="i .EQ. domhi(1) + 1 .AND.(physbc_hi(1) .EQ. Symmetry .OR.(physbc_hi(1) .EQ. SlipWall .OR. physbc_hi(1) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="594" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="595" conditional="j .EQ. domlo(2) .AND.(physbc_lo(2) .EQ. Symmetry .OR.(physbc_lo(2) .EQ. SlipWall .OR. physbc_lo(2) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="599" conditional="j .EQ. domhi(2) + 1 .AND.(physbc_hi(2) .EQ. Symmetry .OR.(physbc_hi(2) .EQ. SlipWall .OR. physbc_hi(2) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="604" conditional="idir .EQ. 3" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="605" conditional="kflux .EQ. domlo(3) .AND.(physbc_lo(3) .EQ. Symmetry .OR.(physbc_lo(3) .EQ. SlipWall .OR. physbc_lo(3) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="609" conditional="kflux .EQ. domhi(3) + 1 .AND.(physbc_hi(3) .EQ. Symmetry .OR.(physbc_hi(3) .EQ. SlipWall .OR. physbc_hi(3) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="618" conditional="idir .EQ. 1" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="618" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="622" conditional="idir .EQ. 2" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="622" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+<if linenum="642" conditional="UESGS &gt; - 1" adds="1" multiplies="4" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="TWO3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="QESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEDEN" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UESGS)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UEDEN" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UEDEN)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<if linenum="645" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="645" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="647" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="647" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="657" conditional="idir .EQ. 1" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMX" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+<else iflinenum="657" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="659" conditional="idir .EQ. 2" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMY" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+<else iflinenum="659" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="661" conditional="idir .EQ. 3" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMZ" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+</else>
+</else>
+</if>
+<loop linenum="669" loopvar="iadv" lowerbound="1" upperbound="nadv" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFA" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFA" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nadv" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="iadv" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="672" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="672" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="674" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="674" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+<loop linenum="683" loopvar="ispec" lowerbound="1" upperbound="nspec" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nspec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ispec" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="686" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="686" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="688" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="688" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+<loop linenum="697" loopvar="iaux" lowerbound="1" upperbound="naux" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="naux" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="iaux" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="700" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="700" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="702" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="702" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+</loop>
+</loop>
+<local name="pstar_hist"/>
+<nonlocal name="ql"/>
+<nonlocal name="qr"/>
+<nonlocal name="gamcl"/>
+<nonlocal name="gamcr"/>
+<nonlocal name="cav"/>
+<nonlocal name="smallc"/>
+<nonlocal name="uflx"/>
+<nonlocal name="ugdnv"/>
+<nonlocal name="pgdnv"/>
+<nonlocal name="gegdnv"/>
+<nonlocal name="domlo"/>
+<nonlocal name="domhi"/>
+<nonlocal name="physbc_lo"/>
+<nonlocal name="physbc_hi"/>
+</function>
+<function name="riemannus" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="820" loopvar="j" lowerbound="jlo" upperbound="jhi" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jlo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jhi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="821" loopvar="i" lowerbound="ilo" upperbound="ihi" stride="1" adds="33" multiplies="36" divides="10" specials="4">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="ilo" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ihi" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="17" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QRHO" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="QPRES" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="QREINT" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEDEN" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEINT" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="small_dens" datatype="double" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="small_pres" datatype="double" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="23" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="23" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="regdnv" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="wl" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="wr" datatype="double" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
+<scalar name="rhoetot" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="scr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rstar" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<scalar name="cstar" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="2"/>
+<scalar name="estar" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="writeread" reads="6" writes="2"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="readwrite" reads="6" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="reo" datatype="double" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="co" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="2"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="entho" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="sgnm" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="spin" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="spout" datatype="double" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
+<scalar name="ushock" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="frac" datatype="double" isConstant="false" accesstype="writeread" reads="9" writes="2"/>
+<scalar name="wsmall" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="csmall" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
+<array name="ql" component="QPRES" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QREINT" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QPRES" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QPRES)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QREINT" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QREINT)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QRHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QRHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="gamcl" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="gamcr" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="smallc" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UEINT" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UEINT)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="gegdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UEDEN" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UEDEN)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="4" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeread">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="3" writes="2"/>
+</array>
+<if linenum="826" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="826" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="830" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="830" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ql" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="846" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="846" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="850" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="850" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="QU" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QV" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QW" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="QU" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QU)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QV" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QV)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="QW" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,QW)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="872" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="reo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="gamcl" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="872" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="878" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="reo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="gamcr" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="878" adds="5" multiplies="5" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ul" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pl" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rel" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ur" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rer" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="reo" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="gamco" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="gamcl" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+<array name="gamcr" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<funccall linenum="902" name="" origname="sign" module="unknown" flops="unknown">
+</funccall>
+<if linenum="906" conditional="pstar - po &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="spin" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="spout" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ushock" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+</if>
+<if linenum="910" conditional="spout - spin .EQ. ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="small" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="scr" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="cav" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0)" dependentloopvar="(i,j)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="910" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="scr" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="spin" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="spout" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</else>
+<if linenum="918" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="918" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="921" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="921" adds="2" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="v1l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2l" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v1r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2r" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</else>
+</else>
+<if linenum="934" conditional="spout &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="regdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ro" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="uo" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="po" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="reo" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="940" conditional="spin &gt;= ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="regdnv" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="estar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="952" conditional="idir .EQ. 1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="953" conditional="i .EQ. domlo(1) .AND.(physbc_lo(1) .EQ. Symmetry .OR.(physbc_lo(1) .EQ. SlipWall .OR. physbc_lo(1) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="957" conditional="i .EQ. domhi(1) + 1 .AND.(physbc_hi(1) .EQ. Symmetry .OR.(physbc_hi(1) .EQ. SlipWall .OR. physbc_hi(1) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="962" conditional="idir .EQ. 2" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="963" conditional="j .EQ. domlo(2) .AND.(physbc_lo(2) .EQ. Symmetry .OR.(physbc_lo(2) .EQ. SlipWall .OR. physbc_lo(2) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="967" conditional="j .EQ. domhi(2) + 1 .AND.(physbc_hi(2) .EQ. Symmetry .OR.(physbc_hi(2) .EQ. SlipWall .OR. physbc_hi(2) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="972" conditional="idir .EQ. 3" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="Symmetry" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="SlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="NoSlipWall" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<array name="domlo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="domhi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="physbc_lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<array name="physbc_hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="3" writes="0"/>
+</array>
+<if linenum="973" conditional="kflux .EQ. domlo(3) .AND.(physbc_lo(3) .EQ. Symmetry .OR.(physbc_lo(3) .EQ. SlipWall .OR. physbc_lo(3) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+<if linenum="977" conditional="kflux .EQ. domhi(3) + 1 .AND.(physbc_hi(3) .EQ. Symmetry .OR.(physbc_hi(3) .EQ. SlipWall .OR. physbc_hi(3) .EQ. NoSlipWall))" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ugdnv" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="0" writes="1"/>
+</array>
+</if>
+</if>
+<if linenum="986" conditional="idir .EQ. 1" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="986" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="990" conditional="idir .EQ. 2" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="990" adds="1" multiplies="3" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="v1gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="v2gdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="3" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="pgdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="UMX" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMY" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UMZ" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+<if linenum="1006" conditional="UESGS &gt; - 1" adds="1" multiplies="4" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="TWO3RD" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="QESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UEDEN" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UESGS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="rgdnv" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="ugdnv" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc)" dependentloopvar="(i,j,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,UESGS)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+<array name="uflx" component="UEDEN" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UEDEN)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+<if linenum="1009" conditional="ustar &gt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="1009" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1011" conditional="ustar &lt; ZERO" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</if>
+<else iflinenum="1011" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+</else>
+</else>
+<if linenum="1021" conditional="idir .EQ. 1" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMX" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMX" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMX)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+<else iflinenum="1021" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1023" conditional="idir .EQ. 2" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMY" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMY" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMY)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+<else iflinenum="1023" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="idir" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1025" conditional="idir .EQ. 3" adds="1" multiplies="0" divides="0" specials="0">
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="UMZ" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="rho_K_contrib" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="uflx" component="UMZ" datatype="double" accesstype="readwrite">
+<access offset="(0,0,kflux,UMZ)" dependentloopvar="(i,j,,)" reads="1" writes="1"/>
+</array>
+</if>
+</else>
+</else>
+</if>
+<loop linenum="1032" loopvar="iadv" lowerbound="1" upperbound="nadv" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFA" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFA" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nadv" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="iadv" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1035" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1035" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1037" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1037" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+<loop linenum="1045" loopvar="ispec" lowerbound="1" upperbound="nspec" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nspec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFS" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="ispec" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1048" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1048" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1050" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1050" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+<loop linenum="1058" loopvar="iaux" lowerbound="1" upperbound="naux" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="naux" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="QFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="UFX" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="iaux" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1061" conditional="ustar &gt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1061" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ustar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="1063" conditional="ustar &lt; ZERO" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</if>
+<else iflinenum="1063" adds="1" multiplies="2" divides="0" specials="0">
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="kc" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="kflux" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="URHO" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="n" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nq" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="qavg" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="ql" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="qr" component="nq" datatype="double" accesstype="readonly">
+<access offset="(0,0,kc,nq)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="URHO" datatype="double" accesstype="readonly">
+<access offset="(0,0,kflux,URHO)" dependentloopvar="(i,j,,)" reads="1" writes="0"/>
+</array>
+<array name="uflx" component="n" datatype="double" accesstype="writeonly">
+<access offset="(0,0,kflux,n)" dependentloopvar="(i,j,,)" reads="0" writes="1"/>
+</array>
+</else>
+</else>
+</loop>
+</loop>
+</loop>
+<nonlocal name="ql"/>
+<nonlocal name="qr"/>
+<nonlocal name="gamcl"/>
+<nonlocal name="gamcr"/>
+<nonlocal name="cav"/>
+<nonlocal name="smallc"/>
+<nonlocal name="uflx"/>
+<nonlocal name="ugdnv"/>
+<nonlocal name="pgdnv"/>
+<nonlocal name="gegdnv"/>
+<nonlocal name="domlo"/>
+<nonlocal name="domhi"/>
+<nonlocal name="physbc_lo"/>
+<nonlocal name="physbc_hi"/>
+</function>
+<function name="wsqge" adds="13" multiplies="9" divides="4" specials="0">
+<scalar name="ZERO" datatype="float" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ONE" datatype="float" isConstant="true" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="HALF" datatype="float" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="p" datatype="double" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="v" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gam" datatype="double" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+<scalar name="gdot" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gstar" datatype="double" isConstant="false" accesstype="writeread" reads="3" writes="2"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
+<scalar name="wsq" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="2"/>
+<scalar name="csq" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gmin" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gmax" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="smlp1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="beta" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<if linenum="751" conditional="alpha .EQ. ZERO" adds="1" multiplies="1" divides="0" specials="0">
+<scalar name="p" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="pstar" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="smlp1" datatype="double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+</if>
+<if linenum="757" conditional="abs(pstar - p) &lt; smlp1 *(pstar + p)" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="wsq" datatype="double" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="csq" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+</function>
+</program>

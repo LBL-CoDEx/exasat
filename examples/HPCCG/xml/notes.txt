@@ -1,0 +1,1 @@
+Check ddot function, ExaSAT failed to detect multiply add operations

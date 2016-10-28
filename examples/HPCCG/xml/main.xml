@@ -1,0 +1,83 @@
+WARNING: In unparseTemplateName(): info.isTypeFirstPart() == true 
+WARNING: In unparseTemplateName(): info.isTypeFirstPart() == true 
+WARNING: In unparseTemplateName(): info.isTypeFirstPart() == true 
+Error: In unparseTemplateDeclarationStatment_support(): What is this if not a template function or template member function stmt = 0x7f28c33ff8b0 = SgTemplateVariableDeclaration 
+WARNING: In unparseTemplateName(): info.isTypeFirstPart() == true 
+WARNING: In unparseTemplateName(): info.isTypeFirstPart() == true 
+<program>
+<function name="main" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="argc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ierr" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="size" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="dump_matrix" datatype="bool" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="niters" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="normr" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="max_iter" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="tolerance" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="141" conditional="argc == 4;" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="nx" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<array name="argv" component="" datatype="char" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="0"/>
+<access offset="(2)" dependentloopvar="()" reads="0" writes="0"/>
+<access offset="(3)" dependentloopvar="()" reads="0" writes="0"/>
+</array>
+<funccall linenum="143" name="" origname="atoi" module="unknown" flops="unknown">
+<arg paramname="__nptr" argname="argv[1]"/>
+</funccall>
+<funccall linenum="144" name="" origname="atoi" module="unknown" flops="unknown">
+<arg paramname="__nptr" argname="argv[2]"/>
+</funccall>
+<funccall linenum="145" name="" origname="atoi" module="unknown" flops="unknown">
+<arg paramname="__nptr" argname="argv[3]"/>
+</funccall>
+<funccall linenum="146" name="" origname="generate_matrix" module="unknown" flops="unknown">
+<arg paramname="nx" argname="nx"/>
+<arg paramname="ny" argname="ny"/>
+<arg paramname="nz" argname="nz"/>
+<arg paramname="A" argname="&A"/>
+<arg paramname="x" argname="&x"/>
+<arg paramname="b" argname="&b"/>
+<arg paramname="xexact" argname="&xexact"/>
+</funccall>
+</if>
+<else iflinenum="141" adds="0" multiplies="0" divides="0" specials="0">
+<array name="argv" component="" datatype="char" accesstype="readwrite">
+<access offset="(1)" dependentloopvar="()" reads="0" writes="0"/>
+</array>
+<funccall linenum="150" name="" origname="read_HPC_row" module="unknown" flops="unknown">
+<arg paramname="data_file" argname="argv[1]"/>
+<arg paramname="A" argname="&A"/>
+<arg paramname="x" argname="&x"/>
+<arg paramname="b" argname="&b"/>
+<arg paramname="xexact" argname="&xexact"/>
+</funccall>
+</else>
+<if linenum="155" conditional="dump_matrix && size &lt;= 4;" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<funccall linenum="155" name="" origname="dump_matlab_matrix" module="unknown" flops="unknown">
+<arg paramname="A" argname="A"/>
+<arg paramname="rank" argname="rank"/>
+</funccall>
+<funccall linenum="167" name="" origname="mytimer" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="172" name="" origname="HPCCG" module="unknown" flops="unknown">
+<arg paramname="A" argname="A"/>
+<arg paramname="b" argname="b"/>
+<arg paramname="x" argname="x"/>
+<arg paramname="max_iter" argname="max_iter"/>
+<arg paramname="tolerance" argname="tolerance"/>
+<arg paramname="niters" argname="niters"/>
+<arg paramname="normr" argname="normr"/>
+<arg paramname="times" argname="times"/>
+</funccall>
+<local name="A"/>
+<local name="x"/>
+<local name="b"/>
+<local name="xexact"/>
+<local name="times"/>
+<nonlocal name="argv"/>
+</function>
+</program>

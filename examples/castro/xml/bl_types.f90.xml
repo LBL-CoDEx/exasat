@@ -1,0 +1,52 @@
+<program>
+<function name="bl_types_info" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="dp_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="sp_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qp_t_0" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qp_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i4_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i8_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ll_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="unit" datatype="int" isConstant="false" accesstype="readonly" reads="10" writes="0"/>
+<funccall linenum="51" name="" origname="range" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="51" name="" origname="precision" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="51" name="" origname="digits" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="53" name="" origname="range" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="53" name="" origname="precision" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="53" name="" origname="digits" module="unknown" flops="unknown">
+</funccall>
+<if linenum="55" conditional="qp_t_0 &gt; 0" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="qp_t_0" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="unit" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="55" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="unit" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</else>
+<funccall linenum="61" name="" origname="range" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="61" name="" origname="precision" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="61" name="" origname="digits" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="66" name="" origname="range" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="66" name="" origname="digits" module="unknown" flops="unknown">
+</funccall>
+<if linenum="68" conditional="i8_t &gt; 0" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="i8_t" datatype="int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="unit" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</if>
+<else iflinenum="68" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="unit" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+</else>
+<funccall linenum="74" name="" origname="range" module="unknown" flops="unknown">
+</funccall>
+<funccall linenum="74" name="" origname="digits" module="unknown" flops="unknown">
+</funccall>
+</function>
+</program>

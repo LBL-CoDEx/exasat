@@ -1,0 +1,151 @@
+#!/usr/bin/python
+
+from math import sqrt
+import sys
+
+sys.path.append('/home/dunat/Projects/exasat/tools/post')
+from analyzeXML import StaticAnalysis
+
+import pprint
+
+def runCompute(filename, chemfile, config, problemSize): 
+
+  sa = StaticAnalysis(filename)
+  
+  r = sa.runModel(config)
+ 
+  numflops = (float(r['flops'])/10**9)
+  wnumflops = (float(r['wflops'])/10**9)
+  onnodetraffic = ((float(r['BW']))/ 2**30)
+  offnodetraffic = ((float(r['cBW']))* 2**(-30))
+
+  cputime = (wnumflops / ((r['params']['Gflop/s/thread'] * r['params']['Threads'])))
+  dramtime = (onnodetraffic / (r['params']['GB/s/thread']* r['params']['Threads']))
+  comptime = r['time']
+  NICbwtime = ((offnodetraffic / r['params']['NIC BW (GB/s)']))
+  NIClattime = (float(r['cMsgs']) * r['params']['NIC Latency (us)'] * 1e-6)
+  commtime = r['cTime']
+
+#running chemistry 
+  config['X Block Size'] = problemSize
+  config['Y Block Size'] = problemSize
+  config['Z Block Size'] = problemSize
+
+  sa = StaticAnalysis(chemfile)
+  r = sa.runModel(config)
+
+  chemnumflops = (float(r['flops'])/10**9)
+  wchemnumflops = (float(r['wflops'])/10**9)
+  chemonnodetraffic = ((float(r['BW']))/ 2**30)
+  chemcputime = (wchemnumflops / ((r['params']['Gflop/s/thread'] * r['params']['Threads'])))
+  chemdramtime = (chemonnodetraffic / (r['params']['GB/s/thread']* r['params']['Threads']))
+  chemcomptime = r['time']
+
+  totaltime = commtime + comptime + chemcomptime 
+  teraflops = ((numflops + chemnumflops)/ totaltime/ 1000)
+  mpoints = (float((problemSize * problemSize * problemSize )) / totaltime /10**6)
+
+#finite diff
+  print "%g " % numflops,
+  print "%g " % onnodetraffic, 
+  print "%g " % cputime, 
+  print "%g " % dramtime,
+  print "%g " % comptime,
+
+#chemistry 
+  print "%g " % chemnumflops,
+  print "%g " % chemonnodetraffic, 
+  print "%g " % chemcputime, 
+  print "%g " % chemdramtime,
+  print "%g " % chemcomptime,
+
+#communication
+  print "%g " % offnodetraffic, 
+  print "%g " % NICbwtime,
+  print "%g " % NIClattime,
+  print "%g " % commtime,
+
+  print "%g " % totaltime,
+  print "%g " % teraflops,
+  print "%g " % mpoints,  
+  print 
+
+def runExaNode1():
+#exaNode1 Settings
+ 
+  xmlpath = '/home/dunat/Projects/exasat/examples/xmls/'
+  filename = xmlpath + "advance-smc-modified.xml"
+
+  #problemSize = [32, 64, 128, 256, 512]
+  species = [9, 21, 53, 60, 70, 80, 90, 100]
+  problemSize = 128
+  version = 'baseline'                 
+  #naive
+  blockSize = [16, 16,  16, 8,  8, 8, # for 9 , 21, 53   
+               8, 4,  8, 4,  8, 4,   # 60, 70, 80
+               8,4, 8,4]
+  print "Results for exaNode1 for SMC"
+
+  dummy = 0
+  print "SMC Problem Size Info Finite Difference Part , , Chemistry Part , , , Communication Part"
+  print "Version BoxSize BlockSize NSpecies",
+  print "NumberofGFlops On-NodeTraffic(GB) ",
+  print "CPUTime(s) DRAMTime(s) ComputeTime(s)",
+  print "NumberofGFlops On-NodeTraffic(GB) ",
+  print "CPUTime(s) DRAMTime(s) ComputeTime(s)",
+  print "Off-NodeTraffic(GB)",
+  print "NICBWTime(s) NICLatTime(s) CommTime(s)",
+  print "TotalTime(s) Teraflop/s MegaPoints/s"
+
+  for nspec in species:
+
+    print version, problemSize, "%dX%d" % (blockSize[dummy], blockSize[dummy + 1]) , 
+    print nspec, 
+
+    config = {}
+    config['Num Species'] = nspec
+    config['GB/s/thread'] = 1
+    config['Gflop/s/thread'] = 10 
+    config['Threads']= 1024 
+    config['$/thread group (kB)']= 1024
+    config['NIC BW (GB/s)']=100
+    config['NIC Latency (us)']=0.4
+    config['Division Cost'] = 40 
+    config['Special Cost'] = 125
+
+    config['X Problem Size'] = problemSize
+    config['Y Problem Size'] = problemSize
+    config['Z Problem Size'] = problemSize
+    config['X Block Size'] = blockSize[dummy]
+    config['Y Block Size'] = blockSize[dummy + 1]
+    config['Z Block Size'] = problemSize
+
+    if nspec == 9 :
+      chemfilename = xmlpath + 'lidryer.xml'
+        
+    if nspec == 21 :
+      chemfilename = xmlpath + 'drm19.xml'
+      
+    if nspec == 53 : 
+      chemfilename = xmlpath + 'grimech30.xml'
+
+    if nspec == 71 : 
+      chemfilename = xmlpath + 'hai.xml'
+
+    if nspec == 107 : 
+      chemfilename = xmlpath + 'prf_ethanol.xml'
+
+
+    runCompute(filename, chemfilename, config, problemSize)
+
+    dummy = dummy + 2
+
+  
+#program starts here
+
+
+runExaNode1()
+
+#runDemo()
+#printBlockCacheTables()
+

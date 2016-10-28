@@ -1,0 +1,57 @@
+<program>
+<function name="div" adds="0" multiplies="0" divides="0" specials="0">
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="13" loopvar="k" lowerbound="lo(3)" upperbound="hi(3)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="14" loopvar="j" lowerbound="lo(2)" upperbound="hi(2)" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="j" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="lo" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="hi" component="" datatype="int" accesstype="readonly">
+<access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<loop linenum="15" loopvar="i" lowerbound="lo(1)" upperbound="hi(1)" stride="1" adds="5" multiplies="3" divides="0" specials="0">
+<scalar name="alpha" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="gamma" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="7" writes="1"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<array name="x" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(-1,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="y" component="" datatype="double" accesstype="readonly">
+<access offset="(0,1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,-1,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="z" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+<access offset="(0,0,-1)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<array name="u" component="" datatype="double" accesstype="writeonly">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<nonlocal name="lo"/>
+<nonlocal name="hi"/>
+<nonlocal name="u"/>
+<nonlocal name="x"/>
+<nonlocal name="y"/>
+<nonlocal name="z"/>
+</function>
+</program>

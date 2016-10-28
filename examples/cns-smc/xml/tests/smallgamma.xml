@@ -1,0 +1,67 @@
+<program>
+<function name="calc_gamma" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="n_spec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="13" loopvar="i_1_7096" lowerbound="0" upperbound="nz - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_1_7096" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="13" loopvar="i_2_7096" lowerbound="0" upperbound="ny - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_2_7096" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="13" loopvar="i_3_7096" lowerbound="0" upperbound="nx - k" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_1_7096" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_2_7096" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_3_7096" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="yspecies" component="m" datatype="float" accesstype="readonly">
+<access offset="(k,k,k,m)" dependentloopvar="(i_3_7096,i_2_7096,i_1_7096,)" reads="1" writes="0"/>
+</array>
+<array name="molwt_c" component="" datatype="float" accesstype="readonly">
+<access offset="(m)" dependentloopvar="()" reads="1" writes="0"/>
+</array>
+<array name="avmolwt" component="" datatype="float" accesstype="writeonly">
+<access offset="(k,k,k)" dependentloopvar="(i_3_7096,i_2_7096,i_1_7096)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+<loop linenum="15" loopvar="m" lowerbound="1" upperbound="n_spec - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="n_spec" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<loop linenum="16" loopvar="i_4_7096" lowerbound="0" upperbound="nz - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="nz" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_4_7096" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="16" loopvar="i_5_7096" lowerbound="0" upperbound="ny - k" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ny" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i_5_7096" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="16" loopvar="i_6_7096" lowerbound="0" upperbound="nx - k" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="nx" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="m" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_4_7096" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_5_7096" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="i_6_7096" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="yspecies" component="m" datatype="float" accesstype="readonly">
+<access offset="(k,k,k,0)" dependentloopvar="(i_6_7096,i_5_7096,i_4_7096,m)" reads="1" writes="0"/>
+</array>
+<array name="molwt_c" component="" datatype="float" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(m)" reads="1" writes="0"/>
+</array>
+<array name="avmolwt" component="" datatype="float" accesstype="writeonly">
+<access offset="(k,k,k)" dependentloopvar="(i_6_7096,i_5_7096,i_4_7096)" reads="0" writes="1"/>
+</array>
+</loop>
+</loop>
+</loop>
+</loop>
+<nonlocal name="avmolwt"/>
+<nonlocal name="yspecies"/>
+<nonlocal name="molwt_c"/>
+</function>
+</program>

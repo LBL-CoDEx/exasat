@@ -1,0 +1,23 @@
+<program>
+<function name="ddot" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="47" conditional="y == x;" adds="0" multiplies="0" divides="0" specials="0">
+</if>
+<loop linenum="51" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+</loop>
+<loop linenum="56" loopvar="i" lowerbound="0" upperbound="n - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
+<scalar name="n" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="x" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="y" datatype="const double *const" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="local_result" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
+</loop>
+<nonlocal name="result"/>
+</function>
+</program>
