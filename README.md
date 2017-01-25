@@ -12,13 +12,13 @@ ExaSAT: Exascale Static Analysis Tool
 -  Set environment variables:
     - `FILTER=<fname>`: fname is function that we want to analyze, or
     - `NOFILTER=1`: analyze all functions in input file
-  - Add Boost and Java lib dirs to LD_LIBRARY_PATH
+  - Add Boost and Java lib dirs to `LD_LIBRARY_PATH`
   - Run: `genCodeDescript <input_file>`
     - Produces XML on stdout
-  - Example: run `./genxml.py` from examples/cns-smc/
-    - Crawls the inputs/ sub-directory and tries to run the compiler analysis on all files
+  - Example: run `./genxml.py` from `examples/cns-smc/`
+    - Crawls the `inputs/` sub-directory and tries to run the compiler analysis on all files
       - May produce errors for some because it can’t find some dependent module files (it’s safe to ignore these)
-    - Stores the produced XMLs in the xml_new/ sub-directory
+    - Stores the produced XMLs in the `xml_new/` sub-directory
 
 ### Performance Model Component Usage: ###
 
@@ -35,23 +35,23 @@ ExaSAT: Exascale Static Analysis Tool
     size, cache line size, and relative costs of arithmetic operations
     (+,-,*,/,specials) and memory operations (R,W,RW).  Defaults will
     be chosen if no file is specified.
-  - old=0 or 1:
+  - `old=0` or `old=1`:
     What format XML to expect
 
 ##### Generate analysis spreadsheet (in tools/post/ directory): #####
 - `./analyze.py <xml-input> <tsv-output>`
 - Example: problem_xml=../../examples/problem.xml ./analyze.py ../../examples/cns-smc/xml/advance-nomod.xml advance-nomod.tsv
   - Generates an analysis spreadsheet advance-nomod.tsv
-- Example script: ./gentsvs.sh
+- Example script: `./gentsvs.sh`
   - Analyze advance routines from CNS and SMC codes as well as chemistry routines from SMC code
-- Can generate dependency graphs by setting options.flag_graph=True in common.py
+- Can generate dependency graphs by setting `options.flag_graph=True` in common.py
 
 ##### Or run in script mode: #####
   - Call analysis from another Python script through analyze and runner modules
     - Step 1: analyze an input XML file to recognize loop structures and calculate working sets, etc. (analyze module)
     - Step 2: use static analysis info to run a performance model for a given problem and hardware configuration (runner module)
-  - Multiple example analyses given by running ./runModel.py <mode>
-    - mode = {micro, cns, smc, smc-regs, smc-summary, diffterm}
+  - Multiple example analyses given by running `./runModel.py <mode>`
+    - `mode = {micro, cns, smc, smc-regs, smc-summary, diffterm}`
 
 ---
 ## Copyright ##
