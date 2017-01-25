@@ -10,12 +10,12 @@ ExaSAT: Exascale Static Analysis Tool
 ### Compiler Analysis Component Usage: ###
 - To build, run make from src/
 -  Set environment variables:
-    - FILTER=<fname>: fname is function that we want to analyze, or
-    - NOFILTER=1: analyze all functions in input file
+    - `FILTER=<fname>`: fname is function that we want to analyze, or
+    - `NOFILTER=1`: analyze all functions in input file
   - Add Boost and Java lib dirs to LD_LIBRARY_PATH
-  - Run: genCodeDescript <input_file>
+  - Run: `genCodeDescript <input_file>`
     - Produces XML on stdout
-  - Example: run ./genxml.py from examples/cns-smc/
+  - Example: run `./genxml.py` from examples/cns-smc/
     - Crawls the inputs/ sub-directory and tries to run the compiler analysis on all files
       - May produce errors for some because it can’t find some dependent module files (it’s safe to ignore these)
     - Stores the produced XMLs in the xml_new/ sub-directory
@@ -23,13 +23,13 @@ ExaSAT: Exascale Static Analysis Tool
 ### Performance Model Component Usage: ###
 
 ##### Set environment variables: #####
-  - problem_xml=<problem-XML-file>:
+  - `problem_xml=<problem-XML-file>`:
     The problem XML specifies problem parameters and software
     optimizations to be evaluated, such as problem size, number of
     ghost cells, how many chemical species to evaluate, cache blocking
     parameters, whether to utilize streaming writes and non-temporal
     access hints.  Defaults will be chosen if no file is specified.
-  - machine_xml=<machine-XML-file>:
+  - `machine_xml=<machine-XML-file>`:
     The machine XML specifies machine parameters, such as memory
     bandwidth, FP compute throughput, number registers, cache sizes, word
     size, cache line size, and relative costs of arithmetic operations
@@ -39,7 +39,7 @@ ExaSAT: Exascale Static Analysis Tool
     What format XML to expect
 
 ##### Generate analysis spreadsheet (in tools/post/ directory): #####
-- ./analyze.py <xml-input> <tsv-output>
+- `./analyze.py <xml-input> <tsv-output>`
 - Example: problem_xml=../../examples/problem.xml ./analyze.py ../../examples/cns-smc/xml/advance-nomod.xml advance-nomod.tsv
   - Generates an analysis spreadsheet advance-nomod.tsv
 - Example script: ./gentsvs.sh
