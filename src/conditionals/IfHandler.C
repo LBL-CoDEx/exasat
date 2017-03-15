@@ -98,11 +98,12 @@ void IfHandler::closeXMLTag()
 }
 
 
-string find_replace(string &originalStr, string replacedSubStr, string replacementStr){
+inline string find_replace(string &originalStr, string replacedSubStr, string replacementStr){
     size_t position= originalStr.find(replacedSubStr);
     while(position!= std::string::npos){
       originalStr.replace(position, replacedSubStr.length(), replacementStr);
-      position= originalStr.find(replacedSubStr);
+      position += replacementStr.length();
+      position= originalStr.find(replacedSubStr, position);
     }
     return originalStr;
 }
@@ -122,10 +123,10 @@ void IfHandler::dump()
 
   if(ifAttr.conditional){
     string conditionalStr(ifAttr.conditional->unparseToString());
+    find_replace(conditionalStr, "&", "&amp;");
     find_replace(conditionalStr, "<", "&lt;");
-    find_replace(conditionalStr, "<=", "&lt;=");
     find_replace(conditionalStr, ">", "&gt;");
-    find_replace(conditionalStr, ">=", "&gt;=");
+    find_replace(conditionalStr, "\"", "&quot;");
     attributes.push_back(make_pair("conditional", conditionalStr));
     //attributes.push_back(make_pair("conditional", ifAttr.conditional->unparseToString()));
   }

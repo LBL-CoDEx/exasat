@@ -233,6 +233,16 @@ void LoopHandler::closeXMLTag()
   outputEnd("loop");
 }
 
+inline string find_replace(string &originalStr, string replacedSubStr, string replacementStr){
+    size_t position= originalStr.find(replacedSubStr);
+    while(position!= std::string::npos){
+      originalStr.replace(position, replacedSubStr.length(), replacementStr);
+      position += replacementStr.length();
+      position= originalStr.find(replacedSubStr, position);
+    }
+    return originalStr;
+}
+
 void LoopHandler::dump()
 {
   std::vector< pair<string, string> > attributes;
@@ -246,8 +256,18 @@ void LoopHandler::dump()
   //loop attributes 
   attributes.push_back(make_pair("linenum", linenum_str.str()));
   attributes.push_back(make_pair("loopvar", index_str));
-  attributes.push_back(make_pair("lowerbound",  loopAttr.lower->unparseToString()));
-  attributes.push_back(make_pair("upperbound", loopAttr.upper->unparseToString()));
+  string lowerbound = loopAttr.lower->unparseToString();
+  find_replace(lowerbound, "&", "&amp;");
+  find_replace(lowerbound, "<", "&lt;");
+  find_replace(lowerbound, ">", "&gt;");
+  find_replace(lowerbound, "\"", "&quot;");
+  attributes.push_back(make_pair("lowerbound", lowerbound));
+  string upperbound = loopAttr.upper->unparseToString();
+  find_replace(upperbound, "&", "&amp;");
+  find_replace(upperbound, "<", "&lt;");
+  find_replace(upperbound, ">", "&gt;");
+  find_replace(upperbound, "\"", "&quot;");
+  attributes.push_back(make_pair("upperbound", upperbound));
   attributes.push_back(make_pair("stride", loopAttr.stride->unparseToString()));
 
   ostringstream count_add_str, count_mul_str, count_special_str, count_div_str; 
