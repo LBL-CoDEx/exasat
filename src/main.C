@@ -692,7 +692,7 @@ int main(int argc, char * argv[])
     dagGen.generateDAGs(reachableFuncDefList, basicBlockList);
     dagGen.dagsToDOT(reachableFuncDefList, basicBlockList);
   }
-  project->unparse();
+  //project->unparse(); //we don't need to unparse unless we plan to transform the input code
 
  return 0;
 }
