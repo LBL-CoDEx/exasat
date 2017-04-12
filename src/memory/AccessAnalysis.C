@@ -213,9 +213,6 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
     }
   }
 #endif
-
-
-
   //Node is a loop body or basic block 
   //Find all the array references in the block 
   //Group them into array-component pairs 
@@ -227,21 +224,28 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
 
   for(; ref != refs.end(); ref++)
   {
-    //if there are array reference expressions, there must be at least one whose parent is not an array reference expression
-    //More specially, all array reference expressions are children (directly or not directly) of these ArrayRefExps
-    if(!isSgPntrArrRefExp((*ref)->get_parent())){
-      if(NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp).size()==1)
+    //we group references into 2 buckets: flat and hierarchical
+    //flat bucket contains array references represented in a flat fashion, e.g. A as in A[i], A and f as in A[f[i]] in C/C++ and A as in A(i,j,k) A(fi(i),fj(j),fk(k)) in Fortran
+    //hierachical bucket contains array references represented in a hierarchical fashion, e.g. A[i][j][k] is represented as ((A[i])[j])[k]
+    bool refOfInterest= !isSgPntrArrRefExp((*ref)->get_parent()); 
+    if(!refOfInterest){ //parent is an arrayRef, still consider ref if it is not the left hand side of its parent
+      refOfInterest = (isSgPntrArrRefExp((*ref)->get_parent())->get_lhs_operand() != (*ref));
+    }
+    if(refOfInterest){
+      if(NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp).size()==1)//definitely considered flat
       {
-        fArrayRefList.push_back((*ref));
+        flatArrayRefList.push_back((*ref));
       }else{
         Rose_STL_Container<SgNode*> subrefs = NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp);
         Rose_STL_Container<SgNode*>::iterator subref = subrefs.begin();
 	bool found=false;
         for(; subref != subrefs.end(); subref++){
-          if((*subref)->get_parent()==(*ref)) found=true;
+          if(isSgPntrArrRefExp((*subref)->get_parent())){
+            if(isSgPntrArrRefExp((*subref)->get_parent())->get_lhs_operand()->unparseToString().compare((*subref)->unparseToString())==0) found=true;
+	  }
         }
         if(found)hArrayRefList.push_back((*ref));
-        else fArrayRefList.push_back((*ref));
+        else flatArrayRefList.push_back((*ref));
       }
     }//no else
   }
@@ -265,7 +269,7 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
             std::vector<SgExpression*> subscripts1; 
             if(isArrayReference(isSgExpression(*subref), &arrNameExp1, &subscripts1)) //no else 
             {
-              SgInitializedName* array_name1 = convertRefToInitializedName (arrNameExp1);
+              //SgInitializedName* array_name1 = convertRefToInitializedName (arrNameExp1);
               unifiedSubscripts.push_back(*subscripts1.begin());
             }
           }
@@ -335,7 +339,7 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
       }
   }
 
-  for(list<SgNode*>::iterator f_it= fArrayRefList.begin(); f_it != fArrayRefList.end(); f_it++)
+  for(list<SgNode*>::iterator f_it= flatArrayRefList.begin(); f_it != flatArrayRefList.end(); f_it++)
   {
       SgExpression* exp = isSgExpression(*f_it);
       ROSE_ASSERT(exp);
@@ -598,7 +602,6 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 
       SgExpression* index = (*it);
       ROSE_ASSERT(index);
-
       Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(index, V_SgVarRefExp);
       
       if(varList.size() ==  0)//no varRef in the subscript
@@ -619,12 +622,12 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 	        clause* c1 = (*it1); 
 	        if(isSgVarRefExp(c1->lhs)){
 		  SgSymbol *s= isSgVarRefExp(c1->lhs)->get_symbol();
-		  if(loopName->get_name().getString() == s->get_name().getString())
+		  if(strcmp(loopName->get_name().getString().c_str(), s->get_name().getString().c_str())==0)
 		    c1->loopVar=true;
 		}
                 if(isSgVarRefExp(c1->rhs)){
                   SgSymbol *s= isSgVarRefExp(c1->rhs)->get_symbol();
-                  if(loopName->get_name().getString() == s->get_name().getString())
+                  if(strcmp(loopName->get_name().getString().c_str(), s->get_name().getString().c_str())==0)
                     c1->loopVar=true;
                 }
 	      }
@@ -645,16 +648,16 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 	        clause* c1 = (*it1); 
 	        if(isSgVarRefExp(c1->lhs)){
 		  SgSymbol *s= isSgVarRefExp(c1->lhs)->get_symbol();
-		  if(loopName->get_name().getString() == s->get_name().getString())
+		  if(strcmp(loopName->get_name().getString().c_str(), s->get_name().getString().c_str())==0)
 	            if(isSgVarRefExp(c1->rhs)){
 		      strideName = isSgVarRefExp(c1->rhs)->get_symbol()->get_name().getString();
 		      c1->loopVar=true;
 		      loopVarMatched=true;
-	            }
+                   }
 	        }
 	        if(isSgVarRefExp(c1->rhs)){
 	  	  SgSymbol *s= isSgVarRefExp(c1->rhs)->get_symbol();
-		  if (loopName->get_name().getString() == s->get_name().getString() )
+		  if (strcmp(loopName->get_name().getString().c_str(), s->get_name().getString().c_str())==0 )
 	            if(isSgVarRefExp(c1->lhs)){
 		      strideName = isSgVarRefExp(c1->lhs)->get_symbol()->get_name().getString();
 		      c1->loopVar=true;
@@ -667,7 +670,7 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
                   for(list<clause*>::iterator it2= clauseList.begin(); it2!=clauseList.end(); it2++){
 		    clause* c2= (*it2);
 	            if(isSgVarRefExp(c2->lhs)){
-		      if(c1!=c2 && isSgVarRefExp(c2->lhs)->get_symbol()->get_name().getString() == strideName){
+		      if(c1!=c2 && strcmp(isSgVarRefExp(c2->lhs)->get_symbol()->get_name().getString().c_str(), strideName.c_str())==0){
 		        c2->loopVar=true;
 	                if(c2->rhs == NULL){
 		          if(c2->sign)count++;
@@ -681,7 +684,7 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 		      }
 		    }
 	            if(isSgVarRefExp(c2->rhs)){
-		      if(c1!=c2 &&isSgVarRefExp(c2->rhs)->get_symbol()->get_name().getString() == strideName){
+		      if(c1!=c2 && strcmp(isSgVarRefExp(c2->rhs)->get_symbol()->get_name().getString().c_str(), strideName.c_str())==0){
 		        c2->loopVar=true;
 	                if(c2->lhs == NULL){
 		          if(c2->sign)count++;
@@ -748,8 +751,8 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 	        if(this_access.offset[indexNo] != "")this_access.offset[indexNo] = "," + this_access.offset[indexNo];
 	        this_access.offset[indexNo] = string(countChar)+this_access.offset[indexNo]; 
 	      }else{
-#if 0
-             ` if(loopVarMatched){
+#if 0 
+              if(loopVarMatched){
 	        if(varList.size()>1)
 	          this_access.offset[indexNo] += ", ";
 	        this_access.offset[indexNo] += string(countChar); 
@@ -777,7 +780,7 @@ SgInitializedName* AccessAnalysis::getNonNullLoopIndex(int position)
 
 
 bool findVarRefInIndexAndReplace(string varName, SgExpression *index, SgExpression* rhs, vector<SgExpression*> &subscripts, int idxOffset){
-  SgExpression* copiedIndex= deepCopy(index);
+  SgExpression* copiedIndex= index;//deepCopy(index);
   copiedIndex->set_parent(index->get_parent());
   Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(copiedIndex, V_SgVarRefExp);
   Rose_STL_Container<SgNode*>::iterator it = varList.begin();
@@ -789,21 +792,23 @@ bool findVarRefInIndexAndReplace(string varName, SgExpression *index, SgExpressi
     ROSE_ASSERT(iname);
     if(strcmp(varName.c_str(), iname->get_name().getString().c_str())==0){
       if(!found) found=true;
-      SgExpression* copiedRHS = copyExpression(rhs);
-      if(*it != indexVar)replaceExpression(indexVar, copiedRHS, true);
+      SgExpression* copiedRHS = rhs;//copyExpression(rhs);
+      if(indexVar!=copiedIndex)replaceExpression(indexVar, copiedRHS, true);
       else copiedIndex= copiedRHS;
     }
     it++;
   }
-  if(found) subscripts[idxOffset]=copiedIndex; 
-  else deepDelete(copiedIndex);
+  if(found){
+    subscripts[idxOffset]=copiedIndex; 
+  }
+  //else deepDelete(copiedIndex);
   return found;
 }
 
-void recursivePropagate(Rose_STL_Container<SgStatement*> stmtList, Rose_STL_Container<SgStatement*>::iterator it, SgStatement* enclosingStmt, SgExpression *index, vector<SgExpression*> &subscripts, int idxOffset){
+void recursivePropagation(Rose_STL_Container<SgStatement*> stmtList, Rose_STL_Container<SgStatement*>::iterator it, SgStatement* enclosingStmt, SgExpression *index, vector<SgExpression*> &subscripts, int idxOffset){
   if(it==stmtList.end()) return;
   if(isSgStatement(*it) == enclosingStmt) return;
-  recursivePropagate(stmtList, it+1, enclosingStmt, index, subscripts, idxOffset);
+  recursivePropagation(stmtList, it+1, enclosingStmt, index, subscripts, idxOffset);
   SgExprStatement *stmt= isSgExprStatement(*it);
   if(stmt){
     SgExpression* expStmt =isSgExprStatement( stmt)->get_expression();
@@ -856,10 +861,9 @@ void AccessAnalysis::computeDependentLoopVar(AccessPattern_t& this_access,
       SgBasicBlock *bb = isSgBasicBlock(enclosingStmt->get_parent());
       if(bb){
         SgStatementPtrList stmtList = bb->get_statements();
-        recursivePropagate(stmtList, stmtList.begin(), enclosingStmt, index, subscripts, indexNo);
+        recursivePropagation(stmtList, stmtList.begin(), enclosingStmt, index, subscripts, indexNo);
       }
-      //Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(parent, V_SgVarRefExp);
-      Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(index, V_SgVarRefExp);
+      Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(/*index*/subscripts[indexNo], V_SgVarRefExp);
 
       if(varList.size() ==  0)
 	{ //constant index, default values: loop dependentLoopVar is " " because it doesn't depend on the loop
@@ -886,7 +890,7 @@ void AccessAnalysis::computeDependentLoopVar(AccessPattern_t& this_access,
 	  //indexItr = std::find(this->loopIndices->begin(), this->loopIndices->end(), iname);
           for(indexItr= this->loopIndices->begin();indexItr!= this->loopIndices->end(); indexItr++){
 	    if(*indexItr)
-	    if(((*indexItr)->get_name().getString().c_str()==iname->get_name().getString().c_str())){
+	    if(strcmp((*indexItr)->get_name().getString().c_str(),iname->get_name().getString().c_str())==0){
 	       break;
             }
 	  }
