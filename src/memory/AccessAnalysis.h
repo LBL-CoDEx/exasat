@@ -29,7 +29,7 @@ class AccessAnalysis
   vector< std::set<SgVarRefExp*>*>* scalarVars;
 //  vector< std::list<SgVarRefExp*>*>* sortedVars;
   list<clause*> clauseList;
-  list<SgNode*> fArrayRefList;
+  list<SgNode*> flatArrayRefList;
   list<SgNode*> hArrayRefList;
 
   bool isPartofFuncCallExp(SgNode* node);
