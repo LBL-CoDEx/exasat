@@ -84,17 +84,21 @@ def get_memrefs(scop_output):
         
 
 class Statement(object):
-  __slots__ = ['name', 'domain', 'schedule', 'accesses']
-  def __init__(self, n, d, s, a):
+  __slots__ = ['name', 'parameters', 'indexes', 'bounds', 'schedule', 'accesses']
+  def __init__(self, n, p, i, b, s, a):
     self.accesses = []
     self.name = n
-    self.domain = d
+    self.parameters = p
+    self.indexes = i
+    self.bounds = b
     self.schedule = s
     self.accesses = a
   def __str__(self):
     result = ''
     result += "Name: " + self.name + '\n'
-    result += "Domain: " + self.domain + '\n'
+    result += "Parameters: " + str(self.parameters) + '\n'
+    result += "Indexes: " + str(self.indexes) + '\n'
+    result += "Bounds: " + str(self.bounds) + '\n'
     result += "Schedule: " + self.schedule + '\n'
     result += "Accesses:\n"
     for access in self.accesses:
@@ -102,18 +106,28 @@ class Statement(object):
     return result
 
 class Access(object):
-  __slots__ = ['name', 'kind', 'scalar', 'index']
+  __slots__ = ['name', 'kind', 'scalar', 'idxs']
   def __init__(self, n, k, s, i=None):
     self.name = n
     self.kind = k
     self.scalar = s
-    self.index = i
+    self.idxs = i
   def __str__(self):
     result = ''
-    result += self.name + " : " + self.kind + " : " +self.scalar + " : " + self.index
+    result += self.name + " : " + self.kind + " : " +self.scalar + " : " + str(self.idxs)
     return result
 
-def parse_access(label, access_str):
+def parse_domain(stmt_name, domain_str):
+  domain_rx_str = "\[(?P<params>[^\]]*)\] -> { %s\[(?P<idxs>[^\]]*)\] : (?P<bounds>.*) }" % stmt_name
+  m = re.match(domain_rx_str, domain_str)
+  if not m:
+    raise Exception('domain string mismatch')
+  params = m.group('params').split(", ")
+  idxs = m.group('idxs').split(", ")
+  bounds = m.group('bounds').split(" and ")
+  return (params, idxs, bounds)
+
+def parse_access(label, stmt_name, idxs, access_str):
   label_to_kind = {"ReadAccess": "read",
                    "MayWriteAccess": "write",
                    "MustWriteAccess": "write"}
@@ -122,13 +136,12 @@ def parse_access(label, access_str):
   m = re.match(access_rx_str, access_str)
   if not m:
     raise Exception("missing accesses")
-  print m.group('params')
   idxs_str = m.group('idxs')
-  idx_rx_str = "\s*(?P<iter>[^;]*) -> MemRef_(?P<aname>\w+)\[(?P<idxs>[^;]+)\] : (?P<conds>[^;]*)"
+  idx_rx_str = "\s*%s\[%s\] -> MemRef_(?P<aname>\w+)\[(?P<idxs>[^;]+)\] : (?P<conds>[^;]*)" % (stmt_name, ", ".join(idxs))
   idxs = re.findall(idx_rx_str, idxs_str)
   for idx in idxs:
     print idx
-  return Access("", kind, m.group('sca'), m.group('idxs'))
+  return Access("", kind, m.group('sca'), idxs)
 
 def parse_statement(stmt_str):
   m = re.match("\s*(?P<stmt_name>\w+)\s*\n(?P<attrs_str>.*)", stmt_str, re.S)
@@ -141,14 +154,14 @@ def parse_statement(stmt_str):
   for attr in attrs:
     (label, val) = attr
     if label == "Domain":
-      domain = val
+      (params, idxs, bounds) = parse_domain(stmt_name, val)
     elif label == "Schedule":
       schedule = val
     elif label in access_strs:
-      accesses.append(parse_access(label, val))
+      accesses.append(parse_access(label, stmt_name, idxs, val))
     else:
       raise Exception("unknown attribute type: " + label)
-  return Statement(stmt_name, domain, schedule, accesses)
+  return Statement(stmt_name, params, idxs, bounds, schedule, accesses)
 
 def get_statements(scop_output):
   result = []
