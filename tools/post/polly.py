@@ -5,6 +5,7 @@ import os
 import subprocess
 import shlex
 import re
+import string
 
 def call(cmd, outfile="-"):
   cmd_list = shlex.split(cmd)
@@ -60,6 +61,19 @@ def get_scops(scops_file):
   f.close()
   return get_sections("^\s*Function:\s*(\w+)\s*$", file_buffer)
 
+class Variable(object):
+  __slots__ = ["name", "type", "sizes"]
+  def __init__(self, n, t, s):
+    self.name = n
+    self.type = t
+    self.sizes = s
+  def __str__(self):
+    result = ""
+    result += "Name: " + self.name + '\n'
+    result += "Type: " + self.type + '\n'
+    result += "Sizes: (" + string.join(self.sizes, ", ") + ")" + '\n'
+    return result
+
 def get_memrefs(scop_output):
   rx_str = "\s*Arrays\s*{\s*\n([^}]*)\s*}\s*\n"
   m = re.search(rx_str, scop_output)
@@ -69,7 +83,6 @@ def get_memrefs(scop_output):
   memref_rx_str = "(?P<mtype>\w+) MemRef_(?P<name>\w+)(?P<sizes>.*);"
   result = []
   for memref_str in memrefs_str:
-    print memref_str
     m = re.search(memref_rx_str, memref_str)
     if m:
       mtype = m.group('mtype')
@@ -79,17 +92,17 @@ def get_memrefs(scop_output):
       else:
         sizes = m.group('sizes').strip("[]").split("][")
         sizes = map(lambda x: x.lstrip('%'), sizes)
-      result.append((name, mtype, sizes))
+      result.append(Variable(name, mtype, sizes))
   return result
         
 
 class Statement(object):
-  __slots__ = ['name', 'parameters', 'indexes', 'bounds', 'schedule', 'accesses']
+  __slots__ = ['name', 'parameters', 'ind_vars', 'bounds', 'schedule', 'accesses']
   def __init__(self, n, p, i, b, s, a):
     self.accesses = []
     self.name = n
     self.parameters = p
-    self.indexes = i
+    self.ind_vars = i
     self.bounds = b
     self.schedule = s
     self.accesses = a
@@ -97,7 +110,7 @@ class Statement(object):
     result = ''
     result += "Name: " + self.name + '\n'
     result += "Parameters: " + str(self.parameters) + '\n'
-    result += "Indexes: " + str(self.indexes) + '\n'
+    result += "Ind Vars: " + str(self.ind_vars) + '\n'
     result += "Bounds: " + str(self.bounds) + '\n'
     result += "Schedule: " + self.schedule + '\n'
     result += "Accesses:\n"
@@ -106,42 +119,69 @@ class Statement(object):
     return result
 
 class Access(object):
-  __slots__ = ['name', 'kind', 'scalar', 'idxs']
-  def __init__(self, n, k, s, i=None):
+  __slots__ = ['name', 'scalar', 'idxs', 'conds', 'reads', 'writes']
+  def __init__(self, n, s, i, c, r, w):
     self.name = n
-    self.kind = k
     self.scalar = s
     self.idxs = i
+    self.conds = c
+    self.reads = r
+    self.writes = w
   def __str__(self):
-    result = ''
-    result += self.name + " : " + self.kind + " : " +self.scalar + " : " + str(self.idxs)
+    result = string.join( \
+               map(str, [self.name, \
+                         self.scalar, \
+                         self.idxs, \
+                         self.conds, \
+                         self.reads, \
+                         self.writes]), \
+               " : ")
     return result
 
 def parse_domain(stmt_name, domain_str):
-  domain_rx_str = "\[(?P<params>[^\]]*)\] -> { %s\[(?P<idxs>[^\]]*)\] : (?P<bounds>.*) }" % stmt_name
+  domain_rx_str = "\[(?P<params>[^\]]*)\] -> { %s\[(?P<ind_vars>[^\]]*)\] : (?P<bounds>.*) }" % stmt_name
   m = re.match(domain_rx_str, domain_str)
   if not m:
     raise Exception('domain string mismatch')
   params = m.group('params').split(", ")
-  idxs = m.group('idxs').split(", ")
+  ind_vars = m.group('ind_vars').split(", ")
   bounds = m.group('bounds').split(" and ")
-  return (params, idxs, bounds)
+  return (params, ind_vars, bounds)
 
-def parse_access(label, stmt_name, idxs, access_str):
-  label_to_kind = {"ReadAccess": "read",
-                   "MayWriteAccess": "write",
-                   "MustWriteAccess": "write"}
-  kind = label_to_kind[label]
-  access_rx_str = "\[Reduction Type: (?P<rdx>\w+)\] \[Scalar: (?P<sca>\d)\]\s+(?P<params>.*) -> { (?P<idxs>.*) }"
+def parse_access(label, stmt_name, ind_vars, access_str):
+  label_to_kind = {"ReadAccess":      (1, 0),
+                   "MayWriteAccess":  (0, 1),
+                   "MustWriteAccess": (0, 1)}
+  (is_read, is_write) = label_to_kind[label]
+  access_rx_str = "\[Reduction Type: (?P<rdx>\w+)\] \[Scalar: (?P<sca>\d)\]\s+(?P<params>.*) -> { (?P<refs>.*) }"
   m = re.match(access_rx_str, access_str)
   if not m:
     raise Exception("missing accesses")
-  idxs_str = m.group('idxs')
-  idx_rx_str = "\s*%s\[%s\] -> MemRef_(?P<aname>\w+)\[(?P<idxs>[^;]+)\] : (?P<conds>[^;]*)" % (stmt_name, ", ".join(idxs))
-  idxs = re.findall(idx_rx_str, idxs_str)
-  for idx in idxs:
-    print idx
-  return Access("", kind, m.group('sca'), idxs)
+  (rdx, scalar, refs_str) = m.group('rdx', 'sca', 'refs')
+  ref_rx_str = "\s*%s\[%s\] -> MemRef_(?P<aname>\w+)\[(?P<idxs>[^;]*)\](?: : (?P<conds>[^;]*))?" % (stmt_name, string.join(ind_vars, ", "))
+  refs = re.findall(ref_rx_str, refs_str)
+  (aname, idxs, conds) = (None, "", "")
+  for ref in refs:
+    (name, idxs, conds) = ref
+    idxs = tuple(idxs.split(", "))
+    conds = conds.split(" and ")
+    if aname == None:
+      aname = name
+    assert name == aname # name should match in all refs
+    # TODO: choose the correct idx/cond pair
+    #       for now, last one seems correct
+  return Access(aname, scalar, idxs, conds, is_read, is_write)
+
+def group_accesses(accesses):
+  seen = {}
+  for a in accesses:
+    key = (a.name, a.idxs)
+    if key not in seen:
+      seen[key] = a
+    else:
+      seen[key].reads += a.reads
+      seen[key].writes += a.writes
+  return sorted(seen.itervalues(), key=lambda x: x.name)
 
 def parse_statement(stmt_str):
   m = re.match("\s*(?P<stmt_name>\w+)\s*\n(?P<attrs_str>.*)", stmt_str, re.S)
@@ -154,14 +194,15 @@ def parse_statement(stmt_str):
   for attr in attrs:
     (label, val) = attr
     if label == "Domain":
-      (params, idxs, bounds) = parse_domain(stmt_name, val)
+      (params, ind_vars, bounds) = parse_domain(stmt_name, val)
     elif label == "Schedule":
       schedule = val
     elif label in access_strs:
-      accesses.append(parse_access(label, stmt_name, idxs, val))
+      accesses.append(parse_access(label, stmt_name, ind_vars, val))
     else:
       raise Exception("unknown attribute type: " + label)
-  return Statement(stmt_name, params, idxs, bounds, schedule, accesses)
+  accesses = group_accesses(accesses)
+  return Statement(stmt_name, params, ind_vars, bounds, schedule, accesses)
 
 def get_statements(scop_output):
   result = []
@@ -176,8 +217,10 @@ def get_statements(scop_output):
   return result
 
 def analyze_scop(scop_output):
+  print "Variables:\n"
   for memref in get_memrefs(scop_output):
     print memref
+  print "Statements:\n"
   for statement in get_statements(scop_output):
     print statement
 
