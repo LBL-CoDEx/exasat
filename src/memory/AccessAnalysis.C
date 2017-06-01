@@ -78,6 +78,63 @@ bool AccessAnalysis::isPartofFuncCallExp(SgNode* node)
   return false;
 }
 
+bool findVarRefInIndexAndReplace(string varName, SgExpression *index, SgExpression* rhs, vector<SgExpression*> &subscripts, int idxOffset){
+  SgExpression* copiedIndex= index;//deepCopy(index);
+  copiedIndex->set_parent(index->get_parent());
+  Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(copiedIndex, V_SgVarRefExp);
+  Rose_STL_Container<SgNode*>::iterator it = varList.begin();
+  bool found=false;
+  while(it!=  varList.end()){//scan over all varRefs and replace matched ones with RHS
+    SgExpression* indexVar = isSgExpression(*it);
+    ROSE_ASSERT(isSgVarRefExp(indexVar));
+    SgInitializedName* iname = convertRefToInitializedName (indexVar);
+    ROSE_ASSERT(iname);
+    if(strcmp(varName.c_str(), iname->get_name().getString().c_str())==0){
+      if(!found) found=true;
+      SgExpression* copiedRHS = rhs;//copyExpression(rhs);
+      if(indexVar!=copiedIndex)replaceExpression(indexVar, copiedRHS, true);
+      else copiedIndex= copiedRHS;
+    }
+    it++;
+  }
+  if(found){
+    subscripts[idxOffset]=copiedIndex; 
+  }
+  //else deepDelete(copiedIndex);
+  return found;
+}
+
+void recursivePropagation(Rose_STL_Container<SgStatement*> stmtList, Rose_STL_Container<SgStatement*>::iterator it, SgStatement* enclosingStmt, SgExpression *index, vector<SgExpression*> &subscripts, int idxOffset){
+  if(it==stmtList.end()) return;
+  if(isSgStatement(*it) == enclosingStmt) return;
+  recursivePropagation(stmtList, it+1, enclosingStmt, index, subscripts, idxOffset);
+  SgExprStatement *stmt= isSgExprStatement(*it);
+  if(stmt){
+    SgExpression* expStmt =isSgExprStatement( stmt)->get_expression();
+    ROSE_ASSERT(expStmt);
+    if(isSgAssignOp(expStmt))
+    {
+       SgExpression * lhs = isSgAssignOp(expStmt)->get_lhs_operand();
+       SgExpression * rhs = isSgAssignOp(expStmt)->get_rhs_operand();
+       SgVarRefExp *varRef = isSgVarRefExp(lhs);
+       if(varRef&&rhs){
+         findVarRefInIndexAndReplace(varRef->get_symbol()->get_name().getString(), index, rhs, subscripts, idxOffset);
+       }  
+    }
+  }else{
+    SgVariableDeclaration* declStmt= isSgVariableDeclaration(*it);
+    if(declStmt){
+      SgInitializedName* initializedName = *(declStmt->get_variables().begin());
+      if(initializedName){
+        SgInitializer* initPtr = initializedName->get_initptr();
+	if(initPtr){
+          findVarRefInIndexAndReplace(initializedName->get_name().getString(), index, ((SgAssignInitializer*)initPtr)->get_operand_i(), subscripts, idxOffset);
+        }
+      }
+    }
+  }
+  return;
+}
 
 void AccessAnalysis::arrayAccessAnalysis(SgNode* node, 
 					 ArraysAccessInfo_t& arrList, 
@@ -250,7 +307,6 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
     }//no else
   }
 
-
   for(list<SgNode*>::iterator h_it= hArrayRefList.begin(); h_it != hArrayRefList.end(); h_it++)
   {
       SgExpression* exp = isSgExpression(*h_it);
@@ -353,6 +409,26 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
 
       if(isArrayReference(exp, &arrNameExp, &subscripts)) //no else 
 	{
+
+#if 1
+  int indexNo = 0 ;
+  vector<SgExpression*>::iterator it;
+  for(it  = subscripts.begin(); it != subscripts.end(); it++, indexNo++)
+    {
+      //set the default values for this access
+      SgExpression* index = (*it);
+      SgNode* parent= index->get_parent();
+      SgStatement *enclosingStmt = getEnclosingStatement(index);
+     if(enclosingStmt){
+      SgBasicBlock *bb = isSgBasicBlock(enclosingStmt->get_parent());
+      if(bb){
+        SgStatementPtrList stmtList = bb->get_statements();
+        recursivePropagation(stmtList, stmtList.begin(), enclosingStmt, index, subscripts, indexNo);
+      }
+    }
+}
+#endif
+
 	  SgInitializedName* array_name = convertRefToInitializedName (arrNameExp);	  
 	  ROSE_ASSERT(array_name);
 
@@ -779,63 +855,7 @@ SgInitializedName* AccessAnalysis::getNonNullLoopIndex(int position)
 }
 
 
-bool findVarRefInIndexAndReplace(string varName, SgExpression *index, SgExpression* rhs, vector<SgExpression*> &subscripts, int idxOffset){
-  SgExpression* copiedIndex= index;//deepCopy(index);
-  copiedIndex->set_parent(index->get_parent());
-  Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(copiedIndex, V_SgVarRefExp);
-  Rose_STL_Container<SgNode*>::iterator it = varList.begin();
-  bool found=false;
-  while(it!=  varList.end()){//scan over all varRefs and replace matched ones with RHS
-    SgExpression* indexVar = isSgExpression(*it);
-    ROSE_ASSERT(isSgVarRefExp(indexVar));
-    SgInitializedName* iname = convertRefToInitializedName (indexVar);
-    ROSE_ASSERT(iname);
-    if(strcmp(varName.c_str(), iname->get_name().getString().c_str())==0){
-      if(!found) found=true;
-      SgExpression* copiedRHS = rhs;//copyExpression(rhs);
-      if(indexVar!=copiedIndex)replaceExpression(indexVar, copiedRHS, true);
-      else copiedIndex= copiedRHS;
-    }
-    it++;
-  }
-  if(found){
-    subscripts[idxOffset]=copiedIndex; 
-  }
-  //else deepDelete(copiedIndex);
-  return found;
-}
 
-void recursivePropagation(Rose_STL_Container<SgStatement*> stmtList, Rose_STL_Container<SgStatement*>::iterator it, SgStatement* enclosingStmt, SgExpression *index, vector<SgExpression*> &subscripts, int idxOffset){
-  if(it==stmtList.end()) return;
-  if(isSgStatement(*it) == enclosingStmt) return;
-  recursivePropagation(stmtList, it+1, enclosingStmt, index, subscripts, idxOffset);
-  SgExprStatement *stmt= isSgExprStatement(*it);
-  if(stmt){
-    SgExpression* expStmt =isSgExprStatement( stmt)->get_expression();
-    ROSE_ASSERT(expStmt);
-    if(isSgAssignOp(expStmt))
-    {
-       SgExpression * lhs = isSgAssignOp(expStmt)->get_lhs_operand();
-       SgExpression * rhs = isSgAssignOp(expStmt)->get_rhs_operand();
-       SgVarRefExp *varRef = isSgVarRefExp(lhs);
-       if(varRef&&rhs){
-         findVarRefInIndexAndReplace(varRef->get_symbol()->get_name().getString(), index, rhs, subscripts, idxOffset);
-       }  
-    }
-  }else{
-    SgVariableDeclaration* declStmt= isSgVariableDeclaration(*it);
-    if(declStmt){
-      SgInitializedName* initializedName = *(declStmt->get_variables().begin());
-      if(initializedName){
-        SgInitializer* initPtr = initializedName->get_initptr();
-	if(initPtr){
-          findVarRefInIndexAndReplace(initializedName->get_name().getString(), index, ((SgAssignInitializer*)initPtr)->get_operand_i(), subscripts, idxOffset);
-        }
-      }
-    }
-  }
-  return;
-}
 
 void AccessAnalysis::computeDependentLoopVar(AccessPattern_t& this_access,
 					    vector<SgExpression*> &subscripts)
@@ -854,15 +874,15 @@ void AccessAnalysis::computeDependentLoopVar(AccessPattern_t& this_access,
       SgExpression* index = (*it);
       ROSE_ASSERT(index);
       SgNode* parent= index->get_parent();
-
-      //there should be only 1 variable and that should be one of the loop indices or depend on one of the loop indices
       SgStatement *enclosingStmt = getEnclosingStatement(index);
      if(enclosingStmt){
+#if 0
       SgBasicBlock *bb = isSgBasicBlock(enclosingStmt->get_parent());
       if(bb){
         SgStatementPtrList stmtList = bb->get_statements();
         recursivePropagation(stmtList, stmtList.begin(), enclosingStmt, index, subscripts, indexNo);
       }
+#endif
       Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(/*index*/subscripts[indexNo], V_SgVarRefExp);
 
       if(varList.size() ==  0)
@@ -950,6 +970,8 @@ void AccessAnalysis::computeDependentLoopVar(AccessPattern_t& this_access,
 		    }
 		}
 #endif
+//printf("AAAAAAAA node AST %s has reference %s\n", bb->unparseToString().c_str(), index->unparseToString().c_str());
+//if(bb)printf("AAAAAAAA %s node AST has reference %s\n", bb->unparseToString().c_str(), index->unparseToString().c_str());
 	    }
 	  else {//index variable matches with the loop control variable 
 	    //get the loop no that the variable depends on
