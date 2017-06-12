@@ -40,6 +40,93 @@ LoopHandler::~LoopHandler()
   children.clear();
 }
 
+
+void findLoopIndices(SgBinaryOp* op, std::vector< std::pair<SgInitializedName*, SgExpression*> > &indexVars){
+  SgExpression *lhs = op->get_lhs_operand(); 
+  SgExpression *rhs = op->get_rhs_operand(); 
+  if(isSgVarRefExp(lhs)){
+    indexVars.push_back(make_pair(isSgVarRefExp(lhs)->get_symbol()->get_declaration(), rhs));
+  }
+  if(isSgBinaryOp(lhs))findLoopIndices(isSgBinaryOp(lhs), indexVars);
+  if(isSgBinaryOp(rhs))findLoopIndices(isSgBinaryOp(rhs), indexVars);
+}
+
+SgExpression* findStride(SgForStatement* forNode, SgInitializedName* indexVar){
+  SgExpression* inc= forNode->get_increment();
+  if(inc){
+    //look for increment exp associated with this indexVar, e.g. i++
+    Rose_STL_Container<SgNode*> unaryOps  = NodeQuery::querySubTree(isSgNode(inc), V_SgUnaryOp);
+    for(Rose_STL_Container<SgNode*>::iterator it= unaryOps.begin(); it!= unaryOps.end(); it++){
+      SgUnaryOp* op = isSgUnaryOp(*it);
+      if(op){
+        SgVarRefExp* varRef= isSgVarRefExp(op->get_operand());
+        if(varRef->get_symbol()->get_declaration() == indexVar){
+          if(isSgMinusMinusOp(op)) return buildIntVal(-1);
+          if(isSgPlusPlusOp(op)) return buildIntVal(1);
+        }
+      }
+    }
+    //if we didn't find the index in a unary op form, we look for binary ops (e.g. i+=1)
+    Rose_STL_Container<SgNode*> binaryOps  = NodeQuery::querySubTree(isSgNode(inc), V_SgBinaryOp);
+    for(Rose_STL_Container<SgNode*>::iterator it= binaryOps.begin(); it!= binaryOps.end(); it++){
+      SgBinaryOp* op = isSgBinaryOp(*it);
+      if(op){
+        SgExpression* lhs= op->get_lhs_operand();
+        SgExpression* rhs= op->get_rhs_operand();
+        SgVarRefExp* varRef= isSgVarRefExp(lhs);
+        if(varRef)
+          if(varRef->get_symbol()->get_declaration() == indexVar){
+            if(isSgPlusAssignOp(op)) return rhs;
+            if(isSgMinusAssignOp(op)) return buildMinusOp(rhs);
+          }
+      }
+    }
+    //if we didn't find the index in a binary op form, we look for assign ops (e.g. i=i+1)
+    Rose_STL_Container<SgNode*> assignOps  = NodeQuery::querySubTree(isSgNode(inc), V_SgAssignOp);
+    for(Rose_STL_Container<SgNode*>::iterator it= assignOps.begin(); it!= assignOps.end(); it++){
+      SgBinaryOp* op = isSgAssignOp(*it);
+      if(op){
+        SgExpression* lhs= op->get_lhs_operand();
+        SgExpression* rhs= op->get_rhs_operand();
+        SgVarRefExp* varRef= isSgVarRefExp(lhs);
+        if(varRef)
+          if(varRef->get_symbol()->get_declaration() == indexVar){
+              if(isSgBinaryOp(rhs)){
+                if(isSgVarRefExp(isSgBinaryOp(rhs)->get_lhs_operand()))
+                  if(isSgVarRefExp(isSgBinaryOp(rhs)->get_lhs_operand())->get_symbol()->get_declaration() == indexVar){
+                    if(isSgAddOp(rhs)) return isSgBinaryOp(rhs)->get_rhs_operand();
+                    if(isSgSubtractOp(rhs)) return buildMinusOp(isSgBinaryOp(rhs)->get_rhs_operand());
+                  }
+              }
+          }
+      }
+    }
+    //We couldn't find/detect the stride
+    return buildNullExpression();
+  }
+}
+
+SgExpression* findUpperBound(SgForStatement* forNode, SgExpression* stride, SgInitializedName* indexVar, SgExpression* initVal){
+  SgBinaryOp* testExp= isSgBinaryOp(forNode->get_test_expr());
+  ROSE_ASSERT(testExp);
+  if(isSgLessThanOp(testExp)) return buildSubtractOp(testExp->get_rhs_operand(), stride); 
+  if(isSgLessOrEqualOp(testExp))return testExp->get_rhs_operand();
+  if(isSgGreaterThanOp(testExp)) return initVal;
+  if(isSgGreaterOrEqualOp(testExp)) return initVal;
+  return buildNullExpression();
+}
+
+SgExpression* findLowerBound(SgForStatement* forNode, SgExpression* stride, SgInitializedName* indexVar, SgExpression* initVal){
+  SgBinaryOp* testExp= isSgBinaryOp(forNode->get_test_expr());
+  if(isSgGreaterThanOp(testExp)) return buildAddOp(testExp->get_rhs_operand(), stride);
+  if(isSgGreaterOrEqualOp(testExp)) return testExp->get_rhs_operand();
+  if(isSgLessThanOp(testExp))return initVal;
+  if(isSgLessOrEqualOp(testExp))return initVal;
+  return buildNullExpression();
+}
+
+
+
 void LoopHandler::process()
 {
   //Step 1: Get the loop attributes such as lower bound, upper bound etc 
@@ -64,6 +151,9 @@ void LoopHandler::process()
                                          &orig_upper, &orig_stride, NULL, NULL, NULL);
     loopAttr.lower = orig_lower;
     loopAttr.upper = orig_upper;
+    loopAttr.indexVar = orig_index;
+    loopAttr.lower = orig_lower;
+    loopAttr.stride = orig_stride;
   }
   else //C for loop
   { 
@@ -71,21 +161,102 @@ void LoopHandler::process()
     bool isInclusiveUpperBound;
     bool is_canonical = isCanonicalForLoop (isSgForStatement(node), &orig_index, & orig_lower,
                                          &orig_upper, &orig_stride, NULL, &isIncremental, &isInclusiveUpperBound);
-    if(isInclusiveUpperBound)
-      loopAttr.upper = orig_upper;
-    else{
-      if(isIncremental)
-        loopAttr.upper = buildSubtractOp(orig_upper, orig_stride);
-      else
-        loopAttr.upper = buildAddOp(orig_upper, orig_stride);
+    if(is_canonical){
+      if(isInclusiveUpperBound)
+        loopAttr.upper = orig_upper;
+      else{
+        if(isIncremental)
+          loopAttr.upper = buildSubtractOp(orig_upper, orig_stride);
+        else
+          loopAttr.upper = buildAddOp(orig_upper, orig_stride);
+      }
+      loopAttr.indexVar = orig_index;
+      loopAttr.lower = orig_lower;
+      loopAttr.stride = orig_stride;
+    }else{
+      vector< std::pair<SgInitializedName*, SgExpression*> > indexVars;
+      std::vector<SgStatement*> forInitStmtList= isSgForStatement(node)->get_init_stmt();
+      for(int i=0 ; i<forInitStmtList.size(); i++){
+        SgStatement* initStmtList= isSgExprStatement(forInitStmtList[i]);
+        if(initStmtList){
+          SgExpression* exp= isSgExprStatement(initStmtList)->get_expression();
+          if(exp){
+            if(isSgBinaryOp(exp)) findLoopIndices(isSgBinaryOp(exp), indexVars);
+          }
+        }
+      }
+      if(indexVars.size()==0){
+        loopAttr.indexVar = buildInitializedName("", buildIntType());
+        loopAttr.lower = buildNullExpression();
+        loopAttr.upper = buildNullExpression();
+        loopAttr.stride = buildNullExpression();
+      }
+      else{
+        SgExpression* testExp= isSgForStatement(node)->get_test_expr();
+        if(isSgLessThanOp(testExp) || isSgLessOrEqualOp(testExp) || isSgGreaterThanOp(testExp) || isSgGreaterOrEqualOp(testExp) || isSgEqualityOp(testExp)|| isSgNotEqualOp(testExp))
+        {  
+          if(isSgVarRefExp(isSgBinaryOp(testExp)->get_lhs_operand())){
+            loopAttr.indexVar = isSgVarRefExp(isSgBinaryOp(testExp)->get_lhs_operand())->get_symbol()->get_declaration();
+            loopAttr.stride = findStride(isSgForStatement(node), loopAttr.indexVar);
+            if(!isSgNullExpression(loopAttr.stride)){
+              std::vector< std::pair<SgInitializedName*, SgExpression*> >::iterator itr;
+              for(itr= indexVars.begin(); itr != indexVars.end(); itr++) 
+                if(itr->first==loopAttr.indexVar) break;
+              loopAttr.lower = findLowerBound(isSgForStatement(node), loopAttr.stride, itr->first, itr->second);
+              loopAttr.upper = findUpperBound(isSgForStatement(node), loopAttr.stride, itr->first, itr->second);
+              
+              //now we analyze the relationship between loop variables (of the same loop)
+              SgExpression *init0=itr->second, *stride0=loopAttr.stride;
+              for(itr= indexVars.begin(); itr != indexVars.end(); itr++){ 
+                SgExpression *init, *stride;
+                if(itr->first != loopAttr.indexVar){
+                  stride = findStride(isSgForStatement(node), itr->first);
+                  init= itr->second; 
+                  if(isSgIntVal(init0) && isSgIntVal(stride0) && isSgIntVal(init) && isSgIntVal(stride)){
+                    SgExpression* replacementExp;
+                    if(isSgIntVal(stride0)->get_value()==1){
+                      int offset= isSgIntVal(init)->get_value()- isSgIntVal(init0)->get_value();
+                      int speedDiff= isSgIntVal(stride)->get_value()- isSgIntVal(stride0)->get_value();
+                      if(speedDiff==0)replacementExp= isSgBinaryOp(testExp)->get_lhs_operand();
+                      else replacementExp= buildMultiplyOp(buildIntVal(1+speedDiff), isSgBinaryOp(testExp)->get_lhs_operand());
+                      if(offset!=0) replacementExp= buildAddOp(replacementExp, buildIntVal(offset));
+                    }else{
+                      ;
+                    }
+                    //replace all occurences of this variable in the loop body
+                    Rose_STL_Container<SgNode*> refs = NodeQuery::querySubTree(isSgForStatement(node)->get_loop_body(), V_SgVarRefExp);
+                    Rose_STL_Container<SgNode*>::iterator ref = refs.begin();
+                    for(; ref != refs.end(); ref++){
+                      if(isSgVarRefExp(*ref))
+                      if(isSgVarRefExp(*ref)->get_symbol())
+                      if(isSgVarRefExp(*ref)->get_symbol()->get_declaration()== itr->first)
+                        replaceExpression(isSgVarRefExp(*ref), replacementExp); 
+                    }
+                  }
+                }
+              }
+            }else{
+              loopAttr.upper = buildNullExpression();
+              loopAttr.stride = buildNullExpression();
+            }
+          }else{
+            loopAttr.indexVar = buildInitializedName("", buildIntType());
+            loopAttr.lower = buildNullExpression();
+            loopAttr.upper = buildNullExpression();
+            loopAttr.stride = buildNullExpression();
+          }
+            
+        }else{
+          loopAttr.indexVar = buildInitializedName("", buildIntType());
+          loopAttr.lower = buildNullExpression();
+          loopAttr.upper = buildNullExpression();
+          loopAttr.stride = buildNullExpression();
+        }
+      }
     }
   }
   int lineno =(isSgNode(node))->get_file_info()->get_line();
-
   loopAttr.lineno = lineno;
-  loopAttr.indexVar = orig_index;
-  loopAttr.lower = orig_lower;
-  loopAttr.stride = orig_stride;
 
   computeFlops(isSgNode(body));
 
