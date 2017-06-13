@@ -677,7 +677,6 @@ void AccessAnalysis::normalizeTerms(SgNode *node, bool sign){
          return;
        }
      }
-printf("AAAAAAAAAA %s\n",node->unparseToString().c_str());
      ROSE_ASSERT(false); //we haven't implemented the other cases 
    }
    SgExpression* lhs= isSgBinaryOp(node)->get_lhs_operand();
