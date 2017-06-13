@@ -590,6 +590,12 @@ int expandClause(SgBinaryOp* op){ //this routine is useful when the lhs and/or r
 
 void AccessAnalysis::normalizeTerms(SgNode *node, bool sign){
  if(node==NULL) return;
+ //we haven't processed composit operations such as dot and arrow
+ Rose_STL_Container<SgNode*> opList= NodeQuery::querySubTree(node, V_SgArrowExp); 
+ if(opList.size()>0) return;
+ Rose_STL_Container<SgNode*> opList1= NodeQuery::querySubTree(node, V_SgDotExp); 
+ if(opList1.size()>0) return;
+ 
  if(isSgVarRefExp(node)){  
    clause *c= new clause;
    c->sign= sign;
@@ -671,6 +677,7 @@ void AccessAnalysis::normalizeTerms(SgNode *node, bool sign){
          return;
        }
      }
+printf("AAAAAAAAAA %s\n",node->unparseToString().c_str());
      ROSE_ASSERT(false); //we haven't implemented the other cases 
    }
    SgExpression* lhs= isSgBinaryOp(node)->get_lhs_operand();
