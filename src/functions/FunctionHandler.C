@@ -105,6 +105,37 @@ SgExpression* findStride1(SgForStatement* forNode, SgInitializedName* indexVar){
   }
 }
 
+void removeRestrictKeywords(SgNode* node){
+  Rose_STL_Container<SgNode*> refs = NodeQuery::querySubTree(node, V_SgVarRefExp);
+  Rose_STL_Container<SgNode*>::iterator it = refs.begin();
+  for(; it != refs.end(); it++){
+    SgVarRefExp *ref= isSgVarRefExp(*it);
+    SgType* type= ref->get_type();
+    if(type){
+      if(type->unparseToString().size()>12)
+      if(type->unparseToString().substr(type->unparseToString().size()-12, 12) == "__restrict__"){
+        SgModifierNodes* modifier=  type->get_modifiers();
+        if(modifier){
+          SgTypeModifier *type_modifier= isSgTypeModifier(modifier);
+          if(type_modifier->isRestrict()){ 
+            type_modifier->unsetRestrict();
+          }
+        }else{
+          SgInitializedName* initName= ref->get_symbol()->get_declaration();
+          if(initName){
+            string typeStr= type->unparseToString();
+            string removeRestrictStr= typeStr.erase(type->unparseToString().size()-15, type->unparseToString().size()-1); //remove " * __restrict__"
+            SgType* newBaseType= buildOpaqueType(typeStr.c_str(), initName->get_scope());
+            SgPointerType* newType= buildPointerType(newBaseType);
+            newType->set_base_type(newBaseType);
+            initName->set_type(newType);
+          }
+        }
+      }
+    }
+  }
+} 
+
 void FunctionHandler::process(SgNode* node)
 {
   //Step 1: convert whole array expressions to fortran do loops
@@ -115,6 +146,8 @@ void FunctionHandler::process(SgNode* node)
 
   SgFunctionDefinition* func_def= isSgFunctionDefinition(node);
   ROSE_ASSERT(func_def);
+
+  removeRestrictKeywords(node);
 
   SgStatement* func_body = func_def -> get_body();
   ROSE_ASSERT(func_body);

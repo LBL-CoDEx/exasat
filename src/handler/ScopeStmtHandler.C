@@ -28,8 +28,8 @@ void ScopeStmtHandler::computeFlops(SgNode* node)
   flops.mulOps = multiply; 
   flops.divOps = division; 
   flops.specialOps = special;
-
 }
+
 
 void ScopeStmtHandler::computeArrayAccesses(SgNode* node)
 {
@@ -65,7 +65,6 @@ void ScopeStmtHandler::computeArrayAccesses(SgNode* node)
 
   delete rwprop; 
   delete accesses;
-
 }
 
 void ScopeStmtHandler::removeDuplicates()
@@ -333,8 +332,15 @@ void ScopeStmtHandler::dumpVectorInfo(set<NameComp_t> vars,
       std::vector< pair<string, string> > attributes;       
       const SgInitializedName* array_name = arr_comp.first; 
       const string component = arr_comp.second; 
-      const SgType* type = array_name->get_type()->findBaseType();
-      const string type_str = type->unparseToString();
+      //const SgType* type = array_name->get_type()->findBaseType();
+      const SgType* type;
+      string type_str="";
+      if(array_name->get_type()){
+        if(isSgPointerType(array_name->get_type())){
+          type = isSgPointerType(array_name->get_type())->get_base_type();
+          type_str+= type->unparseToString();
+        }
+      }
 
       ArraysAccessInfo_t::const_iterator arrAccInfo_itr = accessInfo.find(arr_comp);
 
