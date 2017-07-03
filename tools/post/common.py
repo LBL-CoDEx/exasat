@@ -4,7 +4,7 @@ from params import doSymSubs
 class options:
   dim = 3
   flag_graph = False
-  flag_debug = False
+  flag_debug = True
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
   warned = set()
@@ -29,3 +29,6 @@ def numNonZero(x):
 
 def prod(x):
   return reduce(operator.mul, x)
+
+int_types = set(['int'])
+float_types = set(['float', 'double'])

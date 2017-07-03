@@ -12,7 +12,7 @@ from sympy.parsing.sympy_parser import parse_expr
 import pprint
 
 from params import doSymSubs, isSpeciesArray
-from common import options, numIters, diff, prod
+from common import options, numIters, diff, prod, int_types, float_types
 
 import parser
 import grapher
@@ -82,6 +82,7 @@ class StaticAnalysis:
 
   def __init__(self, filename):
     self.info = parser.XMLParser(filename).info()
+    pp.pprint(self.info)
     if options.flag_debug:
       printLoops(self.info, 'simple')
     self.analyzeInfo()
@@ -91,8 +92,8 @@ class StaticAnalysis:
   def analyzeInfo(self):
 
     def getRegisters(scalars, stateArrays, arrays):
-      ints = filter(lambda x: x['datatype'] == 'int', scalars)
-      floats = filter(lambda x: x['datatype'] == 'double', scalars)
+      ints = filter(lambda x: x['datatype'] in int_types, scalars)
+      floats = filter(lambda x: x['datatype'] in float_types, scalars)
       constInts = filter(lambda x: x['const'] == 'true', ints)
       constFloats = filter(lambda x: x['const'] == 'true', floats)
       SAInts = filter(lambda x: x['datatype'] == 'int', stateArrays)
@@ -602,7 +603,7 @@ class StaticAnalysis:
 
       return linfo
 
-    # main analyzeInfo loop 
+    # main analyzeInfo loop
     for (fname, finfo) in self.info.items():
       newLoops = []
       for (idx, linfo) in enumerate(finfo['loops']):
