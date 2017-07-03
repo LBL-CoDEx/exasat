@@ -18,6 +18,7 @@ typedef struct
   bool sign;//true is positive
   SgExpression* lhs;
   SgExpression* rhs;
+  int coeff;
 } clause;
 
 class AccessAnalysis
