@@ -3,7 +3,7 @@ from params import doSymSubs
 
 class options:
   dim = 3
-  flag_debug = True
+  flag_debug = False
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
   warned = set()

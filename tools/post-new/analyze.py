@@ -62,6 +62,7 @@ class FlopCount(object):
 
   @staticmethod
   def visitor(arg, conds):
+    # TODO: only contribute if conds are satisfied
     assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
     if type(arg) == Flops:
       return Collection([FlopCount(arg)])
@@ -108,6 +109,7 @@ class StateVar(object):
 
   @staticmethod
   def visitor(arg, conds):
+    # TODO: only contribute if conds are satisfied
     assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
     if type(arg) == Scalar:
       return Collection([StateVar(sv=arg)])
@@ -130,7 +132,7 @@ class ArrayVar(object):
       self.writes = array.writes
     elif type(array == Array):
       # from parser.Array object
-      self.name = array.name.split('.')[0]
+      self.name = array.name
       self.type = array.type
       self.reads = sum(map(lambda x: 0 if x.isStateVar() else x.reads, array.accesses))
       self.writes = sum(map(lambda x: 0 if x.isStateVar() else x.writes, array.accesses))
@@ -153,6 +155,7 @@ class ArrayVar(object):
 
   @staticmethod
   def visitor(arg, conds):
+    # TODO: only contribute if conds are satisfied
     assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
     if type(arg) == Array and not arg.onlyStateVars():
       return Collection([ArrayVar(arg)])
@@ -162,8 +165,8 @@ class ArrayVar(object):
 
 class WorkingSet(object):
   """The working set associated with an array in a code region."""
-  slots = ['name', 'type', 'accesses', 'count', '_size']
-  def __init__(self, array, count = 1, clearAccs = False, params = None):
+  slots = ['name', 'type', 'accesses', '_size']
+  def __init__(self, array, clearAccs = False, params = None):
     self.name = array.name
     self.type = array.type
     self.accesses = []
@@ -171,15 +174,14 @@ class WorkingSet(object):
       self.accesses = deepcopy(filter(lambda x: not x.isStateVar(), array.accesses))
       if params:
         self.accesses = map(lambda x: x.subParams(params), self.accesses)
-    self.count = count
     self._size = None
   def __str__(self):
-    s = "WS %s %s, count=%d\n" % (self.type, self.name, self.count)
+    s = "WS %s %s\n" % (self.type, self.name)
     for ac in self.accesses:
       s += str(ac) + '\n'
     return s
   def __iadd__(self, other):
-    assert other.name == self.name and other.type == self.type and other.count == self.count
+    assert other.name == self.name and other.type == self.type
     map(self.consume, other.accesses)
     return self
   def size(self):
@@ -193,7 +195,7 @@ class WorkingSet(object):
     # access regions can overlap
     self.accesses.append(acc)
     self._size = None
-  def loop(self, loop, siblings = None, numBlocks = 1):
+  def loop(self, loop, siblings = None):
     """Unroll along loop variable, combining accesses along loop dimension."""
 
     def tupleDel(t, i):
@@ -205,7 +207,7 @@ class WorkingSet(object):
         d[k] = []
       d[k].append(v)
 
-    result = WorkingSet(self, count = self.count*numBlocks, clearAccs = True)
+    result = WorkingSet(self, clearAccs = True)
     buckets = {}
     for acc in self.accesses:
       if loop.loopvar not in acc.loopvars:
@@ -216,6 +218,8 @@ class WorkingSet(object):
         key = (i, tupleDel(acc.index, i), tupleDel(acc.loopvars, i)) # remove the index corresponding to the loopvar
         appendToDict(buckets, key, acc.index[i]) # add the index to the key's bucket
 
+    # each bucket now contains a set of accesses that differ only in the dimension of the loop
+    # these accesses can be merged, conservatively, by taking the minimum and maximum offset
     for ((i, idx, lvars), offsets) in buckets.iteritems():
       # insert an access interval covering the looped over accesses
       (lb, ub) = loop.range
@@ -228,6 +232,7 @@ class WorkingSet(object):
 
   @staticmethod
   def visitor(arg, conds):
+    # TODO: only contribute if conds are satisfied
     assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
     if type(arg) == Array and not arg.onlyStateVars():
       return Collection([WorkingSet(arg)])
@@ -236,7 +241,8 @@ class WorkingSet(object):
 
 
 class TrafficRegion(object):
-  """The memory traffic associated with a list of access regions and a count."""
+  """The memory traffic associated with a list of regions and a count for how
+     many times those regions are accessed."""
   slots = ['accesses', 'count']
   def __init__(self, accesses, count = 1):
     self.accesses = accesses
@@ -256,7 +262,7 @@ class Traffic(object):
   """The memory traffic required to execute a code region.
     
      Contains several TrafficRegions and the working set to determine reuse in loops."""
-  slots = ['name', 'type', 'regions', 'ws', 'params', 'blockParams', 'cache']
+  slots = ['name', 'type', 'regions', 'ws', 'ws_block_n', 'params', 'blockParams', 'cache']
   def __init__(self, array=None, params=None, blockParams=None, cache=None, copy=None):
     if copy:
       # make a copy (excluding traffic regions and ws)
@@ -273,10 +279,13 @@ class Traffic(object):
       # copy non-state var accesses, do parameter substitution
       accesses = filter(lambda x: not x.isStateVar(), array.accesses)
       accesses = map(lambda x: x.subParams(params), accesses)
+
+      # traffic regions accessed
       self.regions = [TrafficRegion(accesses)]
 
       # need to track working set to compute data reuse
-      self.ws = WorkingSet(array, params=blockParams)
+      self.ws = WorkingSet(array, params=params)
+      self.ws_block_n = 1 # single iteration
 
       # other parameters
       self.params = params
@@ -297,32 +306,40 @@ class Traffic(object):
       region *= n
     return self
   def consume(self, region):
-#   TODO: can take the union of these when partial reuse is possible between
-#         sibling loop nests, but for now assume no reuse between regions if
-#         all siblings do not fit in cache
+    # these regions may overlap
     self.regions.append(region)
   def bytes(self):
     return self.size() * bytesPerWord
   def size(self):
     return sum(map(lambda x: x.size(), self.regions))
   def loop(self, origLoop, siblings):
-    """If enough cache for reuse, traffic equals the loop's working set.
+    """If enough cache for reuse within a block, traffic equals the blocked working set times the number of blocks.
 
        Otherwise, multiply traffic per iteration by number of iterations."""
+
+    # total working set for all regions in this loop (across all siblings) for one iteration
+    # TODO: can take the union of these when partial reuse is possible between
+    #       sibling loop nests, but for now conservatively assume no overlap
+    loopWS = sum(map(lambda x: x.ws.bytes(), siblings))
+
+     # only need to substitute params for the loop bounds
     loop = origLoop.subParams(self.params, shallow=True)
     blockLoop = origLoop.subParams(self.blockParams, shallow=True)
+
+    # number of blocks in the current loop dimension
     numBlocks = float(loop.range[1]      - loop.range[0]+1) / \
                 (blockLoop.range[1] - blockLoop.range[0]+1)
 
     result = Traffic(copy = self)
-    result.ws = self.ws.loop(blockLoop, numBlocks=numBlocks)
-    loopWS = sum(map(lambda x: x.ws.bytes(), siblings))
+    result.ws = self.ws.loop(blockLoop) # working set of the blocked loop
+    result.ws_block_n = self.ws_block_n * numBlocks # number of blocks total
 
     reportReuse(loop.linenum, loopWS, self.cache)
     if loopWS <= self.cache:
       # WS of all siblings fit in cache
-      # traffic equals blocked working set times number of blocks in problem
-      result.regions = [TrafficRegion(result.ws.accesses, count=result.ws.count)]
+      # traffic equals blocked working set times number of total blocks
+      # assumes no reuse between blocks (i.e. problem blocked correctly for cache)
+      result.regions = [TrafficRegion(result.ws.accesses, count=result.ws_block_n)]
     else:
       # no reuse across iterations, multiply traffic by iteration count
       result.regions = self.regions
@@ -333,6 +350,7 @@ class Traffic(object):
   def visitor(params, blockParams, cache):
     # capture problem size, blocking params, and machine model cache
     def f(arg, conds):
+      # TODO: only contribute if conds are satisfied
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
       if type(arg) == Array and not arg.onlyStateVars():
         return Collection([Traffic(arg, params, blockParams, cache)])
@@ -443,11 +461,6 @@ blockParams = [('lo(1)', '1'), \
                ('__BoxX__', '128'), \
                ('__BoxY__', '128'), \
                ('__BoxZ__', '128'), \
-               ('k3d', '0'), \
-               ('kc' , '0'), \
-               ('k'  , '0'), \
-               ('ng' , '4'), \
-               ('offset', '0'), \
               ]
 bytesPerWord = 8
 cache = 1*(2**15)
