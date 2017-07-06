@@ -5,7 +5,7 @@ import copy
 from box import Box
 
 from common import options, collapse, numIters, rangeMerge, rangeDisjoint
-from params import doSymSubs
+from params import doSymSubs, doNameSubs
 
 def parseExpr(s):
   try:
@@ -22,7 +22,7 @@ def getChildren(node, tag):
 
 def arrayName(name, component):
   if component != '':
-    component = doSymSubs(component)
+    component = doNameSubs(component)
     return '%s.%s' % (name, component)
   else:
     return name
@@ -40,9 +40,16 @@ def parseTuple(s, f = lambda x: x):
   return tuple(map(lambda x: f(x.strip()), s)) # strip whitespace and cast to tuple of ints
 
 def subToInt(x, params):
-  if type(x) != int:
-    return int(doSymSubs(x, params))
-  return x
+  if type(x) == int:
+    result = x
+  else:
+    try:
+      result = int(doSymSubs(x, params))
+    except Exception as e:
+      print "Could not do integer parameter substitution for expression: ", x
+      print "Parameters available: ", params
+      raise e
+  return result
 
 
 class Collection(object):

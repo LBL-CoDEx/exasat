@@ -3,15 +3,9 @@
 import sys
 import os
 import re
-import string
 from copy import deepcopy
-import math
-from sympy import Symbol, ask, Q
-from sympy.parsing.sympy_parser import parse_expr
 
 from parser import XMLParser, Collection, Flops, Scalar, Array, ArrayAccess
-from params import doSymSubs, isSpeciesArray
-from common import options, numIters, diff, prod
 from box import Box
 
 # Helper functions
@@ -165,7 +159,7 @@ class ArrayVar(object):
 
 class WorkingSet(object):
   """The working set associated with an array in a code region."""
-  slots = ['name', 'type', 'accesses', '_size']
+  slots = ['name', 'type', 'accesses', 'size_']
   def __init__(self, array, clearAccs = False, params = None):
     self.name = array.name
     self.type = array.type
@@ -174,7 +168,7 @@ class WorkingSet(object):
       self.accesses = deepcopy(filter(lambda x: not x.isStateVar(), array.accesses))
       if params:
         self.accesses = map(lambda x: x.subParams(params), self.accesses)
-    self._size = None
+    self.size_ = None
   def __str__(self):
     s = "WS %s %s\n" % (self.type, self.name)
     for ac in self.accesses:
@@ -186,15 +180,15 @@ class WorkingSet(object):
     return self
   def size(self):
     # memoize
-    if not self._size:
-      self._size = accessSize(self.accesses)
-    return self._size
+    if not self.size_:
+      self.size_ = accessSize(self.accesses)
+    return self.size_
   def bytes(self):
     return self.size() * bytesPerWord
   def consume(self, acc):
     # access regions can overlap
     self.accesses.append(acc)
-    self._size = None
+    self.size_ = None
   def loop(self, loop, siblings = None):
     """Unroll along loop variable, combining accesses along loop dimension."""
 
@@ -243,10 +237,11 @@ class WorkingSet(object):
 class TrafficRegion(object):
   """The memory traffic associated with a list of regions and a count for how
      many times those regions are accessed."""
-  slots = ['accesses', 'count']
+  slots = ['accesses', 'count', 'size_']
   def __init__(self, accesses, count = 1):
     self.accesses = accesses
     self.count = count
+    self.size_ = self.count * accessSize(self.accesses)
   def __str__(self):
     s = " TrafficRegion, count=%g:\n" % self.count
     for acc in self.accesses:
@@ -254,8 +249,10 @@ class TrafficRegion(object):
     return s
   def __imul__(self, n):
     self.count *= n
+    self.size_ *= n
+    return self
   def size(self):
-    return self.count * accessSize(self.accesses)
+    return self.size_
 
 
 class Traffic(object):
@@ -292,7 +289,7 @@ class Traffic(object):
       self.blockParams = blockParams
       self.cache = cache
   def __str__(self):
-    s = "MT %s %s, size=%s)\n" % (self.type, self.name, self.size())
+    s = "MT %s %s, words=%d, bytes=%d\n" % (self.type, self.name, self.size(), self.bytes())
     for region in self.regions:
       s += str(region)
     return s
@@ -317,9 +314,8 @@ class Traffic(object):
 
        Otherwise, multiply traffic per iteration by number of iterations."""
 
-    # total working set for all regions in this loop (across all siblings) for one iteration
-    # TODO: can take the union of these when partial reuse is possible between
-    #       sibling loop nests, but for now conservatively assume no overlap
+    # total working set for all arrays touched in the loop (across all siblings) for one iteration
+    # siblings are all different arrays, so assume no aliasing (overlap) between them
     loopWS = sum(map(lambda x: x.ws.bytes(), siblings))
 
      # only need to substitute params for the loop bounds
@@ -400,6 +396,7 @@ class StaticAnalysis(object):
 # some test parameters
 
 flagSubParams = False
+
 params = [('lo(1)', '1'), \
           ('lo(2)', '1'), \
           ('lo(3)', '1'), \
@@ -427,11 +424,8 @@ params = [('lo(1)', '1'), \
           ('__BoxX__', '128'), \
           ('__BoxY__', '128'), \
           ('__BoxZ__', '128'), \
-          ('k3d', '0'), \
-          ('kc' , '0'), \
-          ('k'  , '0'), \
           ('ng' , '4'), \
-          ('offset', '0'), \
+          ('nspecies', '9'), \
          ]
 
 blockParams = [('lo(1)', '1'), \
@@ -461,7 +455,10 @@ blockParams = [('lo(1)', '1'), \
                ('__BoxX__', '128'), \
                ('__BoxY__', '128'), \
                ('__BoxZ__', '128'), \
+               ('ng' , '4'), \
+               ('nspecies', '9'), \
               ]
+
 bytesPerWord = 8
 cache = 1*(2**15)
 
