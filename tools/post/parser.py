@@ -3,7 +3,7 @@ import string
 import xml.dom.minidom
 import ast
 
-from common import options
+from common import options, int_types, float_types
 from params import doSymSubs
 
 # can override this if needed
@@ -49,6 +49,13 @@ def processBlock(node):
   result['stateArrays'] = []
   result['arrays'] = []
   for arrayNode in getChildren(node, 'array'):
+    name_raw = str(arrayNode.getAttribute('name'))
+    type_raw = str(arrayNode.getAttribute('datatype'))
+    # only analyze numerical data arrays
+    if not (type_raw in float_types or
+            type_raw in int_types):
+      print 'Warning: ignoring array "%s" of type %s' % (name_raw, type_raw)
+      continue
     access = {}
     for accessNode in getChildren(arrayNode, 'access'):
       index = parseStringTuple(accessNode.getAttribute('index' if flag_old else 'offset'))

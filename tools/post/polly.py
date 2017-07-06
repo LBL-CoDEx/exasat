@@ -25,7 +25,7 @@ def gen_scops_file(filename, defines):
   asm_opt_file = filename + ".s.opt.ll"
   scops_file = filename + ".scops"
 
-  cmd_tem = "clang -S -emit-llvm %s %s -o %s"
+  cmd_tem = "clang -S -O3 -g -emit-llvm %s %s -o %s"
   call(cmd_tem % (defines, src_file, asm_file))
 
   cmd_tem = "opt -S -polly-canonicalize %s"
@@ -60,6 +60,20 @@ def get_scops(scops_file):
   file_buffer = f.read()
   f.close()
   return get_sections("^\s*Function:\s*(\w+)\s*$", file_buffer)
+
+def get_function_name(scop_output):
+  rx_str = "^\s*Function:\s*(?P<fname>\w+)\s*$"
+  m = re.search(rx_str, scop_output, re.M)
+  if not m:
+    raise Exception("missing function name")
+  return m.group('fname')
+
+def get_region_name(scop_output):
+  rx_str = "^\s*Region:\s*%(?P<begin>[\w.]+)---%(?P<end>[\w.]+)\s*$"
+  m = re.search(rx_str, scop_output, re.M)
+  if not m:
+    raise Exception("missing region name")
+  return m.group('begin', 'end')
 
 class Variable(object):
   __slots__ = ["name", "type", "sizes"]
@@ -217,12 +231,17 @@ def get_statements(scop_output):
   return result
 
 def analyze_scop(scop_output):
+  print "Function: ",
+  print get_function_name(scop_output)
+  print "Region: ",
+  print get_region_name(scop_output)
   print "Variables:\n"
   for memref in get_memrefs(scop_output):
     print memref
   print "Statements:\n"
   for statement in get_statements(scop_output):
     print statement
+#   print statement.xml()
 
 def main(args):
   filename = os.getenv("filename", "operators.fv2")

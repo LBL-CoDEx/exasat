@@ -14,9 +14,8 @@ def parseExpr(s):
     return doSymSubs(s)
 
 def dprint(s):
-#  if options.flag_debug:
-#    print s
-  pass
+  if options.flag_debug:
+    print s
 
 def getChildren(node, tag):
   return filter(lambda x: x.nodeName == tag, node.childNodes)
@@ -177,7 +176,7 @@ class CodeBlock(object):
       self.scalars = map(Scalar, getChildren(node, 'scalar'))
       self.arrays = map(Array, getChildren(node, 'array'))
   def __str__(self):
-    return "Code Block (%s):" % self.conds
+    return "Code Block (%s):" % str(map(str, self.conds))
   def visit(self, f):
     return Collection(colls = [f(self.flops, self.conds)] + \
                               map(lambda s: f(s, self.conds), self.scalars) + \
@@ -250,7 +249,7 @@ class Loop(object):
   def __str__(self):
     return "Loop %d: %s = [%s, %s] / %d, %s" % \
            (self.linenum, self.loopvar,
-            self.range[0], self.range[1], self.stride, self.conds)
+            self.range[0], self.range[1], self.stride, str(map(str, self.conds)))
   def iter_n(self):
     return numIters(self.range) / self.stride
   def visit(self, f):
