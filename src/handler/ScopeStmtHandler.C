@@ -339,6 +339,9 @@ void ScopeStmtHandler::dumpVectorInfo(set<NameComp_t> vars,
         if(isSgPointerType(array_name->get_type())){
           type = isSgPointerType(array_name->get_type())->get_base_type();
           type_str+= type->unparseToString();
+        }else if(isSgArrayType(array_name->get_type())){
+          type = isSgArrayType(array_name->get_type())->get_base_type();
+          type_str+= type->unparseToString();
         }
       }
 

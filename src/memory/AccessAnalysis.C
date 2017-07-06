@@ -289,9 +289,15 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
       refOfInterest = (isSgPntrArrRefExp((*ref)->get_parent())->get_lhs_operand() != (*ref));
     }
     if(refOfInterest){
-      if(NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp).size()==1)//definitely considered flat
+      if(NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp).size()==1)
       {
-        flatArrayRefList.push_back((*ref));
+        SgExprListExp* expList = isSgExprListExp(isSgPntrArrRefExp(*ref)->get_rhs_operand());
+        if(expList){
+          SgExpressionPtrList& list = expList->get_expressions();
+          if(list.size()>1)hArrayRefList.push_back((*ref));
+          else flatArrayRefList.push_back((*ref));
+        }
+        else flatArrayRefList.push_back((*ref));
       }else{
         Rose_STL_Container<SgNode*> subrefs = NodeQuery::querySubTree(isSgExpression(*ref), V_SgPntrArrRefExp);
         Rose_STL_Container<SgNode*>::iterator subref = subrefs.begin();
@@ -326,7 +332,8 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
             if(isArrayReference(isSgExpression(*subref), &arrNameExp1, &subscripts1)) //no else 
             {
               //SgInitializedName* array_name1 = convertRefToInitializedName (arrNameExp1);
-              unifiedSubscripts.push_back(*subscripts1.begin());
+              for(std::vector<SgExpression*>::iterator subit= subscripts1.begin(); subit!= subscripts1.end(); subit++)
+                unifiedSubscripts.push_back(*subit);
             }
           }
 	  //assumes the component is in the last subscript 
