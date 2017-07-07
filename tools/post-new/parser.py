@@ -201,11 +201,13 @@ class Conditional(object):
   """Encapsulates a conditional."""
   slots = ['linenum', 'condition', 'when']
   def __init__(self, node):
-    assert node.nodeName == "if" or node.nodeName == "else"
+    assert node.nodeName == 'if' or node.nodeName == 'else'
     tag = 'linenum' if node.nodeName == 'if' else 'iflinenum'
     self.linenum = int(node.getAttribute(tag))
     self.condition = str(node.getAttribute('conditional'))
-    self.when = (node.nodeName == "if")
+    self.when = (node.nodeName == 'if')
+    if options.flag_verbose_conditionals:
+      print "Found", str(self)
   def __str__(self):
     return "Conditional: " + str((self.linenum, self.condition, self.when))
 
@@ -214,6 +216,7 @@ class Body(object):
   """A function or loop body: contains information on enclosed code blocks and loops."""
   slots = ['codeblocks', 'loops']
   def __init__(self, node = None, conds = []):
+
     """Does recursive traversal of conditional blocks within body."""
     def traverse(node, tag, conds):
       """Traverse nested if/else blocks in the body of a function or loop."""
@@ -226,9 +229,21 @@ class Body(object):
         result.extend(traverse(cnode, tag, c2))
       return result
 
+    def sort_key(elt):
+      (n,c) = elt
+      # TODO: add linenum to function nodes in XML
+      if n.nodeName == 'function':
+        return 0
+      # TODO: add linenum to else nodes in XML
+      if n.getAttribute('nodeName') == 'else':
+        attr_key = 'iflinenum'
+      else:
+        attr_key = 'linenum'
+      return int(n.getAttribute(attr_key))
+
     if node:
-      self.codeblocks = map(lambda x: CodeBlock(*x), traverse(node, None, conds))
-      self.loops = map(lambda x: Loop(*x), traverse(node, 'loop', conds))
+      self.codeblocks = map(lambda x: CodeBlock(*x), sorted(traverse(node, None, conds), key=sort_key))
+      self.loops = map(lambda x: Loop(*x), sorted(traverse(node, 'loop', conds), key=sort_key))
 
   def visit(self, f):
     return Collection(colls = map(lambda x: x.visit(f), self.codeblocks) + \
