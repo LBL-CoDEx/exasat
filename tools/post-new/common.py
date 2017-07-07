@@ -6,6 +6,8 @@ class options:
   flag_debug = False
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
+  flag_ignore_conds = False # conservatively assume *all* code within *all* conditional blocks are executed
+  flag_verbose_conditionals = True
   warned = set()
 
 def numIters(x):

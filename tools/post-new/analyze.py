@@ -3,16 +3,11 @@
 import sys
 import os
 import re
-import string
 from copy import deepcopy
-import math
-from sympy import Symbol, ask, Q
-from sympy.parsing.sympy_parser import parse_expr
 
-from parser import XMLParser, Collection, Flops, Scalar, Array, ArrayAccess
-from params import doSymSubs, isSpeciesArray
-from common import options, numIters, diff, prod
+from parser import XMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
 from box import Box
+from common import options
 
 # Helper functions
 
@@ -30,6 +25,34 @@ def reportReuse(linenum, ws, cache):
     _reported.add(linenum)
     print "Reuse report: loop %d WS: %d %s %d" % \
           (linenum, ws, '<=' if ws <= cache else '>', cache)
+
+# helper class for checking conditionals
+class TableCondsChecker(object):
+  __slots__ = ['table']
+  def __init__(self, conds_table):
+    if options.flag_ignore_conds:
+      print "WARNING: flag_ignore_conds is True, including all conditionally executed blocks!"
+    self.table = conds_table
+  def check_cond(self, cond):
+    if cond.condition not in self.table:
+      print cond.condition
+      print self.table
+      raise Exception("Did not find conditional in table")
+    return self.table[cond.condition] == cond.when
+  def check_conds(self, conds):
+    conds_sat = all(map(lambda x: self.check_cond(x), conds))
+    if options.flag_verbose_conditionals and len(conds) > 0:
+      print "Conditions", map(lambda x: x.condition, conds), conds_sat
+    return conds_sat
+  def __call__(self, x):
+    # x is either a Conditional or a list of Conditionals
+    if options.flag_ignore_conds:
+      return True
+    if type(x) == Conditional:
+      return self.check_cond(x)
+    else:
+      assert type(x) == list
+      return self.check_conds(x)
 
 # Analysis classes
 
@@ -61,13 +84,14 @@ class FlopCount(object):
     return result
 
   @staticmethod
-  def visitor(arg, conds):
-    # TODO: only contribute if conds are satisfied
-    assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-    if type(arg) == Flops:
-      return Collection([FlopCount(arg)])
-    else:
+  def visitor(conds_chk):
+    # capture condition checker
+    def f(arg, conds):
+      assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
+      if type(arg) == Flops and conds_chk(conds):
+        return Collection([FlopCount(arg)])
       return Collection()
+    return f
 
 
 class StateVar(object):
@@ -108,17 +132,17 @@ class StateVar(object):
     return result
 
   @staticmethod
-  def visitor(arg, conds):
-    # TODO: only contribute if conds are satisfied
-    assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-    if type(arg) == Scalar:
-      return Collection([StateVar(sv=arg)])
-    elif type(arg) == Array:
-      return Collection([StateVar(array=arg)] + \
-                        map(lambda ac: StateVar(array=arg, access=ac),
-                            filter(ArrayAccess.isStateVar, arg.accesses)))
-    else:
+  def visitor(conds_chk):
+    def f(arg, conds):
+      assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
+      if type(arg) == Scalar and conds_chk(conds):
+        return Collection([StateVar(sv=arg)])
+      elif type(arg) == Array and conds_chk(conds):
+        return Collection([StateVar(array=arg)] + \
+                          map(lambda ac: StateVar(array=arg, access=ac),
+                              filter(ArrayAccess.isStateVar, arg.accesses)))
       return Collection()
+    return f
 
 
 class ArrayVar(object):
@@ -154,18 +178,18 @@ class ArrayVar(object):
     return result
 
   @staticmethod
-  def visitor(arg, conds):
-    # TODO: only contribute if conds are satisfied
-    assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-    if type(arg) == Array and not arg.onlyStateVars():
-      return Collection([ArrayVar(arg)])
-    else:
+  def visitor(conds_chk):
+    def f(arg, conds):
+      assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
+      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
+        return Collection([ArrayVar(arg)])
       return Collection()
+    return f
 
 
 class WorkingSet(object):
   """The working set associated with an array in a code region."""
-  slots = ['name', 'type', 'accesses', '_size']
+  slots = ['name', 'type', 'accesses', 'size_']
   def __init__(self, array, clearAccs = False, params = None):
     self.name = array.name
     self.type = array.type
@@ -174,7 +198,7 @@ class WorkingSet(object):
       self.accesses = deepcopy(filter(lambda x: not x.isStateVar(), array.accesses))
       if params:
         self.accesses = map(lambda x: x.subParams(params), self.accesses)
-    self._size = None
+    self.size_ = None
   def __str__(self):
     s = "WS %s %s\n" % (self.type, self.name)
     for ac in self.accesses:
@@ -186,15 +210,15 @@ class WorkingSet(object):
     return self
   def size(self):
     # memoize
-    if not self._size:
-      self._size = accessSize(self.accesses)
-    return self._size
+    if not self.size_:
+      self.size_ = accessSize(self.accesses)
+    return self.size_
   def bytes(self):
     return self.size() * bytesPerWord
   def consume(self, acc):
     # access regions can overlap
     self.accesses.append(acc)
-    self._size = None
+    self.size_ = None
   def loop(self, loop, siblings = None):
     """Unroll along loop variable, combining accesses along loop dimension."""
 
@@ -231,22 +255,23 @@ class WorkingSet(object):
     return result
 
   @staticmethod
-  def visitor(arg, conds):
-    # TODO: only contribute if conds are satisfied
-    assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-    if type(arg) == Array and not arg.onlyStateVars():
-      return Collection([WorkingSet(arg)])
-    else:
+  def visitor(conds_chk):
+    def f(arg, conds):
+      assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
+      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
+        return Collection([WorkingSet(arg)])
       return Collection()
+    return f
 
 
 class TrafficRegion(object):
   """The memory traffic associated with a list of regions and a count for how
      many times those regions are accessed."""
-  slots = ['accesses', 'count']
+  slots = ['accesses', 'count', 'size_']
   def __init__(self, accesses, count = 1):
     self.accesses = accesses
     self.count = count
+    self.size_ = self.count * accessSize(self.accesses)
   def __str__(self):
     s = " TrafficRegion, count=%g:\n" % self.count
     for acc in self.accesses:
@@ -254,8 +279,10 @@ class TrafficRegion(object):
     return s
   def __imul__(self, n):
     self.count *= n
+    self.size_ *= n
+    return self
   def size(self):
-    return self.count * accessSize(self.accesses)
+    return self.size_
 
 
 class Traffic(object):
@@ -292,7 +319,7 @@ class Traffic(object):
       self.blockParams = blockParams
       self.cache = cache
   def __str__(self):
-    s = "MT %s %s, size=%s)\n" % (self.type, self.name, self.size())
+    s = "MT %s %s, words=%d, bytes=%d\n" % (self.type, self.name, self.size(), self.bytes())
     for region in self.regions:
       s += str(region)
     return s
@@ -317,9 +344,8 @@ class Traffic(object):
 
        Otherwise, multiply traffic per iteration by number of iterations."""
 
-    # total working set for all regions in this loop (across all siblings) for one iteration
-    # TODO: can take the union of these when partial reuse is possible between
-    #       sibling loop nests, but for now conservatively assume no overlap
+    # total working set for all arrays touched in the loop (across all siblings) for one iteration
+    # siblings are all different arrays, so assume no aliasing (overlap) between them
     loopWS = sum(map(lambda x: x.ws.bytes(), siblings))
 
      # only need to substitute params for the loop bounds
@@ -347,15 +373,13 @@ class Traffic(object):
     return result
 
   @staticmethod
-  def visitor(params, blockParams, cache):
+  def visitor(conds_chk, params, blockParams, cache):
     # capture problem size, blocking params, and machine model cache
     def f(arg, conds):
-      # TODO: only contribute if conds are satisfied
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Array and not arg.onlyStateVars():
+      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
         return Collection([Traffic(arg, params, blockParams, cache)])
-      else:
-        return Collection()
+      return Collection()
     return f
 
 class StaticAnalysis(object):
@@ -365,7 +389,7 @@ class StaticAnalysis(object):
   def __init__(self, filename):
     self.functions = XMLParser(filename).functions
 
-  def dump(self, params, blockParams, cache):
+  def dump(self, params, blockParams, cache, conds_chk):
     for function in self.functions:
       print "************"
       print "* %s *" % function.name
@@ -381,18 +405,18 @@ class StaticAnalysis(object):
           loop = loop.subParams(params)
 
         print "Floating Point Ops (A/S/M/D):"
-        print loop.visit(FlopCount.visitor)
+        print loop.visit(FlopCount.visitor(conds_chk))
 
         print "State Variables (R/W):"
-        print loop.visit(StateVar.visitor)
+        print loop.visit(StateVar.visitor(conds_chk))
 
         print "Array Variables (L/S):"
-        print loop.visit(ArrayVar.visitor)
+        print loop.visit(ArrayVar.visitor(conds_chk))
 
         print "Working Set:"
-        print loop.visit(WorkingSet.visitor)
+        print loop.visit(WorkingSet.visitor(conds_chk))
 
-        mt = loop.visit(Traffic.visitor(params, blockParams, cache))
+        mt = loop.visit(Traffic.visitor(conds_chk, params, blockParams, cache))
         print
         print "Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
         print mt
@@ -400,6 +424,7 @@ class StaticAnalysis(object):
 # some test parameters
 
 flagSubParams = False
+
 params = [('lo(1)', '1'), \
           ('lo(2)', '1'), \
           ('lo(3)', '1'), \
@@ -427,11 +452,8 @@ params = [('lo(1)', '1'), \
           ('__BoxX__', '128'), \
           ('__BoxY__', '128'), \
           ('__BoxZ__', '128'), \
-          ('k3d', '0'), \
-          ('kc' , '0'), \
-          ('k'  , '0'), \
           ('ng' , '4'), \
-          ('offset', '0'), \
+          ('nspecies', '9'), \
          ]
 
 blockParams = [('lo(1)', '1'), \
@@ -461,7 +483,12 @@ blockParams = [('lo(1)', '1'), \
                ('__BoxX__', '128'), \
                ('__BoxY__', '128'), \
                ('__BoxZ__', '128'), \
+               ('ng' , '4'), \
+               ('nspecies', '9'), \
               ]
+
+conds_table = {'present(courno)': True}
+
 bytesPerWord = 8
 cache = 1*(2**15)
 
@@ -472,7 +499,7 @@ def main(args):
   xmlfile = args[1]
 
   sa = StaticAnalysis(xmlfile)
-  sa.dump(params, blockParams, cache)
+  sa.dump(params, blockParams, cache, TableCondsChecker(conds_table))
  
 if __name__ == '__main__':
   main(sys.argv)

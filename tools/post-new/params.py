@@ -42,7 +42,14 @@ def customizeParams(params, overrides):
       print 'Overriding parameter %s = %s' % (key, value)
       params[key] = value
 
-# symbolic replacments
+# name replacements for better naming
+namerepl = [('qx1+n-1', 'qxn'), \
+            ('qy1+n-1', 'qyn'), \
+            ('qh1+n-1', 'qhn'), \
+            ('iry1+n-1', 'iryn'), \
+           ]
+
+# symbolic replacements and constants
 symrepl = [('dlo(1)', 'lo(1) - ng'), \
            ('dhi(1)', 'hi(1) + ng'), \
            ('dlo(2)', 'lo(2) - ng'), \
@@ -51,10 +58,30 @@ symrepl = [('dlo(1)', 'lo(1) - ng'), \
            ('dhi(3)', 'hi(3) + ng'), \
            ('ncons', 'nspecies + 5'), \
            ('nprim', '3 * nspecies + 7'), \
-           ('iry1+n-1', 'iryn'), \
-           ('qh1+n-1', 'qhn'), \
-           ('qx1+n-1', 'qxn'), \
-           ('qy1+n-1', 'qyn'), \
+           ('iryn', 'iry1+n-1'), \
+           ('qyn', 'qy1+n-1'), \
+           ('qxn', 'qx1+n-1'), \
+           ('qhn', 'qh1+n-1'), \
+           ('qx1', 'qy1+nspecies'), \
+           ('qh1', 'qy1+2*nspecies'), \
+           ('irho', '1'), \
+           ('imx', '2'), \
+           ('imy', '3'), \
+           ('imz', '4'), \
+           ('iene', '5'), \
+           ('iry1', '6'), \
+           ('qrho', '1'), \
+           ('qu', '2'), \
+           ('qv', '3'), \
+           ('qw', '4'), \
+           ('qpres', '5'), \
+           ('qtemp', '6'), \
+           ('qe', '7'), \
+           ('qy1', '8'), \
+           ('k3d', '0'), \
+           ('kc' , '0'), \
+           ('k'  , '0'), \
+           ('offset', '0'), \
           ]
 
 def doSymSubs(expr, repl = symrepl):
@@ -63,6 +90,9 @@ def doSymSubs(expr, repl = symrepl):
   for r in repl:
     expr = expr.subs(r[0], r[1])
   return expr
+
+def doNameSubs(expr):
+  return doSymSubs(expr, namerepl)
 
 def doRefSubs_l(expr, lam=lambda x: x):
   if type(expr) != type(''):
