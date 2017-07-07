@@ -84,21 +84,24 @@ bool findVarRefInIndexAndReplace(string varName, SgExpression *index, SgExpressi
   Rose_STL_Container<SgNode*> varList = NodeQuery::querySubTree(copiedIndex, V_SgVarRefExp);
   Rose_STL_Container<SgNode*>::iterator it = varList.begin();
   bool found=false;
+  SgExpression* indexVar = NULL;
   while(it!=  varList.end()){//scan over all varRefs and replace matched ones with RHS
-    SgExpression* indexVar = isSgExpression(*it);
+    indexVar = isSgExpression(*it);
     ROSE_ASSERT(isSgVarRefExp(indexVar));
     SgInitializedName* iname = convertRefToInitializedName (indexVar);
     ROSE_ASSERT(iname);
     if(strcmp(varName.c_str(), iname->get_name().getString().c_str())==0){
       if(!found) found=true;
       SgExpression* copiedRHS = rhs;//copyExpression(rhs);
-      if(indexVar!=copiedIndex)replaceExpression(indexVar, copiedRHS, true);
-      else copiedIndex= copiedRHS;
+      replaceExpression(indexVar, copiedRHS, true);
     }
     it++;
   }
   if(found){
-    subscripts[idxOffset]=copiedIndex; 
+    if(indexVar!=copiedIndex)
+      subscripts[idxOffset]=copiedIndex; 
+    else
+      subscripts[idxOffset]=rhs; 
   }
   //else deepDelete(copiedIndex);
   return found;
@@ -121,15 +124,15 @@ void recursivePropagation(Rose_STL_Container<SgStatement*> stmtList, Rose_STL_Co
          findVarRefInIndexAndReplace(varRef->get_symbol()->get_name().getString(), index, rhs, subscripts, idxOffset);
        }  
     }
-  }else{
-    SgVariableDeclaration* declStmt= isSgVariableDeclaration(*it);
-    if(declStmt){
-      SgInitializedName* initializedName = *(declStmt->get_variables().begin());
-      if(initializedName){
-        SgInitializer* initPtr = initializedName->get_initptr();
-	if(initPtr){
-          findVarRefInIndexAndReplace(initializedName->get_name().getString(), index, ((SgAssignInitializer*)initPtr)->get_operand_i(), subscripts, idxOffset);
-        }
+    return;
+  }
+  SgVariableDeclaration* declStmt= isSgVariableDeclaration(*it);
+  if(declStmt){
+    SgInitializedName* initializedName = *(declStmt->get_variables().begin());
+    if(initializedName){
+       SgInitializer* initPtr = initializedName->get_initptr();
+      if(initPtr){
+        findVarRefInIndexAndReplace(initializedName->get_name().getString(), index, ((SgAssignInitializer*)initPtr)->get_operand_i(), subscripts, idxOffset);
       }
     }
   }
@@ -321,6 +324,22 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
       std::vector<SgExpression*> subscripts; 
       if(isArrayReference(exp, &arrNameExp, &subscripts)) //no else 
       {
+          int indexNo = 0 ;
+          vector<SgExpression*>::iterator it;
+          for(it  = subscripts.begin(); it != subscripts.end(); it++, indexNo++)
+          {
+            SgExpression* index = (*it);
+            SgNode* parent= index->get_parent();
+            SgStatement *enclosingStmt = getEnclosingStatement(index);
+            if(enclosingStmt){
+              SgBasicBlock *bb = isSgBasicBlock(enclosingStmt->get_parent());
+              if(bb){
+                SgStatementPtrList stmtList = bb->get_statements();
+                recursivePropagation(stmtList, stmtList.begin(), enclosingStmt, index, subscripts, indexNo);
+              }
+            }
+          }
+
           std::vector<SgExpression*> unifiedSubscripts; 
           SgInitializedName* array_name = convertRefToInitializedName (arrNameExp);
           ROSE_ASSERT(array_name);
@@ -412,7 +431,6 @@ void AccessAnalysis::arrayAccessAnalysis(SgNode* node,
 
       if(isArrayReference(exp, &arrNameExp, &subscripts)) //no else 
 	{
-
           //expand subscripts
           int indexNo = 0 ;
           vector<SgExpression*>::iterator it;
@@ -734,7 +752,7 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
 {
   //subscripts go from fastest varying dim to slowest
   //but loops are from outmost to inner most 	
-  int indexNo = 0 ;
+  int indexNo = 0;
 
   vector<SgExpression*>::iterator it;
   //sequentially analyze all subscripts
@@ -750,8 +768,8 @@ void AccessAnalysis::computeOffsets(AccessPattern_t& this_access,
       if(varList.size() ==  0)//no varRef in the subscript
 	{ 
 	  //constant index, this code handles all 3 memory access schemes
-	  if(isSgIntVal(index))
-	    this_access.offset[indexNo] = index->unparseToString();
+	  //if(isSgIntVal(index))
+	  this_access.offset[indexNo] = index->unparseToString();
 	}
       else if(varList.size() >= 1)
 	{
