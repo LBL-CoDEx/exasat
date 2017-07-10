@@ -1,233 +1,292 @@
-import os
-import string
 import xml.dom.minidom
 import ast
+import operator
+import copy
+from box import Box
 
-from common import options, int_types, float_types
-from params import doSymSubs
+from common import options, collapse, numIters, rangeMerge, rangeDisjoint
+from params import doSymSubs, doNameSubs
+from collection import Collection
 
-# can override this if needed
-flag_old = bool(int(os.getenv('old', 0)))
+def parseExpr(s):
+  try:
+    return int(s) # try to do the fast thing first
+  except ValueError as e:
+    return doSymSubs(s)
+
+def dprint(s):
+  if options.flag_debug:
+    print s
 
 def getChildren(node, tag):
   return filter(lambda x: x.nodeName == tag, node.childNodes)
 
 def arrayName(name, component):
   if component != '':
-    component = doSymSubs(component)
+    component = doNameSubs(component)
     return '%s.%s' % (name, component)
   else:
     return name
 
-def processBlock(node):
-  result = {}
-  # process flops
-  result['flops'] = {'adds'       : int(node.getAttribute('adds')), \
-                     'multiplies' : int(node.getAttribute('multiplies')), \
-                     'divides'    : int(node.getAttribute('divides')), \
-                     'specials'   : int(node.getAttribute('specials'))}
+def makeName(node):
+  return arrayName(str(node.getAttribute('name')), \
+                   str(node.getAttribute('component')))
 
-  # process scalars
-  result['scalars'] = []
-  for scalarNode in getChildren(node, 'scalar'):
-    scalar = {'name' : str(scalarNode.getAttribute('name')), \
-              'datatype' : str(scalarNode.getAttribute('datatype')), \
-              'const': str(scalarNode.getAttribute('isConstant')), \
-              'reads': int(scalarNode.getAttribute('reads')), \
-              'writes': int(scalarNode.getAttribute('writes')), \
-             }
-    accesstype = str(scalarNode.getAttribute('accesstype'))
-    if accesstype == 'readonly' and scalar['writes'] > 0 or \
-       accesstype == 'writeonly' and scalar['reads'] > 0 or \
-       (accesstype == 'readwrite' or accesstype == 'writeread') and \
-       (scalar['reads'] == 0 or scalar['writes'] == 0):
-      raise Exception('scalar %s mismatched accesstype: %s, reads: %d, writes: %d' % \
-                      (scalar['name'], accesstype, scalar['reads'], scalar['writes']))
-    result['scalars'].append(scalar)
+def parseTuple(s, f = lambda x: x):
+  """Parses a string containing a tuple.
+    
+     Returns a tuple of elements with f applied to each element.
+     Returns a tuple of strings by default."""
+  s = s.strip('() ').split(',') # remove enclosing parens and whitespace and split on commas
+  return tuple(map(lambda x: f(x.strip()), s)) # strip whitespace and cast to tuple of ints
 
-  # process arrays
-  result['stateArrays'] = []
-  result['arrays'] = []
-  for arrayNode in getChildren(node, 'array'):
-    name_raw = str(arrayNode.getAttribute('name'))
-    type_raw = str(arrayNode.getAttribute('datatype'))
-    # only analyze numerical data arrays
-    if not (type_raw in float_types or
-            type_raw in int_types):
-      print 'Warning: ignoring array "%s" of type %s' % (name_raw, type_raw)
-      continue
-    access = {}
-    for accessNode in getChildren(arrayNode, 'access'):
-      index = parseStringTuple(accessNode.getAttribute('index' if flag_old else 'offset'))
-      if not flag_old and len(index) == options.dim+1:
-        index = index[:-1] # new format keeps component dimension, so drop it
-      index = tuple(map(int, index))
-      access[index] = {'reads' : int(accessNode.getAttribute('reads' )), \
-                       'writes': int(accessNode.getAttribute('writes'))}
-      # spatial (non-state) arrays have 3D relative indices
-      if len(index) == options.dim and isRelative(accessNode):
-        arraytype = 'array'
-      # classify state arrays as relative or absolute
-      elif isRelative(accessNode):
-        arraytype = 'relStateArray'
-      else:
-        arraytype = 'absStateArray'
-    entry = {'name' : arrayName(str(arrayNode.getAttribute('name')), \
-                                str(arrayNode.getAttribute('component'))), \
-             'copies' : 1, \
-             'arraytype' : arraytype, \
-             'datatype' : str(arrayNode.getAttribute('datatype')), \
-             'accesstype' : str(arrayNode.getAttribute('accesstype')), \
-             'access' : access}
-
-    if arraytype == 'array':
-      result['arrays'].append(entry)
-    else:
-      result['stateArrays'].append(entry)
-
-  return result
-
-def processLoop(lnode):
-  loop = processBlock(lnode)
-  loop['loopvar'] = str(lnode.getAttribute('loopvar'))
-  loop['linenum'] = int(lnode.getAttribute('linenum'))
-  loop['range'] = (str(lnode.getAttribute('lowerbound')), str(lnode.getAttribute('upperbound')))
-  loop['stride'] = int(lnode.getAttribute('stride'))
-  return loop
-
-def processIf(inode):
-  result = processBlock(inode)
-  result['linenum'] = int(inode.getAttribute('linenum'))
-  result['conditional'] = str(inode.getAttribute('conditional'))
-  return result
-
-def isRelative(anode):
-  if flag_old:
-    return anode.getAttribute('isRelative') == "true"
+def subToInt(x, params):
+  if type(x) == int:
+    result = x
   else:
-    tup = parseStringTuple(anode.getAttribute('dependentloopvar'))
-    return any(map(lambda x: x != '', tup))
-
-def traverseLoops(node):
-  loops = []
-  for lnode in getChildren(node, 'loop'):
-    loop = processLoop(lnode)
-    loop['loops'] = traverseLoops(lnode)
-    loop['ifs'] = traverseIfs(lnode)
-    loops.append(loop)
-  return loops
-
-def traverseIfs(node):
-  ifs = []
-  for inode in getChildren(node, 'if'):
-    result = processIf(inode)
-    result['loops'] = traverseLoops(inode)
-    result['ifs'] = traverseIfs(inode)
-    ifs.append(result)
-  return ifs
-
-def parseStringTuple(s):
-  s = s.strip()
-  if s[0] != '(' or s[-1] != ')':
-    raise IOError('input string does not represent a tuple: %s' % s)
-  return tuple(map(lambda x: string.strip(str(x)),
-                   string.split(s[1:-1], ',')))
-
-def parseIntTuple(s):
-  return tuple(map(int, parseStringTuple(s)))
-
-def processVars(fnode, varType):
-  result = set()
-  for node in getChildren(fnode, varType):
-    aname = arrayName(str(node.getAttribute('name')), \
-                      str(node.getAttribute('component')))
-    result.add(aname)
+    try:
+      result = int(doSymSubs(x, params))
+    except Exception as e:
+      print "Could not do integer parameter substitution for expression: ", x
+      print "Parameters available: ", params
+      raise e
   return result
 
-def processComms(fnode):
-  comms = []
-  for cnode in getChildren(fnode, 'comm'):
-    comm = {}
-    comm['linenum'] = int(cnode.getAttribute('linenum'))
-    comm['interface'] = str(cnode.getAttribute('interface'))
-    comm['arrays'] = []
-    for anode in getChildren(cnode, 'array'):
-      array = {}
-      array['name'] = str(anode.getAttribute('name'))
-      array['numComps'] = doSymSubs(str(anode.getAttribute('numofcomponents')))
-      array['type'] = str(anode.getAttribute('commtype'))
-      array['ghost'] = ast.literal_eval(anode.getAttribute('ghost')) # ick
-      comm['arrays'].append(array)
-    comms.append(comm)
-  return comms
 
-# merge ifs into this node
-def flattenIfs(x):
-  def mergeFlops(a, b):
-    for k in a.iterkeys():
-      a[k] += b[k]
-  for y in x['loops'] + x['ifs']:
-    flattenIfs(y)
-  for y in x['ifs']:
-    if 'flops' in x: 
-      mergeFlops(x['flops'], y['flops'])
-      x['scalars'].extend(y['scalars'])
-      x['arrays'].extend(y['arrays'])
-      x['stateArrays'].extend(y['stateArrays'])
-    x['loops'].extend(y['loops'])
-  del x['ifs']
-  x['loops'].sort(key=lambda x: x['linenum'])
+class Flops(object):
+  slots = ['adds', 'multiplies', 'divides', 'specials']
+  def __init__(self, node):
+    for x in self.slots:
+      self.__setattr__(x, int(node.getAttribute(x)))
+    dprint(self)
+  def __str__(self):
+    return "Flops(%d, %d, %d, %d)" % \
+           tuple(map(lambda x: self.__getattribute__(x), self.slots))
 
-# process functions in node and append info onto finfos
-def processFunctions(node, finfos):
-  functions = getChildren(node, 'function')
-  for fnode in functions:
-    fname = str(fnode.getAttribute('name'))
-    print 'Processing %s ...' % fname
-    finfo = {}
-    # process local/nonlocal, and read/write/read-write vars
-    for varType in ['local', 'nonlocal']:
-      finfo[varType] = processVars(fnode, varType)
-    # process comms
-    finfo['comms'] = processComms(fnode)
-    # process loops
-    finfo['loops'] = traverseLoops(fnode)
-    # process ifs
-    finfo['ifs'] = traverseIfs(fnode)
-    # TODO: add better support for conditionals, for now just flatten
-    flattenIfs(finfo)
-    finfos.append((fname, finfo))
+
+class Scalar(object):
+  slots = ['name', 'type', 'const', 'reads', 'writes']
+  def __init__(self, node):
+    self.name = str(node.getAttribute('name'))
+    self.type = str(node.getAttribute('datatype'))
+    self.const = str(node.getAttribute('isConstant'))
+    self.reads = int(node.getAttribute('reads'))
+    self.writes = int(node.getAttribute('writes'))
+    dprint(self)
+  def __str__(self):
+    return "%s %s, R=%d, W=%d" % (self.type, self.name, self.reads, self.writes)
+
+
+class ArrayAccess(object):
+  slots = ['index', 'loopvars', 'reads', 'writes']
+  def __init__(self, node=None, index=None, loopvars=None):
+    if node:
+      self.index = parseTuple(node.getAttribute('offset'), parseExpr)
+      self.loopvars = parseTuple(node.getAttribute('dependentloopvar'), str)
+      self.reads = int(node.getAttribute('reads' ))
+      self.writes = int(node.getAttribute('writes'))
+      dprint(self)
+    else:
+      self.index = index
+      self.loopvars = loopvars
+      self.reads = 0
+      self.writes = 0
+  def __str__(self):
+    idxStr = '('+','.join(map(str, self.index))+')'
+    lvStr = '('+','.join(self.loopvars)+')'
+    return "  %s+%s, R=%d, W=%d" % \
+           (idxStr, lvStr, self.reads, self.writes)
+  def __sub__(self, other):
+    assert self.loopvars == other.loopvars
+    boxDiff = Box(intervals = self.index) - Box(intervals = other.index)
+    return map(lambda x: x.intervals, boxDiff.contents)
+  def isStateVar(self):
+    return all(map(lambda x: x == '', self.loopvars))
+  def subParams(self, params):
+    result = ArrayAccess()
+    result.index = tuple(map(lambda x: subToInt(x, params), self.index))
+    result.loopvars = self.loopvars
+    result.reads = self.reads
+    result.writes = self.writes
+    return result
+
+
+class Array(object):
+  slots = ['name', 'type', 'accesses']
+  def __init__(self, node = None):
+    if node:
+      self.name = makeName(node)
+      self.type = str(node.getAttribute('datatype'))
+      dprint(self)
+      self.accesses = map(ArrayAccess, getChildren(node, 'access'))
+  def __str__(self):
+    return "%s %s" % (self.type, self.name)
+  def onlyStateVars(self):
+    return all(map(ArrayAccess.isStateVar, self.accesses))
+  def subParams(self, params):
+    result = Array()
+    result.name = self.name
+    result.type = self.type
+    result.accesses = map(lambda x: x.subParams(params), self.accesses)
+    return result
+
+
+class CodeBlock(object):
+  """Branchless section of code with conditions for execution.
+
+     Contains arithmetic, scalar and array accesses, and communication."""
+  slots = ['flops', 'scalars', 'arrays', 'conds']
+  def __init__(self, node = None, conds = []):
+    if node:
+      # XXX: gracefully handle code blocks missing attributes
+      if node.getAttribute('adds'):
+        self.flops = Flops(node)
+      else:
+        print "WARNING: No Flops attributes on code block!"
+      self.conds = conds
+      dprint(self)
+      self.scalars = map(Scalar, getChildren(node, 'scalar'))
+      self.arrays = map(Array, getChildren(node, 'array'))
+  def __str__(self):
+    return "Code Block (%s):" % str(map(str, self.conds))
+  def collect(self, f):
+    return Collection(colls = [f(self.flops, self.conds)] + \
+                              map(lambda s: f(s, self.conds), self.scalars) + \
+                              map(lambda a: f(a, self.conds), self.arrays))
+  def subParams(self, params):
+    result = CodeBlock()
+    result.flops = self.flops
+    result.scalars = self.scalars
+    result.arrays = map(lambda x: x.subParams(params), self.arrays)
+    result.conds = self.conds
+    return result
+
+
+class Conditional(object):
+  """Encapsulates a conditional."""
+  slots = ['linenum', 'condition', 'when']
+  def __init__(self, node):
+    assert node.nodeName == 'if' or node.nodeName == 'else'
+    tag = 'linenum' if node.nodeName == 'if' else 'iflinenum'
+    self.linenum = int(node.getAttribute(tag))
+    self.condition = str(node.getAttribute('conditional'))
+    self.when = (node.nodeName == 'if')
+    if options.flag_verbose_conditionals:
+      print "Found", str(self)
+  def __str__(self):
+    return "Conditional: " + str((self.linenum, self.condition, self.when))
+
+
+class Body(object):
+  """A function or loop body: contains information on enclosed code blocks and loops."""
+  slots = ['codeblocks', 'loops']
+  def __init__(self, node = None, conds = []):
+
+    """Does recursive traversal of conditional blocks within body."""
+    def traverse(node, tag, conds):
+      """Traverse nested if/else blocks in the body of a function or loop."""
+      if tag:
+        result = map(lambda x: (x, conds), getChildren(node, tag))
+      else:
+        result = [(node, conds)]
+      for cnode in getChildren(node, 'if') + getChildren(node, 'else'):
+        c2 = conds + [Conditional(cnode)]
+        result.extend(traverse(cnode, tag, c2))
+      return result
+
+    def sort_key(elt):
+      (n,c) = elt
+      # TODO: add linenum to function nodes in XML
+      if n.nodeName == 'function':
+        return 0
+      # TODO: add linenum to else nodes in XML
+      if n.getAttribute('nodeName') == 'else':
+        attr_key = 'iflinenum'
+      else:
+        attr_key = 'linenum'
+      return int(n.getAttribute(attr_key))
+
+    if node:
+      self.codeblocks = map(lambda x: CodeBlock(*x), sorted(traverse(node, None, conds), key=sort_key))
+      self.loops = map(lambda x: Loop(*x), sorted(traverse(node, 'loop', conds), key=sort_key))
+
+  def collect(self, f):
+    return Collection(colls = map(lambda x: x.collect(f), self.codeblocks) + \
+                              map(lambda x: x.collect(f), self.loops))
+  def subParams(self, params):
+    result = Body()
+    result.codeblocks = map(lambda x: x.subParams(params), self.codeblocks)
+    result.loops = map(lambda x: x.subParams(params), self.loops)
+    return result
+
+
+class Loop(object):
+  """Contains information on loop variables, bounds, strides, and loop body."""
+  slots = ['name', 'loopvar', 'linenum', 'range', 'stride', 'conds', 'body']
+  def __init__(self, node = None, conds = []):
+    if node:
+      self.loopvar = str(node.getAttribute('loopvar'))
+      self.linenum = int(node.getAttribute('linenum'))
+      self.range = (parseExpr(str(node.getAttribute('lowerbound'))),
+                    parseExpr(str(node.getAttribute('upperbound'))))
+      self.stride = int(node.getAttribute('stride'))
+      self.conds = conds
+      dprint(self)
+      self.body = Body(node, conds)
+  def __str__(self):
+    return "Loop %d: %s = [%s, %s] / %d, %s" % \
+           (self.linenum, self.loopvar,
+            self.range[0], self.range[1], self.stride, str(map(str, self.conds)))
+  def iter_n(self):
+    return numIters(self.range) / self.stride
+  def collect(self, f):
+    return self.body.collect(f).loop(self)
+  def subParams(self, params, shallow = False):
+    result = Loop()
+    result.loopvar = self.loopvar
+    result.linenum = self.linenum
+    result.range = tuple(map(lambda x: subToInt(x, params), self.range))
+    result.stride = subToInt(self.stride, params)
+    result.conds = self.conds
+    result.body = self.body
+    if not shallow:
+      result.body = self.body.subParams(params)
+    return result
+
+
+class Function(object):
+  """Contains information on passed parameters and function body."""
+  slots = ['name', 'params', 'local', 'body']
+  def __init__(self, node = None):
+    if node:
+      self.name = str(node.getAttribute('name'))
+      dprint("Parsing function %s ..." % self.name)
+      self.params = map(makeName, getChildren(node, 'nonlocal'))
+      self.local = map(makeName, getChildren(node, 'local'))
+      self.body = Body(node)
+  def collect(self, f):
+    return self.body.collect(f)
+
 
 class XMLParser(object):
-
-  slots = ['doc', 'info']
-
+  """Contains information on enclosed modules."""
+  slots = ['doc', 'functions']
   def __init__(self, filename):
     assert type(filename) == type('')
     self.doc = xml.dom.minidom.parse(filename)
+    program = getChildren(self.doc, 'program')[0]
+    self.functions = map(Function, getChildren(program, 'function'))
 
-  def info(self):
-    # for functions not in modules
-    finfos = []
-    processFunctions(self.doc.firstChild, finfos)
-
-    # for functions in modules
-    modules = getChildren(self.doc.firstChild, 'module')
-    for mnode in modules:
-      processFunctions(mnode, finfos)
-
-    return dict(finfos)
-
-class MachineXMLParser(object):
-  __slots__  = ['doc', 'params']
-  def __init__(self, filename):
+class KeyValXMLParser(object):
+  __slots__  = ['doc', 'items']
+  def __init__(self, filename, val_type=str):
     assert type(filename) == type('')
     self.doc = xml.dom.minidom.parse(filename)
-    self.parse_params()
-  def parse_params(self):
-    self.params = {}
+    self.parse_items(val_type)
+  def parse_items(self, val_type):
+    self.items = []
     machine = self.doc.firstChild
     for prop in getChildren(machine, 'prop'):
       key = str(prop.getAttribute('key'))
-      value = float(prop.getAttribute('val'))
-      self.params[key] = value
+      value = val_type(prop.getAttribute('val'))
+      self.items.append((key, value))
