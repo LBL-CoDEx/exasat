@@ -5,7 +5,7 @@ import os
 import re
 from copy import deepcopy
 
-from parser import XMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
+from parser import XMLParser, KeyValXMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
 from box import Box
 from common import options
 
@@ -42,7 +42,7 @@ class TableCondsChecker(object):
   def check_conds(self, conds):
     conds_sat = all(map(lambda x: self.check_cond(x), conds))
     if options.flag_verbose_conditionals and len(conds) > 0:
-      print "Conditions", map(lambda x: x.condition, conds), conds_sat
+      print "Conditions", map(lambda x: x.condition, conds), ":", conds_sat
     return conds_sat
   def __call__(self, x):
     # x is either a Conditional or a list of Conditionals
@@ -84,7 +84,7 @@ class FlopCount(object):
     return result
 
   @staticmethod
-  def visitor(conds_chk):
+  def collector(conds_chk):
     # capture condition checker
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
@@ -132,7 +132,7 @@ class StateVar(object):
     return result
 
   @staticmethod
-  def visitor(conds_chk):
+  def collector(conds_chk):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
       if type(arg) == Scalar and conds_chk(conds):
@@ -178,7 +178,7 @@ class ArrayVar(object):
     return result
 
   @staticmethod
-  def visitor(conds_chk):
+  def collector(conds_chk):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
       if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
@@ -189,16 +189,23 @@ class ArrayVar(object):
 
 class WorkingSet(object):
   """The working set associated with an array in a code region."""
-  slots = ['name', 'type', 'accesses', 'size_']
-  def __init__(self, array, clearAccs = False, params = None):
-    self.name = array.name
-    self.type = array.type
-    self.accesses = []
-    if not clearAccs:
+  slots = ['name', 'type', 'accesses', 'word_byte_n', 'size_']
+  def __init__(self, array = None, params = None, machine = None, shallow_copy = None):
+    if shallow_copy:
+      self.name = shallow_copy.name
+      self.type = shallow_copy.type
+      self.word_byte_n = shallow_copy.word_byte_n
+      # shallow_copy clears accesses
+      self.accesses = []
+      self.size_ = None
+    else:
+      self.name = array.name
+      self.type = array.type
       self.accesses = deepcopy(filter(lambda x: not x.isStateVar(), array.accesses))
       if params:
         self.accesses = map(lambda x: x.subParams(params), self.accesses)
-    self.size_ = None
+      self.word_byte_n = machine['word_byte_n']
+      self.size_ = None
   def __str__(self):
     s = "WS %s %s\n" % (self.type, self.name)
     for ac in self.accesses:
@@ -214,7 +221,7 @@ class WorkingSet(object):
       self.size_ = accessSize(self.accesses)
     return self.size_
   def bytes(self):
-    return self.size() * bytesPerWord
+    return self.size() * self.word_byte_n
   def consume(self, acc):
     # access regions can overlap
     self.accesses.append(acc)
@@ -231,7 +238,7 @@ class WorkingSet(object):
         d[k] = []
       d[k].append(v)
 
-    result = WorkingSet(self, clearAccs = True)
+    result = WorkingSet(shallow_copy=self)
     buckets = {}
     for acc in self.accesses:
       if loop.loopvar not in acc.loopvars:
@@ -255,11 +262,11 @@ class WorkingSet(object):
     return result
 
   @staticmethod
-  def visitor(conds_chk):
+  def collector(conds_chk, machine):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
       if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
-        return Collection([WorkingSet(arg)])
+        return Collection([WorkingSet(arg, machine=machine)])
       return Collection()
     return f
 
@@ -289,15 +296,16 @@ class Traffic(object):
   """The memory traffic required to execute a code region.
     
      Contains several TrafficRegions and the working set to determine reuse in loops."""
-  slots = ['name', 'type', 'regions', 'ws', 'ws_block_n', 'params', 'blockParams', 'cache']
-  def __init__(self, array=None, params=None, blockParams=None, cache=None, copy=None):
+  slots = ['name', 'type', 'regions', 'ws', 'ws_block_n', 'params', 'block_params', 'word_byte_n', 'cache_byte_n']
+  def __init__(self, array=None, params=None, block_params=None, machine=None, copy=None):
     if copy:
       # make a copy (excluding traffic regions and ws)
       self.name = copy.name
       self.type = copy.type
-      self.params = copy.params           # for problem size and others
-      self.blockParams = copy.blockParams # for cache blocking only
-      self.cache = copy.cache             # size of cache in machine model
+      self.params = copy.params             # for problem size and others
+      self.block_params = copy.block_params # for cache blocking only
+      self.word_byte_n = copy.word_byte_n   # word size
+      self.cache_byte_n = copy.cache_byte_n # cache size
     else:
       # copy from an Array object
       self.name = array.name
@@ -311,13 +319,14 @@ class Traffic(object):
       self.regions = [TrafficRegion(accesses)]
 
       # need to track working set to compute data reuse
-      self.ws = WorkingSet(array, params=params)
+      self.ws = WorkingSet(array, params=params, machine=machine)
       self.ws_block_n = 1 # single iteration
 
       # other parameters
       self.params = params
-      self.blockParams = blockParams
-      self.cache = cache
+      self.block_params = block_params
+      self.word_byte_n = machine['word_byte_n']
+      self.cache_byte_n = machine['core_cache_kbytes'] * 1024
   def __str__(self):
     s = "MT %s %s, words=%d, bytes=%d\n" % (self.type, self.name, self.size(), self.bytes())
     for region in self.regions:
@@ -336,7 +345,7 @@ class Traffic(object):
     # these regions may overlap
     self.regions.append(region)
   def bytes(self):
-    return self.size() * bytesPerWord
+    return self.size() * self.word_byte_n
   def size(self):
     return sum(map(lambda x: x.size(), self.regions))
   def loop(self, origLoop, siblings):
@@ -346,11 +355,11 @@ class Traffic(object):
 
     # total working set for all arrays touched in the loop (across all siblings) for one iteration
     # siblings are all different arrays, so assume no aliasing (overlap) between them
-    loopWS = sum(map(lambda x: x.ws.bytes(), siblings))
+    loop_ws_byte_n = sum(map(lambda x: x.ws.bytes(), siblings))
 
      # only need to substitute params for the loop bounds
     loop = origLoop.subParams(self.params, shallow=True)
-    blockLoop = origLoop.subParams(self.blockParams, shallow=True)
+    blockLoop = origLoop.subParams(self.block_params, shallow=True)
 
     # number of blocks in the current loop dimension
     numBlocks = float(loop.range[1]      - loop.range[0]+1) / \
@@ -360,8 +369,8 @@ class Traffic(object):
     result.ws = self.ws.loop(blockLoop) # working set of the blocked loop
     result.ws_block_n = self.ws_block_n * numBlocks # number of blocks total
 
-    reportReuse(loop.linenum, loopWS, self.cache)
-    if loopWS <= self.cache:
+    reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
+    if loop_ws_byte_n <= self.cache_byte_n:
       # WS of all siblings fit in cache
       # traffic equals blocked working set times number of total blocks
       # assumes no reuse between blocks (i.e. problem blocked correctly for cache)
@@ -373,12 +382,12 @@ class Traffic(object):
     return result
 
   @staticmethod
-  def visitor(conds_chk, params, blockParams, cache):
-    # capture problem size, blocking params, and machine model cache
+  def collector(conds_chk, params, block_params, machine):
+    # capture problem size, blocking params, and machine model
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
       if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
-        return Collection([Traffic(arg, params, blockParams, cache)])
+        return Collection([Traffic(arg, params, block_params, machine)])
       return Collection()
     return f
 
@@ -389,7 +398,7 @@ class StaticAnalysis(object):
   def __init__(self, filename):
     self.functions = XMLParser(filename).functions
 
-  def dump(self, params, blockParams, cache, conds_chk):
+  def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
     for function in self.functions:
       print "************"
       print "* %s *" % function.name
@@ -401,105 +410,49 @@ class StaticAnalysis(object):
         print "*************"
         print
 
-        if flagSubParams:
+        if flag_sub_params:
           loop = loop.subParams(params)
 
         print "Floating Point Ops (A/S/M/D):"
-        print loop.visit(FlopCount.visitor(conds_chk))
+        print loop.collect(FlopCount.collector(conds_chk))
 
         print "State Variables (R/W):"
-        print loop.visit(StateVar.visitor(conds_chk))
+        print loop.collect(StateVar.collector(conds_chk))
 
         print "Array Variables (L/S):"
-        print loop.visit(ArrayVar.visitor(conds_chk))
+        print loop.collect(ArrayVar.collector(conds_chk))
 
         print "Working Set:"
-        print loop.visit(WorkingSet.visitor(conds_chk))
+        print loop.collect(WorkingSet.collector(conds_chk, machine))
 
-        mt = loop.visit(Traffic.visitor(conds_chk, params, blockParams, cache))
+        mt = loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
         print
         print "Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
         print mt
 
-# some test parameters
-
-flagSubParams = False
-
-params = [('lo(1)', '1'), \
-          ('lo(2)', '1'), \
-          ('lo(3)', '1'), \
-          ('hi(1)', '128'), \
-          ('hi(2)', '128'), \
-          ('hi(3)', '128'), \
-          ('fine_lo(1)', '1'), \
-          ('fine_lo(2)', '1'), \
-          ('fine_lo(3)', '1'), \
-          ('fine_hi(1)', '128'), \
-          ('fine_hi(2)', '128'), \
-          ('fine_hi(3)', '128'), \
-          ('crse_lo(1)', '1'), \
-          ('crse_lo(2)', '1'), \
-          ('crse_lo(3)', '1'), \
-          ('crse_hi(1)', '64'), \
-          ('crse_hi(2)', '64'), \
-          ('crse_hi(3)', '64'), \
-          ('ilo1', '1'), \
-          ('ilo2', '1'), \
-          ('ilo3', '1'), \
-          ('ihi1', '128'), \
-          ('ihi2', '128'), \
-          ('ihi3', '128'), \
-          ('__BoxX__', '128'), \
-          ('__BoxY__', '128'), \
-          ('__BoxZ__', '128'), \
-          ('ng' , '4'), \
-          ('nspecies', '9'), \
-         ]
-
-blockParams = [('lo(1)', '1'), \
-               ('lo(2)', '1'), \
-               ('lo(3)', '1'), \
-               ('hi(1)', '128'), \
-               ('hi(2)', '128'), \
-               ('hi(3)', '128'), \
-               ('fine_lo(1)', '1'), \
-               ('fine_lo(2)', '1'), \
-               ('fine_lo(3)', '1'), \
-               ('fine_hi(1)', '128'), \
-               ('fine_hi(2)', '128'), \
-               ('fine_hi(3)', '128'), \
-               ('crse_lo(1)', '1'), \
-               ('crse_lo(2)', '1'), \
-               ('crse_lo(3)', '1'), \
-               ('crse_hi(1)', '64'), \
-               ('crse_hi(2)', '64'), \
-               ('crse_hi(3)', '64'), \
-               ('ilo1', '1'), \
-               ('ilo2', '1'), \
-               ('ilo3', '1'), \
-               ('ihi1', '128'), \
-               ('ihi2', '128'), \
-               ('ihi3', '128'), \
-               ('__BoxX__', '128'), \
-               ('__BoxY__', '128'), \
-               ('__BoxZ__', '128'), \
-               ('ng' , '4'), \
-               ('nspecies', '9'), \
-              ]
-
-conds_table = {'present(courno)': True}
-
-bytesPerWord = 8
-cache = 1*(2**15)
+def load_xml(xml_env, default_xml=None, val_type=str, default=[]):
+  result = default
+  xml_file = os.getenv(xml_env, default_xml)
+  if xml_file:
+    result = KeyValXMLParser(xml_file, val_type).items
+  return result
 
 def main(args):
-  if len(args) < 2:
-    print "Usage: %s <xml-file>" % args[0]
-    sys.exit(1)
-  xmlfile = args[1]
+  # some test parameters
+  def_xml        = "../../examples/cns-smc/xml/advance-flat.xml"
+  def_params_xml = "../../examples/cns-smc/params.xml"
+  def_conds_xml  = "../../examples/cns-smc/conds.xml"
+  def_mach_xml   = "../../examples/machine.xml"
 
-  sa = StaticAnalysis(xmlfile)
-  sa.dump(params, blockParams, cache, TableCondsChecker(conds_table))
+  xml_file = os.getenv("xml", def_xml) 
+  params = load_xml("params_xml", def_params_xml)
+  block_params = load_xml("block_params_xml", default=params)
+  conds_table = dict(load_xml("conds_xml", def_conds_xml, val_type=bool))
+  machine = dict(load_xml("machine_xml", def_mach_xml, val_type=float))
+
+  sa = StaticAnalysis(xml_file)
+  sa.dump(params, block_params, machine, \
+          TableCondsChecker(conds_table), False)
  
 if __name__ == '__main__':
   main(sys.argv)

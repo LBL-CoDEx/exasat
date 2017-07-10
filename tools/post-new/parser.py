@@ -6,6 +6,7 @@ from box import Box
 
 from common import options, collapse, numIters, rangeMerge, rangeDisjoint
 from params import doSymSubs, doNameSubs
+from collection import Collection
 
 def parseExpr(s):
   try:
@@ -50,42 +51,6 @@ def subToInt(x, params):
       print "Parameters available: ", params
       raise e
   return result
-
-
-class Collection(object):
-  """Generic collection class for use with visitor.
-    
-     Items must have a name member and implement __iadd__ (or __add__), and loop.
-     Items need __str__ if collection is printed."""
-  slots = ['d']
-  def __init__(self, items = None, colls = None):
-    '''Accepts list of items or list of collections of items.'''
-    self.d = {}
-    if items != None:
-      map(self.consume, items)
-    elif colls != None:
-      map(self.merge, colls)
-  def consume(self, item):
-    if item.name in self.d:
-      self.d[item.name] += item
-    else:
-      self.d[item.name] = item
-  def merge(self, other):
-    assert type(other) == Collection
-    map(self.consume, other.d.itervalues())
-  def loop(self, loop):
-    return Collection(map(lambda x: x.loop(loop, self), self))
-  def __str__(self):
-    s = ""
-    for item in sorted(self.d.values(), key=lambda x: x.name):
-      s += str(item) + '\n'
-    return s
-  def __iter__(self):
-    return self.d.itervalues()
-  def __add__(self, other):
-    result = Collection(self)
-    result.merge(other)
-    return result
 
 
 class Flops(object):
@@ -184,7 +149,7 @@ class CodeBlock(object):
       self.arrays = map(Array, getChildren(node, 'array'))
   def __str__(self):
     return "Code Block (%s):" % str(map(str, self.conds))
-  def visit(self, f):
+  def collect(self, f):
     return Collection(colls = [f(self.flops, self.conds)] + \
                               map(lambda s: f(s, self.conds), self.scalars) + \
                               map(lambda a: f(a, self.conds), self.arrays))
@@ -245,9 +210,9 @@ class Body(object):
       self.codeblocks = map(lambda x: CodeBlock(*x), sorted(traverse(node, None, conds), key=sort_key))
       self.loops = map(lambda x: Loop(*x), sorted(traverse(node, 'loop', conds), key=sort_key))
 
-  def visit(self, f):
-    return Collection(colls = map(lambda x: x.visit(f), self.codeblocks) + \
-                              map(lambda x: x.visit(f), self.loops))
+  def collect(self, f):
+    return Collection(colls = map(lambda x: x.collect(f), self.codeblocks) + \
+                              map(lambda x: x.collect(f), self.loops))
   def subParams(self, params):
     result = Body()
     result.codeblocks = map(lambda x: x.subParams(params), self.codeblocks)
@@ -274,8 +239,8 @@ class Loop(object):
             self.range[0], self.range[1], self.stride, str(map(str, self.conds)))
   def iter_n(self):
     return numIters(self.range) / self.stride
-  def visit(self, f):
-    return self.body.visit(f).loop(self)
+  def collect(self, f):
+    return self.body.collect(f).loop(self)
   def subParams(self, params, shallow = False):
     result = Loop()
     result.loopvar = self.loopvar
@@ -299,8 +264,8 @@ class Function(object):
       self.params = map(makeName, getChildren(node, 'nonlocal'))
       self.local = map(makeName, getChildren(node, 'local'))
       self.body = Body(node)
-  def visit(self, f):
-    return self.body.visit(f)
+  def collect(self, f):
+    return self.body.collect(f)
 
 
 class XMLParser(object):
@@ -312,16 +277,16 @@ class XMLParser(object):
     program = getChildren(self.doc, 'program')[0]
     self.functions = map(Function, getChildren(program, 'function'))
 
-class MachineXMLParser(object):
-  __slots__  = ['doc', 'params']
-  def __init__(self, filename):
+class KeyValXMLParser(object):
+  __slots__  = ['doc', 'items']
+  def __init__(self, filename, val_type=str):
     assert type(filename) == type('')
     self.doc = xml.dom.minidom.parse(filename)
-    self.parse_params()
-  def parse_params(self):
-    self.params = {}
+    self.parse_items(val_type)
+  def parse_items(self, val_type):
+    self.items = []
     machine = self.doc.firstChild
     for prop in getChildren(machine, 'prop'):
       key = str(prop.getAttribute('key'))
-      value = float(prop.getAttribute('val'))
-      self.params[key] = value
+      value = val_type(prop.getAttribute('val'))
+      self.items.append((key, value))
