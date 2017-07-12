@@ -295,21 +295,61 @@ class KeyValXMLParser(object):
 
 class PollyArray(object):
   """Contains information about an array."""
+  __slots__ = ['name', 'elt_type', 'elt_size', 'dim_n', 'dims']
   def __init__(self, node):
-    pass
+    self.name = str(node.getAttribute('name'))
+    assert self.name[0:7] == 'MemRef_'
+    self.name = self.name[7:]
+    self.elt_type = str(node.getAttribute('elt_type'))
+    self.elt_size = int(node.getAttribute('elt_size'))
+    self.dim_n = int(node.getAttribute('dim_n'))
+    self.dims = []
+    for (i, dnode) in enumerate(getChildren(node, 'dim')):
+      assert dnode.getAttribute('index') == str(i)
+      dim = str(dnode.getAttribute('size')).lstrip('%')
+      self.dims.append(dim)
+    if self.dim_n == 0:
+      dprint("  Parsing scalar (%s, %s, %s) ..." % \
+        (self.name, self.elt_type, self.elt_size))
+    else:
+      dprint("  Parsing array (%s, %s, %s, %s, %s) ..." % \
+        (self.name, self.elt_type, self.elt_size, self.dim_n, self.dims))
 
-class Scop(object):
-  """Contains information on detected scop region."""
-  __slots__ = ['filename', 'linenum', 'function', 'region_name', 'loop_depth']
+class PollyAccess(object):
+  """Contains information about a statement."""
+  __slots__ = ['type', 'reduction_type', 'is_scalar', 'relation']
+  def __init__(self, node):
+    self.type = str(node.getAttribute('type'))
+    self.reduction_type = str(node.getAttribute('reduction_type'))
+    self.is_scalar = str(node.getAttribute('is_scalar'))
+    self.relation = str(node.getAttribute('relation'))
+    dprint("    Parsing access (%s, %s, %s, %s) ..." % \
+      (self.type, self.reduction_type, self.is_scalar, self.relation))
+
+class PollyStatement(object):
+  """Contains information about a statement."""
+  __slots__ = ['name', 'domain', 'schedule', 'accesses']
+  def __init__(self, node):
+    self.name = str(node.getAttribute('name'))
+    self.domain = str(node.getAttribute('domain'))
+    self.schedule = str(node.getAttribute('schedule'))
+    dprint("  Parsing statement (%s, %s, %s) ..." % \
+      (self.name, self.domain, self.schedule))
+    self.accesses = map(PollyAccess, getChildren(node, 'access'))
+
+class PollyScop(object):
+  """Contains information about a scop region."""
+  __slots__ = ['filename', 'linenum', 'function', 'region', 'depth', 'arrays', 'statements']
   def __init__(self, node):
     self.filename = str(node.getAttribute('filename'))
-#   self.linenum = str(node.getAttribute('linenum'))
-#   self.function = str(node.getAttribute('function'))
-#   self.region = str(node.getAttribute('region'))
-#   self.loop_depth = str(node.getAttribute('loop_depth'))
-#   dprint("Parsing scop (%s, %s, %s, %s, %s) ..." % \
-#     (self.filename, self.linenum, self.function, \
-#      self.region, self.loop_depth)
+    self.linenum = str(node.getAttribute('linenum'))
+    self.function = str(node.getAttribute('function'))
+    self.region = str(node.getAttribute('region'))
+    self.depth = str(node.getAttribute('loop_depth'))
+    dprint("Parsing scop (%s, %s, %s, %s, %s) ..." % \
+      (self.filename, self.linenum, self.function, self.region, self.depth))
+    self.arrays = map(PollyArray, getChildren(node, 'array'))
+    self.statements = map(PollyStatement, getChildren(node, 'statement'))
 
 class PollyXMLParser(object):
   """Contains information produced by Polly-ExaSAT Scop Analysis."""
@@ -318,4 +358,4 @@ class PollyXMLParser(object):
     assert type(filename) == type('')
     self.doc = xml.dom.minidom.parse(filename)
     program = getChildren(self.doc, 'program')[0]
-    self.scops = map(Scop, getChildren(program, 'scop'))
+    self.scops = map(PollyScop, getChildren(program, 'scop'))
