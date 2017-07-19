@@ -644,7 +644,7 @@ void AccessAnalysis::normalizeTerms(SgNode *node, bool sign){
  if(isSgMultiplyOp(node)){
    if(!isSgVarRefExp(isSgBinaryOp(node)->get_lhs_operand())&&!isSgIntVal(isSgBinaryOp(node)->get_lhs_operand()) || !isSgVarRefExp(isSgBinaryOp(node)->get_rhs_operand())&&!isSgIntVal(isSgBinaryOp(node)->get_rhs_operand()))
    {
-     if(isSgAddOp(isSgBinaryOp(node)->get_lhs_operand()) || isSgSubtractOp(isSgBinaryOp(node)->get_lhs_operand()) || isSgAddOp(isSgBinaryOp(node)->get_rhs_operand()) || isSgSubtractOp(isSgBinaryOp(node)->get_rhs_operand())){
+     if(isSgAddOp(isSgBinaryOp(node)->get_lhs_operand()) || isSgSubtractOp(isSgBinaryOp(node)->get_lhs_operand()) || isSgAddOp(isSgBinaryOp(node)->get_rhs_operand()) || isSgSubtractOp(isSgBinaryOp(node)->get_rhs_operand()) || isSgUnaryOp(isSgBinaryOp(node)->get_lhs_operand()) || isSgUnaryOp(isSgBinaryOp(node)->get_rhs_operand())){
        int returnedSign= expandClause(isSgBinaryOp(node));
        normalizeTerms(isSgBinaryOp(node)->get_lhs_operand(), sign);
        normalizeTerms(isSgBinaryOp(node)->get_lhs_operand(), sign && returnedSign);
@@ -702,6 +702,7 @@ void AccessAnalysis::normalizeTerms(SgNode *node, bool sign){
          return;
        }
      }
+printf("FAILING AT NODE %s\n", node->unparseToString().c_str());
      ROSE_ASSERT(false); //we haven't implemented the other cases 
    }
    SgExpression* lhs= isSgBinaryOp(node)->get_lhs_operand();

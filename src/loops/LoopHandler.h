@@ -22,6 +22,7 @@ class LoopHandler : public ScopeStmtHandler
  private:
 
   LoopAttributes_t loopAttr;
+  void ouputEmptyLoop();
 
  public:
 
