@@ -3,13 +3,15 @@ import re
 from common import options
 import analyze
 
+noGraphs = True
 noSlideShow = True
-if options.flag_graph:
+hasGV = False
+if not noGraphs:
   try:
     import pygraphviz as pgv
+    hasGV = True
   except Exception as e:
     print e
-    options.flag_graph = False
 
 class Grapher(object):
 
@@ -18,7 +20,7 @@ class Grapher(object):
 
   # draw graph showing dependencies between loops only
   def generateLoopDepGraphs(self):
-    if not options.flag_graph:
+    if not hasGV:
       print "Skipping graph generation ..."
       return
     for fname in self.info.keys():
@@ -166,7 +168,7 @@ class Grapher(object):
       for n in G.iternodes():
         n.attr['label'] = ''
 
-    if not options.flag_graph:
+    if not hasGV:
       print "Skipping graph generation ..."
       return
 

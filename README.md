@@ -20,7 +20,7 @@ ExaSAT: Exascale Static Analysis Tool
       - May produce errors for some because it can’t find some dependent module files (it’s safe to ignore these)
     - Stores the produced XMLs in the `xml_new/` sub-directory
 
-### Performance Model Component Usage: ###
+### Performance Model Component (old version) Usage: ###
 
 ##### Set environment variables: #####
   - `problem_xml=<problem-XML-file>`:
@@ -38,7 +38,7 @@ ExaSAT: Exascale Static Analysis Tool
   - `old=0` or `old=1`:
     What format XML to expect
 
-##### Generate analysis spreadsheet (in tools/post/ directory): #####
+##### Generate analysis spreadsheet (in tools/post-old/ directory): #####
 - `./analyze.py <xml-input> <tsv-output>`
 - Example: problem_xml=../../examples/problem.xml ./analyze.py ../../examples/cns-smc/xml/advance-nomod.xml advance-nomod.tsv
   - Generates an analysis spreadsheet advance-nomod.tsv
