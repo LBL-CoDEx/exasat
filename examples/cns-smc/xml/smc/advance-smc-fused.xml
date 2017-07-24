@@ -5,6 +5,10 @@
 <scalar name="ncons" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="nprim" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="courno" datatype="double" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="readonly" reads="46" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="readonly" reads="157" writes="0"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
+<scalar name="qhn" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
 <array name="lo" component="" datatype="int" accesstype="readonly">
 <access offset="(1)" dependentloopvar="()" reads="11" writes="0"/>
 <access offset="(2)" dependentloopvar="()" reads="11" writes="0"/>
@@ -665,20 +669,20 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="8" writes="1"/>
-<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qhn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="2" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qh1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="2" writes="0"/>
 </array>
 <array name="Q" component="qpres" datatype="double" accesstype="readonly">
 <access offset="(0,0,0,qpres)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
 </array>
-<array name="Q" component="qxn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qx1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
-<array name="Q" component="qyn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qy1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ddiag" component="n" datatype="double" accesstype="readonly">
 <access offset="(0,0,0,0)" dependentloopvar="(i,j,k,n)" reads="2" writes="0"/>
@@ -898,21 +902,21 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="29" writes="1"/>
-<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeread" reads="52" writes="1"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qxn" datatype="double" accesstype="readonly">
-<access offset="(1,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(2,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(3,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
-<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(-1,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(-2,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(-3,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(-4,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qx1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(1,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(2,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(3,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
+<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(-1,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(-2,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(-3,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(-4,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
 </array>
-<array name="Q" component="qyn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-1,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qy1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-1,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ddiag" component="n" datatype="double" accesstype="readonly">
 <access offset="(1,0,0,0)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
@@ -1030,10 +1034,10 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qhn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-1,0,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qh1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-1,0,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ytmp" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
@@ -1088,16 +1092,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="Hgx" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Hgx" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="dx2inv" component="" datatype="double" accesstype="readonly">
 <access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="writeonly">
-<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="0" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="writeonly">
+<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="0" writes="1"/>
 </array>
 </loop>
 </if>
@@ -1279,21 +1283,21 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="29" writes="1"/>
-<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeread" reads="52" writes="1"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qxn" datatype="double" accesstype="readonly">
-<access offset="(0,1,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(0,2,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(0,3,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
-<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(0,-1,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(0,-2,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(0,-3,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(0,-4,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qx1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,1,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(0,2,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(0,3,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
+<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(0,-1,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(0,-2,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(0,-3,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(0,-4,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
 </array>
-<array name="Q" component="qyn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-1,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qy1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-1,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ddiag" component="n" datatype="double" accesstype="readonly">
 <access offset="(0,1,0,0)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
@@ -1411,10 +1415,10 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qhn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-1,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qh1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-1,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ytmp" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
@@ -1469,16 +1473,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
-<array name="Hgy" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Hgy" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="dx2inv" component="" datatype="double" accesstype="readonly">
 <access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 </if>
@@ -1660,21 +1664,21 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="80" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="29" writes="1"/>
-<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeread" reads="52" writes="1"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qxn" datatype="double" accesstype="readonly">
-<access offset="(0,0,1,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(0,0,2,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(0,0,3,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
-<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(0,0,-1,qx1+-1)" dependentloopvar="(i,j,k,)" reads="8" writes="0"/>
-<access offset="(0,0,-2,qx1+-1)" dependentloopvar="(i,j,k,)" reads="7" writes="0"/>
-<access offset="(0,0,-3,qx1+-1)" dependentloopvar="(i,j,k,)" reads="6" writes="0"/>
-<access offset="(0,0,-4,qx1+-1)" dependentloopvar="(i,j,k,)" reads="5" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qx1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,1,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(0,0,2,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(0,0,3,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
+<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(0,0,-1,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="8" writes="0"/>
+<access offset="(0,0,-2,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="7" writes="0"/>
+<access offset="(0,0,-3,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="6" writes="0"/>
+<access offset="(0,0,-4,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="5" writes="0"/>
 </array>
-<array name="Q" component="qyn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-1,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qy1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-1,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ddiag" component="n" datatype="double" accesstype="readonly">
 <access offset="(0,0,1,0)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
@@ -1792,10 +1796,10 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<array name="Q" component="qhn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-1,qh1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="qhn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="qh1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-1,qh1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Ytmp" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
@@ -1850,16 +1854,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
-<array name="Hgz" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Hgz" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="dx2inv" component="" datatype="double" accesstype="readonly">
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 </if>
@@ -2150,16 +2154,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
-<array name="U" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(1,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(2,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(3,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(4,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-2,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-3,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(-4,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="U" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(1,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(2,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(3,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(4,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-1,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-2,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-3,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(-4,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Q" component="qu" datatype="double" accesstype="readonly">
 <access offset="(1,0,0,qu)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
@@ -2180,8 +2184,8 @@
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 <loop linenum="1701" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="8" multiplies="13" divides="0" specials="0">
@@ -2192,16 +2196,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
-<array name="U" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,1,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,2,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,3,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,4,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-2,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-3,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,-4,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="U" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,1,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,2,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,3,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,4,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-1,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-2,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-3,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,-4,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Q" component="qv" datatype="double" accesstype="readonly">
 <access offset="(0,1,0,qv)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
@@ -2222,8 +2226,8 @@
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 <loop linenum="1752" loopvar="n" lowerbound="1" upperbound="nspecies" stride="1" adds="8" multiplies="13" divides="0" specials="0">
@@ -2234,16 +2238,16 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="18" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="10" writes="1"/>
-<array name="U" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,1,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,2,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,3,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,4,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-2,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-3,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
-<access offset="(0,0,-4,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="U" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,1,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,2,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,3,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,4,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-1,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-2,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-3,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
+<access offset="(0,0,-4,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Q" component="qw" datatype="double" accesstype="readonly">
 <access offset="(0,0,1,qw)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
@@ -2264,8 +2268,8 @@
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 </loop>
@@ -2360,15 +2364,15 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeread" reads="5" writes="1"/>
-<array name="Uprime" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="iryn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Uprime" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
-<array name="U" component="iryn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="U" component="iry1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
-<array name="Unew" component="iryn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="2" writes="1"/>
+<array name="Unew" component="iry1 + n - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="2" writes="1"/>
 </array>
 </loop>
 </loop>
@@ -2418,6 +2422,7 @@
 </function>
 <function name="ctoprim" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="courno" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <array name="lo" component="" datatype="int" accesstype="readonly">
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
@@ -2631,10 +2636,10 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
+<scalar name="qxn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="qx1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<array name="Q" component="qxn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<array name="Q" component="qx1 + n - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qx1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="X" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>

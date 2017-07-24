@@ -8,10 +8,10 @@
 <access offset="(4)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
 <array name="u" component="" datatype="double" accesstype="readonly">
-<access offset="()" dependentloopvar="()" reads="1" writes="0"/>
-<access offset="()" dependentloopvar="()" reads="1" writes="0"/>
-<access offset="()" dependentloopvar="()" reads="1" writes="0"/>
-<access offset="()" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(- 1)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(- 2)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(- 3)" dependentloopvar="()" reads="1" writes="0"/>
+<access offset="(- 4)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(2)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
@@ -124,7 +124,7 @@
 <access offset="(1)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
 <array name="cons" component="imx" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,imx)" dependentloopvar="(i,i,j,k,)" reads="0" writes="0"/>
+<access offset="(0,0,0,imx)" dependentloopvar="(,j,k,)" reads="0" writes="0"/>
 </array>
 <array name="rhs" component="irho" datatype="double" accesstype="readwrite">
 <access offset="(0,0,0,irho)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>

@@ -34,7 +34,7 @@
 <access offset="(i,-1,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
 </array>
 <array name="F" component="irho" datatype="double" accesstype="readonly">
-<access offset="(,0,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
+<access offset="(- 1,0,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
 </array>
 <array name="Unew" component="irho" datatype="double" accesstype="readonly">
 <access offset="(i,0,0,irho)" dependentloopvar="(,j,k,)" reads="0" writes="2"/>
@@ -105,7 +105,7 @@
 <access offset="(i,-1,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
 </array>
 <array name="F" component="irho" datatype="double" accesstype="readonly">
-<access offset="(,0,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
+<access offset="(- 1,0,0,irho)" dependentloopvar="(,j,k,)" reads="1" writes="0"/>
 </array>
 <array name="Unew" component="irho" datatype="double" accesstype="readonly">
 <access offset="(i,0,0,irho)" dependentloopvar="(,j,k,)" reads="0" writes="2"/>

@@ -1,5 +1,6 @@
 <program>
 <function name="chemterm_3d" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <array name="lo" component="" datatype="int" accesstype="readonly">
 <access offset="(3)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
@@ -289,9 +290,9 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="1" writes="1"/>
-<array name="Q" component="qyn" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="0"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
+<array name="Q" component="n + qy1 - 1" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,qy1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="0"/>
 </array>
 <array name="Yt" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(n)" reads="0" writes="1"/>
@@ -575,15 +576,15 @@
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="n" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
 <scalar name="iry1" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
+<scalar name="qyn" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <array name="wdot" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
 </array>
 <array name="molecular_weight" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(n)" reads="1" writes="0"/>
 </array>
-<array name="Uprime" component="qyn" datatype="double" accesstype="readwrite">
-<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,)" reads="1" writes="1"/>
+<array name="Uprime" component="n + iry1 - 1" datatype="double" accesstype="readwrite">
+<access offset="(0,0,0,iry1+-1)" dependentloopvar="(i,j,k,n)" reads="1" writes="1"/>
 </array>
 </loop>
 </loop>
