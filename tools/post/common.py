@@ -1,13 +1,26 @@
+#!/usr/bin/env python
+
+""" Some common ExaSAT helper functions. """
+__author__ = "Cy Chan"
+__copyright__ = "Copyright 2016, The Regents of the University of California, through Lawrence Berkeley National Laboratory"
+__credits__ = ["Cy Chan"]
+__license__ = "Modified BSD License (see LICENSE file)"
+__version__ = "2.0"
+__maintainer__ = "Cy Chan"
+__email__ = "cychan@lbl.gov"
+__status__ = "Production"
+
 import operator
 from params import doSymSubs
 
 class options:
   dim = 3
-  flag_debug = False
+  flag_debug = True
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
   flag_ignore_conds = False # conservatively assume *all* code within *all* conditional blocks are executed
   flag_verbose_conditionals = True
+  flag_verbose_parser = False
   warned = set()
 
 def numIters(x):

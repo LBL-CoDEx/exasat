@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+
+""" Parameter handling functions and defaults for code analysis. """
+__author__ = "Cy Chan"
+__copyright__ = "Copyright 2016, The Regents of the University of California, through Lawrence Berkeley National Laboratory"
+__credits__ = ["Cy Chan"]
+__license__ = "Modified BSD License (see LICENSE file)"
+__version__ = "2.0"
+__maintainer__ = "Cy Chan"
+__email__ = "cychan@lbl.gov"
+__status__ = "Production"
+
 from sympy.parsing.sympy_parser import parse_expr
 
 model_params = [('X Problem Size', 128), \
@@ -109,8 +121,3 @@ def doParamSubs(expr, params, nonparams = {}):
       if r[1] in nonparams:
         expr = expr.subs(r[0], nonparams[r[1]])
   return float(expr)
-
-specComponents = ['n', 'qxn', 'qyn', 'qhn', 'iryn', 'idXn']
-
-def isSpeciesArray(x):
-  return x.split('.')[-1] in specComponents

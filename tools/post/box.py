@@ -1,4 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+
+""" Helper class for box algebra. """
+__author__ = "Cy Chan"
+__copyright__ = "Copyright 2016, The Regents of the University of California, through Lawrence Berkeley National Laboratory"
+__credits__ = ["Cy Chan"]
+__license__ = "Modified BSD License (see LICENSE file)"
+__version__ = "2.0"
+__maintainer__ = "Cy Chan"
+__email__ = "cychan@lbl.gov"
+__status__ = "Production"
 
 import operator
 import math

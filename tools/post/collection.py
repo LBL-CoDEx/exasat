@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+
+""" Collection class for generic analysis traversal of code tree. """
+__author__ = "Cy Chan"
+__copyright__ = "Copyright 2016, The Regents of the University of California, through Lawrence Berkeley National Laboratory"
+__credits__ = ["Cy Chan"]
+__license__ = "Modified BSD License (see LICENSE file)"
+__version__ = "2.0"
+__maintainer__ = "Cy Chan"
+__email__ = "cychan@lbl.gov"
+__status__ = "Production"
+
 class Collection(object):
   """Generic collection class for use with collect visitor.
     
