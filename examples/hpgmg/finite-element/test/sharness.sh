@@ -1,1 +1,0 @@
-../sharness/sharness.sh

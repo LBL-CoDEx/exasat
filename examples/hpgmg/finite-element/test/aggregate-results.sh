@@ -1,1 +1,0 @@
-../sharness/aggregate-results.sh
