@@ -26,52 +26,19 @@ import copy
 from box import Box
 
 from common import options, collapse, numIters, rangeMerge, rangeDisjoint
-from params import doSymRepl, doNameSubs
+from params import arrayName, parseExpr, parseTuple, subToInt
 from collection import Collection
-
-def parseExpr(s):
-  try:
-    return int(s) # try to do the fast thing first
-  except ValueError as e:
-    return doSymRepl(s)
 
 def dprint(s):
   if options.flag_verbose_parser:
     print s
 
+def makeName(node, namesubs):
+  return arrayName(str(node.getAttribute('name')), \
+                   str(node.getAttribute('component')), namesubs)
+
 def getChildren(node, tag):
   return filter(lambda x: x.nodeName == tag, node.childNodes)
-
-def arrayName(name, component):
-  if component != '':
-    component = doNameSubs(component)
-    return '%s.%s' % (name, component)
-  else:
-    return name
-
-def makeName(node):
-  return arrayName(str(node.getAttribute('name')), \
-                   str(node.getAttribute('component')))
-
-def parseTuple(s, f = lambda x: x):
-  """Parses a string containing a tuple.
-    
-     Returns a tuple of elements with f applied to each element.
-     Returns a tuple of strings by default."""
-  s = s.strip('() ').split(',') # remove enclosing parens and whitespace and split on commas
-  return tuple(map(lambda x: f(x.strip()), s)) # strip whitespace and cast to tuple of ints
-
-def subToInt(x, params):
-  if type(x) == int:
-    result = x
-  else:
-    try:
-      result = int(doSymRepl(x, params))
-    except Exception as e:
-      print "Could not do integer parameter substitution for expression: ", x
-      print "Parameters available: ", params
-      raise e
-  return result
 
 
 class Flops(object):
@@ -100,9 +67,9 @@ class Scalar(object):
 
 class ArrayAccess(object):
   slots = ['index', 'loopvars', 'reads', 'writes']
-  def __init__(self, node=None, index=None, loopvars=None):
+  def __init__(self, node=None, env=None, index=None, loopvars=None):
     if node:
-      self.index = parseTuple(node.getAttribute('offset'), parseExpr)
+      self.index = parseTuple(node.getAttribute('offset'), lambda x: parseExpr(x, env['symsubs']))
       self.loopvars = parseTuple(node.getAttribute('dependentloopvar'), str)
       self.reads = int(node.getAttribute('reads' ))
       self.writes = int(node.getAttribute('writes'))
@@ -134,12 +101,12 @@ class ArrayAccess(object):
 
 class Array(object):
   slots = ['name', 'type', 'accesses']
-  def __init__(self, node = None):
+  def __init__(self, node = None, env = None):
     if node:
-      self.name = makeName(node)
+      self.name = makeName(node, env['namesubs'])
       self.type = str(node.getAttribute('datatype'))
       dprint(self)
-      self.accesses = map(ArrayAccess, getChildren(node, 'access'))
+      self.accesses = map(lambda x: ArrayAccess(x, env), getChildren(node, 'access'))
   def __str__(self):
     return "%s %s" % (self.type, self.name)
   def onlyStateVars(self):
@@ -157,9 +124,8 @@ class CodeBlock(object):
 
      Contains arithmetic, scalar and array accesses, and communication."""
   slots = ['flops', 'scalars', 'arrays', 'conds']
-  def __init__(self, node = None, conds = []):
+  def __init__(self, node = None, conds = [], env = None):
     if node:
-      # XXX: gracefully handle code blocks missing attributes
       if node.getAttribute('adds'):
         self.flops = Flops(node)
       else:
@@ -167,7 +133,7 @@ class CodeBlock(object):
       self.conds = conds
       dprint(self)
       self.scalars = map(Scalar, getChildren(node, 'scalar'))
-      self.arrays = map(Array, getChildren(node, 'array'))
+      self.arrays = map(lambda x: Array(x, env), getChildren(node, 'array'))
   def __str__(self):
     return "Code Block (%s):" % str(map(str, self.conds))
   def collect(self, f):
@@ -201,22 +167,22 @@ class Conditional(object):
 class Body(object):
   """A function or loop body: contains information on enclosed code blocks and loops."""
   slots = ['codeblocks', 'loops']
-  def __init__(self, node = None, conds = []):
+  def __init__(self, node = None, conds = [], env = None):
 
     """Does recursive traversal of conditional blocks within body."""
     def traverse(node, tag, conds):
       """Traverse nested if/else blocks in the body of a function or loop."""
       if tag:
-        result = map(lambda x: (x, conds), getChildren(node, tag))
+        result = map(lambda x: (x, conds, env), getChildren(node, tag))
       else:
-        result = [(node, conds)]
+        result = [(node, conds, env)]
       for cnode in getChildren(node, 'if') + getChildren(node, 'else'):
         c2 = conds + [Conditional(cnode)]
         result.extend(traverse(cnode, tag, c2))
       return result
 
     def sort_key(elt):
-      (n,c) = elt
+      (n,c,s) = elt
       # TODO: add linenum to function nodes in XML
       if n.nodeName == 'function':
         return 0
@@ -244,16 +210,16 @@ class Body(object):
 class Loop(object):
   """Contains information on loop variables, bounds, strides, and loop body."""
   slots = ['name', 'loopvar', 'linenum', 'range', 'stride', 'conds', 'body']
-  def __init__(self, node = None, conds = []):
+  def __init__(self, node = None, conds = [], env = None):
     if node:
       self.loopvar = str(node.getAttribute('loopvar'))
       self.linenum = int(node.getAttribute('linenum'))
-      self.range = (parseExpr(str(node.getAttribute('lowerbound'))),
-                    parseExpr(str(node.getAttribute('upperbound'))))
+      self.range = (parseExpr(str(node.getAttribute('lowerbound')), env['symsubs']),
+                    parseExpr(str(node.getAttribute('upperbound')), env['symsubs']))
       self.stride = int(node.getAttribute('stride'))
       self.conds = conds
       dprint(self)
-      self.body = Body(node, conds)
+      self.body = Body(node, conds, env)
   def __str__(self):
     return "Loop %d: %s = [%s, %s] / %d, %s" % \
            (self.linenum, self.loopvar,
@@ -267,7 +233,7 @@ class Loop(object):
     result.loopvar = self.loopvar
     result.linenum = self.linenum
     result.range = tuple(map(lambda x: subToInt(x, params), self.range))
-    result.stride = subToInt(self.stride, params)
+    result.stride = self.stride
     result.conds = self.conds
     result.body = self.body
     if not shallow:
@@ -278,13 +244,13 @@ class Loop(object):
 class Function(object):
   """Contains information on passed parameters and function body."""
   slots = ['name', 'params', 'local', 'body']
-  def __init__(self, node = None):
+  def __init__(self, node, env):
     if node:
       self.name = str(node.getAttribute('name'))
       dprint("Parsing function %s ..." % self.name)
-      self.params = map(makeName, getChildren(node, 'nonlocal'))
-      self.local = map(makeName, getChildren(node, 'local'))
-      self.body = Body(node)
+      self.params = map(lambda x: makeName(x, env['namesubs']), getChildren(node, 'nonlocal'))
+      self.local = map(lambda x: makeName(x, env['namesubs']), getChildren(node, 'local'))
+      self.body = Body(node, env = env)
   def collect(self, f):
     return self.body.collect(f)
 
@@ -292,11 +258,14 @@ class Function(object):
 class XMLParser(object):
   """Contains information on enclosed modules."""
   slots = ['doc', 'functions']
-  def __init__(self, filename):
+  def __init__(self, filename, symsubs, namesubs):
     assert type(filename) == type('')
     self.doc = xml.dom.minidom.parse(filename)
+    env = {'symsubs' : symsubs, 'namesubs' : namesubs}
     program = getChildren(self.doc, 'program')[0]
-    self.functions = map(Function, getChildren(program, 'function'))
+    self.functions = map(lambda x: Function(x, env),
+                         getChildren(program, 'function'))
+
 
 class KeyValXMLParser(object):
   __slots__  = ['doc', 'items']

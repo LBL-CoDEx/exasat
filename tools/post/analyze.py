@@ -19,7 +19,6 @@ import sys
 import os
 import re
 from copy import deepcopy
-import cProfile
 
 from parser import XMLParser, KeyValXMLParser, PollyXMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
 from box import Box
@@ -411,16 +410,15 @@ class StaticAnalysis(object):
 
   slots = ['functions', 'scops']
 
-  def __init__(self, xml_file = None, polly_xml_file = None):
+  def __init__(self, xml_file = None, polly_xml_file = None, symsubs = None, namesubs = None):
     self.functions = []
     self.scops = []
     if xml_file:
-      self.functions = XMLParser(xml_file).functions
+      self.functions = XMLParser(xml_file, symsubs, namesubs).functions
     if polly_xml_file:
       self.scops = PollyXMLParser(polly_xml_file).scops
 
   def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
-    pr = cProfile.Profile()
     for function in self.functions:
       print "************"
       print "* %s *" % function.name
@@ -448,11 +446,8 @@ class StaticAnalysis(object):
         print "Working Set:"
         print loop.collect(WorkingSet.collector(conds_chk, machine))
 
-        pr.enable()
         mt = loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
-        pr.disable()
         print
         print "Total Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
         print
         print mt
-    pr.dump_stats('stats2.out')

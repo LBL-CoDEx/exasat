@@ -1,0 +1,30 @@
+<symsubs>
+<prop key="dlo(1)" val="lo(1) - ng" />
+<prop key="dhi(1)" val="hi(1) + ng" />
+<prop key="dlo(2)" val="lo(2) - ng" />
+<prop key="dhi(2)" val="hi(2) + ng" />
+<prop key="dlo(3)" val="lo(3) - ng" />
+<prop key="dhi(3)" val="hi(3) + ng" />
+<prop key="ncons" val="nspecies + 5" />
+<prop key="nprim" val="3 * nspecies + 7" />
+<prop key="irho" val="1" />
+<prop key="imx" val="2" />
+<prop key="imy" val="3" />
+<prop key="imz" val="4" />
+<prop key="iene" val="5" />
+<prop key="iry1" val="6" />
+<prop key="qrho" val="1" />
+<prop key="qu" val="2" />
+<prop key="qv" val="3" />
+<prop key="qw" val="4" />
+<prop key="qpres" val="5" />
+<prop key="qtemp" val="6" />
+<prop key="qe" val="7" />
+<prop key="qy1" val="8" />
+<prop key="qx1" val="8+nspecies" />
+<prop key="qh1" val="8+2*nspecies" />
+<prop key="k3d" val="0" />
+<prop key="kc" val="0" />
+<prop key="k" val="0" />
+<prop key="offset" val="0" />
+</symsubs>

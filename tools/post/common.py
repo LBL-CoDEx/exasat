@@ -24,7 +24,6 @@ class options:
 
 def numIters(x):
   # TODO: this is for inclusive upper bound, make sure consistent across C and Fortran
-  # TODO: confirm removal of doSymSubs here is correct
   return -x[0] + x[1] + 1
 
 def diff(x):
