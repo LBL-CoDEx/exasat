@@ -23,15 +23,56 @@ import xml.dom.minidom
 import ast
 import operator
 import copy
-from box import Box
+from sympy.parsing.sympy_parser import parse_expr
 
-from common import options, collapse, numIters, rangeMerge, rangeDisjoint
-from params import arrayName, parseExpr, parseTuple, subToInt
+from box import Box
 from collection import Collection
+from common import options, collapse, numIters, rangeMerge, rangeDisjoint
 
 def dprint(s):
   if options.flag_verbose_parser:
     print s
+
+def to_sym_dict(list_of_pairs):
+  return dict(map(lambda (x,y): (parse_expr(x), parse_expr(y)), list_of_pairs))
+
+def doSymRepl(expr, repl):
+  if type(expr) == type('') or type(expr) == unicode:
+    expr = parse_expr(expr)
+  return expr.xreplace(repl)
+
+def parseExpr(s, symsubs):
+  try:
+    return int(s) # try to do the fast thing first
+  except ValueError as e:
+    return doSymRepl(s, symsubs)
+
+def parseTuple(s, f = lambda x: x):
+  """Parses a string containing a tuple.
+    
+     Returns a tuple of elements with f applied to each element.
+     Returns a tuple of strings by default."""
+  s = s.strip('() ').split(',') # remove enclosing parens and whitespace and split on commas
+  return tuple(map(lambda x: f(x.strip()), s)) # strip whitespace and cast to tuple of ints
+
+def subToInt(x, params):
+  if type(x) == int:
+    result = x
+  else:
+    try:
+      result = int(doSymRepl(x, params))
+    except Exception as e:
+      print "Could not do integer parameter substitution for expression: ", x
+      print "Parameters available: ", params
+      raise e
+  return result
+
+def arrayName(name, component, namesubs):
+  if component != '':
+    component = parse_expr(component).subs(namesubs)
+    return '%s.%s' % (name, component)
+  else:
+    return name
 
 def makeName(node, namesubs):
   return arrayName(str(node.getAttribute('name')), \

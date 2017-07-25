@@ -19,8 +19,7 @@ import sys
 import os
 
 from analyze import StaticAnalysis, TableCondsChecker
-from parser import KeyValXMLParser
-from params import to_sym_dict
+from parser import KeyValXMLParser, to_sym_dict
 
 def load_kv_xml(xml_env, default_xml=None, val_type=str, default=[]):
   result = default
