@@ -1,14 +1,14 @@
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1d4090 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1d4330 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1d45d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1d4870 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1e17d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1e1a70 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1e1d10 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f06ee1e1fb0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f06edf552b8 = SgEnumDeclaration not in child list of scope = 0x7f06ee651120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f06edf552b8 = SgEnumDeclaration not in child list of scope = 0x7f06ee651120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f06edf552b8 = SgEnumDeclaration not in child list of scope = 0x7f06ee651120 = SgGlobal 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36c3090 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36c3330 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36c35d0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36c3870 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36d07d0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36d0a70 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36d0d10 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f37c36d0fb0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f37c34442b8 = SgEnumDeclaration not in child list of scope = 0x7f37c3b40120 = SgGlobal 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f37c34442b8 = SgEnumDeclaration not in child list of scope = 0x7f37c3b40120 = SgGlobal 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f37c34442b8 = SgEnumDeclaration not in child list of scope = 0x7f37c3b40120 = SgGlobal 
 <program>
 <function name="CopyBlock" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -271,7 +271,7 @@
 </if>
 <if linenum="852" conditional="maxLevels &lt; 2;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
-<if linenum="877" conditional="fine_box_dim % 2 == 0 && fine_box_dim &gt; 8 && fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="877" conditional="fine_box_dim % 2 == 0 &amp;&amp; fine_box_dim &gt; 8 &amp;&amp; fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="fine_box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -297,7 +297,7 @@
 </if>
 <funccall linenum="877" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
-<if linenum="885" conditional="fine_boxes_in_i % 2 == 0 && fine_box_dim &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="885" conditional="fine_boxes_in_i % 2 == 0 &amp;&amp; fine_box_dim &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="fine_box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -323,7 +323,7 @@
 </if>
 <funccall linenum="885" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
-<if linenum="893" conditional="coarse_dim != 1 && fine_dim_i == 2 * coarse_dim && fine_dim_i / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="893" conditional="coarse_dim != 1 &amp;&amp; fine_dim_i == 2 * coarse_dim &amp;&amp; fine_dim_i / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="fine_dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
@@ -346,7 +346,7 @@
 </if>
 <funccall linenum="893" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
-<if linenum="901" conditional="coarse_dim != 1 && fine_dim_i == 4 * coarse_dim && fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="901" conditional="coarse_dim != 1 &amp;&amp; fine_dim_i == 4 * coarse_dim &amp;&amp; fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="coarse_dim" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
@@ -373,7 +373,7 @@
 </if>
 <funccall linenum="901" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
-<if linenum="909" conditional="coarse_dim != 1 && fine_dim_i == 8 * coarse_dim && fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="909" conditional="coarse_dim != 1 &amp;&amp; fine_dim_i == 8 * coarse_dim &amp;&amp; fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="coarse_dim" datatype="int" isConstant="false" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
@@ -400,7 +400,7 @@
 </if>
 <funccall linenum="909" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
-<if linenum="917" conditional="fine_box_dim % 2 == 0 && fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="917" conditional="fine_box_dim % 2 == 0 &amp;&amp; fine_box_dim / 2 &gt;= stencil_get_radius();" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="6" writes="0"/>
 <scalar name="doRestrict" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="fine_box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -464,19 +464,19 @@
 </funccall>
 </if>
 <funccall linenum="935" name="" origname="create_level" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="boxes_in_i" argname="boxes_in_i[level]"/>
 <arg paramname="box_dim" argname="box_dim[level]"/>
 <arg paramname="box_ghosts" argname="box_ghosts[level]"/>
-<arg paramname="numVectors" argname="all_grids -> levels[level - 1] -> numVectors"/>
-<arg paramname="domain_boundary_condition" argname="all_grids -> levels[level - 1] -> boundary_condition . type"/>
-<arg paramname="my_rank" argname="all_grids -> levels[level - 1] -> my_rank"/>
+<arg paramname="numVectors" argname="all_grids -&gt; levels[level - 1] -&gt; numVectors"/>
+<arg paramname="domain_boundary_condition" argname="all_grids -&gt; levels[level - 1] -&gt; boundary_condition . type"/>
+<arg paramname="my_rank" argname="all_grids -&gt; levels[level - 1] -&gt; my_rank"/>
 <arg paramname="num_ranks" argname="nProcs[level]"/>
 </funccall>
 </loop>
 <funccall linenum="941" name="" origname="create_vectors" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[all_grids -> num_levels - 1]"/>
-<arg paramname="numVectors" argname="all_grids -> levels[all_grids -> num_levels - 1] -> numVectors + IterativeSolver_NumVectors()"/>
+<arg paramname="level" argname="all_grids -&gt; levels[all_grids -&gt; num_levels - 1]"/>
+<arg paramname="numVectors" argname="all_grids -&gt; levels[all_grids -&gt; num_levels - 1] -&gt; numVectors + IterativeSolver_NumVectors()"/>
 </funccall>
 <funccall linenum="941" name="" origname="IterativeSolver_NumVectors" module="unknown" flops="unknown">
 </funccall>
@@ -527,8 +527,8 @@
 <access offset="(-1)" dependentloopvar="(level)" reads="0" writes="0"/>
 </array>
 <funccall linenum="977" name="" origname="rebuild_operator" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
-<arg paramname="fromLevel" argname="(level > 0?all_grids -> levels[level - 1] :((void *)0))"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
+<arg paramname="fromLevel" argname="(level &gt; 0?all_grids -&gt; levels[level - 1] :((void *)0))"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
 </funccall>
@@ -548,11 +548,11 @@
 <access offset="(0)" dependentloopvar="(level)" reads="3" writes="0"/>
 </array>
 <funccall linenum="986" name="" origname="dot" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="id_a" argname="9"/>
 <arg paramname="id_b" argname="9"/>
 </funccall>
-<if linenum="991" conditional="all_grids -&gt; levels[level] -&gt; boundary_condition . type == 0 &&(a == 0 || alpha_is_zero == 1);" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="991" conditional="all_grids -&gt; levels[level] -&gt; boundary_condition . type == 0 &amp;&amp;(a == 0 || alpha_is_zero == 1);" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 </loop>
 <funccall linenum="995" name="" origname="getTime" module="unknown" flops="unknown">
@@ -610,22 +610,22 @@
 <if linenum="1011" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_buffers[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1011" name="" origname="FREE" module="unknown" flops="unknown">
-<arg paramname="ptr" argname="all_grids -> levels[level] -> restriction[i] . recv_buffers[0]"/>
+<arg paramname="ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_buffers[0]"/>
 </funccall>
 <if linenum="1012" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_buffers;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1012" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . recv_buffers"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_buffers"/>
 </funccall>
 <if linenum="1013" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_ranks;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1013" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . recv_ranks"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_ranks"/>
 </funccall>
 <if linenum="1014" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_sizes;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1014" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . recv_sizes"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . recv_sizes"/>
 </funccall>
 </if>
 <if linenum="1016" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . num_sends &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -639,38 +639,38 @@
 <if linenum="1018" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . send_buffers[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1018" name="" origname="FREE" module="unknown" flops="unknown">
-<arg paramname="ptr" argname="all_grids -> levels[level] -> restriction[i] . send_buffers[0]"/>
+<arg paramname="ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . send_buffers[0]"/>
 </funccall>
 <if linenum="1019" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . send_buffers;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1019" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . send_buffers"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . send_buffers"/>
 </funccall>
 <if linenum="1020" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . send_ranks;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1020" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . send_ranks"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . send_ranks"/>
 </funccall>
 <if linenum="1021" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . send_sizes;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1021" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . send_sizes"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . send_sizes"/>
 </funccall>
 </if>
 <if linenum="1023" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1023" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . blocks[0]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[0]"/>
 </funccall>
 <if linenum="1024" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[1];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1024" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . blocks[1]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[1]"/>
 </funccall>
 <if linenum="1025" conditional="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[2];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1025" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> restriction[i] . blocks[2]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[i] . blocks[2]"/>
 </funccall>
 </loop>
 <if linenum="1033" conditional="all_grids -&gt; levels[level] -&gt; interpolation . num_recvs &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -682,22 +682,22 @@
 <if linenum="1035" conditional="all_grids -&gt; levels[level] -&gt; interpolation . recv_buffers[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1035" name="" origname="FREE" module="unknown" flops="unknown">
-<arg paramname="ptr" argname="all_grids -> levels[level] -> interpolation . recv_buffers[0]"/>
+<arg paramname="ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . recv_buffers[0]"/>
 </funccall>
 <if linenum="1036" conditional="all_grids -&gt; levels[level] -&gt; interpolation . recv_buffers;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1036" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . recv_buffers"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . recv_buffers"/>
 </funccall>
 <if linenum="1037" conditional="all_grids -&gt; levels[level] -&gt; interpolation . recv_ranks;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1037" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . recv_ranks"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . recv_ranks"/>
 </funccall>
 <if linenum="1038" conditional="all_grids -&gt; levels[level] -&gt; interpolation . recv_sizes;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1038" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . recv_sizes"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . recv_sizes"/>
 </funccall>
 </if>
 <if linenum="1040" conditional="all_grids -&gt; levels[level] -&gt; interpolation . num_sends &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -709,38 +709,38 @@
 <if linenum="1042" conditional="all_grids -&gt; levels[level] -&gt; interpolation . send_buffers[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1042" name="" origname="FREE" module="unknown" flops="unknown">
-<arg paramname="ptr" argname="all_grids -> levels[level] -> interpolation . send_buffers[0]"/>
+<arg paramname="ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . send_buffers[0]"/>
 </funccall>
 <if linenum="1043" conditional="all_grids -&gt; levels[level] -&gt; interpolation . send_buffers;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1043" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . send_buffers"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . send_buffers"/>
 </funccall>
 <if linenum="1044" conditional="all_grids -&gt; levels[level] -&gt; interpolation . send_ranks;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1044" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . send_ranks"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . send_ranks"/>
 </funccall>
 <if linenum="1045" conditional="all_grids -&gt; levels[level] -&gt; interpolation . send_sizes;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1045" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . send_sizes"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . send_sizes"/>
 </funccall>
 </if>
 <if linenum="1047" conditional="all_grids -&gt; levels[level] -&gt; interpolation . blocks[0];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1047" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . blocks[0]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . blocks[0]"/>
 </funccall>
 <if linenum="1048" conditional="all_grids -&gt; levels[level] -&gt; interpolation . blocks[1];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1048" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . blocks[1]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . blocks[1]"/>
 </funccall>
 <if linenum="1049" conditional="all_grids -&gt; levels[level] -&gt; interpolation . blocks[2];" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1049" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="all_grids -> levels[level] -> interpolation . blocks[2]"/>
+<arg paramname="__ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . blocks[2]"/>
 </funccall>
 </loop>
 <if linenum="1056" conditional="all_grids -&gt; my_rank == 0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -754,13 +754,13 @@
 <access offset="(0)" dependentloopvar="(level)" reads="0" writes="0"/>
 </array>
 <funccall linenum="1060" name="" origname="destroy_level" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 </funccall>
 </loop>
 <if linenum="1062" conditional="all_grids -&gt; levels;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
 <funccall linenum="1062" name="" origname="free" module="unknown" flops="unknown">
-<arg paramname="__ptr" argname="(all_grids -> levels)"/>
+<arg paramname="__ptr" argname="(all_grids -&gt; levels)"/>
 </funccall>
 <nonlocal name="stdout"/>
 <nonlocal name="all_grids"/>
@@ -793,7 +793,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
 <scalar name="num_levels" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="90" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12d ""/>
+<arg paramname="__format" argname="&quot;%12d &quot;"/>
 <arg paramname="" argname="level - fromLevel"/>
 </funccall>
 </loop>
@@ -810,8 +810,8 @@
 <access offset="(0)" dependentloopvar="(level)" reads="0" writes="0"/>
 </array>
 <funccall linenum="91" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%10d^3 ""/>
-<arg paramname="" argname="all_grids -> levels[level] -> dim . i"/>
+<arg paramname="__format" argname="&quot;%10d^3 &quot;"/>
+<arg paramname="" argname="all_grids -&gt; levels[level] -&gt; dim . i"/>
 </funccall>
 </loop>
 <funccall linenum="91" name="" origname="printf" module="unknown" flops="unknown">
@@ -827,8 +827,8 @@
 <access offset="(0)" dependentloopvar="(level)" reads="0" writes="0"/>
 </array>
 <funccall linenum="92" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%10d^3 ""/>
-<arg paramname="" argname="all_grids -> levels[level] -> box_dim"/>
+<arg paramname="__format" argname="&quot;%10d^3 &quot;"/>
+<arg paramname="" argname="all_grids -&gt; levels[level] -&gt; box_dim"/>
 </funccall>
 </loop>
 <funccall linenum="92" name="" origname="printf" module="unknown" flops="unknown">
@@ -858,12 +858,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="94" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="94" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="95" name="" origname="printf" module="unknown" flops="unknown">
@@ -880,12 +880,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="95" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="95" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="96" name="" origname="printf" module="unknown" flops="unknown">
@@ -902,12 +902,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="96" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="96" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="97" name="" origname="printf" module="unknown" flops="unknown">
@@ -924,12 +924,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="97" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="97" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="98" name="" origname="printf" module="unknown" flops="unknown">
@@ -946,12 +946,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="98" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="98" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="99" name="" origname="printf" module="unknown" flops="unknown">
@@ -968,12 +968,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="99" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="99" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="100" name="" origname="printf" module="unknown" flops="unknown">
@@ -990,12 +990,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="100" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="100" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="101" name="" origname="printf" module="unknown" flops="unknown">
@@ -1012,12 +1012,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="101" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="101" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="109" name="" origname="printf" module="unknown" flops="unknown">
@@ -1034,12 +1034,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="109" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="109" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="110" name="" origname="printf" module="unknown" flops="unknown">
@@ -1056,12 +1056,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="110" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="110" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="118" name="" origname="printf" module="unknown" flops="unknown">
@@ -1078,12 +1078,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="118" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="118" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="119" name="" origname="printf" module="unknown" flops="unknown">
@@ -1100,12 +1100,12 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="119" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="119" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="130" name="" origname="printf" module="unknown" flops="unknown">
@@ -1133,31 +1133,31 @@
 <access offset="(0)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
 <funccall linenum="131" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f ""/>
+<arg paramname="__format" argname="&quot;%12.6f &quot;"/>
 <arg paramname="" argname="time"/>
 </funccall>
 </loop>
 <funccall linenum="131" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""%12.6f\n""/>
+<arg paramname="__format" argname="&quot;%12.6f\n&quot;"/>
 <arg paramname="" argname="total"/>
 </funccall>
 <funccall linenum="133" name="" origname="printf" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="134" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname="" Total time in MGBuild %12.6f seconds\n""/>
-<arg paramname="" argname="SecondsPerCycle *((double )all_grids -> timers . MGBuild)"/>
+<arg paramname="__format" argname="&quot; Total time in MGBuild %12.6f seconds\n&quot;"/>
+<arg paramname="" argname="SecondsPerCycle *((double )all_grids -&gt; timers . MGBuild)"/>
 </funccall>
 <funccall linenum="135" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname="" Total time in MGSolve %12.6f seconds\n""/>
-<arg paramname="" argname="scale *((double )all_grids -> timers . MGSolve)"/>
+<arg paramname="__format" argname="&quot; Total time in MGSolve %12.6f seconds\n&quot;"/>
+<arg paramname="" argname="scale *((double )all_grids -&gt; timers . MGSolve)"/>
 </funccall>
 <funccall linenum="136" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname="" number of v-cycles %12d\n""/>
-<arg paramname="" argname="all_grids -> levels[fromLevel] -> vcycles_from_this_level / all_grids -> MGSolves_performed"/>
+<arg paramname="__format" argname="&quot; number of v-cycles %12d\n&quot;"/>
+<arg paramname="" argname="all_grids -&gt; levels[fromLevel] -&gt; vcycles_from_this_level / all_grids -&gt; MGSolves_performed"/>
 </funccall>
 <funccall linenum="137" name="" origname="printf" module="unknown" flops="unknown">
-<arg paramname="__format" argname=""Bottom solver iterations %12d\n""/>
-<arg paramname="" argname="all_grids -> levels[all_grids -> num_levels - 1] -> Krylov_iterations / all_grids -> MGSolves_performed"/>
+<arg paramname="__format" argname="&quot;Bottom solver iterations %12d\n&quot;"/>
+<arg paramname="" argname="all_grids -&gt; levels[all_grids -&gt; num_levels - 1] -&gt; Krylov_iterations / all_grids -&gt; MGSolves_performed"/>
 </funccall>
 <funccall linenum="141" name="" origname="printf" module="unknown" flops="unknown">
 </funccall>
@@ -1177,7 +1177,7 @@
 <access offset="(0)" dependentloopvar="(level)" reads="0" writes="0"/>
 </array>
 <funccall linenum="149" name="" origname="reset_level_timers" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 </funccall>
 </loop>
 <nonlocal name="all_grids"/>
@@ -1207,15 +1207,15 @@
 <funccall linenum="1140" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="1145" name="" origname="norm" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="id_a" argname="F_id"/>
 </funccall>
 <funccall linenum="1149" name="" origname="zero_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="id_a" argname="e_id"/>
 </funccall>
 <funccall linenum="1150" name="" origname="scale_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="id_c" argname="R_id"/>
 <arg paramname="scale_a" argname="1.0"/>
 <arg paramname="id_a" argname="F_id"/>
@@ -1261,18 +1261,18 @@
 <access offset="(level)" dependentloopvar="()" reads="0" writes="0"/>
 </array>
 <funccall linenum="1164" name="" origname="mean" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="id_a" argname="e_id"/>
 </funccall>
 <funccall linenum="1165" name="" origname="shift_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="id_c" argname="e_id"/>
 <arg paramname="id_a" argname="e_id"/>
 <arg paramname="shift_a" argname="-average_value_of_e"/>
 </funccall>
 </if>
 <funccall linenum="1167" name="" origname="residual" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="res_id" argname="0"/>
 <arg paramname="x_id" argname="e_id"/>
 <arg paramname="rhs_id" argname="F_id"/>
@@ -1280,7 +1280,7 @@
 <arg paramname="b" argname="b"/>
 </funccall>
 <funccall linenum="1168" name="" origname="norm" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="id_a" argname="0"/>
 </funccall>
 <funccall linenum="1169" name="" origname="getTime" module="unknown" flops="unknown">
@@ -1346,7 +1346,7 @@
 <funccall linenum="1096" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="1097" name="" origname="IterativeSolver" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="u_id" argname="e_id"/>
 <arg paramname="f_id" argname="R_id"/>
 <arg paramname="a" argname="a"/>
@@ -1359,14 +1359,14 @@
 <funccall linenum="1103" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="1104" name="" origname="smooth" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="phi_id" argname="e_id"/>
 <arg paramname="rhs_id" argname="R_id"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
 </funccall>
 <funccall linenum="1105" name="" origname="residual" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="res_id" argname="0"/>
 <arg paramname="x_id" argname="e_id"/>
 <arg paramname="rhs_id" argname="R_id"/>
@@ -1374,14 +1374,14 @@
 <arg paramname="b" argname="b"/>
 </funccall>
 <funccall linenum="1106" name="" origname="restriction" module="unknown" flops="unknown">
-<arg paramname="level_c" argname="all_grids -> levels[level + 1]"/>
+<arg paramname="level_c" argname="all_grids -&gt; levels[level + 1]"/>
 <arg paramname="id_c" argname="R_id"/>
-<arg paramname="level_f" argname="all_grids -> levels[level]"/>
+<arg paramname="level_f" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="id_f" argname="0"/>
 <arg paramname="restrictionType" argname="0"/>
 </funccall>
 <funccall linenum="1107" name="" origname="zero_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level + 1]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level + 1]"/>
 <arg paramname="id_a" argname="e_id"/>
 </funccall>
 <funccall linenum="1108" name="" origname="getTime" module="unknown" flops="unknown">
@@ -1397,14 +1397,14 @@
 <funccall linenum="1114" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="1115" name="" origname="interpolation_vcycle" module="unknown" flops="unknown">
-<arg paramname="level_f" argname="all_grids -> levels[level]"/>
+<arg paramname="level_f" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="id_f" argname="e_id"/>
 <arg paramname="prescale_f" argname="1.0"/>
-<arg paramname="level_c" argname="all_grids -> levels[level + 1]"/>
+<arg paramname="level_c" argname="all_grids -&gt; levels[level + 1]"/>
 <arg paramname="id_c" argname="e_id"/>
 </funccall>
 <funccall linenum="1116" name="" origname="smooth" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[level]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[level]"/>
 <arg paramname="phi_id" argname="e_id"/>
 <arg paramname="rhs_id" argname="R_id"/>
 <arg paramname="a" argname="a"/>
@@ -1902,7 +1902,7 @@
 <scalar name="minSolves" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="70" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stdout"/>
-<arg paramname="__format" argname=""\n\n===== Warming up by running %d solves ==========================================\n""/>
+<arg paramname="__format" argname="&quot;\n\n===== Warming up by running %d solves ==========================================\n&quot;"/>
 <arg paramname="" argname="minSolves"/>
 </funccall>
 </if>
@@ -1910,7 +1910,7 @@
 <scalar name="minSolves" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="71" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stdout"/>
-<arg paramname="__format" argname=""\n\n===== Running %d solves ========================================================\n""/>
+<arg paramname="__format" argname="&quot;\n\n===== Running %d solves ========================================================\n&quot;"/>
 <arg paramname="" argname="minSolves"/>
 </funccall>
 </else>
@@ -1922,7 +1922,7 @@
 <arg paramname="all_grids" argname="all_grids"/>
 </funccall>
 <funccall linenum="78" name="" origname="zero_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[onLevel]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[onLevel]"/>
 <arg paramname="id_a" argname="1"/>
 </funccall>
 <funccall linenum="82" name="" origname="MGSolve" module="unknown" flops="unknown">
@@ -1958,7 +1958,7 @@
 <access offset="(2)" dependentloopvar="()" reads="0" writes="3"/>
 <access offset="(0)" dependentloopvar="(level)" reads="13" writes="0"/>
 </array>
-<if linenum="192" conditional="level &gt; 0 && all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="192" conditional="level &gt; 0 &amp;&amp; all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="num_sends" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
@@ -2127,7 +2127,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="247" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.send_ranks\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.send_ranks\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="247" name="" origname="exit" module="unknown" flops="unknown">
@@ -2138,7 +2138,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="248" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.send_sizes\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.send_sizes\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="248" name="" origname="exit" module="unknown" flops="unknown">
@@ -2149,7 +2149,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="249" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.send_buffers\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.send_buffers\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="249" name="" origname="exit" module="unknown" flops="unknown">
@@ -2221,27 +2221,27 @@
 <access offset="(0)" dependentloopvar="(neighbor)" reads="0" writes="0"/>
 </array>
 <funccall linenum="266" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> interpolation . blocks[0]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> interpolation . allocated_blocks[0]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> interpolation . num_blocks[0]"/>
-<arg paramname="dim_i" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
-<arg paramname="dim_j" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
-<arg paramname="dim_k" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . blocks[0]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . allocated_blocks[0]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . num_blocks[0]"/>
+<arg paramname="dim_i" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
+<arg paramname="dim_j" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
+<arg paramname="dim_k" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
 <arg paramname="read_box" argname="fineBoxes[fineBox] . sendBox"/>
 <arg paramname="read_ptr" argname="((void *)0)"/>
 <arg paramname="read_i" argname="fineBoxes[fineBox] . i"/>
 <arg paramname="read_j" argname="fineBoxes[fineBox] . j"/>
 <arg paramname="read_k" argname="fineBoxes[fineBox] . k"/>
-<arg paramname="read_jStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . sendBox] . jStride"/>
-<arg paramname="read_kStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . sendBox] . kStride"/>
+<arg paramname="read_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . sendBox] . jStride"/>
+<arg paramname="read_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . sendBox] . kStride"/>
 <arg paramname="read_scale" argname="1"/>
 <arg paramname="write_box" argname="- 1"/>
-<arg paramname="write_ptr" argname="all_grids -> levels[level] -> interpolation . send_buffers[neighbor]"/>
+<arg paramname="write_ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . send_buffers[neighbor]"/>
 <arg paramname="write_i" argname="offset"/>
 <arg paramname="write_j" argname="0"/>
 <arg paramname="write_k" argname="0"/>
-<arg paramname="write_jStride" argname="all_grids -> levels[level - 1] -> box_dim"/>
-<arg paramname="write_kStride" argname="all_grids -> levels[level - 1] -> box_dim * all_grids -> levels[level - 1] -> box_dim"/>
+<arg paramname="write_jStride" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim"/>
+<arg paramname="write_kStride" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim * all_grids -&gt; levels[level - 1] -&gt; box_dim"/>
 <arg paramname="write_scale" argname="2"/>
 <arg paramname="my_blockcopy_tile_i" argname="10000"/>
 <arg paramname="my_blockcopy_tile_j" argname="8"/>
@@ -2281,27 +2281,27 @@
 <access offset="(0)" dependentloopvar="(fineBox)" reads="0" writes="0"/>
 </array>
 <funccall linenum="301" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> interpolation . blocks[1]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> interpolation . allocated_blocks[1]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> interpolation . num_blocks[1]"/>
-<arg paramname="dim_i" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
-<arg paramname="dim_j" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
-<arg paramname="dim_k" argname="all_grids -> levels[level - 1] -> box_dim / 2"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . blocks[1]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . allocated_blocks[1]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . num_blocks[1]"/>
+<arg paramname="dim_i" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
+<arg paramname="dim_j" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
+<arg paramname="dim_k" argname="all_grids -&gt; levels[level - 1] -&gt; box_dim / 2"/>
 <arg paramname="read_box" argname="fineBoxes[fineBox] . sendBox"/>
 <arg paramname="read_ptr" argname="((void *)0)"/>
 <arg paramname="read_i" argname="fineBoxes[fineBox] . i"/>
 <arg paramname="read_j" argname="fineBoxes[fineBox] . j"/>
 <arg paramname="read_k" argname="fineBoxes[fineBox] . k"/>
-<arg paramname="read_jStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . sendBox] . jStride"/>
-<arg paramname="read_kStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . sendBox] . kStride"/>
+<arg paramname="read_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . sendBox] . jStride"/>
+<arg paramname="read_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . sendBox] . kStride"/>
 <arg paramname="read_scale" argname="1"/>
 <arg paramname="write_box" argname="fineBoxes[fineBox] . recvBox"/>
 <arg paramname="write_ptr" argname="((void *)0)"/>
 <arg paramname="write_i" argname="0"/>
 <arg paramname="write_j" argname="0"/>
 <arg paramname="write_k" argname="0"/>
-<arg paramname="write_jStride" argname="all_grids -> levels[level - 1] -> my_boxes[fineBoxes[fineBox] . recvBox] . jStride"/>
-<arg paramname="write_kStride" argname="all_grids -> levels[level - 1] -> my_boxes[fineBoxes[fineBox] . recvBox] . kStride"/>
+<arg paramname="write_jStride" argname="all_grids -&gt; levels[level - 1] -&gt; my_boxes[fineBoxes[fineBox] . recvBox] . jStride"/>
+<arg paramname="write_kStride" argname="all_grids -&gt; levels[level - 1] -&gt; my_boxes[fineBoxes[fineBox] . recvBox] . kStride"/>
 <arg paramname="write_scale" argname="2"/>
 <arg paramname="my_blockcopy_tile_i" argname="10000"/>
 <arg paramname="my_blockcopy_tile_j" argname="8"/>
@@ -2317,7 +2317,7 @@
 <arg paramname="__ptr" argname="fineRanks"/>
 </funccall>
 </if>
-<if linenum="337" conditional="level &lt; all_grids -&gt; num_levels - 1 && all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="337" conditional="level &lt; all_grids -&gt; num_levels - 1 &amp;&amp; all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="num_recvs" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="num_my_boxes" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -2433,7 +2433,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="380" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.recv_ranks\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.recv_ranks\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="380" name="" origname="exit" module="unknown" flops="unknown">
@@ -2444,7 +2444,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="381" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.recv_sizes\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.recv_sizes\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="381" name="" origname="exit" module="unknown" flops="unknown">
@@ -2455,7 +2455,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="382" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->interpolation.recv_buffers\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;interpolation.recv_buffers\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="382" name="" origname="exit" module="unknown" flops="unknown">
@@ -2523,27 +2523,27 @@
 <access offset="(0)" dependentloopvar="(neighbor)" reads="0" writes="0"/>
 </array>
 <funccall linenum="399" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> interpolation . blocks[2]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> interpolation . allocated_blocks[2]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> interpolation . num_blocks[2]"/>
-<arg paramname="dim_i" argname="all_grids -> levels[level] -> box_dim"/>
-<arg paramname="dim_j" argname="all_grids -> levels[level] -> box_dim"/>
-<arg paramname="dim_k" argname="all_grids -> levels[level] -> box_dim"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . blocks[2]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . allocated_blocks[2]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; interpolation . num_blocks[2]"/>
+<arg paramname="dim_i" argname="all_grids -&gt; levels[level] -&gt; box_dim"/>
+<arg paramname="dim_j" argname="all_grids -&gt; levels[level] -&gt; box_dim"/>
+<arg paramname="dim_k" argname="all_grids -&gt; levels[level] -&gt; box_dim"/>
 <arg paramname="read_box" argname="- 1"/>
-<arg paramname="read_ptr" argname="all_grids -> levels[level] -> interpolation . recv_buffers[neighbor]"/>
+<arg paramname="read_ptr" argname="all_grids -&gt; levels[level] -&gt; interpolation . recv_buffers[neighbor]"/>
 <arg paramname="read_i" argname="offset"/>
 <arg paramname="read_j" argname="0"/>
 <arg paramname="read_k" argname="0"/>
-<arg paramname="read_jStride" argname="all_grids -> levels[level] -> box_dim"/>
-<arg paramname="read_kStride" argname="all_grids -> levels[level] -> box_dim * all_grids -> levels[level] -> box_dim"/>
+<arg paramname="read_jStride" argname="all_grids -&gt; levels[level] -&gt; box_dim"/>
+<arg paramname="read_kStride" argname="all_grids -&gt; levels[level] -&gt; box_dim * all_grids -&gt; levels[level] -&gt; box_dim"/>
 <arg paramname="read_scale" argname="1"/>
 <arg paramname="write_box" argname="coarseBoxes[coarseBox] . recvBox"/>
 <arg paramname="write_ptr" argname="((void *)0)"/>
 <arg paramname="write_i" argname="0"/>
 <arg paramname="write_j" argname="0"/>
 <arg paramname="write_k" argname="0"/>
-<arg paramname="write_jStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . recvBox] . jStride"/>
-<arg paramname="write_kStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . recvBox] . kStride"/>
+<arg paramname="write_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . recvBox] . jStride"/>
+<arg paramname="write_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . recvBox] . kStride"/>
 <arg paramname="write_scale" argname="1"/>
 <arg paramname="my_blockcopy_tile_i" argname="10000"/>
 <arg paramname="my_blockcopy_tile_j" argname="8"/>
@@ -2595,7 +2595,7 @@
 <access offset="(2)" dependentloopvar="()" reads="0" writes="3"/>
 <access offset="(restrictionType)" dependentloopvar="()" reads="9" writes="8"/>
 </array>
-<if linenum="492" conditional="level &lt; all_grids -&gt; num_levels - 1 && all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="492" conditional="level &lt; all_grids -&gt; num_levels - 1 &amp;&amp; all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="num_sends" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
@@ -2741,7 +2741,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="544" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].send_ranks\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].send_ranks\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="544" name="" origname="exit" module="unknown" flops="unknown">
@@ -2752,7 +2752,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="545" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].send_sizes\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].send_sizes\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="545" name="" origname="exit" module="unknown" flops="unknown">
@@ -2763,7 +2763,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="546" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].send_buffers\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].send_buffers\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="546" name="" origname="exit" module="unknown" flops="unknown">
@@ -2837,9 +2837,9 @@
 <access offset="(restrictionType)" dependentloopvar="()" reads="0" writes="0"/>
 </array>
 <funccall linenum="581" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . blocks[0]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . allocated_blocks[0]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . num_blocks[0]"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . blocks[0]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . allocated_blocks[0]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . num_blocks[0]"/>
 <arg paramname="dim_i" argname="restrict_dim_i"/>
 <arg paramname="dim_j" argname="restrict_dim_j"/>
 <arg paramname="dim_k" argname="restrict_dim_k"/>
@@ -2848,11 +2848,11 @@
 <arg paramname="read_i" argname="0"/>
 <arg paramname="read_j" argname="0"/>
 <arg paramname="read_k" argname="0"/>
-<arg paramname="read_jStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . sendBox] . jStride"/>
-<arg paramname="read_kStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . sendBox] . kStride"/>
+<arg paramname="read_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . sendBox] . jStride"/>
+<arg paramname="read_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . sendBox] . kStride"/>
 <arg paramname="read_scale" argname="2"/>
 <arg paramname="write_box" argname="- 1"/>
-<arg paramname="write_ptr" argname="all_grids -> levels[level] -> restriction[restrictionType] . send_buffers[neighbor]"/>
+<arg paramname="write_ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . send_buffers[neighbor]"/>
 <arg paramname="write_i" argname="offset"/>
 <arg paramname="write_j" argname="0"/>
 <arg paramname="write_k" argname="0"/>
@@ -2905,9 +2905,9 @@
 <access offset="(0)" dependentloopvar="(coarseBox)" reads="0" writes="0"/>
 </array>
 <funccall linenum="619" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . blocks[1]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . allocated_blocks[1]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . num_blocks[1]"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . blocks[1]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . allocated_blocks[1]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . num_blocks[1]"/>
 <arg paramname="dim_i" argname="restrict_dim_i"/>
 <arg paramname="dim_j" argname="restrict_dim_j"/>
 <arg paramname="dim_k" argname="restrict_dim_k"/>
@@ -2916,16 +2916,16 @@
 <arg paramname="read_i" argname="0"/>
 <arg paramname="read_j" argname="0"/>
 <arg paramname="read_k" argname="0"/>
-<arg paramname="read_jStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . sendBox] . jStride"/>
-<arg paramname="read_kStride" argname="all_grids -> levels[level] -> my_boxes[coarseBoxes[coarseBox] . sendBox] . kStride"/>
+<arg paramname="read_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . sendBox] . jStride"/>
+<arg paramname="read_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[coarseBoxes[coarseBox] . sendBox] . kStride"/>
 <arg paramname="read_scale" argname="2"/>
 <arg paramname="write_box" argname="coarseBoxes[coarseBox] . recvBox"/>
 <arg paramname="write_ptr" argname="((void *)0)"/>
 <arg paramname="write_i" argname="coarseBoxes[coarseBox] . i"/>
 <arg paramname="write_j" argname="coarseBoxes[coarseBox] . j"/>
 <arg paramname="write_k" argname="coarseBoxes[coarseBox] . k"/>
-<arg paramname="write_jStride" argname="all_grids -> levels[level + 1] -> my_boxes[coarseBoxes[coarseBox] . recvBox] . jStride"/>
-<arg paramname="write_kStride" argname="all_grids -> levels[level + 1] -> my_boxes[coarseBoxes[coarseBox] . recvBox] . kStride"/>
+<arg paramname="write_jStride" argname="all_grids -&gt; levels[level + 1] -&gt; my_boxes[coarseBoxes[coarseBox] . recvBox] . jStride"/>
+<arg paramname="write_kStride" argname="all_grids -&gt; levels[level + 1] -&gt; my_boxes[coarseBoxes[coarseBox] . recvBox] . kStride"/>
 <arg paramname="write_scale" argname="1"/>
 <arg paramname="my_blockcopy_tile_i" argname="10000"/>
 <arg paramname="my_blockcopy_tile_j" argname="8"/>
@@ -2941,7 +2941,7 @@
 <arg paramname="__ptr" argname="coarseRanks"/>
 </funccall>
 </if>
-<if linenum="659" conditional="level &gt; 0 && all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
+<if linenum="659" conditional="level &gt; 0 &amp;&amp; all_grids -&gt; levels[level] -&gt; num_my_boxes &gt; 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="num_recvs" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="box_dim" datatype="int" isConstant="false" accesstype="readonly" reads="12" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
@@ -3104,7 +3104,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="711" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].recv_ranks \n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].recv_ranks \n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="711" name="" origname="exit" module="unknown" flops="unknown">
@@ -3115,7 +3115,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="712" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].recv_sizes \n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].recv_sizes \n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="712" name="" origname="exit" module="unknown" flops="unknown">
@@ -3126,7 +3126,7 @@
 <scalar name="level" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="713" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname=""malloc failed - all_grids->levels[%d]->restriction[restrictionType].recv_buffers\n""/>
+<arg paramname="__format" argname="&quot;malloc failed - all_grids-&gt;levels[%d]-&gt;restriction[restrictionType].recv_buffers\n&quot;"/>
 <arg paramname="" argname="level"/>
 </funccall>
 <funccall linenum="713" name="" origname="exit" module="unknown" flops="unknown">
@@ -3203,14 +3203,14 @@
 <access offset="(restrictionType)" dependentloopvar="()" reads="0" writes="0"/>
 </array>
 <funccall linenum="749" name="" origname="append_block_to_list" module="unknown" flops="unknown">
-<arg paramname="blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . blocks[2]"/>
-<arg paramname="allocated_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . allocated_blocks[2]"/>
-<arg paramname="num_blocks" argname="&all_grids -> levels[level] -> restriction[restrictionType] . num_blocks[2]"/>
+<arg paramname="blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . blocks[2]"/>
+<arg paramname="allocated_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . allocated_blocks[2]"/>
+<arg paramname="num_blocks" argname="&amp;all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . num_blocks[2]"/>
 <arg paramname="dim_i" argname="restrict_dim_i"/>
 <arg paramname="dim_j" argname="restrict_dim_j"/>
 <arg paramname="dim_k" argname="restrict_dim_k"/>
 <arg paramname="read_box" argname="- 1"/>
-<arg paramname="read_ptr" argname="all_grids -> levels[level] -> restriction[restrictionType] . recv_buffers[neighbor]"/>
+<arg paramname="read_ptr" argname="all_grids -&gt; levels[level] -&gt; restriction[restrictionType] . recv_buffers[neighbor]"/>
 <arg paramname="read_i" argname="offset"/>
 <arg paramname="read_j" argname="0"/>
 <arg paramname="read_k" argname="0"/>
@@ -3222,8 +3222,8 @@
 <arg paramname="write_i" argname="fineBoxes[fineBox] . i"/>
 <arg paramname="write_j" argname="fineBoxes[fineBox] . j"/>
 <arg paramname="write_k" argname="fineBoxes[fineBox] . k"/>
-<arg paramname="write_jStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . recvBox] . jStride"/>
-<arg paramname="write_kStride" argname="all_grids -> levels[level] -> my_boxes[fineBoxes[fineBox] . recvBox] . kStride"/>
+<arg paramname="write_jStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . recvBox] . jStride"/>
+<arg paramname="write_kStride" argname="all_grids -&gt; levels[level] -&gt; my_boxes[fineBoxes[fineBox] . recvBox] . kStride"/>
 <arg paramname="write_scale" argname="1"/>
 <arg paramname="my_blockcopy_tile_i" argname="10000"/>
 <arg paramname="my_blockcopy_tile_j" argname="8"/>
@@ -3479,7 +3479,7 @@
 <funccall linenum="86" name="" origname="CopyBlock" module="unknown" flops="unknown">
 <arg paramname="level" argname="level"/>
 <arg paramname="id" argname="id"/>
-<arg paramname="block" argname="&level -> exchange_ghosts[shape] . blocks[1][buffer]"/>
+<arg paramname="block" argname="&amp;level -&gt; exchange_ghosts[shape] . blocks[1][buffer]"/>
 </funccall>
 </loop>
 <funccall linenum="88" name="" origname="getTime" module="unknown" flops="unknown">
@@ -3810,7 +3810,7 @@
 <arg paramname="prescale_f" argname="prescale_f"/>
 <arg paramname="level_c" argname="level_c"/>
 <arg paramname="id_c" argname="id_c"/>
-<arg paramname="block" argname="&level_c -> interpolation . blocks[1][buffer]"/>
+<arg paramname="block" argname="&amp;level_c -&gt; interpolation . blocks[1][buffer]"/>
 </funccall>
 </loop>
 <funccall linenum="291" name="" origname="getTime" module="unknown" flops="unknown">
@@ -3936,7 +3936,7 @@
 <funccall linenum="284" name="" origname="stencil_get_radius" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="285" name="" origname="create_level" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 <arg paramname="boxes_in_i" argname="boxes_in_i"/>
 <arg paramname="box_dim" argname="box_dim"/>
 <arg paramname="box_ghosts" argname="ghosts"/>
@@ -3950,13 +3950,13 @@
 <funccall linenum="288" name="" origname="fprintf" module="unknown" flops="unknown">
 </funccall>
 <funccall linenum="294" name="" origname="initialize_problem" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 <arg paramname="hLevel" argname="h"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
 </funccall>
 <funccall linenum="295" name="" origname="rebuild_operator" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 <arg paramname="fromLevel" argname="((void *)0)"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
@@ -3964,7 +3964,7 @@
 <if linenum="296" conditional="level_h . boundary_condition . type == 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="average_value_of_f" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="297" name="" origname="mean" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 <arg paramname="id_a" argname="2"/>
 </funccall>
 <if linenum="298" conditional="average_value_of_f != 0.0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -3974,12 +3974,12 @@
 <scalar name="average_value_of_f" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <funccall linenum="299" name="" origname="fprintf" module="unknown" flops="unknown">
 <arg paramname="__stream" argname="stderr"/>
-<arg paramname="__format" argname="" WARNING... Periodic boundary conditions, but f does not sum to zero... mean(f)=%e\n""/>
+<arg paramname="__format" argname="&quot; WARNING... Periodic boundary conditions, but f does not sum to zero... mean(f)=%e\n&quot;"/>
 <arg paramname="" argname="average_value_of_f"/>
 </funccall>
 </if>
 <funccall linenum="300" name="" origname="shift_vector" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 <arg paramname="id_c" argname="2"/>
 <arg paramname="id_a" argname="2"/>
 <arg paramname="shift_a" argname="-average_value_of_f"/>
@@ -3987,8 +3987,8 @@
 </if>
 </if>
 <funccall linenum="308" name="" origname="MGBuild" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
-<arg paramname="fine_grid" argname="&level_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
+<arg paramname="fine_grid" argname="&amp;level_h"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
 <arg paramname="minCoarseGridDim" argname="minCoarseDim"/>
@@ -4014,7 +4014,7 @@
 <arg paramname="restrictionType" argname="0"/>
 </funccall>
 <funccall linenum="325" name="" origname="bench_hpgmg" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 <arg paramname="onLevel" argname="l"/>
 <arg paramname="a" argname="a"/>
 <arg paramname="b" argname="b"/>
@@ -4025,7 +4025,7 @@
 </funccall>
 </if>
 <funccall linenum="328" name="" origname="MGPrintTiming" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 <arg paramname="fromLevel" argname="l"/>
 </funccall>
 </loop>
@@ -4056,7 +4056,7 @@
 </funccall>
 </if>
 <funccall linenum="356" name="" origname="MGResetTimers" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 </funccall>
 <loop linenum="357" loopvar="l" lowerbound="0" upperbound="3 - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -4077,7 +4077,7 @@
 <arg paramname="id_a" argname="1"/>
 </funccall>
 <funccall linenum="363" name="" origname="MGSolve" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 <arg paramname="onLevel" argname="l"/>
 <arg paramname="u_id" argname="1"/>
 <arg paramname="F_id" argname="2"/>
@@ -4087,7 +4087,7 @@
 </funccall>
 </loop>
 <funccall linenum="366" name="" origname="richardson_error" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 <arg paramname="levelh" argname="0"/>
 <arg paramname="u_id" argname="1"/>
 </funccall>
@@ -4096,10 +4096,10 @@
 </funccall>
 </if>
 <funccall linenum="371" name="" origname="MGDestroy" module="unknown" flops="unknown">
-<arg paramname="all_grids" argname="&MG_h"/>
+<arg paramname="all_grids" argname="&amp;MG_h"/>
 </funccall>
 <funccall linenum="372" name="" origname="destroy_level" module="unknown" flops="unknown">
-<arg paramname="level" argname="&level_h"/>
+<arg paramname="level" argname="&amp;level_h"/>
 </funccall>
 <if linenum="376" conditional="my_rank == 0;" adds="0" multiplies="0" divides="0" specials="0">
 <funccall linenum="376" name="" origname="fprintf" module="unknown" flops="unknown">
@@ -4934,7 +4934,7 @@
 <arg paramname="id_c" argname="id_c"/>
 <arg paramname="level_f" argname="level_f"/>
 <arg paramname="id_f" argname="id_f"/>
-<arg paramname="block" argname="&level_f -> restriction[restrictionType] . blocks[1][buffer]"/>
+<arg paramname="block" argname="&amp;level_f -&gt; restriction[restrictionType] . blocks[1][buffer]"/>
 <arg paramname="restrictionType" argname="restrictionType"/>
 </funccall>
 </loop>
@@ -4955,21 +4955,21 @@
 <access offset="(levelh+2)" dependentloopvar="()" reads="0" writes="0"/>
 </array>
 <funccall linenum="1076" name="" origname="restriction" module="unknown" flops="unknown">
-<arg paramname="level_c" argname="all_grids -> levels[levelh + 1]"/>
+<arg paramname="level_c" argname="all_grids -&gt; levels[levelh + 1]"/>
 <arg paramname="id_c" argname="0"/>
-<arg paramname="level_f" argname="all_grids -> levels[levelh]"/>
+<arg paramname="level_f" argname="all_grids -&gt; levels[levelh]"/>
 <arg paramname="id_f" argname="u_id"/>
 <arg paramname="restrictionType" argname="0"/>
 </funccall>
 <funccall linenum="1077" name="" origname="restriction" module="unknown" flops="unknown">
-<arg paramname="level_c" argname="all_grids -> levels[levelh + 2]"/>
+<arg paramname="level_c" argname="all_grids -&gt; levels[levelh + 2]"/>
 <arg paramname="id_c" argname="0"/>
-<arg paramname="level_f" argname="all_grids -> levels[levelh + 1]"/>
+<arg paramname="level_f" argname="all_grids -&gt; levels[levelh + 1]"/>
 <arg paramname="id_f" argname="u_id"/>
 <arg paramname="restrictionType" argname="0"/>
 </funccall>
 <funccall linenum="1078" name="" origname="add_vectors" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[levelh + 1]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[levelh + 1]"/>
 <arg paramname="id_c" argname="0"/>
 <arg paramname="scale_a" argname="1.0"/>
 <arg paramname="id_a" argname="u_id"/>
@@ -4977,7 +4977,7 @@
 <arg paramname="id_b" argname="0"/>
 </funccall>
 <funccall linenum="1079" name="" origname="add_vectors" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[levelh + 2]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[levelh + 2]"/>
 <arg paramname="id_c" argname="0"/>
 <arg paramname="scale_a" argname="1.0"/>
 <arg paramname="id_a" argname="u_id"/>
@@ -4985,11 +4985,11 @@
 <arg paramname="id_b" argname="0"/>
 </funccall>
 <funccall linenum="1080" name="" origname="norm" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[levelh + 1]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[levelh + 1]"/>
 <arg paramname="id_a" argname="0"/>
 </funccall>
 <funccall linenum="1081" name="" origname="norm" module="unknown" flops="unknown">
-<arg paramname="level" argname="all_grids -> levels[levelh + 2]"/>
+<arg paramname="level" argname="all_grids -&gt; levels[levelh + 2]"/>
 <arg paramname="id_a" argname="0"/>
 </funccall>
 <if linenum="1083" conditional="all_grids -&gt; my_rank == 0;" adds="0" multiplies="0" divides="0" specials="0">
@@ -5226,7 +5226,7 @@
 <scalar name="jStride" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="kStride" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="color000" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
-<if linenum="113" conditional="(i ^ j ^ k ^ color000 ^ 1) & 1;" adds="3" multiplies="5" divides="0" specials="0">
+<if linenum="113" conditional="(i ^ j ^ k ^ color000 ^ 1) &amp; 1;" adds="3" multiplies="5" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="b" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="h2inv" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>

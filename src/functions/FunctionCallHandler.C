@@ -293,6 +293,16 @@ bool FunctionCallHandler::matchArgumentsWithParameters(SgExpressionPtrList callA
   return true;
 }
 
+inline
+string find_replace(string &originalStr, string replacedSubStr, string replacementStr){
+    size_t position= originalStr.find(replacedSubStr);
+    while(position!= std::string::npos){
+      originalStr.replace(position, replacedSubStr.length(), replacementStr);
+      position= originalStr.find(replacedSubStr, position + replacementStr.size());
+    }
+    return originalStr;
+}
+
 void FunctionCallHandler::dump()
 {
   string func_name = fCallInfo.func_name; 
@@ -322,6 +332,12 @@ void FunctionCallHandler::dump()
       string arg_name = argItr-> second;
 
       string param_name = iname-> get_name().str(); 
+
+      find_replace(arg_name, "&", "&amp;");
+      find_replace(arg_name, "<", "&lt;");
+      find_replace(arg_name, ">", "&gt;");
+      find_replace(arg_name, "\"", "&quot;");
+      find_replace(arg_name, "'", "&apos;");
 
       std::vector< pair<string, string> > arg_attr;
       arg_attr.push_back(make_pair("paramname", param_name));
