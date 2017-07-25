@@ -22,9 +22,23 @@ from distutils.util import strtobool
 from analyze import StaticAnalysis, TableCondsChecker
 from parser import KeyValXMLParser, to_sym_dict
 
-def cns_smc_args():
+# default args
+def default_args():
   return {
-    # some test parameters for CNS-SMC code
+    "xml"          : None,
+    "polly"        : None,
+    "symsubs"      : None,
+    "namesubs"     : None,
+    "params"       : None,
+    "block_params" : None,
+    "conds"        : None,
+    "machine"      : "../../examples/machine.xml",
+    "subparams"    : "False",
+  }
+
+# setup for CNS code
+def cns_args():
+  return {
     "xml"          : "../../examples/cns-smc/xml/advance-flat.xml",
 #    "polly"        : "../../examples/cns-smc/xml/advance-flat.polly.xml",
     "polly"        : "",
@@ -37,8 +51,22 @@ def cns_smc_args():
     "subparams"    : "False",
   }
 
-def get_env_args(defaults = {}):
-  result = defaults
+# setup for SMC code
+def smc_args():
+  # use most of the CNS setup
+  result = cns_args()
+  # change the source input files
+  result["xml"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.xml"
+#  result["polly"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.polly.xml"
+  result["polly"] = ""
+  return result
+
+# setup for HPGMG code
+def hpgmg_args():
+  return {}
+
+def get_env_args():
+  result = default_args()
   for tag in ["xml", "polly", # which XML files to analyze
               "symsubs", "namesubs", # substitutions made upon parsing the XML
               # problem and machine parameters used to evaluate performance
@@ -68,7 +96,8 @@ def load_args(args):
 
 def main(args):
 
-  (sa_kw_args, dump_kw_args) = load_args(get_env_args(cns_smc_args()))
+#  (sa_kw_args, dump_kw_args) = load_args(cns_args())
+  (sa_kw_args, dump_kw_args) = load_args(get_env_args())
 
   # parse the XML files and do substitutions
   sa = StaticAnalysis(**sa_kw_args)
@@ -78,4 +107,3 @@ def main(args):
  
 if __name__ == '__main__':
   main(sys.argv)
-
