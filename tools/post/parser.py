@@ -26,14 +26,14 @@ import copy
 from box import Box
 
 from common import options, collapse, numIters, rangeMerge, rangeDisjoint
-from params import doSymSubs, doNameSubs
+from params import doSymRepl, doNameSubs
 from collection import Collection
 
 def parseExpr(s):
   try:
     return int(s) # try to do the fast thing first
   except ValueError as e:
-    return doSymSubs(s)
+    return doSymRepl(s)
 
 def dprint(s):
   if options.flag_verbose_parser:
@@ -66,7 +66,7 @@ def subToInt(x, params):
     result = x
   else:
     try:
-      result = int(doSymSubs(x, params))
+      result = int(doSymRepl(x, params))
     except Exception as e:
       print "Could not do integer parameter substitution for expression: ", x
       print "Parameters available: ", params

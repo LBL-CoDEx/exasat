@@ -19,6 +19,7 @@ import sys
 import os
 import re
 from copy import deepcopy
+import cProfile
 
 from parser import XMLParser, KeyValXMLParser, PollyXMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
 from box import Box
@@ -419,6 +420,7 @@ class StaticAnalysis(object):
       self.scops = PollyXMLParser(polly_xml_file).scops
 
   def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
+    pr = cProfile.Profile()
     for function in self.functions:
       print "************"
       print "* %s *" % function.name
@@ -431,6 +433,7 @@ class StaticAnalysis(object):
         print
 
         if flag_sub_params:
+          print "substituting parameters ..."
           loop = loop.subParams(params)
 
         print "Floating Point Ops (A/S/M/D):"
@@ -445,40 +448,11 @@ class StaticAnalysis(object):
         print "Working Set:"
         print loop.collect(WorkingSet.collector(conds_chk, machine))
 
+        pr.enable()
         mt = loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
+        pr.disable()
         print
-        print "Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
+        print "Total Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
+        print
         print mt
-
-def load_xml(xml_env, default_xml=None, val_type=str, default=[]):
-  result = default
-  xml_file = os.getenv(xml_env, default_xml)
-  if xml_file:
-    result = KeyValXMLParser(xml_file, val_type).items
-  return result
-
-def main(args):
-  # some test parameters
-  def_xml        = "../../examples/cns-smc/xml/advance-flat.xml"
-#  def_polly_xml  = "../../examples/cns-smc/xml/advance-flat.polly.xml"
-#  def_polly_xml  = "../../examples/hpgmg/xml/scops.xml"
-  def_polly_xml  = ""
-  def_params_xml = "../../examples/cns-smc/params.xml"
-  def_conds_xml  = "../../examples/cns-smc/conds.xml"
-  def_mach_xml   = "../../examples/machine.xml"
-
-  xml_file = os.getenv("xml", def_xml) 
-  polly_xml_file = os.getenv("pollyxml", def_polly_xml) 
-
-  params = load_xml("params_xml", def_params_xml)
-  block_params = load_xml("block_params_xml", default=params)
-  conds_table = dict(load_xml("conds_xml", def_conds_xml, val_type=bool))
-  machine = dict(load_xml("machine_xml", def_mach_xml, val_type=float))
-
-  sa = StaticAnalysis(xml_file, polly_xml_file)
-
-  sa.dump(params, block_params, machine, \
-          TableCondsChecker(conds_table), False)
- 
-if __name__ == '__main__':
-  main(sys.argv)
+    pr.dump_stats('stats2.out')

@@ -11,7 +11,6 @@ __email__ = "cychan@lbl.gov"
 __status__ = "Production"
 
 import operator
-from params import doSymSubs
 
 class options:
   dim = 3
@@ -24,10 +23,9 @@ class options:
   warned = set()
 
 def numIters(x):
-  # NOTE: this is for inclusive upper bound, make sure consistent across C and Fortran
-  if type(x[0]) == int and type(x[1]) == int:
-    return -x[0] + x[1] + 1
-  return doSymSubs('-(%s) + (%s) + 1' % x)
+  # TODO: this is for inclusive upper bound, make sure consistent across C and Fortran
+  # TODO: confirm removal of doSymSubs here is correct
+  return -x[0] + x[1] + 1
 
 def diff(x):
   t = type(x)

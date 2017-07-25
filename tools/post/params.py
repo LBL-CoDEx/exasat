@@ -54,15 +54,18 @@ def customizeParams(params, overrides):
       print 'Overriding parameter %s = %s' % (key, value)
       params[key] = value
 
+def to_sym_dict(list_of_pairs):
+  return dict(map(lambda (x,y): (parse_expr(x), parse_expr(y)), list_of_pairs))
+
 # name replacements for better naming
-namerepl = [('qx1+n-1', 'qxn'), \
+namesubs = [('qx1+n-1', 'qxn'), \
             ('qy1+n-1', 'qyn'), \
             ('qh1+n-1', 'qhn'), \
             ('iry1+n-1', 'iryn'), \
            ]
 
 # symbolic replacements and constants
-symrepl = [('dlo(1)', 'lo(1) - ng'), \
+symsubs = [('dlo(1)', 'lo(1) - ng'), \
            ('dhi(1)', 'hi(1) + ng'), \
            ('dlo(2)', 'lo(2) - ng'), \
            ('dhi(2)', 'hi(2) + ng'), \
@@ -96,7 +99,10 @@ symrepl = [('dlo(1)', 'lo(1) - ng'), \
            ('offset', '0'), \
           ]
 
-def doSymSubs(expr, repl = symrepl):
+symrepl = to_sym_dict(symsubs)
+
+# NOTE: this is really slow, try to use doSymRepl instead
+def doSymSubs(expr, repl = symsubs):
   if type(expr) == type('') or type(expr) == unicode:
     expr = parse_expr(expr)
   for r in repl:
@@ -104,20 +110,9 @@ def doSymSubs(expr, repl = symrepl):
   return expr
 
 def doNameSubs(expr):
-  return doSymSubs(expr, namerepl)
+  return doSymSubs(expr, namesubs)
 
-def doRefSubs_l(expr, lam=lambda x: x):
-  if type(expr) != type(''):
-    expr = str(expr)
-  for r in paramrepl + nonparamrepl:
-    expr = expr.replace(r[0], lam(r[1]))
-  return '(%s)' % expr
-
-def doParamSubs(expr, params, nonparams = {}):
-  if type(expr) != type(0) and type(expr) != type(0.):
-    for r in paramrepl:
-      expr = expr.subs(r[0], params[r[1]])
-    for r in nonparamrepl:
-      if r[1] in nonparams:
-        expr = expr.subs(r[0], nonparams[r[1]])
-  return float(expr)
+def doSymRepl(expr, repl = symrepl):
+  if type(expr) == type('') or type(expr) == unicode:
+    expr = parse_expr(expr)
+  return expr.xreplace(repl)
