@@ -39,6 +39,14 @@ bool Flops::isDoubleOrFloat(SgExpression *exp)
 	if(isSgTypeDouble(element_type) || isSgTypeFloat(element_type))
 	  return true;
     }
+  Rose_STL_Container<SgNode*> vals = NodeQuery::querySubTree(exp, V_SgValueExp);
+  Rose_STL_Container<SgNode*>::iterator vi = vals.begin();
+  for( ; vi != vals.end(); vi++)
+  {
+     SgValueExp* valExp= isSgValueExp(*vi);
+     if(isSgDoubleVal(valExp)) return true;
+     if(isSgFloatVal(valExp)) return true;
+  }
   return false;
 }
 bool Flops::isValidFlop(SgBinaryOp* binOp)

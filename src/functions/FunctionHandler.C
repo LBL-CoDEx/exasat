@@ -124,10 +124,21 @@ void removeRestrictKeywords(SgNode* node){
 			SgInitializedName* initName= ref->get_symbol()->get_declaration();
 			if(initName){
 			    string typeStr= type->unparseToString();
-			    string removeRestrictStr= typeStr.erase(type->unparseToString().size()-15, type->unparseToString().size()-1); //remove " * __restrict__"
-			    SgType* newBaseType= buildOpaqueType(typeStr.c_str(), initName->get_scope());
-			    SgPointerType* newType= buildPointerType(newBaseType);
-			    newType->set_base_type(newBaseType);
+			    string removeRestrictStr= typeStr.erase(type->unparseToString().size()-14, type->unparseToString().size()-1); //remove " * __restrict__"
+      			    //rebuild the type
+      			    SgType* baseType= buildIntType();//just a dummy node
+		            SgType* newType0= buildPointerType(baseType);
+ 		            SgType* newType= newType0;
+      			    while(removeRestrictStr.substr(removeRestrictStr.size()-1,1)=="*"){
+		              newType= buildPointerType(newType);
+                              removeRestrictStr.erase(removeRestrictStr.size()-1, removeRestrictStr.size()-1); 
+			    } 
+                            removeRestrictStr.erase(removeRestrictStr.size()-1, removeRestrictStr.size()-1); //remove the last space
+			    SgType* newBaseType;
+			    if(removeRestrictStr.substr(removeRestrictStr.size()-6, 6).compare("double")==0){ newBaseType= buildDoubleType();
+			    }else if(removeRestrictStr.substr(removeRestrictStr.size()-5, 5).compare("float")==0) newBaseType= buildFloatType();
+			    else newBaseType= buildOpaqueType(removeRestrictStr.c_str(), initName->get_scope());
+			    isSgPointerType(newType0)->set_base_type(newBaseType);
 			    initName->set_type(newType);
 			}
 		    }
