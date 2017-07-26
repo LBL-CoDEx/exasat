@@ -47,7 +47,7 @@ class TableCondsChecker(object):
   def __init__(self, conds_table):
     if options.flag_ignore_conds:
       print "WARNING: flag_ignore_conds is True, including all conditionally executed blocks!"
-    self.table = conds_table
+    self.table = dict(conds_table)
   def check_cond(self, cond):
     if cond.condition not in self.table:
       print cond.condition
@@ -410,13 +410,12 @@ class StaticAnalysis(object):
 
   slots = ['functions', 'scops']
 
-  def __init__(self, xml_file = None, polly_xml_file = None, symsubs = None, namesubs = None):
-    self.functions = []
-    self.scops = []
-    if xml_file:
-      self.functions = XMLParser(xml_file, symsubs, namesubs).functions
-    if polly_xml_file:
-      self.scops = PollyXMLParser(polly_xml_file).scops
+  def __init__(self, xml, polly_xml = None, symsubs = None, namesubs = None):
+    self.functions = XMLParser(xml, symsubs, namesubs).functions
+    if polly_xml:
+      self.scops = PollyXMLParser(polly_xml).scops
+    else:
+      self.scops = []
 
   def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
     for function in self.functions:

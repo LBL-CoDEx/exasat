@@ -228,7 +228,7 @@ class Body(object):
       if n.nodeName == 'function':
         return 0
       # TODO: add linenum to else nodes in XML
-      if n.getAttribute('nodeName') == 'else':
+      if n.nodeName == 'else':
         attr_key = 'iflinenum'
       else:
         attr_key = 'linenum'
@@ -311,9 +311,11 @@ class XMLParser(object):
 class KeyValXMLParser(object):
   __slots__  = ['doc', 'items']
   def __init__(self, filename, val_type=str):
-    assert type(filename) == type('')
-    self.doc = xml.dom.minidom.parse(filename)
-    self.parse_items(val_type)
+    self.items = []
+    if filename:
+      assert type(filename) == type('')
+      self.doc = xml.dom.minidom.parse(filename)
+      self.parse_items(val_type)
   def parse_items(self, val_type):
     self.items = []
     machine = self.doc.firstChild

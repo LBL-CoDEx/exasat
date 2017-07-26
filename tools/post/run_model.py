@@ -17,46 +17,93 @@ __status__ = "Production"
 
 import sys
 import os
+from distutils.util import strtobool
 
 from analyze import StaticAnalysis, TableCondsChecker
 from parser import KeyValXMLParser, to_sym_dict
 
-def load_kv_xml(xml_env, default_xml=None, val_type=str, default=[]):
-  result = default
-  xml_file = os.getenv(xml_env, default_xml)
-  if xml_file:
-    result = KeyValXMLParser(xml_file, val_type).items
+# default args
+def default_args():
+  return {
+    "xml"          : None,
+    "polly"        : None,
+    "symsubs"      : None,
+    "namesubs"     : None,
+    "params"       : None,
+    "block_params" : None,
+    "conds"        : None,
+    "machine"      : "../../examples/machine.xml",
+    "subparams"    : "False",
+  }
+
+# setup for CNS code
+def cns_args():
+  return {
+    "xml"          : "../../examples/cns-smc/xml/advance-flat.xml",
+#    "polly"        : "../../examples/cns-smc/xml/advance-flat.polly.xml",
+    "polly"        : "",
+    "symsubs"      : "../../examples/cns-smc/symsubs.xml",
+    "namesubs"     : "../../examples/cns-smc/namesubs.xml",
+    "params"       : "../../examples/cns-smc/params.xml",
+    "block_params" : "../../examples/cns-smc/block_params.xml",
+    "conds"        : "../../examples/cns-smc/conds.xml",
+    "machine"      : "../../examples/machine.xml",
+    "subparams"    : "False",
+  }
+
+# setup for SMC code
+def smc_args():
+  # use most of the CNS setup
+  result = cns_args()
+  # change the source input files
+  result["xml"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.xml"
+#  result["polly"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.polly.xml"
+  result["polly"] = ""
   return result
 
+# setup for HPGMG code
+def hpgmg_args():
+  return {}
+
+def get_env_args():
+  result = default_args()
+  for tag in ["xml", "polly", # which XML files to analyze
+              "symsubs", "namesubs", # substitutions made upon parsing the XML
+              # problem and machine parameters used to evaluate performance
+              "params", "block_params", "conds", "machine",
+              # bool: T: substitute parameters first for numeric results (faster)
+              #       F: generate symbolic results in terms of the parameters (slower)
+              "subparams", 
+             ]:
+    val = os.getenv(tag, None)
+    if val:
+      result[tag] = val
+  return result
+
+def load_args(args):
+  return (
+    { "xml"             : args["xml"],
+      "polly_xml"       : args["polly"],
+      "symsubs"         : to_sym_dict(KeyValXMLParser(args["symsubs"]).items),
+      "namesubs"        : to_sym_dict(KeyValXMLParser(args["namesubs"]).items),
+    },
+    { "params"          : to_sym_dict(KeyValXMLParser(args["params"]).items),
+      "block_params"    : to_sym_dict(KeyValXMLParser(args["block_params"]).items),
+      "machine"         : dict(KeyValXMLParser(args["machine"], float).items),
+      "conds_chk"       : TableCondsChecker(KeyValXMLParser(args["conds"], strtobool).items),
+      "flag_sub_params" : strtobool(args["subparams"]),
+    })
+
 def main(args):
-  # some test parameters
-  def_xml        = "../../examples/cns-smc/xml/advance-flat.xml"
-#  def_polly_xml  = "../../examples/cns-smc/xml/advance-flat.polly.xml"
-#  def_polly_xml  = "../../examples/hpgmg/xml/scops.xml"
-  def_polly_xml  = ""
-  def_symsubs_xml = "../../examples/cns-smc/symsubs.xml"
-  def_namesubs_xml = "../../examples/cns-smc/namesubs.xml"
-  def_params_xml = "../../examples/cns-smc/params.xml"
-  def_block_params_xml = "../../examples/cns-smc/params.xml"
-  def_conds_xml  = "../../examples/cns-smc/conds.xml"
-  def_mach_xml   = "../../examples/machine.xml"
 
-  xml_file = os.getenv("xml", def_xml) 
-  polly_xml_file = os.getenv("pollyxml", def_polly_xml) 
+#  (sa_kw_args, dump_kw_args) = load_args(cns_args())
+  (sa_kw_args, dump_kw_args) = load_args(get_env_args())
 
-  symsubs = to_sym_dict(load_kv_xml("symsubs_xml", def_symsubs_xml))
-  namesubs = to_sym_dict(load_kv_xml("namesubs_xml", def_namesubs_xml))
-  params = to_sym_dict(load_kv_xml("params_xml", def_params_xml))
-  block_params = to_sym_dict(load_kv_xml("block_params_xml", def_block_params_xml))
-  conds_table = dict(load_kv_xml("conds_xml", def_conds_xml, val_type=bool))
-  machine = dict(load_kv_xml("machine_xml", def_mach_xml, val_type=float))
+  # parse the XML files and do substitutions
+  sa = StaticAnalysis(**sa_kw_args)
 
-  flag_sub_params = os.getenv("subparams", False) 
-
-  sa = StaticAnalysis(xml_file, polly_xml_file, symsubs, namesubs)
-  sa.dump(params, block_params, machine, \
-          TableCondsChecker(conds_table), flag_sub_params)
+  # do performance analysis at granularity of first-level loops in all functions
+  sa.dump(**dump_kw_args)
  
 if __name__ == '__main__':
   main(sys.argv)
-
