@@ -111,41 +111,18 @@ void removeRestrictKeywords(SgNode* node){
     for(; it != refs.end(); it++){
 	SgVarRefExp *ref= isSgVarRefExp(*it);
 	SgType* type= ref->get_type();
-	if(type){
-	    if(type->unparseToString().size()>12)
-		if(type->unparseToString().substr(type->unparseToString().size()-12, 12) == "__restrict__"){
-		    SgModifierNodes* modifier=  type->get_modifiers();
-		    if(modifier){
-			SgTypeModifier *type_modifier= isSgTypeModifier(modifier);
-			if(type_modifier->isRestrict()){ 
-			    type_modifier->unsetRestrict();
-			}
-		    }else{
-			SgInitializedName* initName= ref->get_symbol()->get_declaration();
-			if(initName){
-			    string typeStr= type->unparseToString();
-			    string removeRestrictStr= typeStr.erase(type->unparseToString().size()-14, type->unparseToString().size()-1); //remove " * __restrict__"
-      			    //rebuild the type
-      			    SgType* baseType= buildIntType();//just a dummy node
-		            SgType* newType0= buildPointerType(baseType);
- 		            SgType* newType= newType0;
-      			    while(removeRestrictStr.substr(removeRestrictStr.size()-1,1)=="*"){
-		              newType= buildPointerType(newType);
-                              removeRestrictStr.erase(removeRestrictStr.size()-1, removeRestrictStr.size()-1); 
-			    } 
-                            removeRestrictStr.erase(removeRestrictStr.size()-1, removeRestrictStr.size()-1); //remove the last space
-			    SgType* newBaseType;
-			    if(removeRestrictStr.substr(removeRestrictStr.size()-6, 6).compare("double")==0){ newBaseType= buildDoubleType();
-			    }else if(removeRestrictStr.substr(removeRestrictStr.size()-5, 5).compare("float")==0) newBaseType= buildFloatType();
-			    else newBaseType= buildOpaqueType(removeRestrictStr.c_str(), initName->get_scope());
-			    isSgPointerType(newType0)->set_base_type(newBaseType);
-			    initName->set_type(newType);
-			}
-		    }
+	if(isSgModifierType(type)){
+	    SgTypeModifier type_modifier= isSgModifierType(type)->get_typeModifier();
+	    if(type_modifier.isRestrict ()){
+		SgInitializedName* initName= ref->get_symbol()->get_declaration();
+		if(initName){
+		    SgType* actualType= isSgModifierType(type)->get_base_type();
+		    initName->set_type(actualType);
 		}
+	    }
 	}
     }
-} 
+}
 
 void FunctionHandler::process(SgNode* node)
 {
@@ -186,7 +163,7 @@ void FunctionHandler::process(SgNode* node)
 	if(!is_canonical){
 	    vector< std::pair<SgInitializedName*, SgExpression*> > indexVars;
 	    SgForInitStatement* forInitStmt= isSgForStatement(forLoop)->get_for_init_stmt();
-            //parse loop index variables
+	    //parse loop index variables
 	    if(forInitStmt){
 		std::vector<SgStatement*> forInitStmtList= forInitStmt->get_init_stmt();
 		for(int i=0 ; i<forInitStmtList.size(); i++){
@@ -216,7 +193,7 @@ void FunctionHandler::process(SgNode* node)
 	    }
 	    if(indexVars.size()>1){
 		SgExpression* testExp= forLoop->get_test_expr();
-                //we assume that only one variable appears in the test expression, otherwise it would be difficult to find the relation among variables
+		//we assume that only one variable appears in the test expression, otherwise it would be difficult to find the relation among variables
 		if(isSgLessThanOp(testExp) || isSgLessOrEqualOp(testExp) || isSgGreaterThanOp(testExp) || isSgGreaterOrEqualOp(testExp) || isSgNotEqualOp(testExp))
 		{
 		    Rose_STL_Container<SgNode*> varRefs = NodeQuery::querySubTree(testExp, V_SgVarRefExp);
