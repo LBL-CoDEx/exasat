@@ -1,14 +1,14 @@
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da995090 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da995330 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da9955d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da995870 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da9a27d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da9a2a70 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da9a2d10 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7fe2da9a2fb0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7fe2da7162b8 = SgEnumDeclaration not in child list of scope = 0x7fe2dae12120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7fe2da7162b8 = SgEnumDeclaration not in child list of scope = 0x7fe2dae12120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7fe2da7162b8 = SgEnumDeclaration not in child list of scope = 0x7fe2dae12120 = SgGlobal 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8507090 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8507330 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc85075d0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8507870 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc85147d0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8514a70 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8514d10 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### ResetParentPointersInMemoryPool::visit(declaration = 0x7ffbc8514fb0 = SgClassDeclaration) declaration->get_parent() == NULL 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7ffbc82882b8 = SgEnumDeclaration not in child list of scope = 0x7ffbc8984120 = SgGlobal 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7ffbc82882b8 = SgEnumDeclaration not in child list of scope = 0x7ffbc8984120 = SgGlobal 
+##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7ffbc82882b8 = SgEnumDeclaration not in child list of scope = 0x7ffbc8984120 = SgGlobal 
 <program>
 <function name="CopyBlock" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -83,7 +83,7 @@
 <scalar name="write_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
 </array>
 <array name="write" component="" datatype="double" accesstype="writeonly">
@@ -104,7 +104,7 @@
 <scalar name="write_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
 <access offset="(1,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
 </array>
@@ -127,7 +127,7 @@
 <scalar name="write_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
 <access offset="(1,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
 <access offset="(2,0)" dependentloopvar="(k,j)" reads="1" writes="0"/>
@@ -152,7 +152,7 @@
 <scalar name="write_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(k,i)" reads="1" writes="0"/>
 </array>
 <array name="write" component="" datatype="double" accesstype="writeonly">
@@ -171,7 +171,7 @@
 <scalar name="write_jStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(j,i)" reads="1" writes="0"/>
 </array>
 <array name="write" component="" datatype="double" accesstype="writeonly">
@@ -196,7 +196,7 @@
 <scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="read" component="" datatype="const double" accesstype="readonly">
+<array name="read" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
 <array name="write" component="" datatype="double" accesstype="writeonly">
@@ -430,7 +430,7 @@
 </if>
 <if linenum="926" conditional="doRestrict;" adds="0" multiplies="0" divides="0" specials="0">
 </if>
-<loop linenum="932" loopvar="level" lowerbound="1" upperbound="all_grids -> num_levels - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="932" loopvar="level" lowerbound="1" upperbound="all_grids -> num_levels - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
 <scalar name="h" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="my_rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="numVectors" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -1851,7 +1851,7 @@
 <access offset="(fineBoxID)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(-1)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
-<array name="fineRanks" component="" datatype="int" accesstype="writeonly">
+<array name="fineRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
 </if>
@@ -1878,14 +1878,14 @@
 <scalar name="numFineBoxesRemote" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <if linenum="239" conditional="fineRanks[neighbor] != _rank;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="numFineRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="fineRanks" component="" datatype="int" accesstype="writeonly">
+<array name="fineRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="2" writes="0"/>
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
@@ -1961,7 +1961,7 @@
 <scalar name="numFineRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
 <scalar name="offset" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="all_grids" component="" datatype="mg_type" accesstype="writeonly">
@@ -1973,7 +1973,7 @@
 <scalar name="numFineBoxes" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="fineBox" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="fineBoxes" component="" datatype="RP_type" accesstype="readonly">
@@ -2163,7 +2163,7 @@
 <array name="coarseBoxes" component="" datatype="RP_type" accesstype="writeonly">
 <access offset="(numCoarseBoxes)" dependentloopvar="()" reads="0" writes="6"/>
 </array>
-<array name="coarseRanks" component="" datatype="int" accesstype="writeonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(numCoarseBoxes)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
 </if>
@@ -2184,14 +2184,14 @@
 <scalar name="numCoarseBoxes" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <if linenum="372" conditional="coarseRanks[neighbor] != _rank;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="numCoarseRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="writeonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="2" writes="0"/>
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
@@ -2267,7 +2267,7 @@
 <scalar name="numCoarseRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
 <scalar name="offset" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="all_grids" component="" datatype="mg_type" accesstype="writeonly">
@@ -2279,7 +2279,7 @@
 <scalar name="numCoarseBoxes" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="coarseBox" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="coarseBoxes" component="" datatype="RP_type" accesstype="readonly">
@@ -2466,7 +2466,7 @@
 <access offset="(coarseBoxID)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(1)" dependentloopvar="(level)" reads="1" writes="0"/>
 </array>
-<array name="coarseRanks" component="" datatype="int" accesstype="writeonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
 </if>
@@ -2490,14 +2490,14 @@
 <scalar name="numCoarseBoxesRemote" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <if linenum="536" conditional="coarseRanks[neighbor] != _rank;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="numCoarseRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="writeonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="2" writes="0"/>
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
@@ -2576,7 +2576,7 @@
 <scalar name="numCoarseRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
 <scalar name="offset" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="all_grids" component="" datatype="mg_type" accesstype="readonly">
@@ -2589,7 +2589,7 @@
 <scalar name="numCoarseBoxes" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="coarseBox" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="coarseRanks" component="" datatype="int" accesstype="readonly">
+<array name="coarseRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="coarseBoxes" component="" datatype="RP_type" accesstype="readonly">
@@ -2829,7 +2829,7 @@
 <array name="fineBoxes" component="" datatype="RP_type" accesstype="writeonly">
 <access offset="(numFineBoxesRemote)" dependentloopvar="()" reads="0" writes="9"/>
 </array>
-<array name="fineRanks" component="" datatype="int" accesstype="writeonly">
+<array name="fineRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(numFineBoxesRemote)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
 </if>
@@ -2853,14 +2853,14 @@
 <scalar name="numFineBoxesRemote" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <if linenum="703" conditional="fineRanks[neighbor] != _rank;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="numFineRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="_rank" datatype="int" isConstant="false" accesstype="writeonly" reads="0" writes="1"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="fineRanks" component="" datatype="int" accesstype="writeonly">
+<array name="fineRanks" component="" datatype="double" accesstype="writeonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="2" writes="0"/>
 <access offset="(0)" dependentloopvar="()" reads="0" writes="1"/>
 </array>
@@ -2939,7 +2939,7 @@
 <scalar name="numFineRanks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="writeread" reads="6" writes="1"/>
 <scalar name="offset" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="all_grids" component="" datatype="mg_type" accesstype="readonly">
@@ -2952,7 +2952,7 @@
 <scalar name="numFineBoxesRemote" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="neighbor" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="fineBox" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
-<array name="fineRanks" component="" datatype="int" accesstype="readonly">
+<array name="fineRanks" component="" datatype="double" accesstype="readonly">
 <access offset="(0)" dependentloopvar="(neighbor)" reads="1" writes="0"/>
 </array>
 <array name="fineBoxes" component="" datatype="RP_type" accesstype="readonly">
@@ -3077,7 +3077,7 @@
 <scalar name="jlo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="jhi" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<loop linenum="265" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="265" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="0" multiplies="1" divides="0" specials="0">
 <scalar name="ilo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="ihi" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
@@ -3155,7 +3155,7 @@
 <nonlocal name="By"/>
 <nonlocal name="Bz"/>
 </function>
-<function name="evaluateU" adds="30" multiplies="47" divides="0" specials="0">
+<function name="evaluateU" adds="30" multiplies="47" divides="1" specials="0">
 <scalar name="x" datatype="double" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
 <scalar name="y" datatype="double" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
 <scalar name="z" datatype="double" isConstant="false" accesstype="readonly" reads="11" writes="0"/>
@@ -3364,7 +3364,7 @@
 <loop linenum="95" loopvar="j" lowerbound="0" upperbound="dim_j" stride="1" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
 <scalar name="dim_j" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
-<loop linenum="96" loopvar="i" lowerbound="0" upperbound="dim_i" stride="1" adds="9" multiplies="13" divides="0" specials="0">
+<loop linenum="96" loopvar="i" lowerbound="0" upperbound="dim_i" stride="1" adds="12" multiplies="13" divides="0" specials="0">
 <scalar name="box" datatype="int" isConstant="false" accesstype="readonly" reads="8" writes="0"/>
 <scalar name="i" datatype="int" isConstant="false" accesstype="writeread" reads="4" writes="1"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
@@ -3594,7 +3594,7 @@
 <nonlocal name="level_f"/>
 <nonlocal name="level_c"/>
 </function>
-<function name="main" adds="0" multiplies="0" divides="0" specials="0">
+<function name="main" adds="0" multiplies="0" divides="1" specials="0">
 <scalar name="type" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="argc" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="my_rank" datatype="int" isConstant="false" accesstype="readonly" reads="7" writes="0"/>
@@ -4085,7 +4085,7 @@
 </funccall>
 <funccall linenum="122" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
-<loop linenum="128" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="128" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="1" specials="0">
 <scalar name="h" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="num_my_blocks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="block" datatype="int" isConstant="false" accesstype="writeread" reads="9" writes="1"/>
@@ -4287,7 +4287,7 @@
 </funccall>
 <funccall linenum="15" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
-<loop linenum="19" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="19" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="1" specials="0">
 <scalar name="h" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="num_my_blocks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="res_id" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -4329,7 +4329,7 @@
 <scalar name="jlo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="jhi" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<loop linenum="44" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="2" multiplies="4" divides="0" specials="0">
+<loop linenum="44" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="13" multiplies="10" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="b" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="ilo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
@@ -4341,7 +4341,7 @@
 <scalar name="kStride" datatype="const int" isConstant="true" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="h2inv" datatype="const double" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="Ax" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<array name="x" component="" datatype="const double" accesstype="readonly">
+<array name="x" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="7" writes="0"/>
 <access offset="(1,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
@@ -4350,21 +4350,21 @@
 <access offset="(0,-1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,0,-1)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="rhs" component="" datatype="const double" accesstype="readonly">
+<array name="rhs" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="alpha" component="" datatype="const double" accesstype="readonly">
+<array name="alpha" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_i" component="" datatype="const double" accesstype="readonly">
+<array name="beta_i" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(1,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_j" component="" datatype="const double" accesstype="readonly">
+<array name="beta_j" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_k" component="" datatype="const double" accesstype="readonly">
+<array name="beta_k" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,0,1)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
@@ -4449,7 +4449,7 @@
 <scalar name="dim_j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="jj" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<loop linenum="51" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="51" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="7" multiplies="1" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="read_jStride" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
 <scalar name="read_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="5" writes="0"/>
@@ -4483,7 +4483,7 @@
 <scalar name="dim_j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="jj" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<loop linenum="62" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="62" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="3" multiplies="1" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="read_jStride" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="read_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -4513,7 +4513,7 @@
 <scalar name="dim_j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="jj" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<loop linenum="73" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="73" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="3" multiplies="1" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="read_jStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="read_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -4543,7 +4543,7 @@
 <scalar name="dim_j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="jj" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
-<loop linenum="84" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="84" loopvar="i" lowerbound="0" upperbound="dim_i - 1" stride="1" adds="3" multiplies="1" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="read_jStride" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
 <scalar name="read_kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -4846,7 +4846,7 @@
 </funccall>
 <funccall linenum="37" name="" origname="getTime" module="unknown" flops="unknown">
 </funccall>
-<loop linenum="41" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<loop linenum="41" loopvar="block" lowerbound="0" upperbound="level -> num_my_blocks - 1" stride="1" adds="0" multiplies="0" divides="1" specials="0">
 <scalar name="h" datatype="double" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="box_ghosts" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="num_my_blocks" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
@@ -4895,7 +4895,7 @@
 <scalar name="jlo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="jhi" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<loop linenum="81" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="3" multiplies="5" divides="0" specials="0">
+<loop linenum="81" loopvar="i" lowerbound="ilo" upperbound="ihi - 1" stride="1" adds="14" multiplies="12" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="b" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="ilo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
@@ -4907,28 +4907,28 @@
 <scalar name="jStride" datatype="const int" isConstant="true" accesstype="readonly" reads="5" writes="0"/>
 <scalar name="kStride" datatype="const int" isConstant="true" accesstype="readonly" reads="4" writes="0"/>
 <scalar name="Ax" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<array name="rhs" component="" datatype="const double" accesstype="readonly">
+<array name="rhs" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="alpha" component="" datatype="const double" accesstype="readonly">
+<array name="alpha" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_i" component="" datatype="const double" accesstype="readonly">
+<array name="beta_i" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(1,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_j" component="" datatype="const double" accesstype="readonly">
+<array name="beta_j" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="beta_k" component="" datatype="const double" accesstype="readonly">
+<array name="beta_k" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,0,1)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="Dinv" component="" datatype="const double" accesstype="readonly">
+<array name="Dinv" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="x_n" component="" datatype="const double" accesstype="readonly">
+<array name="x_n" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="8" writes="0"/>
 <access offset="(1,0,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
@@ -4937,7 +4937,7 @@
 <access offset="(0,-1,0)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 <access offset="(0,0,-1)" dependentloopvar="(k,j,i)" reads="1" writes="0"/>
 </array>
-<array name="RedBlack" component="" datatype="const double" accesstype="readonly">
+<array name="RedBlack" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0)" dependentloopvar="(j,i)" reads="1" writes="0"/>
 </array>
 <array name="x_np1" component="" datatype="double" accesstype="writeonly">
