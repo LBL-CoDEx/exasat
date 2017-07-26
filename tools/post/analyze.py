@@ -34,12 +34,10 @@ def accessSize(accs):
   # take the union across boxes to eliminate overlaps
   return reduce(lambda x,y: x.union(y), map(makeBox, accs)).size()
 
-_reported = set()
 def reportReuse(linenum, ws, cache):
-  if linenum not in _reported:
-    _reported.add(linenum)
-    print "Reuse report: loop %d WS: %d %s %d" % \
-          (linenum, ws, '<=' if ws <= cache else '>', cache)
+  rel = '<=' if ws <= cache else '> '
+  print "Reuse report: loop %4d WS: %8.4g %s %.4g KiB (%8d %s %8d bytes)" % \
+        (linenum, float(ws) / 2**10, rel, float(cache) / 2**10, ws, rel, cache)
 
 # helper class for checking conditionals
 class TableCondsChecker(object):
@@ -340,6 +338,8 @@ class Traffic(object):
       # other parameters
       self.params = params
       self.block_params = block_params
+      # TODO: use the type to lookup in the model how large the word is
+      #       for now assume everything we care about is the same size
       self.word_byte_n = machine['word_byte_n']
       self.cache_byte_n = machine['core_cache_kbytes'] * 1024
   def __str__(self):
@@ -384,7 +384,9 @@ class Traffic(object):
     result.ws = self.ws.loop(blockLoop) # working set of the blocked loop
     result.ws_block_n = self.ws_block_n * numBlocks # number of blocks total
 
-    reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
+    # only report if we are the first of siblings (prevent printing duplicate reports)
+    if self == siblings.iterfirst():
+      reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
     if loop_ws_byte_n <= self.cache_byte_n:
       # WS of all siblings fit in cache
       # traffic equals blocked working set times number of total blocks
@@ -446,7 +448,8 @@ class StaticAnalysis(object):
         print loop.collect(WorkingSet.collector(conds_chk, machine))
 
         mt = loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
+        total_bytes = sum(map(lambda x: x.bytes(), mt))
         print
-        print "Total Memory Traffic (L/S) using cache model: %d " % sum(map(lambda x: x.size(), mt))
+        print "Total Memory Traffic (L/S) using cache model: %g GiB (%d bytes)" % (float(total_bytes) / 2**30, total_bytes)
         print
         print mt

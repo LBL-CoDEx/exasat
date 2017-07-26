@@ -50,3 +50,7 @@ class Collection(object):
     result = Collection(self)
     result.merge(other)
     return result
+  def iterfirst(self):
+    # return first item order of iteration
+    for item in self.d.itervalues():
+      return item

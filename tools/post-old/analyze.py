@@ -82,8 +82,8 @@ class StaticAnalysis:
 
   def __init__(self, filename):
     self.info = parser.XMLParser(filename).info()
-    pp.pprint(self.info)
     if options.flag_debug:
+      pp.pprint(self.info)
       printLoops(self.info, 'simple')
     self.analyzeInfo()
     if options.flag_debug:

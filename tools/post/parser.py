@@ -23,11 +23,22 @@ import xml.dom.minidom
 import ast
 import operator
 import copy
+import re
 from sympy.parsing.sympy_parser import parse_expr
 
 from box import Box
 from collection import Collection
 from common import options, collapse, numIters, rangeMerge, rangeDisjoint
+
+# TODO: load these from application-specific XML file
+textsubs = [('level\s*-\s*1' , 'levelm1'),
+            ('level\s*\+\s*1' , 'levelp1'),
+            ('\s*\.\s*' , '__dot__'  ),
+            ('\s*->\s*', '__arrow__'),
+            ('\s*\[\s*', '__lbrkt__'),
+            ('\s*\]\s*', '__rbrkt__'),
+            ('\s*\]\s*', '__rbrkt__'),
+           ]
 
 def dprint(s):
   if options.flag_verbose_parser:
@@ -36,12 +47,20 @@ def dprint(s):
 def to_sym_dict(list_of_pairs):
   return dict(map(lambda (x,y): (parse_expr(x), parse_expr(y)), list_of_pairs))
 
+# direct text replacement using string replace
+def doTextRepl(s, textsubs):
+  for sub in textsubs:
+    s = re.sub(sub[0], sub[1], s)
+  return s
+
+# symbolic replacement using sympy xreplace
 def doSymRepl(expr, repl):
   if type(expr) == type('') or type(expr) == unicode:
     expr = parse_expr(expr)
   return expr.xreplace(repl)
 
 def parseExpr(s, symsubs):
+  s = doTextRepl(s, textsubs)
   try:
     return int(s) # try to do the fast thing first
   except ValueError as e:
@@ -300,8 +319,14 @@ class XMLParser(object):
   """Contains information on enclosed modules."""
   slots = ['doc', 'functions']
   def __init__(self, filename, symsubs, namesubs):
-    assert type(filename) == type('')
-    self.doc = xml.dom.minidom.parse(filename)
+    if not filename or type(filename) != type(''):
+      print "Invalid xml filename: %s" % filename
+      raise Exception()
+    try:
+      self.doc = xml.dom.minidom.parse(filename)
+    except Exception as e:
+      print "Invalid xml: %s" % filename
+      raise e
     env = {'symsubs' : symsubs, 'namesubs' : namesubs}
     program = getChildren(self.doc, 'program')[0]
     self.functions = map(lambda x: Function(x, env),

@@ -26,6 +26,6 @@
 <prop key="__BoxX__" val="32" />
 <prop key="__BoxY__" val="32" />
 <prop key="__BoxZ__" val="32" />
-<prop key="ng" val="4" />
+<prop key="ng" val="0" />
 <prop key="nspecies" val="9" />
 </params>

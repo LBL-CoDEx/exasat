@@ -96,8 +96,10 @@ def load_args(args):
 
 def main(args):
 
-#  (sa_kw_args, dump_kw_args) = load_args(cns_args())
-  (sa_kw_args, dump_kw_args) = load_args(get_env_args())
+  if len(args) > 1 and args[1] == "cns":
+    (sa_kw_args, dump_kw_args) = load_args(cns_args())
+  else:
+    (sa_kw_args, dump_kw_args) = load_args(get_env_args())
 
   # parse the XML files and do substitutions
   sa = StaticAnalysis(**sa_kw_args)

@@ -3,11 +3,12 @@ import string
 import xml.dom.minidom
 import ast
 
+from distutils.util import strtobool
 from common import options, int_types, float_types
 from params import doSymSubs
 
 # can override this if needed
-flag_old = bool(int(os.getenv('old', 0)))
+flag_old = strtobool(os.getenv('old', 'True'))
 
 def getChildren(node, tag):
   return filter(lambda x: x.nodeName == tag, node.childNodes)
