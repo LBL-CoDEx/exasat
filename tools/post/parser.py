@@ -127,7 +127,7 @@ class Scalar(object):
 
 class ArrayAccess(object):
   slots = ['index', 'loopvars', 'reads', 'writes']
-  def __init__(self, node=None, env=None, index=None, loopvars=None):
+  def __init__(self, node=None, env=None, index=None, loopvars=None, reads=None, writes=None):
     if node:
       self.index = parseTuple(node.getAttribute('offset'), lambda x: parseExpr(x, env['symsubs']))
       self.loopvars = parseTuple(node.getAttribute('dependentloopvar'), str)
@@ -135,10 +135,11 @@ class ArrayAccess(object):
       self.writes = int(node.getAttribute('writes'))
       dprint(self)
     else:
+      # this constructor is used in analyze.WorkingSet.loop() to represent an index set
       self.index = index
       self.loopvars = loopvars
-      self.reads = 0
-      self.writes = 0
+      self.reads = reads
+      self.writes = writes
   def __str__(self):
     idxStr = '('+','.join(map(str, self.index))+')'
     lvStr = '('+','.join(self.loopvars)+')'

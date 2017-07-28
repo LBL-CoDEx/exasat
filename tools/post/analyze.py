@@ -26,6 +26,24 @@ from common import options
 
 # Helper functions
 
+def get_type_byte_n(word_type, machine):
+  return machine[word_type + "_byte_n"]
+
+def get_cache_byte_n(machine):
+  return machine['cache_kbytes'] * 1024
+
+def get_scale_factor(tag, machine):
+  return machine[tag + '_sf']
+
+def get_access_type(accesses):
+  (r,w) = (False, False)
+  for x in accesses:
+    (r,w) = (r or x.reads > 0, w or x.writes > 0)
+  assert (r or w) and "must have non-zero reads or writes"
+  return {(True, False): 'ld',
+          (False, True): 'st',
+          (True, True) : 'ls'}[(r,w)]
+
 def accessSize(accs):
   """Returns the number of points in a list of (possibly overlapping) accesses using Box library."""
   def makeBox(acc):
@@ -217,7 +235,7 @@ class WorkingSet(object):
       self.accesses = deepcopy(filter(lambda x: not x.isStateVar(), array.accesses))
       if params:
         self.accesses = map(lambda x: x.subParams(params), self.accesses)
-      self.word_byte_n = machine['word_byte_n']
+      self.word_byte_n = get_type_byte_n(self.type, machine)
       self.size_ = None
   def __str__(self):
     s = "WS %s %s\n" % (self.type, self.name)
@@ -260,17 +278,19 @@ class WorkingSet(object):
         # sort accesses into buckets to be merged
         i = acc.loopvars.index(loop.loopvar) # which index corresponds to the loopvar
         key = (i, tupleDel(acc.index, i), tupleDel(acc.loopvars, i)) # remove the index corresponding to the loopvar
-        appendToDict(buckets, key, acc.index[i]) # add the index to the key's bucket
+        # add the index to the key's bucket along with read/write flags
+        appendToDict(buckets, key, (acc.index[i], acc.reads, acc.writes))
 
     # each bucket now contains a set of accesses that differ only in the dimension of the loop
     # these accesses can be merged, conservatively, by taking the minimum and maximum offset
-    for ((i, idx, lvars), offsets) in buckets.iteritems():
+    for ((i, idx, lvars), offsets_and_rw) in buckets.iteritems():
+      (offsets, reads, writes) = zip(*offsets_and_rw)
       # insert an access interval covering the looped over accesses
       (lb, ub) = loop.range
       r = (lb + min(offsets), ub + max(offsets))
       idx = tupleIns(idx, i, r)
       lvars = tupleIns(lvars, i, '')
-      result.consume(ArrayAccess(index=idx, loopvars=lvars))
+      result.consume(ArrayAccess(index=idx, loopvars=lvars, reads=sum(reads), writes=sum(writes)))
 
     return result
 
@@ -293,7 +313,8 @@ class TrafficRegion(object):
     self.count = count
     self.size_ = self.count * accessSize(self.accesses)
   def __str__(self):
-    s = " TrafficRegion, count=%g:\n" % self.count
+    s = " TrafficRegion, count=%g, acc_type=%s:\n" % \
+        (self.count, get_access_type(self.accesses))
     for acc in self.accesses:
       s += str(acc) + '\n'
     return s
@@ -303,26 +324,32 @@ class TrafficRegion(object):
     return self
   def size(self):
     return self.size_
+  def bytes(self, acc_byte_n):
+    return self.size_ * acc_byte_n[get_access_type(self.accesses)]
 
 
 class Traffic(object):
-  """The memory traffic required to execute a code region.
+  """The memory traffic required by an array during execution of a code region.
     
      Contains several TrafficRegions and the working set to determine reuse in loops."""
-  slots = ['name', 'type', 'regions', 'ws', 'ws_block_n', 'params', 'block_params', 'word_byte_n', 'cache_byte_n']
+  slots = ['name', 'element_type',
+           'regions', 'ws', 'ws_block_n',
+           'element_byte_n', 'acc_byte_n', 
+           'params', 'block_params', 'cache_byte_n']
   def __init__(self, array=None, params=None, block_params=None, machine=None, copy=None):
     if copy:
-      # make a copy (excluding traffic regions and ws)
+      # make a copy (excluding traffic regions and WorkingSet info)
       self.name = copy.name
-      self.type = copy.type
+      self.element_type = copy.element_type
+      self.element_byte_n = copy.element_byte_n
+      self.acc_byte_n = copy.acc_byte_n # bytes per load/store access
       self.params = copy.params             # for problem size and others
       self.block_params = copy.block_params # for cache blocking only
-      self.word_byte_n = copy.word_byte_n   # word size
       self.cache_byte_n = copy.cache_byte_n # cache size
     else:
       # copy from an Array object
       self.name = array.name
-      self.type = array.type
+      self.element_type = array.type
 
       # copy non-state var accesses, do parameter substitution
       accesses = filter(lambda x: not x.isStateVar(), array.accesses)
@@ -335,15 +362,21 @@ class Traffic(object):
       self.ws = WorkingSet(array, params=params, machine=machine)
       self.ws_block_n = 1 # single iteration
 
+      # sizes of elements and accesses
+      self.element_byte_n = get_type_byte_n(self.element_type, machine)
+      self.acc_byte_n = {}
+      for acc_type in ['ld', 'st', 'ls']:
+        self.acc_byte_n[acc_type] = get_scale_factor(acc_type, machine) * \
+                                    self.element_byte_n
+
       # other parameters
       self.params = params
       self.block_params = block_params
-      # TODO: use the type to lookup in the model how large the word is
-      #       for now assume everything we care about is the same size
-      self.word_byte_n = machine['word_byte_n']
-      self.cache_byte_n = machine['core_cache_kbytes'] * 1024
+      self.cache_byte_n = get_cache_byte_n(machine)
+
   def __str__(self):
-    s = "MT %s %s, words=%d, bytes=%d\n" % (self.type, self.name, self.size(), self.bytes())
+    s = "MT %s %s, words=%d, bytes=%d\n" % \
+        (self.element_type, self.name, self.size(), self.bytes())
     for region in self.regions:
       s += str(region)
     return s
@@ -357,12 +390,16 @@ class Traffic(object):
       region *= n
     return self
   def consume(self, region):
-    # these regions may overlap
+    # NOTE: Regions consumed may overlap, but should not be merged (yet).
+    #       If cache is sufficient, a new region will be created in loop()
+    #         from the embedded WorkingSet object.
+    #       If cache is insufficient, each region is assumed to be loaded
+    #         into cache independently (conservative estimate)
     self.regions.append(region)
-  def bytes(self):
-    return self.size() * self.word_byte_n
   def size(self):
     return sum(map(lambda x: x.size(), self.regions))
+  def bytes(self):
+    return sum(map(lambda x: x.bytes(self.acc_byte_n), self.regions))
   def loop(self, origLoop, siblings):
     """If enough cache for reuse within a block, traffic equals the blocked working set times the number of blocks.
 

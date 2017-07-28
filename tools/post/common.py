@@ -13,7 +13,6 @@ __status__ = "Production"
 import operator
 
 class options:
-  dim = 3
   flag_debug = True
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
