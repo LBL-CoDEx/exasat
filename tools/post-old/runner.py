@@ -174,10 +174,18 @@ class Runner(object):
                       }
         # fix the plane WS for faces-only stencils
         if ainfo['stenciltype'] == 'faces':
-          array['WS']['all']['plane'] = my_params['Word Size'] * ainfo['WS']['numPlanes'] * \
-              (blockx * accessy + accessx * blocky - blockx * blocky)
-          array['WS']['reuse']['plane'] = my_params['Word Size'] * ainfo['WS']['numReusePlanes'] * \
-              (blockx * accessy + accessx * blocky - blockx * blocky)
+
+          array['WS']['all']['plane'] = my_params['Word Size'] * \
+              ((ainfo['WS']['numPlanes'] - 1) * (blockx * blocky) + \
+               1 * (blockx * accessy + accessx * blocky - blockx * blocky))
+          array['WS']['all']['pencil'] = my_params['Word Size'] * \
+              ((ainfo['WS']['numPencils'] - 1) * blockx + 1 * accessx)
+
+          array['WS']['reuse']['plane'] = my_params['Word Size'] * \
+              ((ainfo['WS']['numReusePlanes'] - 1) * (blockx * blocky) + \
+               1 * (blockx * accessy + accessx * blocky - blockx * blocky))
+          array['WS']['reuse']['pencil'] = my_params['Word Size'] * \
+              ((ainfo['WS']['numReusePencils'] - 1) * blockx + 1 * accessx)
 
         # BW calculation for generic case
         array['BW'] = {'block' : result['numBlocks'] * ainfo['BW']['numCopies'] * my_params['R cost'] * \
@@ -194,8 +202,11 @@ class Runner(object):
           array['BW']['block'] = result['numBlocks'] * ainfo['BW']['numCopies'] * my_params['R cost'] * \
               (accessx * blocky * blockz + blockx * accessy * blockz + \
                blockx * blocky * accessz - 2 * blockx * blocky * blockz)
-          array['BW']['plane'] = result['numBlocks'] * ainfo['BW']['numPlanes'] * my_params['R cost'] * \
-              (accessx * blocky + blockx * accessy - blockx * blocky) * blockz
+          array['BW']['plane'] = result['numBlocks'] * my_params['R cost'] * \
+              ((ainfo['BW']['numPlanes'] - 1) * (blockx * blocky) + \
+               1 * (accessx * blocky + blockx * accessy - blockx * blocky)) * blockz
+          array['BW']['pencil'] = result['numBlocks'] * my_params['R cost'] * \
+              ((ainfo['BW']['numPencils'] - 1) * blockx + 1 * accessx) * blocky * blockz
 
         arrays.append(array)
 

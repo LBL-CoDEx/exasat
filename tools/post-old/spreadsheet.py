@@ -444,21 +444,43 @@ class SpreadsheetWriter(object):
                     array['WS']['numReusePencils'], array['WS']['numReuseCells']])))
 
             # working set size formulas (kB)
+
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*%s*(%s*%s+%s*%s-%s*%s)/2^10' % \
-                  getRefs('Word Size', 'aWSPlanes', 'blockxcl', 'accessy', \
-                          'accessxcl', 'blocky', 'blockxcl', 'blocky'))
+              f.write('|=%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
+                  getRefs('Word Size', \
+                          'aWSPlanes', 'blockxcl', 'blocky', \
+                          'blockxcl', 'accessy', \
+                          'accessxcl', 'blocky', \
+                          'blockxcl', 'blocky'))
             else:
               f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aWSPlanes', 'accessxcl', 'accessy'))
-            f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSPencils', 'accessxcl'))
-            f.write('|=%s*%s/2^10' % getRefs('Word Size', 'aWSCells'))
+
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*%s*(%s*%s+%s*%s-%s*%s)/2^10' % \
-                  getRefs('Word Size', 'aWSReusePlanes', 'blockxcl', 'accessy', \
-                          'accessxcl', 'blocky', 'blockxcl', 'blocky'))
+              f.write('|=%s*((%s-1)*(%s)+1*(%s))/2^10' % \
+                  getRefs('Word Size', 'aWSPencils', 'blockxcl', 'accessxcl'))
+            else:
+              f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSPencils', 'accessxcl'))
+
+            f.write('|=%s*%s/2^10' % getRefs('Word Size', 'aWSCells'))
+
+            # working set size formulas (reuse only) (kB)
+
+            if array['stenciltype'] == 'faces':
+              f.write('|=%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
+                  getRefs('Word Size', \
+                          'aWSReusePlanes', 'blockxcl', 'blocky', \
+                          'blockxcl', 'accessy', \
+                          'accessxcl', 'blocky', \
+                          'blockxcl', 'blocky'))
             else:
               f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aWSReusePlanes', 'accessxcl', 'accessy'))
-            f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSReusePencils', 'accessxcl'))
+
+            if array['stenciltype'] == 'faces':
+              f.write('|=%s*((%s-1)*(%s)+1*(%s))/2^10' % \
+                  getRefs('Word Size', 'aWSReusePencils', 'blockxcl', 'accessxcl'))
+            else:
+              f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSReusePencils', 'accessxcl'))
+
             f.write('|=%s*%s/2^10' % getRefs('Word Size', 'aWSReuseCells'))
 
             # memory traffic formulas (GBytes per sweep)
@@ -466,16 +488,25 @@ class SpreadsheetWriter(object):
               f.write('|=%s*%s*%s*(%s*%s*%s+%s*%s*%s+%s*%s*%s-2*%s*%s*%s)/2^30' % \
                   getRefs('numBlocks', 'aBWCopies', 'R cost', 'accessxcl', 'blocky', 'blockz', 'blockxcl', \
                           'accessy', 'blockz', 'blockxcl', 'blocky', 'accessz', 'blockxcl', 'blocky', 'blockz'))
-              f.write('|=%s*%s*%s*(%s*%s+%s*%s-%s*%s)*%s/2^30' % \
-                  getRefs('numBlocks', 'aBWPlanes', 'R cost', 'accessxcl', 'blocky', \
-                          'blockxcl', 'accessy', 'blockxcl', 'blocky', 'blockz'))
+              f.write('|=%s*%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))*%s/2^30' % \
+                  getRefs('numBlocks', 'R cost', \
+                          'aBWPlanes', 'blockxcl', 'blocky', \
+                          'accessxcl', 'blocky', \
+                          'blockxcl', 'accessy', \
+                          'blockxcl', 'blocky', \
+                          'blockz'))
+              f.write('|=%s*%s*((%s-1)*%s+1*%s)*%s*%s/2^30' % \
+                  getRefs('numBlocks', 'R cost', \
+                          'aBWPencils', 'blockxcl', \
+                          'accessxcl', \
+                          'blocky', 'blockz'))
             else:
               f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCopies', 'R cost', \
                                                            'accessxcl', 'accessy', 'accessz'))
               f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWPlanes', 'R cost', \
                                                            'accessxcl', 'accessy', 'blockz'))
-            f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWPencils', 'R cost', \
-                                                         'accessxcl', 'blocky', 'blockz'))
+              f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWPencils', 'R cost', \
+                                                           'accessxcl', 'blocky', 'blockz'))
             f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCells', 'R cost', \
                                                          'blockx', 'blocky', 'blockz'))
 
