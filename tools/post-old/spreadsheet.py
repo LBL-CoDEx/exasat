@@ -391,7 +391,7 @@ class SpreadsheetWriter(object):
           # print header
           loopid = '%s.%d' % (fname, loop['linenum'])
           f.write('Loop line num:|%d\n' % (loop['linenum']))
-          f.write('|||Iteration Space|||Block Iteration Space|||||Block Access Space||||Bandwidth||||' + \
+          f.write('|||Iteration Space|||Block Iteration Space|||||Block Access Space|||||Bandwidth|||' + \
                   'Working Set|||Reuse WS|||WS (all reads)|||WS (reuse only)|||GBytes transferred/sweep\n')
           f.write('||Name|X|Y|Z|X|Y|Z|X (cache line)|Num Blocks|' + \
                   'X#$CLABEL{accessx}|Y#$CLABEL{accessy}|Z#$CLABEL{accessz}|X (cache line)#$CLABEL{accessxcl}|' + \
@@ -438,7 +438,7 @@ class SpreadsheetWriter(object):
                                                                            'Cache Line Size', 'Word Size'))
 
             # bandwidth and working set figures from access pattern analysis
-            f.write('|=%s'*10 % tuple(map(doRefSubs, [array['BW']['numCopies'], array['BW']['numPlanes'], \
+            f.write('|=%s'*10 % tuple(map(doRefSubs, [array['copies'], array['BW']['numPlanes'], \
                     array['BW']['numPencils'], array['BW']['numCells'], array['WS']['numPlanes'], \
                     array['WS']['numPencils'], array['WS']['numCells'], array['WS']['numReusePlanes'], \
                     array['WS']['numReusePencils'], array['WS']['numReuseCells']])))
@@ -446,84 +446,83 @@ class SpreadsheetWriter(object):
             # working set size formulas (kB)
 
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
-                  getRefs('Word Size', \
+              f.write('|=%s*%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', \
                           'aWSPlanes', 'blockxcl', 'blocky', \
                           'blockxcl', 'accessy', \
                           'accessxcl', 'blocky', \
                           'blockxcl', 'blocky'))
             else:
-              f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aWSPlanes', 'accessxcl', 'accessy'))
+              f.write('|=%s*%s*%s*%s*%s/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', 'aWSPlanes', 'accessxcl', 'accessy'))
 
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*((%s-1)*(%s)+1*(%s))/2^10' % \
-                  getRefs('Word Size', 'aWSPencils', 'blockxcl', 'accessxcl'))
+              f.write('|=%s*%s*((%s-1)*(%s)+1*(%s))/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', 'aWSPencils', 'blockxcl', 'accessxcl'))
             else:
-              f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSPencils', 'accessxcl'))
+              f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aBWCopies', 'aWSPencils', 'accessxcl'))
 
-            f.write('|=%s*%s/2^10' % getRefs('Word Size', 'aWSCells'))
+            f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aBWCopies', 'aWSCells'))
 
             # working set size formulas (reuse only) (kB)
 
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
-                  getRefs('Word Size', \
+              f.write('|=%s*%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', \
                           'aWSReusePlanes', 'blockxcl', 'blocky', \
                           'blockxcl', 'accessy', \
                           'accessxcl', 'blocky', \
                           'blockxcl', 'blocky'))
             else:
-              f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aWSReusePlanes', 'accessxcl', 'accessy'))
+              f.write('|=%s*%s*%s*%s*%s/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', 'aWSReusePlanes', 'accessxcl', 'accessy'))
 
             if array['stenciltype'] == 'faces':
-              f.write('|=%s*((%s-1)*(%s)+1*(%s))/2^10' % \
-                  getRefs('Word Size', 'aWSReusePencils', 'blockxcl', 'accessxcl'))
+              f.write('|=%s*%s*((%s-1)*(%s)+1*(%s))/2^10' % \
+                  getRefs('Word Size', 'aBWCopies', 'aWSReusePencils', 'blockxcl', 'accessxcl'))
             else:
-              f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aWSReusePencils', 'accessxcl'))
+              f.write('|=%s*%s*%s*%s/2^10' % getRefs('Word Size', 'aBWCopies', 'aWSReusePencils', 'accessxcl'))
 
-            f.write('|=%s*%s/2^10' % getRefs('Word Size', 'aWSReuseCells'))
+            f.write('|=%s*%s*%s/2^10' % getRefs('Word Size', 'aBWCopies', 'aWSReuseCells'))
 
             # memory traffic formulas (GBytes per sweep)
             if array['stenciltype'] == 'faces':
               f.write('|=%s*%s*%s*(%s*%s*%s+%s*%s*%s+%s*%s*%s-2*%s*%s*%s)/2^30' % \
                   getRefs('numBlocks', 'aBWCopies', 'R cost', 'accessxcl', 'blocky', 'blockz', 'blockxcl', \
                           'accessy', 'blockz', 'blockxcl', 'blocky', 'accessz', 'blockxcl', 'blocky', 'blockz'))
-              f.write('|=%s*%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))*%s/2^30' % \
-                  getRefs('numBlocks', 'R cost', \
+              f.write('|=%s*%s*%s*((%s-1)*(%s*%s)+1*(%s*%s+%s*%s-%s*%s))*%s/2^30' % \
+                  getRefs('numBlocks', 'aBWCopies', 'R cost', \
                           'aBWPlanes', 'blockxcl', 'blocky', \
                           'accessxcl', 'blocky', \
                           'blockxcl', 'accessy', \
                           'blockxcl', 'blocky', \
                           'blockz'))
-              f.write('|=%s*%s*((%s-1)*%s+1*%s)*%s*%s/2^30' % \
-                  getRefs('numBlocks', 'R cost', \
+              f.write('|=%s*%s*%s*((%s-1)*%s+1*%s)*%s*%s/2^30' % \
+                  getRefs('numBlocks', 'aBWCopies', 'R cost', \
                           'aBWPencils', 'blockxcl', \
                           'accessxcl', \
                           'blocky', 'blockz'))
             else:
               f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCopies', 'R cost', \
                                                            'accessxcl', 'accessy', 'accessz'))
-              f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWPlanes', 'R cost', \
-                                                           'accessxcl', 'accessy', 'blockz'))
-              f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWPencils', 'R cost', \
-                                                           'accessxcl', 'blocky', 'blockz'))
-            f.write('|=%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCells', 'R cost', \
-                                                         'blockx', 'blocky', 'blockz'))
+              f.write('|=%s*%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCopies', 'aBWPlanes', 'R cost', \
+                                                              'accessxcl', 'accessy', 'blockz'))
+              f.write('|=%s*%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCopies', 'aBWPencils', 'R cost', \
+                                                              'accessxcl', 'blocky', 'blockz'))
+            f.write('|=%s*%s*%s*%s*%s*%s*%s/2^30' % getRefs('numBlocks', 'aBWCopies', 'aBWCells', 'R cost', \
+                                                            'blockx', 'blocky', 'blockz'))
 
             f.write('\n')
 
           def addFname(*args):
             return tuple(map(lambda x: '%s.%s' % (loopid, x), args))
 
-          temp = '|=sum(%%s:%%s)#$ELABEL{%s}' * 20 % \
-                 addFname('BWCopies', 'BWPlanes', 'BWPencils', 'BWCells', \
-                          'WSPlanes', 'WSPencils', 'WSCells', \
-                          'WSReusePlanes', 'WSReusePencils', 'WSReuseCells', \
-                          'WSPlane', 'WSPencil', 'WSCell', \
+          temp = '|=sum(%%s:%%s)#$ELABEL{%s}' * 10 % \
+                 addFname('WSPlane', 'WSPencil', 'WSCell', \
                           'WSReusePlane', 'WSReusePencil', 'WSReuseCell', \
                           'blockGbytes', 'planeGbytes', 'pencilGbytes', 'cellGbytes')
 
-          f.write('||Total||||||||||||' + temp % (getRefs((-max(len(readArrays), 1), 0), (-1, 0)) * 20))
+          f.write('||Total' + '|'*22 + temp % (getRefs((-max(len(readArrays), 1), 0), (-1, 0)) * 10))
           f.write('\n')
 
         f.write('\n')

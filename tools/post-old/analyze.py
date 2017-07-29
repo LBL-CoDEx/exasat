@@ -116,15 +116,16 @@ class StaticAnalysis:
     # compute number of cells, pencils, and planes accessed by stencil pattern
     def getPencilsAndPlanes(loop):
 
+      def numCopies(array):
+        return array['copies']
+
       # raw number of pencils and planes accessed during a corresponding sweep
       def numBWCells(array):
-        return array['copies'] * len(set(array['access'].keys()))
+        return len(set(array['access'].keys()))
       def numBWPencils(array):
-        return array['copies'] * len(set(map(lambda x:x[1:3], array['access'].keys())))
+        return len(set(map(lambda x:x[1:3], array['access'].keys())))
       def numBWPlanes(array):
-        return array['copies'] * len(set(map(lambda x:x[2], array['access'].keys())))
-      def numBWCopies(array):
-        return array['copies']
+        return len(set(map(lambda x:x[2], array['access'].keys())))
 
       def maxDiff(x):
         if len(x) == 1:
@@ -170,21 +171,21 @@ class StaticAnalysis:
 
       def numWSPlanes(array, gap = None):
         result = computeWS(set(map(lambda x:x[2], array['access'].keys())), gap)
-        return array['copies'] * result
+        return result
 
       # Only return non-zero if array has reuse between either planes or pencils
       def numWSReusePlanes(array, gap = None):
-        result = numWSPlanes(array, gap) / array['copies']
+        result = numWSPlanes(array, gap)
         if numWSReusePencils(array) == 0 and \
            (gap and result == gap or not gap and result == 1):
           return 0
-        return array['copies'] * result
+        return result
 
       # WS is determined by largest gap in Y-dim across all Z-planes,
       # then apply same formula as numWSPlanes for each plane and sum.
       def numWSPencils(array, gap = None):
         result = sum(map(lambda x:computeWS(x, gap), pencilsByPlane(array).values()))
-        return array['copies'] * result
+        return result
 
       # Number of pencils needed for a working set in planes with reuse
       # Differentiate between Z-planes of an array with/without reuse
@@ -192,7 +193,7 @@ class StaticAnalysis:
         # no reuse if only one pencil in a plane
         pencilsWithReuse = filter(lambda x: len(x) > 1, pencilsByPlane(array).values())
         result = sum(map(lambda x:computeWS(x, gap), pencilsWithReuse))
-        return array['copies'] * result
+        return result
 
       # TODO: implement these (for now, just use BWCells)
       #       take into account cache line size?
@@ -230,52 +231,72 @@ class StaticAnalysis:
       for array in loop['arrays']:
         array['ghost'] = getGhostZone(array)
         array['BW'] = {}
-        array['BW']['numCells'] = numBWCells(array)
+        array['BW']['numCells'  ] = numBWCells(array)
         array['BW']['numPencils'] = numBWPencils(array)
-        array['BW']['numPlanes'] = numBWPlanes(array)
-        array['BW']['numCopies'] = numBWCopies(array)
+        array['BW']['numPlanes' ] = numBWPlanes(array)
         array['WS'] = {}
-        array['WS']['numCells'] = numWSCells(array, cellGap)
-        array['WS']['numReuseCells'] = numWSReuseCells(array, cellGap)
+        array['WS']['numCells'  ] = numWSCells(array, cellGap)
         array['WS']['numPencils'] = numWSPencils(array, pencilGap)
+        array['WS']['numPlanes' ] = numWSPlanes(array, planeGap)
+        array['WS']['numReuseCells'  ] = numWSReuseCells(array, cellGap)
         array['WS']['numReusePencils'] = numWSReusePencils(array, pencilGap)
-        array['WS']['numPlanes'] = numWSPlanes(array, planeGap)
-        array['WS']['numReusePlanes'] = numWSReusePlanes(array, planeGap)
+        array['WS']['numReusePlanes' ] = numWSReusePlanes(array, planeGap)
 
       # compute aggregate bandwidth and working set info by access type
       loop['BW'] = {'numCells': {}, 'numPencils': {}, 'numPlanes': {}, 'numArrays': {}}
       loop['WS'] = {'numCells': {}, 'numPencils': {}, 'numPlanes': {}, 'numArrays': {}}
 
-      loop['BW']['numCells']['R'] = sum(map(numBWCells, readArrays))
-      loop['BW']['numCells']['RW'] = sum(map(numBWCells, readWriteArrays))
-      loop['BW']['numCells']['W'] = sum(map(numBWCells, writeArrays))
+      def totBWCells(x):
+        return x['copies'] * x['BW']['numCells']
+      def totBWPencils(x):
+        return x['copies'] * x['BW']['numPencils']
+      def totBWPlanes(x):
+        return x['copies'] * x['BW']['numPlanes']
 
-      loop['BW']['numPencils']['R'] = sum(map(numBWPencils, readArrays))
-      loop['BW']['numPencils']['RW'] = sum(map(numBWPencils, readWriteArrays))
-      loop['BW']['numPencils']['W'] = sum(map(numBWPencils, writeArrays))
+      def totWSCells(x):
+        return x['copies'] * x['WS']['numCells']
+      def totWSPencils(x):
+        return x['copies'] * x['WS']['numPencils']
+      def totWSPlanes(x):
+        return x['copies'] * x['WS']['numPlanes']
 
-      loop['BW']['numPlanes']['R'] = sum(map(numBWPlanes, readArrays))
-      loop['BW']['numPlanes']['RW'] = sum(map(numBWPlanes, readWriteArrays))
-      loop['BW']['numPlanes']['W'] = sum(map(numBWPlanes, writeArrays))
+      def totWSReuseCells(x):
+        return x['copies'] * x['WS']['numReuseCells']
+      def totWSReusePencils(x):
+        return x['copies'] * x['WS']['numReusePencils']
+      def totWSReusePlanes(x):
+        return x['copies'] * x['WS']['numReusePlanes']
 
-      loop['BW']['numArrays']['R'] = sum(map(lambda x: x['copies'], readArrays))
-      loop['BW']['numArrays']['RW'] = sum(map(lambda x: x['copies'], readWriteArrays))
-      loop['BW']['numArrays']['W'] = sum(map(lambda x: x['copies'], writeArrays))
+      loop['BW']['numCells'  ]['R' ] = sum(map(totBWCells, readArrays))
+      loop['BW']['numCells'  ]['RW'] = sum(map(totBWCells, readWriteArrays))
+      loop['BW']['numCells'  ]['W' ] = sum(map(totBWCells, writeArrays))
 
-      loop['WS']['numCells']['RR'] = sum(map(lambda x:numWSReuseCells(x, cellGap), readArrays))
-      loop['WS']['numCells']['R'] = sum(map(lambda x:numWSCells(x, cellGap), readArrays))
-      loop['WS']['numCells']['RW'] = sum(map(lambda x:numWSCells(x, cellGap), readWriteArrays))
-      loop['WS']['numCells']['W'] = sum(map(lambda x:numWSCells(x, cellGap), writeArrays))
+      loop['BW']['numPencils']['R' ] = sum(map(totBWPencils, readArrays))
+      loop['BW']['numPencils']['RW'] = sum(map(totBWPencils, readWriteArrays))
+      loop['BW']['numPencils']['W' ] = sum(map(totBWPencils, writeArrays))
 
-      loop['WS']['numPencils']['RR'] = sum(map(lambda x:numWSReusePencils(x, pencilGap), readArrays))
-      loop['WS']['numPencils']['R'] = sum(map(lambda x:numWSPencils(x, pencilGap), readArrays))
-      loop['WS']['numPencils']['RW'] = sum(map(lambda x:numWSPencils(x, pencilGap), readWriteArrays))
-      loop['WS']['numPencils']['W'] = sum(map(lambda x:numWSPencils(x, pencilGap), writeArrays))
+      loop['BW']['numPlanes' ]['R' ] = sum(map(totBWPlanes, readArrays))
+      loop['BW']['numPlanes' ]['RW'] = sum(map(totBWPlanes, readWriteArrays))
+      loop['BW']['numPlanes' ]['W' ] = sum(map(totBWPlanes, writeArrays))
 
-      loop['WS']['numPlanes']['RR'] = sum(map(lambda x:numWSReusePlanes(x, planeGap), readArrays))
-      loop['WS']['numPlanes']['R'] = sum(map(lambda x:numWSPlanes(x, planeGap), readArrays))
-      loop['WS']['numPlanes']['RW'] = sum(map(lambda x:numWSPlanes(x, planeGap), readWriteArrays))
-      loop['WS']['numPlanes']['W'] = sum(map(lambda x:numWSPlanes(x, planeGap), writeArrays))
+      loop['BW']['numArrays' ]['R' ] = sum(map(numCopies, readArrays))
+      loop['BW']['numArrays' ]['RW'] = sum(map(numCopies, readWriteArrays))
+      loop['BW']['numArrays' ]['W' ] = sum(map(numCopies, writeArrays))
+
+      loop['WS']['numCells'  ]['RR'] = sum(map(totWSReuseCells, readArrays))
+      loop['WS']['numCells'  ]['R' ] = sum(map(totWSCells, readArrays))
+      loop['WS']['numCells'  ]['RW'] = sum(map(totWSCells, readWriteArrays))
+      loop['WS']['numCells'  ]['W' ] = sum(map(totWSCells, writeArrays))
+
+      loop['WS']['numPencils']['RR'] = sum(map(totWSReusePencils, readArrays))
+      loop['WS']['numPencils']['R' ] = sum(map(totWSPencils, readArrays))
+      loop['WS']['numPencils']['RW'] = sum(map(totWSPencils, readWriteArrays))
+      loop['WS']['numPencils']['W' ] = sum(map(totWSPencils, writeArrays))
+
+      loop['WS']['numPlanes' ]['RR'] = sum(map(totWSReusePlanes, readArrays))
+      loop['WS']['numPlanes' ]['R' ] = sum(map(totWSPlanes, readArrays))
+      loop['WS']['numPlanes' ]['RW'] = sum(map(totWSPlanes, readWriteArrays))
+      loop['WS']['numPlanes' ]['W' ] = sum(map(totWSPlanes, writeArrays))
 
     # set memTableFlag to true if we want input arrays to be present from
     # beginning of the function and output arrays until the end

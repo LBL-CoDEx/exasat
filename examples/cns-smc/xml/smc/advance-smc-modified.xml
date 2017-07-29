@@ -40,9 +40,6 @@
 <array name="lam" component="" datatype="double" accesstype="readonly">
 <access offset="(0,0,0)" dependentloopvar="(,,)" reads="1" writes="0"/>
 </array>
-<array name="Hg" component="2:ncons" datatype="double" accesstype="readonly">
-<access offset="(0,0,0,0)" dependentloopvar="(,,,)" reads="1" writes="0"/>
-</array>
 <array name="dpy" component="nspecies" datatype="double" accesstype="readonly">
 <access offset="(0,0,0,nspecies)" dependentloopvar="(,,,)" reads="1" writes="0"/>
 </array>
