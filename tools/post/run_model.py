@@ -48,7 +48,7 @@ def cns_args():
     "block_params" : "../../examples/cns-smc/block_params.xml",
     "conds"        : "../../examples/cns-smc/conds.xml",
     "machine"      : "../../examples/machine.xml",
-    "subparams"    : "False",
+    "subparams"    : os.getenv("subparams", "False"),
   }
 
 # setup for SMC code
@@ -56,8 +56,8 @@ def smc_args():
   # use most of the CNS setup
   result = cns_args()
   # change the source input files
-  result["xml"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.xml"
-#  result["polly"] = "../../examples/cns-smc/xml/smc/advance-smc-flat.polly.xml"
+  result["xml"] = "../../examples/cns-smc/xml/smc/advance-smc-modified.xml"
+#  result["polly"] = "../../examples/cns-smc/xml/smc/advance-smc-modified.polly.xml"
   result["polly"] = ""
   return result
 
@@ -98,6 +98,8 @@ def main(args):
 
   if len(args) > 1 and args[1] == "cns":
     (sa_kw_args, dump_kw_args) = load_args(cns_args())
+  elif args[1] == "smc":
+    (sa_kw_args, dump_kw_args) = load_args(smc_args())
   else:
     (sa_kw_args, dump_kw_args) = load_args(get_env_args())
 

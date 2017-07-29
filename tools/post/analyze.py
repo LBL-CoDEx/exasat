@@ -238,7 +238,10 @@ class WorkingSet(object):
       self.word_byte_n = get_type_byte_n(self.type, machine)
       self.size_ = None
   def __str__(self):
-    s = "WS %s %s\n" % (self.type, self.name)
+    try:
+      s = "WS %s %s, words=%s, KiB=%s\n" % (self.type, self.name, self.size(), self.bytes() / 2.**10)
+    except:
+      s = "WS %s %s\n" % (self.type, self.name)
     for ac in self.accesses:
       s += str(ac) + '\n'
     return s
@@ -381,7 +384,7 @@ class Traffic(object):
       s += str(region)
     return s
   def __iadd__(self, other):
-    assert other.name == self.name and other.type == self.type
+    assert other.name == self.name and other.element_type == self.element_type
     self.ws += other.ws # add other's working set to ours
     map(self.consume, other.regions)
     return self
@@ -411,6 +414,8 @@ class Traffic(object):
 
      # only need to substitute params for the loop bounds
     loop = origLoop.subParams(self.params, shallow=True)
+    # FIXME: this isn't quite right
+    #        may overlap block iteration spaces, depending on loop bound expressions
     blockLoop = origLoop.subParams(self.block_params, shallow=True)
 
     # number of blocks in the current loop dimension
@@ -423,6 +428,8 @@ class Traffic(object):
 
     # only report if we are the first of siblings (prevent printing duplicate reports)
     if self == siblings.iterfirst():
+      for s in sorted(siblings, key=lambda x: x.name):
+        print s.ws
       reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
     if loop_ws_byte_n <= self.cache_byte_n:
       # WS of all siblings fit in cache
@@ -458,19 +465,22 @@ class StaticAnalysis(object):
 
   def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
     for function in self.functions:
-      print "************"
+      print "*" * (4+len(function.name))
       print "* %s *" % function.name
-      print "************"
-      for loop in function.body.loops:
+      print "*" * (4+len(function.name))
+      for sym_loop in function.body.loops:
         print
-        print "*************"
-        print "* Loop %4d *" % loop.linenum
-        print "*************"
+        print "*" * (9+len(str(sym_loop.linenum)))
+        print "* Loop %d *" % sym_loop.linenum
+        print "*" * (9+len(str(sym_loop.linenum)))
         print
 
         if flag_sub_params:
-          print "substituting parameters ..."
-          loop = loop.subParams(params)
+          loop = sym_loop.subParams(params)
+          block_loop = sym_loop.subParams(block_params)
+        else:
+          loop = sym_loop
+          block_loop = sym_loop
 
         print "Floating Point Ops (A/S/M/D):"
         print loop.collect(FlopCount.collector(conds_chk))
@@ -482,11 +492,13 @@ class StaticAnalysis(object):
         print loop.collect(ArrayVar.collector(conds_chk))
 
         print "Working Set:"
-        print loop.collect(WorkingSet.collector(conds_chk, machine))
+        print block_loop.collect(WorkingSet.collector(conds_chk, machine))
 
-        mt = loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
+        print "Memory Traffic:"
+        mt = sym_loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
         total_bytes = sum(map(lambda x: x.bytes(), mt))
         print
-        print "Total Memory Traffic (L/S) using cache model: %g GiB (%d bytes)" % (float(total_bytes) / 2**30, total_bytes)
+        print "Total Memory Traffic (L/S) using cache model: %g GiB (%d bytes)" % \
+              (float(total_bytes) / 2**30, total_bytes)
         print
         print mt
