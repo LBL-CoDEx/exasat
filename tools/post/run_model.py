@@ -94,14 +94,17 @@ def load_args(args):
       "flag_sub_params" : strtobool(args["subparams"]),
     })
 
-def main(args):
+def main(cl_args):
 
-  if len(args) > 1 and args[1] == "cns":
-    (sa_kw_args, dump_kw_args) = load_args(cns_args())
-  elif args[1] == "smc":
-    (sa_kw_args, dump_kw_args) = load_args(smc_args())
+  if len(cl_args) > 1:
+    if cl_args[1] == "cns":
+      args = cns_args()
+    elif cl_args[1] == "smc":
+      args = smc_args()
   else:
-    (sa_kw_args, dump_kw_args) = load_args(get_env_args())
+    args = get_env_args()
+
+  (sa_kw_args, dump_kw_args) = load_args(args)
 
   # parse the XML files and do substitutions
   sa = StaticAnalysis(**sa_kw_args)

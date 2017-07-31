@@ -13,11 +13,11 @@ __status__ = "Production"
 import operator
 
 class options:
-  flag_debug = True
+  flag_debug = False
   flag_warn = True
   flag_ignore_gap = True # ignore the gaps in stencil pattern when calculating working set
   flag_ignore_conds = False # conservatively assume *all* code within *all* conditional blocks are executed
-  flag_verbose_conditionals = True
+  flag_verbose_conditionals = False
   flag_verbose_parser = False
   warned = set()
 

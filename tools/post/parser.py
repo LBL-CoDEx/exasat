@@ -337,13 +337,11 @@ class XMLParser(object):
   slots = ['doc', 'functions']
   def __init__(self, filename, symsubs, namesubs):
     if not filename or type(filename) != type(''):
-      print "Invalid xml filename: %s" % filename
-      raise Exception()
+      raise Exception("Invalid xml filename: %s" % filename)
     try:
       self.doc = xml.dom.minidom.parse(filename)
     except Exception as e:
-      print "Invalid xml: %s" % filename
-      raise e
+      raise Exception("Invalid xml: %s" % filename)
     env = {'symsubs' : symsubs, 'namesubs' : namesubs}
     program = getChildren(self.doc, 'program')[0]
     self.functions = map(lambda x: Function(x, env),
