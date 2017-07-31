@@ -90,7 +90,7 @@ def load_args(args):
     { "params"          : to_sym_dict(KeyValXMLParser(args["params"]).items),
       "block_params"    : to_sym_dict(KeyValXMLParser(args["block_params"]).items),
       "machine"         : dict(KeyValXMLParser(args["machine"], float).items),
-      "conds_chk"       : TableCondsChecker(KeyValXMLParser(args["conds"], strtobool).items),
+      "conds_chk"       : TableCondsChecker(KeyValXMLParser(args["conds"], float).items),
       "flag_sub_params" : strtobool(args["subparams"]),
     })
 

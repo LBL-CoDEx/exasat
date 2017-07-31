@@ -18,6 +18,7 @@ __status__ = "Production"
 import sys
 import os
 import re
+import operator
 from copy import deepcopy
 
 from parser import XMLParser, KeyValXMLParser, PollyXMLParser, Collection, Flops, Scalar, Array, ArrayAccess, Conditional
@@ -69,12 +70,13 @@ class TableCondsChecker(object):
       print cond.condition
       print self.table
       raise Exception("Did not find conditional in table")
-    return self.table[cond.condition] == cond.when
+    p = self.table[cond.condition]
+    return p if cond.when else (1-p)
   def check_conds(self, conds):
-    conds_sat = all(map(lambda x: self.check_cond(x), conds))
+    conds_sats = map(lambda x: self.check_cond(x), conds)
     if options.flag_verbose_conditionals and len(conds) > 0:
-      print "Conditions", map(lambda x: x.condition, conds), ":", conds_sat
-    return conds_sat
+      print "Conditions", map(lambda x: x.condition, conds), ":", conds_sats
+    return reduce(operator.mul, conds_sats, 1.0)
   def __call__(self, x):
     # x is either a Conditional or a list of Conditionals
     if options.flag_ignore_conds:
@@ -119,8 +121,9 @@ class FlopCount(object):
     # capture condition checker
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Flops and conds_chk(conds):
-        return Collection([FlopCount(arg)])
+      conds_sat = conds_chk(conds)
+      if type(arg) == Flops and conds_sat > 0.0:
+        return Collection([FlopCount(arg) * conds_sat])
       return Collection()
     return f
 
@@ -166,11 +169,12 @@ class StateVar(object):
   def collector(conds_chk):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Scalar and conds_chk(conds):
-        return Collection([StateVar(sv=arg)])
-      elif type(arg) == Array and conds_chk(conds):
-        return Collection([StateVar(array=arg)] + \
-                          map(lambda ac: StateVar(array=arg, access=ac),
+      conds_sat = conds_chk(conds)
+      if type(arg) == Scalar and conds_sat > 0.0:
+        return Collection([StateVar(sv=arg) * conds_sat])
+      elif type(arg) == Array and conds_sat > 0.0:
+        return Collection([StateVar(array=arg) * conds_sat] + \
+                          map(lambda ac: StateVar(array=arg, access=ac) * conds_sat,
                               filter(ArrayAccess.isStateVar, arg.accesses)))
       return Collection()
     return f
@@ -212,8 +216,9 @@ class ArrayVar(object):
   def collector(conds_chk):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
-        return Collection([ArrayVar(arg)])
+      conds_sat = conds_chk(conds)
+      if type(arg) == Array and not arg.onlyStateVars() and conds_sat > 0.0:
+        return Collection([ArrayVar(arg) * conds_sat])
       return Collection()
     return f
 
@@ -301,7 +306,9 @@ class WorkingSet(object):
   def collector(conds_chk, machine):
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
+      # TODO: do something more sophisticated when Pr[conds] < 1.0
+      # for now, just include it in the working set if Pr[conds] > 0.0
+      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds) > 0.0:
         return Collection([WorkingSet(arg, machine=machine)])
       return Collection()
     return f
@@ -310,25 +317,24 @@ class WorkingSet(object):
 class TrafficRegion(object):
   """The memory traffic associated with a list of regions and a count for how
      many times those regions are accessed."""
-  slots = ['accesses', 'count', 'size_']
+  slots = ['accesses', 'size', 'count']
   def __init__(self, accesses, count = 1):
     self.accesses = accesses
+    self.size = accessSize(self.accesses)
     self.count = count
-    self.size_ = self.count * accessSize(self.accesses)
   def __str__(self):
-    s = " TrafficRegion, count=%g, acc_type=%s:\n" % \
-        (self.count, get_access_type(self.accesses))
+    s = " TrafficRegion, size=%d, count=%g, acc_type=%s:\n" % \
+        (self.size, self.count, get_access_type(self.accesses))
     for acc in self.accesses:
       s += str(acc) + '\n'
     return s
   def __imul__(self, n):
     self.count *= n
-    self.size_ *= n
     return self
-  def size(self):
-    return self.size_
+  def words(self):
+    return self.size * self.count
   def bytes(self, acc_byte_n):
-    return self.size_ * acc_byte_n[get_access_type(self.accesses)]
+    return self.words() * acc_byte_n[get_access_type(self.accesses)]
 
 
 class Traffic(object):
@@ -338,17 +344,20 @@ class Traffic(object):
   slots = ['name', 'element_type',
            'regions', 'ws', 'ws_block_n',
            'element_byte_n', 'acc_byte_n', 
-           'params', 'block_params', 'cache_byte_n']
-  def __init__(self, array=None, params=None, block_params=None, machine=None, copy=None):
+           'params', 'block_params', 'cache_byte_n',
+           'conds_chk']
+  def __init__(self, array=None, params=None, block_params=None, machine=None,
+               conds_chk=None, conds_sat=None, copy=None):
     if copy:
       # make a copy (excluding traffic regions and WorkingSet info)
       self.name = copy.name
       self.element_type = copy.element_type
       self.element_byte_n = copy.element_byte_n
-      self.acc_byte_n = copy.acc_byte_n # bytes per load/store access
+      self.acc_byte_n = copy.acc_byte_n     # bytes per load/store access
       self.params = copy.params             # for problem size and others
       self.block_params = copy.block_params # for cache blocking only
       self.cache_byte_n = copy.cache_byte_n # cache size
+      self.conds_chk = copy.conds_chk
     else:
       # copy from an Array object
       self.name = array.name
@@ -359,7 +368,8 @@ class Traffic(object):
       accesses = map(lambda x: x.subParams(params), accesses)
 
       # traffic regions accessed
-      self.regions = [TrafficRegion(accesses)]
+      # conds_sat is accumulated percentage of *all* branches taken up code tree
+      self.regions = [TrafficRegion(accesses, conds_sat)]
 
       # need to track working set to compute data reuse
       self.ws = WorkingSet(array, params=params, machine=machine)
@@ -376,10 +386,11 @@ class Traffic(object):
       self.params = params
       self.block_params = block_params
       self.cache_byte_n = get_cache_byte_n(machine)
+      self.conds_chk = conds_chk # may need to re-evaluate branch taken percentage
 
   def __str__(self):
-    s = "MT %s %s, words=%d, bytes=%d\n" % \
-        (self.element_type, self.name, self.size(), self.bytes())
+    s = "MT %s %s, size=%d, words=%g, bytes=%g\n" % \
+        (self.element_type, self.name, self.size(), self.words(), self.bytes())
     for region in self.regions:
       s += str(region)
     return s
@@ -400,7 +411,9 @@ class Traffic(object):
     #         into cache independently (conservative estimate)
     self.regions.append(region)
   def size(self):
-    return sum(map(lambda x: x.size(), self.regions))
+    return sum(map(lambda x: x.size, self.regions))
+  def words(self):
+    return sum(map(lambda x: x.words(), self.regions))
   def bytes(self):
     return sum(map(lambda x: x.bytes(self.acc_byte_n), self.regions))
   def loop(self, origLoop, siblings):
@@ -438,6 +451,8 @@ class Traffic(object):
       # traffic equals blocked working set times number of total blocks
       # assumes no reuse between blocks (i.e. problem blocked correctly for cache)
       result.regions = [TrafficRegion(result.ws.accesses, count=result.ws_block_n)]
+      # re-evaluate percentage branches taken up to this loop
+      result *= self.conds_chk(origLoop.conds)
     else:
       # no reuse across iterations, multiply traffic by iteration count
       result.regions = self.regions
@@ -449,8 +464,9 @@ class Traffic(object):
     # capture problem size, blocking params, and machine model
     def f(arg, conds):
       assert type(arg) == Flops or type(arg) == Scalar or type(arg) == Array
-      if type(arg) == Array and not arg.onlyStateVars() and conds_chk(conds):
-        return Collection([Traffic(arg, params, block_params, machine)])
+      conds_sat = conds_chk(conds)
+      if type(arg) == Array and not arg.onlyStateVars() and conds_sat > 0.0:
+        return Collection([Traffic(arg, params, block_params, machine, conds_chk, conds_sat)])
       return Collection()
     return f
 
@@ -479,7 +495,7 @@ class StaticAnalysis(object):
 
         if flag_sub_params:
           loop = sym_loop.subParams(params)
-          block_loop = sym_loop.subParams(block_params)
+          block_loop = sym_loop.blocked(block_params)
         else:
           loop = sym_loop
           block_loop = sym_loop
@@ -500,7 +516,7 @@ class StaticAnalysis(object):
         mt = sym_loop.collect(Traffic.collector(conds_chk, params, block_params, machine))
         total_bytes = sum(map(lambda x: x.bytes(), mt))
         print
-        print "Total Memory Traffic (L/S) using cache model: %g GiB (%d bytes)" % \
+        print "Total Memory Traffic (L/S) using cache model: %g GiB (%g bytes)" % \
               (float(total_bytes) / 2**30, total_bytes)
         print
         print mt

@@ -108,7 +108,7 @@ class Flops(object):
       self.__setattr__(x, int(node.getAttribute(x)))
     dprint(self)
   def __str__(self):
-    return "Flops(%d, %d, %d, %d)" % \
+    return "Flops(%g, %g, %g, %g)" % \
            tuple(map(lambda x: self.__getattribute__(x), self.slots))
 
 
@@ -122,7 +122,7 @@ class Scalar(object):
     self.writes = int(node.getAttribute('writes'))
     dprint(self)
   def __str__(self):
-    return "%s %s, R=%d, W=%d" % (self.type, self.name, self.reads, self.writes)
+    return "%s %s, R=%g, W=%g" % (self.type, self.name, self.reads, self.writes)
 
 
 class ArrayAccess(object):
@@ -143,7 +143,7 @@ class ArrayAccess(object):
   def __str__(self):
     idxStr = '('+','.join(map(str, self.index))+')'
     lvStr = '('+','.join(self.loopvars)+')'
-    return "  %s+%s, R=%d, W=%d" % \
+    return "  %s+%s, R=%g, W=%g" % \
            (idxStr, lvStr, self.reads, self.writes)
   def __sub__(self, other):
     assert self.loopvars == other.loopvars
@@ -302,8 +302,8 @@ class Loop(object):
     for (orig_range, blocked_range) in block_params.items():
       # check to see if loop matches the orig_range params
       if (type(self.range[0]) != int and \
-          type(self.range[1]) != int and \
           self.range[0].has(orig_range[0]) and \
+          type(self.range[1]) != int and \
           self.range[1].has(orig_range[1])) or \
          (self.range[0] == 0 and \
           type(self.range[1]) != int and \
