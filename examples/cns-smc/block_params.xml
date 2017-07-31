@@ -1,31 +1,14 @@
 <params>
-<prop key="lo(1)" val="1" />
-<prop key="lo(2)" val="1" />
-<prop key="lo(3)" val="1" />
-<prop key="hi(1)" val="16" />
-<prop key="hi(2)" val="16" />
-<prop key="hi(3)" val="128" />
-<prop key="fine_lo(1)" val="1" />
-<prop key="fine_lo(2)" val="1" />
-<prop key="fine_lo(3)" val="1" />
-<prop key="fine_hi(1)" val="16" />
-<prop key="fine_hi(2)" val="16" />
-<prop key="fine_hi(3)" val="128" />
-<prop key="crse_lo(1)" val="1" />
-<prop key="crse_lo(2)" val="1" />
-<prop key="crse_lo(3)" val="1" />
-<prop key="crse_hi(1)" val="8" />
-<prop key="crse_hi(2)" val="8" />
-<prop key="crse_hi(3)" val="64" />
-<prop key="ilo1" val="1" />
-<prop key="ilo2" val="1" />
-<prop key="ilo3" val="1" />
-<prop key="ihi1" val="16" />
-<prop key="ihi2" val="16" />
-<prop key="ihi3" val="128" />
-<prop key="__BoxX__" val="16" />
-<prop key="__BoxY__" val="16" />
-<prop key="__BoxZ__" val="128" />
-<prop key="ng" val="0" />
-<prop key="nspecies" val="9" />
+<prop key="(lo(1), hi(1))" val="(1,  16)" />
+<prop key="(lo(2), hi(2))" val="(1,  16)" />
+<prop key="(lo(3), hi(3))" val="(1, 128)" />
+<prop key="(fine_lo(1), fine_hi(1))" val="(1,  16)" />
+<prop key="(fine_lo(2), fine_hi(2))" val="(1,  16)" />
+<prop key="(fine_lo(3), fine_hi(3))" val="(1, 128)" />
+<prop key="(crse_lo(1), crse_hi(1))" val="(1,   8)" />
+<prop key="(crse_lo(2), crse_hi(2))" val="(1,   8)" />
+<prop key="(crse_lo(3), crse_hi(3))" val="(1,  64)" />
+<prop key="(ilo1, ihi1)" val="(1,  16)" />
+<prop key="(ilo2, ihi2)" val="(1,  16)" />
+<prop key="(ilo3, ihi3)" val="(1, 128)" />
 </params>

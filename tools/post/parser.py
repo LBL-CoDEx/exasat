@@ -289,14 +289,30 @@ class Loop(object):
     return numIters(self.range) / self.stride
   def collect(self, f):
     return self.body.collect(f).loop(self)
-  def subParams(self, params, shallow = False):
+  def copy(self, new_range = None):
     result = Loop()
     result.loopvar = self.loopvar
     result.linenum = self.linenum
-    result.range = tuple(map(lambda x: subToInt(x, params), self.range))
+    result.range = new_range if new_range else self.range
     result.stride = self.stride
     result.conds = self.conds
     result.body = self.body
+    return result
+  def blocked(self, block_params):
+    for (orig_range, blocked_range) in block_params.items():
+      # check to see if loop matches the orig_range params
+      if (type(self.range[0]) != int and \
+          type(self.range[1]) != int and \
+          self.range[0].has(orig_range[0]) and \
+          self.range[1].has(orig_range[1])) or \
+         (self.range[0] == 0 and \
+          type(self.range[1]) != int and \
+          self.range[1].has(orig_range[1] - orig_range[0])):
+        return self.copy(blocked_range)
+    return self
+  def subParams(self, params, shallow = False):
+    new_range = tuple(map(lambda x: subToInt(x, params), self.range))
+    result = self.copy(new_range)
     if not shallow:
       result.body = self.body.subParams(params)
     return result

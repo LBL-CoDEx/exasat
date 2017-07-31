@@ -414,16 +414,11 @@ class Traffic(object):
 
      # only need to substitute params for the loop bounds
     loop = origLoop.subParams(self.params, shallow=True)
-    # FIXME: this isn't quite right
-    #        may overlap block iteration spaces, depending on loop bound expressions
-    blockLoop = origLoop.subParams(self.block_params, shallow=True)
-    # XXX: remove the following (using for debug only)
-    if blockLoop.loopvar != 'n':
-      if blockLoop.loopvar != 'k':
-        blockLoop.range = (1,16)
-      else:
-        blockLoop.range = (1,128)
-    # XXX: end hack
+
+    # block loop if range matches
+    blockLoop = origLoop.blocked(self.block_params)
+    # substitute rest of parameters
+    blockLoop = blockLoop.subParams(self.params, shallow=True)
 
     # number of blocks in the current loop dimension
     numBlocks = float(loop.range[1]      - loop.range[0]+1) / \
@@ -435,9 +430,9 @@ class Traffic(object):
 
     # only report if we are the first of siblings (prevent printing duplicate reports)
     if self == siblings.iterfirst():
+      reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
 #     for s in sorted(siblings, key=lambda x: x.name):
 #       print s.ws
-      reportReuse(loop.linenum, loop_ws_byte_n, self.cache_byte_n)
     if loop_ws_byte_n <= self.cache_byte_n:
       # WS of all siblings fit in cache
       # traffic equals blocked working set times number of total blocks
