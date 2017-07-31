@@ -496,6 +496,7 @@ class StaticAnalysis(object):
         if flag_sub_params:
           loop = sym_loop.subParams(params)
           block_loop = sym_loop.blocked(block_params)
+          block_loop = block_loop.subParams(params)
         else:
           loop = sym_loop
           block_loop = sym_loop
