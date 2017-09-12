@@ -38,10 +38,9 @@ void SpecialBBHandler::process()
 
   computeFlops(isSgNode(body));
 
-  Scalars::getActiveScalarVars(isSgNode(body), scalarVars);
-
   computeArrayAccesses(isSgNode(body));
 
+  Scalars::getActiveScalarVars(isSgNode(body), scalarVars);
 }
 
 void SpecialBBHandler::closeXMLTag()

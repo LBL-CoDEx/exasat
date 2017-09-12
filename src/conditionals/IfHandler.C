@@ -80,13 +80,12 @@ void IfHandler::process()
 
   computeFlops(isSgNode(body));
 
+  computeArrayAccesses(isSgNode(body));
+
   //scalar variables in the loop
   //because of the else statments, we do not include the scalars of the condition 
   //in the current if but include it in the parent
   Scalars::getActiveScalarVars(isSgNode(body), scalarVars);
-
-  computeArrayAccesses(isSgNode(body));
-
 }
 
 void IfHandler::closeXMLTag()
