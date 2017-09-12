@@ -40,7 +40,7 @@ class AccessAnalysis
   void computeOffsets(AccessPattern_t& this_access,
 		      vector<SgExpression*> subscripts);
   void factorizeTerms(AccessPattern_t& this_access, SgExpression*);
-  void normalizeTerms(SgNode*, bool);
+  void normalizeTerms(SgNode*, bool, vector<SgExpression*> &subscripts, int idxOffset);
 
   string getAccessString(vector<SgExpression*> subs);
 
