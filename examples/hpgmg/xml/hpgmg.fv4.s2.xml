@@ -1,14 +1,3 @@
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb5fe090 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb5fe330 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb5fe5d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb5fe870 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb60b7d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb60ba70 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb60bd10 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f66eb60bfb0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f66eb37f2b8 = SgEnumDeclaration not in child list of scope = 0x7f66eba7b120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f66eb37f2b8 = SgEnumDeclaration not in child list of scope = 0x7f66eba7b120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f66eb37f2b8 = SgEnumDeclaration not in child list of scope = 0x7f66eba7b120 = SgGlobal 
 <program>
 <function name="CopyBlock" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -5978,7 +5967,7 @@
 <funccall linenum="30" name="" origname="stencil_get_shape" module="unknown" flops="unknown">
 </funccall>
 </if>
-<else iflinenum="30" adds="0" multiplies="0" divides="0" specials="0">
+<else iflinenum="30" conditional="(s &amp; 1) == 0;" adds="0" multiplies="0" divides="0" specials="0">
 <funccall linenum="31" name="" origname="exchange_boundary" module="unknown" flops="unknown">
 <arg paramname="level" argname="level"/>
 <arg paramname="id" argname="0"/>
@@ -6013,14 +6002,6 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="box" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="jStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <array name="level" component="" datatype="level_type" accesstype="readonly">
 <access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(6)" dependentloopvar="()" reads="1" writes="0"/>
@@ -6043,7 +6024,7 @@
 <access offset="(x_id)" dependentloopvar="()" reads="1" writes="0"/>
 </array>
 </if>
-<else iflinenum="68" adds="0" multiplies="0" divides="0" specials="0">
+<else iflinenum="68" conditional="(s &amp; 1) == 0;" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="x_id" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="box" datatype="const int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="ghosts" datatype="const int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>
@@ -6078,7 +6059,7 @@
 <access offset="(0,0,0)" dependentloopvar="(k,j,i)" reads="0" writes="1"/>
 </array>
 </loop>
-<loop linenum="100" loopvar="i" lowerbound="ilo +((ilo ^ j ^ k ^ color000) & 1)" upperbound="ihi - 2" stride="2" adds="86" multiplies="32" divides="0" specials="0">
+<loop linenum="100" loopvar="i" lowerbound="0" upperbound="ihi - 2" stride="2" adds="86" multiplies="32" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="b" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="ilo" datatype="const int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>

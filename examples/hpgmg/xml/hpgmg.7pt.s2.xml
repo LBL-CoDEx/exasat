@@ -1,14 +1,3 @@
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8c0090 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8c0330 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8c05d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8c0870 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8cd7d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8cda70 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8cdd10 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f193e8cdfb0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f193e6412b8 = SgEnumDeclaration not in child list of scope = 0x7f193ed3d120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f193e6412b8 = SgEnumDeclaration not in child list of scope = 0x7f193ed3d120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f193e6412b8 = SgEnumDeclaration not in child list of scope = 0x7f193ed3d120 = SgGlobal 
 <program>
 <function name="CopyBlock" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -4863,14 +4852,6 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="box" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="jStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <array name="level" component="" datatype="level_type" accesstype="readonly">
 <access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(6)" dependentloopvar="()" reads="1" writes="0"/>
@@ -4890,7 +4871,7 @@
 <scalar name="jlo" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="jhi" datatype="const int" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="j" datatype="int" isConstant="false" accesstype="writeread" reads="2" writes="1"/>
-<loop linenum="100" loopvar="i" lowerbound="ilo +((ilo ^ j ^ k ^ color000) & 1)" upperbound="ihi - 2" stride="2" adds="14" multiplies="11" divides="0" specials="0">
+<loop linenum="100" loopvar="i" lowerbound="0" upperbound="ihi - 2" stride="2" adds="14" multiplies="11" divides="0" specials="0">
 <scalar name="a" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="b" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="ilo" datatype="const int" isConstant="true" accesstype="readonly" reads="2" writes="0"/>

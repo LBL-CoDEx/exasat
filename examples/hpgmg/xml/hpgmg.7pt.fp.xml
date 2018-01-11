@@ -1,14 +1,3 @@
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88415090 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88415330 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e884155d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88415870 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e884227d0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88422a70 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88422d10 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### ResetParentPointersInMemoryPool::visit(declaration = 0x7f5e88422fb0 = SgClassDeclaration) declaration->get_parent() == NULL 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f5e881962b8 = SgEnumDeclaration not in child list of scope = 0x7f5e88892120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f5e881962b8 = SgEnumDeclaration not in child list of scope = 0x7f5e88892120 = SgGlobal 
-##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = 0x7f5e881962b8 = SgEnumDeclaration not in child list of scope = 0x7f5e88892120 = SgGlobal 
 <program>
 <function name="CopyBlock" adds="0" multiplies="0" divides="0" specials="0">
 <scalar name="dim_i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
@@ -4864,14 +4853,6 @@
 <scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="box" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="jStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
-<scalar name="kStride" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <array name="level" component="" datatype="level_type" accesstype="readonly">
 <access offset="(5)" dependentloopvar="()" reads="1" writes="0"/>
 <access offset="(6)" dependentloopvar="()" reads="1" writes="0"/>

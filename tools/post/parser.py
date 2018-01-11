@@ -341,6 +341,7 @@ class XMLParser(object):
     try:
       self.doc = xml.dom.minidom.parse(filename)
     except Exception as e:
+      print e
       raise Exception("Invalid xml: %s" % filename)
     env = {'symsubs' : symsubs, 'namesubs' : namesubs}
     program = getChildren(self.doc, 'program')[0]

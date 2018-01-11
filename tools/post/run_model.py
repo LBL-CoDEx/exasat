@@ -26,6 +26,7 @@ from parser import KeyValXMLParser, to_sym_dict
 def default_args():
   return {
     "xml"          : None,
+    "fns"          : None,
     "polly"        : None,
     "symsubs"      : None,
     "namesubs"     : None,
@@ -40,6 +41,7 @@ def default_args():
 def cns_args():
   return {
     "xml"          : "../../examples/cns-smc/xml/advance-flat.xml",
+    "fns"          : None,
 #    "polly"        : "../../examples/cns-smc/xml/advance-flat.polly.xml",
     "polly"        : "",
     "symsubs"      : "../../examples/cns-smc/symsubs.xml",
@@ -63,11 +65,23 @@ def smc_args():
 
 # setup for HPGMG code
 def hpgmg_args():
-  return {}
+  return {
+    "xml"          : "../../examples/hpgmg/xml/hpgmg.27pt.s2.xml",
+    "fns"          : "smooth",
+    "polly"        : "",
+    "symsubs"      : "../../examples/hpgmg/symsubs.xml",
+    "namesubs"     : "../../examples/hpgmg/namesubs.xml",
+    "params"       : "../../examples/hpgmg/params.xml",
+    "block_params" : "../../examples/hpgmg/block_params.xml",
+    "conds"        : "../../examples/hpgmg/conds.xml",
+    "machine"      : "../../examples/machine.xml",
+    "subparams"    : os.getenv("subparams", "False"),
+  }
 
 def get_env_args():
   result = default_args()
   for tag in ["xml", "polly", # which XML files to analyze
+              "fns", # which functions to analyze
               "symsubs", "namesubs", # substitutions made upon parsing the XML
               # problem and machine parameters used to evaluate performance
               "params", "block_params", "conds", "machine",
@@ -87,7 +101,8 @@ def load_args(args):
       "symsubs"         : to_sym_dict(KeyValXMLParser(args["symsubs"]).items),
       "namesubs"        : to_sym_dict(KeyValXMLParser(args["namesubs"]).items),
     },
-    { "params"          : to_sym_dict(KeyValXMLParser(args["params"]).items),
+    { "fns"             : set(args["fns"].split(',')),
+      "params"          : to_sym_dict(KeyValXMLParser(args["params"]).items),
       "block_params"    : to_sym_dict(KeyValXMLParser(args["block_params"]).items),
       "machine"         : dict(KeyValXMLParser(args["machine"], float).items),
       "conds_chk"       : TableCondsChecker(KeyValXMLParser(args["conds"], float).items),
@@ -101,6 +116,8 @@ def main(cl_args):
       args = cns_args()
     elif cl_args[1] == "smc":
       args = smc_args()
+    elif cl_args[1] == "hpgmg":
+      args = hpgmg_args()
   else:
     args = get_env_args()
 

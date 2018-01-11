@@ -28,7 +28,14 @@ from common import options
 # Helper functions
 
 def get_type_byte_n(word_type, machine):
-  return machine[word_type + "_byte_n"]
+  if word_type[0:6] == "const ":
+    word_type = word_type[6:]
+  key = word_type + "_byte_n"
+  if key in machine:
+    return machine[key]
+  else:
+    print "WARNING: type \"%s\" size not specified, ignoring ..." % word_type
+    return 0
 
 def get_cache_byte_n(machine):
   return machine['cache_kbytes'] * 1024
@@ -481,8 +488,8 @@ class StaticAnalysis(object):
     else:
       self.scops = []
 
-  def dump(self, params, block_params, machine, conds_chk, flag_sub_params):
-    for function in self.functions:
+  def dump(self, fns, params, block_params, machine, conds_chk, flag_sub_params):
+    for function in filter(lambda x: x.name in fns, self.functions):
       print "*" * (4+len(function.name))
       print "* %s *" % function.name
       print "*" * (4+len(function.name))
