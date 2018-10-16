@@ -5201,7 +5201,7 @@
 <scalar name="box" datatype="const int" isConstant="true" accesstype="readonly" reads="11" writes="0"/>
 <scalar name="ijk" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
 <scalar name="ijk" datatype="int" isConstant="false" accesstype="readonly" reads="32" writes="0"/>
-<loop linenum="26" loopvar="s" lowerbound="0" upperbound="2 * 2 - 1" stride="1" adds="1" multiplies="0" divides="0" specials="0">
+<loop linenum="26" loopvar="s" lowerbound="0" upperbound="0" stride="1" adds="1" multiplies="0" divides="0" specials="0">
 <scalar name="smooth" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
 <scalar name="s" datatype="int" isConstant="false" accesstype="writeread" reads="3" writes="1"/>
 <scalar name="_timeStart" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>

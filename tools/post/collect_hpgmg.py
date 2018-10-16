@@ -54,7 +54,9 @@ def main(cl_args):
 
   (sa_kw_args, kw_args) = load_args(hpgmg_args())
 
-  (irange, jrange) = map(parse_expr, ("(ilo, ihi)", "(jlo, jhi)"))
+  (irange, jrange, krange) = map(parse_expr, ("(ilo, ihi)", "(jlo, jhi)", "(klo, khi)"))
+
+  f = open("results.tsv", 'w')
 
   for xml in ["../../examples/hpgmg/xml/hpgmg.7pt.fp.xml", \
               "../../examples/hpgmg/xml/hpgmg.7pt.s2.xml", \
@@ -66,19 +68,27 @@ def main(cl_args):
 
     print "Processing %s ..." % xml
     sa_kw_args["xml"] = xml
+    f.write(xml + '\n')
 
     # parse the XML files and do substitutions
     sa = analyze.StaticAnalysis(**sa_kw_args)
 
+    # write header to file
+    for log_block_sz in xrange(2, 7):
+      block_sz = 2**log_block_sz
+      f.write('\t' + str(block_sz))
+    f.write('\n')
+
     for log_cache in xrange(15, 26):
       kw_args["machine"]["cache_kbytes"] = 2**(log_cache-10)
       print "Setting cache size to %d kbytes ..." % kw_args["machine"]["cache_kbytes"]
+      f.write(str(kw_args["machine"]["cache_kbytes"]) + '\t')
       for log_block_sz in xrange(2, 7):
         block_sz = 2**log_block_sz
         print "Setting block size to %d ..." % block_sz
         kw_args["block_params"][irange] = (0, block_sz)
         kw_args["block_params"][jrange] = (0, block_sz)
-        print kw_args
+        kw_args["block_params"][krange] = (0, 64)
 
         smooth = None
         for func in sa.functions:
@@ -93,10 +103,10 @@ def main(cl_args):
               (float(total_bytes) / 2**30, total_bytes)
         print
         print mt
-      
-
-        # do performance analysis at granularity of first-level loops in all functions
-        # sa.dump(**dump_kw_args)
+        f.write(str(total_bytes) + '\t')
+      f.write('\n')
+    f.write('\n')
+  f.close()
 
 if __name__ == '__main__':
   main(sys.argv)
