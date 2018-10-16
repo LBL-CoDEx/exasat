@@ -1,0 +1,21 @@
+<machine>
+<prop key="core_n" desc="Cores" val="1024" />
+<prop key="core_gbs" desc="GB/s/core" val="1" />
+<prop key="core_gflops" desc="Gflop/s/core" val="10" />
+<prop key="core_int_reg_n" desc="Int Regs/core" val="16" />
+<prop key="core_fp_reg_n" desc="FP Regs/core" val="16" />
+<prop key="cache_kbytes" desc="$ / Thread Group (kB)" val="65536" />
+<prop key="bool_byte_n" desc="Word Size" val="1" />
+<prop key="int_byte_n" desc="Word Size" val="4" />
+<prop key="long_byte_n" desc="Word Size" val="8" />
+<prop key="float_byte_n" desc="Word Size" val="4" />
+<prop key="double_byte_n" desc="Word Size" val="8" />
+<prop key="line_byte_n" desc="Cache Line Size" val="64" />
+<prop key="ld_sf" desc="Load Scale Factor" val="1" />
+<prop key="st_sf" desc="Store Scale Factor" val="2" />
+<prop key="ls_sf" desc="Load/Store Scale Factor" val="2" />
+<prop key="div_sf" desc="Division Scale Factor" val="39" />
+<prop key="spc_sf" desc="Special Scale Factor" val="125" />
+<prop key="nic_bw_gbs" desc="NIC BW (GB/s)" val="100" />
+<prop key="nic_lat_us" desc="NIC Latency (us)" val="0.4" />
+</machine>

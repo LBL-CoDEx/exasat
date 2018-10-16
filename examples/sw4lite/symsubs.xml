@@ -1,0 +1,10 @@
+<symsubs>
+<prop key="ifirst" val="1" />
+<prop key="ilast" val="128" />
+<prop key="jfirst" val="1" />
+<prop key="jlast" val="128" />
+<prop key="kfirst" val="1" />
+<prop key="klast" val="512" />
+<prop key="k1" val="1" />
+<prop key="k2" val="512" />
+</symsubs>

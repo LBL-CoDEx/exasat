@@ -1,0 +1,5 @@
+<conds>
+<prop key="beta != 0" val="1.0" />
+<prop key="onesided[4] == 1" val="0.0" />
+<prop key="onesided[5] == 1" val="0.0" />
+</conds>

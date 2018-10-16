@@ -1,0 +1,128 @@
+<program>
+<function name="addsgd4fort" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="beta" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<if linenum="22" conditional="beta != 0" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="ifirst" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilast" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jfirst" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jlast" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ni" datatype="const ::size_t" isConstant="true" accesstype="readonly" reads="1" writes="0"/>
+<loop linenum="48" loopvar="k" lowerbound="kfirst + 2" upperbound="klast - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="kfirst" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="klast" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<loop linenum="49" loopvar="j" lowerbound="jfirst + 2" upperbound="jlast - 2" stride="1" adds="0" multiplies="0" divides="0" specials="0">
+<scalar name="jfirst" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="jlast" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="2" writes="0"/>
+<loop linenum="52" loopvar="i" lowerbound="ifirst + 2" upperbound="ilast - 2" stride="1" adds="0" multiplies="0" divides="1" specials="0">
+<scalar name="ifirst" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="ilast" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="beta" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="3" writes="0"/>
+<array name="_rho" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="1" writes="0"/>
+</array>
+<loop linenum="55" loopvar="c" lowerbound="0" upperbound="3 - 1" stride="1" adds="53" multiplies="70" divides="0" specials="0">
+<scalar name="k" datatype="int" isConstant="false" accesstype="readonly" reads="82" writes="0"/>
+<scalar name="j" datatype="int" isConstant="false" accesstype="readonly" reads="82" writes="0"/>
+<scalar name="i" datatype="int" isConstant="false" accesstype="readonly" reads="82" writes="0"/>
+<scalar name="birho" datatype="double" isConstant="false" accesstype="readonly" reads="1" writes="0"/>
+<scalar name="c" datatype="int" isConstant="false" accesstype="readonly" reads="57" writes="0"/>
+<array name="a_dcx" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="2" writes="0"/>
+<access offset="(1)" dependentloopvar="(i)" reads="2" writes="0"/>
+<access offset="(-1)" dependentloopvar="(i)" reads="2" writes="0"/>
+</array>
+<array name="a_dcy" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(j)" reads="2" writes="0"/>
+<access offset="(1)" dependentloopvar="(j)" reads="2" writes="0"/>
+<access offset="(-1)" dependentloopvar="(j)" reads="2" writes="0"/>
+</array>
+<array name="a_dcz" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(k)" reads="2" writes="0"/>
+<access offset="(1)" dependentloopvar="(k)" reads="2" writes="0"/>
+<access offset="(-1)" dependentloopvar="(k)" reads="2" writes="0"/>
+</array>
+<array name="a_strx" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="1" writes="0"/>
+</array>
+<array name="a_stry" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(j)" reads="1" writes="0"/>
+</array>
+<array name="a_strz" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(k)" reads="1" writes="0"/>
+</array>
+<array name="a_cox" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(i)" reads="2" writes="0"/>
+</array>
+<array name="a_coy" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(j)" reads="2" writes="0"/>
+</array>
+<array name="a_coz" component="" datatype="double" accesstype="readonly">
+<access offset="(0)" dependentloopvar="(k)" reads="2" writes="0"/>
+</array>
+<array name="_rho" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,1,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,0,0)" dependentloopvar="(i,j,k)" reads="6" writes="0"/>
+<access offset="(0,0,1)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,0,-1)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(0,-1,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+<access offset="(-1,0,0)" dependentloopvar="(i,j,k)" reads="2" writes="0"/>
+</array>
+<array name="_u" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(2,0,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,1,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,2,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,0,1,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,0,2,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,0,0,0)" dependentloopvar="(i,j,k,c)" reads="9" writes="0"/>
+<access offset="(0,0,-1,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,0,-2,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,-1,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,-2,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(-1,0,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(-2,0,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+</array>
+<array name="_um" component="" datatype="double" accesstype="readonly">
+<access offset="(1,0,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(2,0,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,1,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,2,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,0,1,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,0,2,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,0,0,0)" dependentloopvar="(i,j,k,c)" reads="9" writes="0"/>
+<access offset="(0,0,-1,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,0,-2,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(0,-1,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(0,-2,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+<access offset="(-1,0,0,0)" dependentloopvar="(i,j,k,c)" reads="2" writes="0"/>
+<access offset="(-2,0,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+</array>
+<array name="_up" component="" datatype="double" accesstype="readonly">
+<access offset="(0,0,0,0)" dependentloopvar="(i,j,k,c)" reads="1" writes="0"/>
+</array>
+</loop>
+</loop>
+</loop>
+</loop>
+</if>
+<local name="_rho"/>
+<local name="_up"/>
+<local name="_u"/>
+<local name="_um"/>
+<nonlocal name="a_dcx"/>
+<nonlocal name="a_dcy"/>
+<nonlocal name="a_dcz"/>
+<nonlocal name="a_strx"/>
+<nonlocal name="a_stry"/>
+<nonlocal name="a_strz"/>
+<nonlocal name="a_cox"/>
+<nonlocal name="a_coy"/>
+<nonlocal name="a_coz"/>
+</function>
+</program>
