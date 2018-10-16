@@ -26,7 +26,7 @@ from parser import KeyValXMLParser, to_sym_dict
 def default_args():
   return {
     "xml"          : None,
-    "fns"          : None,
+    "fns"          : "",
     "polly"        : None,
     "symsubs"      : None,
     "namesubs"     : None,
@@ -41,7 +41,7 @@ def default_args():
 def cns_args():
   return {
     "xml"          : "../../examples/cns-smc/xml/advance-flat.xml",
-    "fns"          : None,
+    "fns"          : "",
 #    "polly"        : "../../examples/cns-smc/xml/advance-flat.polly.xml",
     "polly"        : "",
     "symsubs"      : "../../examples/cns-smc/symsubs.xml",
@@ -78,6 +78,21 @@ def hpgmg_args():
     "subparams"    : os.getenv("subparams", "False"),
   }
 
+# setup for sw4lite code
+def sw4lite_args():
+  return {
+    "xml"          : "../../examples/sw4lite/xml/rhs4sg.xml",
+    "fns"          : "",
+    "polly"        : "",
+    "symsubs"      : "../../examples/sw4lite/symsubs.xml",
+    "namesubs"     : "../../examples/sw4lite/namesubs.xml",
+    "params"       : "../../examples/sw4lite/params.xml",
+    "block_params" : "../../examples/sw4lite/block_params.xml",
+    "conds"        : "../../examples/sw4lite/conds.xml",
+    "machine"      : "../../examples/sw4lite/machine.xml",
+    "subparams"    : os.getenv("subparams", "False"),
+  }
+
 def get_env_args():
   result = default_args()
   for tag in ["xml", "polly", # which XML files to analyze
@@ -101,7 +116,7 @@ def load_args(args):
       "symsubs"         : to_sym_dict(KeyValXMLParser(args["symsubs"]).items),
       "namesubs"        : to_sym_dict(KeyValXMLParser(args["namesubs"]).items),
     },
-    { "fns"             : set(args["fns"].split(',')),
+    { "fns"             : None if args["fns"] == "" else set(args["fns"].split(',')),
       "params"          : to_sym_dict(KeyValXMLParser(args["params"]).items),
       "block_params"    : to_sym_dict(KeyValXMLParser(args["block_params"]).items),
       "machine"         : dict(KeyValXMLParser(args["machine"], float).items),
@@ -118,6 +133,8 @@ def main(cl_args):
       args = smc_args()
     elif cl_args[1] == "hpgmg":
       args = hpgmg_args()
+    elif cl_args[1] == "sw4lite":
+      args = sw4lite_args()
   else:
     args = get_env_args()
 

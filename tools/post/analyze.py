@@ -489,7 +489,13 @@ class StaticAnalysis(object):
       self.scops = []
 
   def dump(self, fns, params, block_params, machine, conds_chk, flag_sub_params):
-    for function in filter(lambda x: x.name in fns, self.functions):
+
+    if fns == None:
+      functions = self.functions
+    else:
+      functions = filter(lambda x: x.name in fns, self.functions)
+
+    for function in functions:
       print "*" * (4+len(function.name))
       print "* %s *" % function.name
       print "*" * (4+len(function.name))
